@@ -4,38 +4,9 @@ import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
 plugins {
   java
   `java-library`
-
-  `maven-publish`
-
-  id("io.papermc.paperweight.userdev") version "1.7.1"
-  id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1"
-  id("xyz.jpenilla.run-paper") version "2.3.0"
-
-  id("io.github.goooler.shadow") version "8.1.7"
-}
-
-val groupStringSeparator = "."
-val kebabcaseStringSeparator = "-"
-val snakecaseStringSeparator = "_"
-
-fun capitalizeFirstLetter(string: String): String {
-  return string.first().uppercase() + string.slice(IntRange(1, string.length - 1))
-}
-
-fun snakecase(kebabcaseString: String): String {
-  return kebabcaseString.lowercase().replace(kebabcaseStringSeparator, snakecaseStringSeparator)
-}
-
-fun pascalcase(kebabcaseString: String): String {
-  var pascalCaseString = ""
-
-  val splitString = kebabcaseString.split(kebabcaseStringSeparator)
-
-  for (part in splitString) {
-    pascalCaseString += capitalizeFirstLetter(part)
-  }
-
-  return pascalCaseString
+  id("io.papermc.paperweight.userdev") version "1.7.2"
+  id("xyz.jpenilla.run-paper") version "2.3.0" // Adds runServer and runMojangMappedServer tasks for testing
+  id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1" // Generates plugin.yml based on the Gradle config
 }
 
 description = "Test plugin for paperweight-userdev"
