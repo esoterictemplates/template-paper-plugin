@@ -40,8 +40,7 @@ public class LanguageManager {
     String languagesFolderName = "languages";
     String languagesFolderPath = dataFolder.getPath() + File.separator + languagesFolderName;
     File languagesFolder = new File(languagesFolderPath);
-
-    plugin.saveResource(languagesFolderName, false);
+    languagesFolder.mkdir();
 
     for (File languageMessagesFile : languagesFolder.listFiles()) {
       String languageName = languageMessagesFile.getName();
