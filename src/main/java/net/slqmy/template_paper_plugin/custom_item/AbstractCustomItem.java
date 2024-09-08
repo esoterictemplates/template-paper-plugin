@@ -30,12 +30,12 @@ public abstract class AbstractCustomItem implements Listener {
     Bukkit.getPluginManager().registerEvents(this, plugin);
   }
 
-  public abstract ItemStack getCustomItem(Player player);
+  protected abstract ItemStack generateCustomItem(ItemStack baseCustomItem, Player player);
 
-  protected ItemStack getBaseCustomItem() {
+  public ItemStack getCustomItem(Player player) {
     ItemStack item = new ItemStack(material);
     item.editMeta((meta) -> meta.getPersistentDataContainer().set(itemIdKey, PersistentDataType.STRING, itemId));
-    return item;
+    return generateCustomItem(item, player);
   }
 
   public boolean isItem(ItemStack itemStack) {
