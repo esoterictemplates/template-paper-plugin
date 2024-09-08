@@ -96,10 +96,14 @@ public class PlayerDataManager {
     }
   }
 
-  public PlayerProfile getPlayerProfile(UUID uuid) {
+  public PlayerProfile getPlayerProfile(UUID uuid, boolean createNewProfile) {
     PlayerProfile profile = playerData.get(uuid);
 
     if (profile == null) {
+      if (!createNewProfile) {
+        return null;
+      }
+
       profile = new PlayerProfile(plugin.getLanguageManager().getDefaultLanguage());
 
       playerData.put(uuid, profile);
@@ -108,7 +112,15 @@ public class PlayerDataManager {
     return playerData.get(uuid);
   }
 
+  public PlayerProfile getPlayerProfile(UUID uuid) {
+    return getPlayerProfile(uuid, true);
+  }
+
+  public PlayerProfile getPlayerProfile(Player player, boolean createNewProfile) {
+    return getPlayerProfile(player.getUniqueId(), createNewProfile);
+  }
+
   public PlayerProfile getPlayerProfile(Player player) {
-    return getPlayerProfile(player.getUniqueId());
+    return getPlayerProfile(player, true);
   }
 }
