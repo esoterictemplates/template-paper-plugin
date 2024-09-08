@@ -21,7 +21,7 @@ public class PlayerDataManager {
 
   private final String playerDataFilesExtension = ".json";
 
-  private final String playerDataFolderName = "player-data";
+  private final String playerDataFolderName = "data" + File.separator + "player";
   private final String playerDataFolderPath;
   private final File playerDataFolder;
 

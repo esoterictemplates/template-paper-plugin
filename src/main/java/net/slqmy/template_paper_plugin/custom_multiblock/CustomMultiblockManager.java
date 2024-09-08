@@ -25,7 +25,7 @@ public class CustomMultiblockManager {
   private final TemplatePaperPlugin plugin;
 
   private final String multiblocksFileExtension = ".json";
-  private final String multiblocksResourceFilePath = "multiblocks" + multiblocksFileExtension;
+  private final String multiblocksResourceFilePath = "data" + File.separator + "multiblocks" + multiblocksFileExtension;
   private final String multiblocksFilePath;
   private final File multiblocksFile;
 
