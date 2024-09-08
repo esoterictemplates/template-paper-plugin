@@ -14,6 +14,14 @@ public final class TemplatePaperPlugin extends JavaPlugin implements Listener {
   private PlayerDataManager playerDataManager;
   private LanguageManager languageManager;
 
+  public PlayerDataManager getPlayerDataManager() {
+    return playerDataManager;
+  }
+
+  public LanguageManager getLanguageManager() {
+    return languageManager;
+  }
+
   @Override
   public void onEnable() {
     playerDataManager = new PlayerDataManager(this);
