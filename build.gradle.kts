@@ -11,11 +11,11 @@ fun capitaliseFirstLetter(string: String): String {
   return string.first().uppercase() + string.slice(IntRange(1, string.length - 1))
 }
 
-fun underscoreCase(kebabCaseString: String): String {
+fun snakecase(kebabCaseString: String): String {
   return kebabCaseString.lowercase().replace('-', '_')
 }
 
-fun pascalCase(kebabCaseString: String): String {
+fun pascalcase(kebabCaseString: String): String {
   var pascalCaseString = ""
 
   val splitString = kebabCaseString.split("-")
@@ -29,7 +29,7 @@ fun pascalCase(kebabCaseString: String): String {
 
 val author = "Slqmy"
 
-group = "net." + author.lowercase() + "." + underscoreCase(rootProject.name)
+group = "net." + author.lowercase() + "." + snakecase(rootProject.name)
 version = "1.0.0-SNAPSHOT"
 description = "Test plugin for paperweight-userdev"
 
@@ -83,7 +83,7 @@ tasks {
 // Configure plugin.yml generation
 // - name, version, and description are inherited from the Gradle project.
 bukkitPluginYaml {
-  main = project.group.toString() + "." + pascalCase(rootProject.name)
+  main = project.group.toString() + "." + pascalcase(rootProject.name)
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
   authors.add(author)
   apiVersion = paperApiVersion
