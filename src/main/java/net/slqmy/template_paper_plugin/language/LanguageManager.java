@@ -1,20 +1,19 @@
 package net.slqmy.template_paper_plugin.language;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent.Builder;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 import net.slqmy.template_paper_plugin.data.player.PlayerProfile;
 import net.slqmy.template_paper_plugin.util.FileUtil;
 
 import java.util.UUID;
-import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import java.util.Map;
 import java.util.Set;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -196,6 +195,9 @@ public class LanguageManager {
     String[] parts = placeholderPattern.split(miniMessageString);
     List<Integer> argumentIndexes = new ArrayList<>();
 
+    plugin.getLogger().info(Arrays.toString(parts));
+    plugin.getLogger().info(String.valueOf(parts.length));
+
     while (matcher.find()) {
       argumentIndexes.add(Integer.parseUnsignedInt(matcher.group(1)));
     }
@@ -203,13 +205,21 @@ public class LanguageManager {
     Component output = miniMessage.deserialize(parts[0]);
 
     for (int i = 1; i < parts.length; i++) {
+      plugin.getLogger().info(String.valueOf(i));
+
       int argumentIndex = argumentIndexes.get(i - 1);
-      output.append(arguments[argumentIndex]);
+
+      plugin.getLogger().info(String.valueOf(argumentIndex));
+
+      output = output.append(arguments[argumentIndex]);
 
       String part = parts[i];
+
+      plugin.getLogger().info(part);
+
       Component component = miniMessage.deserialize(part);
 
-      output.append(component);
+      output = output.append(component);
     }
 
     return output;
@@ -284,12 +294,6 @@ public class LanguageManager {
       return component;
     }
 
-    if (object instanceof Consumer<?> consumer) {
-      try {
-        return Component.text((Consumer<? super Builder>) consumer);
-      } catch (ClassCastException exception) {}
-    }
-
-    return Component.text(object.toString());
+    return Component.text(String.valueOf(object));
   }
 }
