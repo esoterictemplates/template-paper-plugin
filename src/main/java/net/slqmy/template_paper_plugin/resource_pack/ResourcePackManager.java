@@ -52,15 +52,13 @@ public class ResourcePackManager {
   }
 
   private void saveResourcepackZipFile() {
-    plugin.getFileManager().saveResourceFileFolder(resourcePackResourceFolderName);
-
+    File resourcePackFolder = plugin.getFileManager().saveResourceFileFolder(resourcePackResourceFolderName);
     resourcePackZipFilePath = plugin.getDataPath() + File.separator + resourcePackResourceFolderName + FileUtil.getFileExtensionSeparator() + resourcePackFileExtension;
 
     try {
-      FileUtil.zipFolder(Path.of(plugin.getDataPath() + File.separator + resourcePackResourceFolderName), Path.of(resourcePackZipFilePath));
       resourcePackZipFile = new File(resourcePackZipFilePath);
+      FileUtil.zipFolder(resourcePackFolder.toPath(), resourcePackZipFile.toPath());
 
-      File resourcePackFolder = new File(plugin.getDataPath() + File.separator + resourcePackResourceFolderName);
       FileUtils.deleteDirectory(resourcePackFolder);
     } catch (Exception exception) {
       exception.printStackTrace();
