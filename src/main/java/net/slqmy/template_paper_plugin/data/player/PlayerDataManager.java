@@ -2,8 +2,10 @@ package net.slqmy.template_paper_plugin.data.player;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 
 import org.bukkit.entity.Player;
@@ -14,21 +16,21 @@ import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 
 public class PlayerDataManager {
 
-  private TemplatePaperPlugin plugin;
+  private final String playerDataFolderName = "player-data";
+  private final String playerDataFolderPath;
+
+  private final File playerDataFolder;
 
   private Map<UUID, PlayerProfile> playerData;
 
   public PlayerDataManager(TemplatePaperPlugin plugin) {
-    this.plugin = plugin;
+    playerDataFolderPath = plugin.getDataFolder().getPath() + File.pathSeparator + playerDataFolderName;
+    playerDataFolder = new File(playerDataFolderPath);
 
     load();
   }
 
   private void load() {
-    String playerDataFolderName = "player-data";
-    String playerDataFolderPath = plugin.getDataFolder().getPath() + File.pathSeparator + playerDataFolderName;
-    File playerDataFolder = new File(playerDataFolderPath);
-
     Gson gson = new Gson();
 
     File[] playerDataFiles = playerDataFolder.listFiles();
@@ -51,6 +53,34 @@ public class PlayerDataManager {
       }
 
       playerData.put(playerUuid, profile);
+    }
+  }
+
+  private void save() {
+    Gson gson = new Gson();
+
+    for (Entry<UUID, PlayerProfile> entry : playerData.entrySet()) {
+      UUID uuid = entry.getKey();
+      PlayerProfile profile = entry.getValue();
+
+      File file = new File(playerDataFolderPath + File.pathSeparator + uuid.toString());
+
+      FileWriter writer;
+
+      try {
+        file.createNewFile();
+
+        writer = new FileWriter(file);
+
+        String json = gson.toJson(profile);
+
+        writer.write(json);
+
+        writer.close();
+        writer.flush();
+      } catch (IOException exception) {
+        exception.printStackTrace();
+      }
     }
   }
 
