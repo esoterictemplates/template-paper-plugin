@@ -107,6 +107,18 @@ public class LanguageManager {
     return getLanguage(profile.getUuid());
   }
 
+  public void setLanguage(PlayerProfile profile, String language) {
+    profile.setLanguage(language);
+  }
+
+  public void setLanguage(UUID uuid, String language) {
+    setLanguage(plugin.getPlayerDataManager().getPlayerProfile(uuid), language);
+  }
+
+  public void setLanguage(Player player, String language) {
+    setLanguage(player.getUniqueId(), language);
+  }
+
   private Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Object... arguments) {
     Map<Message, String> languageMessageMap = languages.get(language);
     String miniMessageString = languageMessageMap.get(message);
