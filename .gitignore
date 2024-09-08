@@ -124,5 +124,6 @@ build
 # .class files
 bin
 
-# Node modules
+# Node files
 node_modules
+package-lock.json
