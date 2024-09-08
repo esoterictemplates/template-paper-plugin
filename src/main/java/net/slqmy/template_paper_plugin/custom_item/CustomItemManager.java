@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 
 import net.slqmy.template_paper_plugin.custom_item.AbstractCustomItem;
 import net.slqmy.template_paper_plugin.custom_item.CustomItem;
-import net.slqmy.template_paper_plugin.custom_item.items.DummyCustomItem;
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 
 public class CustomItemManager {
@@ -15,7 +14,6 @@ public class CustomItemManager {
   private final Map<CustomItem, AbstractCustomItem> customItemMap = new HashMap<>();
 
   public CustomItemManager(TemplatePaperPlugin plugin) {
-    new DummyCustomItem(plugin, this);
   }
 
   public void addCustomItem(CustomItem itemId, AbstractCustomItem customItem) {

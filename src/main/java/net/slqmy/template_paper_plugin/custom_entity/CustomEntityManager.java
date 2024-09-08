@@ -9,14 +9,12 @@ import org.bukkit.entity.Entity;
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 import net.slqmy.template_paper_plugin.custom_entity.CustomEntity;
 import net.slqmy.template_paper_plugin.custom_entity.AbstractCustomEntity;
-import net.slqmy.template_paper_plugin.custom_entity.entities.DummyCustomEntity;
 
 public class CustomEntityManager {
 
   private final Map<CustomEntity, AbstractCustomEntity<?>> customEntityMap = new HashMap<>();
 
   public CustomEntityManager(TemplatePaperPlugin plugin) {
-    new DummyCustomEntity(plugin, this);
   }
 
   public void addCustomEntity(CustomEntity itemId, AbstractCustomEntity<?> customItem) {
