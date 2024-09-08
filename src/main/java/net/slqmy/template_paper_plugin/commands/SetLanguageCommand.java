@@ -28,7 +28,7 @@ public class SetLanguageCommand extends CommandAPICommand {
 
     Argument<String> languageArgument = new CustomArgument<String, String>(
         new GreedyStringArgument(languageArgumentNodeName),
-        new CustomArgumentInfoParser<String, String>() {
+        new CustomArgumentInfoParser<>() {
           @Override
           public String apply(CustomArgumentInfo<String> info) throws CustomArgumentException {
             String selectedLanguage = info.currentInput();
