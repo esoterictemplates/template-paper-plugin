@@ -77,6 +77,10 @@ dependencies {
 }
 
 tasks {
+  build {
+    dependsOn(shadowJar)
+  }
+
   compileJava {
     options.release = javaVersion
   }
@@ -118,4 +122,8 @@ publishing {
             }
         }
     }
+}
+
+tasks.named("publishMavenJavaPublicationToMavenLocal") {
+  dependsOn(tasks.named("build"))
 }
