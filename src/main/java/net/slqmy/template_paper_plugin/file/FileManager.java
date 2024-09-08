@@ -19,9 +19,7 @@ public class FileManager {
         plugin.saveResource(resourceFilePath, shouldReplaceExistingFiles);
       });
     } catch (IOException exception) {
-      if (!(exception instanceof FileNotFoundException)) {
-        exception.printStackTrace();
-      }
+      exception.printStackTrace();
     }
   }
 
