@@ -1,2 +1,2 @@
-SET_LANGUAGE_SUCCESSFULLY: Successfully set your language to %s!
-UNKNOWN_LANGUAGE: "Unsupported or unknown language: '%s'"
+SET_LANGUAGE_SUCCESSFULLY: "<green>Successfully set your language to </green>%s<green>!</green>"
+UNKNOWN_LANGUAGE: "Unsupported or unknown language: '%s'."
