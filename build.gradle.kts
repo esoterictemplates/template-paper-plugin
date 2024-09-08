@@ -7,7 +7,7 @@ plugins {
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1" // Generates plugin.yml based on the Gradle config
 }
 
-group = "io.papermc.paperweight"
+group = "net.slqmy.template_paper_plugin"
 version = "1.0.0-SNAPSHOT"
 description = "Test plugin for paperweight-userdev"
 
