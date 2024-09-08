@@ -125,7 +125,7 @@ public class LanguageManager {
     setLanguage(player.getUniqueId(), language);
   }
 
-  private String getLocale(CommandSender commandSender) {
+  public String getLocale(CommandSender commandSender) {
     if (!(commandSender instanceof Player player)) {
       return defaultLanguage;
     }
@@ -140,16 +140,16 @@ public class LanguageManager {
     return localeDisplayName;
   }
 
-  private String getLocale(UUID uuid) {
+  public String getLocale(UUID uuid) {
     Player player = Bukkit.getPlayer(uuid);
     return getLocale(player);
   }
 
-  private String getLocale(PlayerProfile profile) {
+  public String getLocale(PlayerProfile profile) {
     return getLocale(profile.getUuid());
   }
 
-  private String getProfileLanguage(PlayerProfile profile) {
+  public String getProfileLanguage(PlayerProfile profile) {
     if (profile == null) {
       return null;
     }
@@ -157,11 +157,11 @@ public class LanguageManager {
     return profile.getLanguage();
   }
 
-  private String getProfileLanguage(UUID uuid) {
+  public String getProfileLanguage(UUID uuid) {
     return getProfileLanguage(plugin.getPlayerDataManager().getPlayerProfile(uuid));
   }
 
-  private String getProfileLanguage(CommandSender commandSender) {
+  public String getProfileLanguage(CommandSender commandSender) {
     if (commandSender == null) {
       return null;
     } else if (commandSender instanceof Player player) {
