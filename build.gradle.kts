@@ -64,7 +64,6 @@ tasks.assemble {
 
 repositories {
     mavenCentral()
-    maven("https://repo.codemc.org/repository/maven-public/")
 }
 
 dependencies {
