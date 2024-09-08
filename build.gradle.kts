@@ -48,7 +48,7 @@ val topLevelDomain = "net"
 val projectNameString = rootProject.name
 
 group = topLevelDomain + groupStringSeparator + mainProjectAuthor.lowercase() + groupStringSeparator + snakecase(projectNameString)
-version = "0.0.3"
+version = "0.0.4"
 
 val buildDirectoryString = buildDir.toString()
 
