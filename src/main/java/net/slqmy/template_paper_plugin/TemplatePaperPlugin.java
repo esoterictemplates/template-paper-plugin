@@ -21,6 +21,7 @@ import net.slqmy.template_paper_plugin.data.player.PlayerDataManager;
 import net.slqmy.template_paper_plugin.file.FileManager;
 import net.slqmy.template_paper_plugin.http_server.HttpServerManager;
 import net.slqmy.template_paper_plugin.language.LanguageManager;
+import net.slqmy.template_paper_plugin.language.Message;
 import net.slqmy.template_paper_plugin.resource_pack.ResourcePackManager;
 
 @DefaultQualifier(NonNull.class)
@@ -90,7 +91,9 @@ public final class TemplatePaperPlugin extends JavaPlugin {
 
     fileManager = new FileManager(this);
     playerDataManager = new PlayerDataManager(this);
-    languageManager = new LanguageManager(this);
+    if (Message.isEnabled()) {
+      languageManager = new LanguageManager(this);
+    }
     resourcePackManager = new ResourcePackManager(this);
     httpServerManager = new HttpServerManager(this);
     if (CustomItem.isEnabled()) {
@@ -103,8 +106,9 @@ public final class TemplatePaperPlugin extends JavaPlugin {
       customMultiblockManager = new CustomMultiblockManager(this);
     }
 
-    new SetLanguageCommand(this);
-
+    if (Message.isEnabled()) {
+      new SetLanguageCommand(this);
+    }
     if (CustomItem.isEnabled()) {
       new GiveCustomItemCommand(this);
     }
