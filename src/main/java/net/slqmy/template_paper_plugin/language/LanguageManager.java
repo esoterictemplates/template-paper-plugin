@@ -1,5 +1,7 @@
 package net.slqmy.template_paper_plugin.language;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 
 import java.util.Map;
@@ -11,6 +13,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 public class LanguageManager {
 
     private final TemplatePaperPlugin plugin;
+
+    private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     private final Map<Language, LanguageData> languages = new HashMap<>();
 
@@ -47,7 +51,7 @@ public class LanguageManager {
         }
     }
 
-    public String getMessage(Message message, Language language) {
-        return languages.get(language).getMessages().get(message);
+    public Component getMessage(Message message, Language language) {
+        return miniMessage.deserialize(languages.get(language).getMessages().get(message));
     }
 }
