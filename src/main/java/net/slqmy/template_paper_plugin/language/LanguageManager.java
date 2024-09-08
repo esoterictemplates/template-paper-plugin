@@ -4,10 +4,9 @@ import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.io.File;
 
 import org.bukkit.configuration.file.YamlConfiguration;
-
-import java.io.File;
 
 public class LanguageManager {
 
