@@ -14,9 +14,17 @@ import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 
 public class PlayerDataManager {
 
+  private TemplatePaperPlugin plugin;
+
   private Map<UUID, PlayerProfile> playerData;
 
   public PlayerDataManager(TemplatePaperPlugin plugin) {
+    this.plugin = plugin;
+
+    load();
+  }
+
+  private void load() {
     String playerDataFolderName = "player-data";
     String playerDataFolderPath = plugin.getDataFolder().getPath() + File.pathSeparator + playerDataFolderName;
     File playerDataFolder = new File(playerDataFolderPath);
