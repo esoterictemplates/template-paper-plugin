@@ -64,4 +64,4 @@ const gradleSettingsFilePath = "settings.gradle.kts";
 
 // Replace project name in the gradle settings
 const gradleSettingsFileContent = readFileSync(gradleSettingsFilePath).toString();
-writeFileSync(gradleSettingsFilePath, gradleSettingsFileContent.replace(oldProjectName, newProjectName));
+writeFileSync(gradleSettingsFilePath, gradleSettingsFileContent.replace(`rootProject.name = "${oldProjectName}"`, newProjectName));
