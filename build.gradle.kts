@@ -15,7 +15,7 @@ val groupStringSeparator = "."
 val kebabcaseStringSeparator = "-"
 val snakecaseStringSeparator = "_"
 
-fun capitaliseFirstLetter(string: String): String {
+fun capitalizeFirstLetter(string: String): String {
   return string.first().uppercase() + string.slice(IntRange(1, string.length - 1))
 }
 
@@ -29,7 +29,7 @@ fun pascalcase(kebabcaseString: String): String {
   val splitString = kebabcaseString.split(kebabcaseStringSeparator)
 
   for (part in splitString) {
-    pascalCaseString += capitaliseFirstLetter(part)
+    pascalCaseString += capitalizeFirstLetter(part)
   }
 
   return pascalCaseString
