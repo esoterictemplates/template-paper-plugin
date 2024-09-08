@@ -29,7 +29,7 @@ public class GiveCustomItemCommand extends CommandAPICommand {
           public CustomItem apply(CustomArgumentInfo<String> info) throws CustomArgumentException {
             return CustomItem.valueOf(info.currentInput());
           }
-        });
+        }).includeSuggestions(ArgumentSuggestions.strings(customItemNames));
 
     executesPlayer((info) -> {
       CustomItem item = (CustomItem) info.args().get(customItemArgumentNodeName);
