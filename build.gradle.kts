@@ -69,7 +69,7 @@ java {
 }
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
@@ -108,15 +108,15 @@ bukkitPluginYaml {
 }
 
 publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
+  publications {
+    create<MavenPublication>("mavenJava") {
+      from(components["java"])
 
-            groupId = projectGroupString
-            artifactId = projectNameString
-            version = projectVersionString
-        }
+      groupId = projectGroupString
+      artifactId = projectNameString
+      version = projectVersionString
     }
+  }
 }
 
 tasks.named("publishMavenJavaPublicationToMavenLocal") {
