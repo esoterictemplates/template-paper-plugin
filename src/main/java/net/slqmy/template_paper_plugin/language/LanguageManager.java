@@ -81,6 +81,38 @@ public class LanguageManager {
     }
   }
 
+  public String getPlayerLanguage(PlayerProfile playerProfile) {
+    return playerProfile.getLanguage();
+  }
+
+  public String getPlayerLanguage(UUID uuid) {
+    return plugin.getPlayerDataManager().getPlayerProfile(uuid).getLanguage();
+  }
+
+  public String getPlayerLanguage(Player player) {
+    return getPlayerLanguage(player.getUniqueId());
+  }
+
+  public String getLanguage(CommandSender commandSender) {
+    if (commandSender instanceof Player player) {
+      return getPlayerLanguage(player);
+    } else {
+      return defaultLanguage;
+    }
+  }
+
+  public void setPlayerLanguage(PlayerProfile playerProfile, String language) {
+    playerProfile.setLanguage(language);
+  }
+
+  public void setPlayerLanguage(UUID uuid, String language) {
+    setPlayerLanguage(plugin.getPlayerDataManager().getPlayerProfile(uuid), language);
+  }
+
+  public void setPlayerLanguage(Player player, String language) {
+    setPlayerLanguage(player.getUniqueId(), language);
+  }
+
   private Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Object... arguments) {
     Map<Message, String> languageMessageMap = languages.get(language);
     String miniMessageString = languageMessageMap.get(message);
