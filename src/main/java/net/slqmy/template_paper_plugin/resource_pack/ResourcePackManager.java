@@ -18,6 +18,8 @@ public class ResourcePackManager {
   private final String resourcePackFileExtension = "zip";
   private final String resourcePackFileMimeType = resourcePackFileType + FileUtil.getFileMimeTypeTypeSubtypeSeparator() + resourcePackFileExtension;
 
+  private final String resourcePackAssetsFolderName = "assets";
+
   private String resourcePackZipFilePath;
   private File resourcePackZipFile;
 
@@ -59,11 +61,11 @@ public class ResourcePackManager {
       return;
     }
 
-    if (!List.of(resourcePackFiles).contains("assets")) {
+    if (!List.of(resourcePackFiles).contains(resourcePackAssetsFolderName)) {
       return;
     }
 
-    File assetsFile = new File(plugin.getDataPath() + File.separator + resourcePackResourceFolderName + File.separator + "assets");
+    File assetsFile = new File(plugin.getDataPath() + File.separator + resourcePackResourceFolderName + File.separator + resourcePackAssetsFolderName);
     if (FileUtil.isDirectoryRecursivelyEmpty(assetsFile)) {
       return;
     }
