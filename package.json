@@ -1,0 +1,25 @@
+{
+  "name": "template-paper-plugin-scripts",
+  "description": "A collection of scripts designed to help with working on Minecraft plugins that use the template-paper-plugin template.",
+  "author": {
+    "name": "Esoteric Slime",
+    "url": "https://github.com/EsotericSlime",
+    "email": "90862990+EsotericSlime@users.noreply.github.com"
+  },
+  "keywords": [
+    "minecraft",
+    "plugin",
+    "help",
+    "script"
+  ],
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EsotericDevelopment/template-paper-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EsotericDevelopment/template-paper-plugin/issues"
+  },
+  "license": "ISC",
+  "homepage": "https://github.com/EsotericDevelopment/template-paper-plugin#readme"
+}
