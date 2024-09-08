@@ -19,7 +19,13 @@ public class LanguageManager {
 
   private final TemplatePaperPlugin plugin;
 
+  private final Language defaultLanguage;
+
   private final Map<Language, LanguageData> languages = new HashMap<>();
+
+  public Language getDefaultLanguage() {
+    return defaultLanguage;
+  }
 
   public LanguageManager(TemplatePaperPlugin plugin) {
     this.plugin = plugin;
@@ -67,6 +73,8 @@ public class LanguageManager {
       LanguageData languageData = new LanguageData(languageName, messages);
       languages.put(language, languageData);
     }
+
+    defaultLanguage = Language.valueOf(plugin.getConfig().getString("default-language"));
   }
 
   public Language getLanguageByName(String name) {
