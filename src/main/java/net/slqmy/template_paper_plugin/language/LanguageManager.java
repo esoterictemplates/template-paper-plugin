@@ -31,10 +31,22 @@ public class LanguageManager {
     plugin.saveResource(languagesFolderName, false);
 
     for (Language language : Language.values()) {
-      String languageFolderPath = languagesFolderPath + File.separator + language.name() + File.separator;
+      String languageEnumName = language.name();
 
-      String manifestFilePath = languageFolderPath + "manifest.yaml";
-      String messagesFilePath = languageFolderPath + "messages.yaml";
+      String languageFolderPath = languagesFolderPath + File.separator + languageEnumName + File.separator;
+      String languageFolderResourcePath = languagesFolderName + File.separator + languageEnumName + File.separator;
+
+      String manifestFileName = "manifest.yaml";
+      String messagesFileName = "messages.yaml";
+
+      String manifestFilePath = languageFolderPath + manifestFileName;
+      String messagesFilePath = languageFolderPath + messagesFileName;
+
+      String manifestResourceFilePath = languageFolderResourcePath + manifestFileName;
+      String messagesResourceFilePath = languageFolderResourcePath + messagesFileName;
+
+      plugin.saveResource(manifestResourceFilePath, false);
+      plugin.saveResource(messagesResourceFilePath, false);
 
       File manifestFile = new File(manifestFilePath);
       File messagesFile = new File(messagesFilePath);
@@ -52,7 +64,7 @@ public class LanguageManager {
         messages.put(message, mappedResult);
       }
 
-      LanguageData languageData = new LanguageData(Language.valueOf(languageName), messages);
+      LanguageData languageData = new LanguageData(languageName, messages);
       languages.put(language, languageData);
     }
   }
