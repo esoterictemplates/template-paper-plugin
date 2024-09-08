@@ -24,9 +24,9 @@ public class SpawnCustomEntityCommand extends CommandAPICommand {
       return;
     }
 
-    String customEntityArgumentNodeName = "custom-entity";
+    String customEntityArgumentNodeName = "custom-entity-id";
 
-    String[] customEntityNames = Stream.of(CustomEntity.values()).map((customEntity) -> customEntity.name()).toArray(String[]::new);
+    String[] customEntityIds = Stream.of(CustomEntity.values()).map((customEntity) -> customEntity.name()).toArray(String[]::new);
 
     Argument<CustomEntity> customEntityArgument = new CustomArgument<CustomEntity, String>(new StringArgument(customEntityArgumentNodeName), new CustomArgumentInfoParser<>() {
       @Override
@@ -39,7 +39,7 @@ public class SpawnCustomEntityCommand extends CommandAPICommand {
           throw CustomArgumentException.fromAdventureComponent(plugin.getLanguageManager().getMessage(Message.UNKNOWN_CUSTOM_ENTITY, info.sender(), input));
         }
       }
-    }).includeSuggestions(ArgumentSuggestions.strings(customEntityNames));
+    }).includeSuggestions(ArgumentSuggestions.strings(customEntityIds));
 
     executesPlayer((info) -> {
       CustomEntity entity = (CustomEntity) info.args().get(customEntityArgumentNodeName);

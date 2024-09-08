@@ -24,9 +24,9 @@ public class GiveCustomItemCommand extends CommandAPICommand {
       return;
     }
 
-    String customItemArgumentNodeName = "custom-item";
+    String customItemArgumentNodeName = "custom-item-id";
 
-    String[] customItemNames = Stream.of(CustomItem.values()).map((customItem) -> customItem.name()).toArray(String[]::new);
+    String[] customItemIds = Stream.of(CustomItem.values()).map((customItem) -> customItem.name()).toArray(String[]::new);
 
     Argument<CustomItem> customItemArgument = new CustomArgument<CustomItem, String>(new StringArgument(customItemArgumentNodeName), new CustomArgumentInfoParser<>() {
       @Override
@@ -39,7 +39,7 @@ public class GiveCustomItemCommand extends CommandAPICommand {
           throw CustomArgumentException.fromAdventureComponent(plugin.getLanguageManager().getMessage(Message.UNKNOWN_CUSTOM_ITEM, info.sender(), input));
         }
       }
-    }).includeSuggestions(ArgumentSuggestions.strings(customItemNames));
+    }).includeSuggestions(ArgumentSuggestions.strings(customItemIds));
 
     executesPlayer((info) -> {
       CustomItem item = (CustomItem) info.args().get(customItemArgumentNodeName);
