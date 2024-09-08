@@ -96,11 +96,7 @@ tasks {
 
   shadowJar {
     // helper function to relocate a package into our package
-    fun reloc(pkg: String) = relocate(pkg, "io.papermc.paperweight.testplugin.dependency.$pkg")
-
-    // relocate cloud and it's transitive dependencies
-    reloc("org.incendo.cloud")
-    reloc("io.leangen.geantyref")
+    fun relocatePackage(packageName: String) = relocate(packageName, group + groupStringSeparator + "$packageName")
   }
 }
 
