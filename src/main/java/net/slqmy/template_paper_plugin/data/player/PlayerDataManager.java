@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.util.Map;
 import java.util.UUID;
 
+import org.bukkit.entity.Player;
+
 import com.google.gson.Gson;
 
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
@@ -38,5 +40,13 @@ public class PlayerDataManager {
       PlayerProfile profile = gson.fromJson(reader, PlayerProfile.class);
       playerData.put(playerUUID, profile);
     }
+  }
+
+  public PlayerProfile getPlayerProfile(UUID uuid) {
+    return playerData.get(uuid);
+  }
+
+  public PlayerProfile getPlayerProfile(Player player) {
+    return playerData.get(player.getUniqueId());
   }
 }
