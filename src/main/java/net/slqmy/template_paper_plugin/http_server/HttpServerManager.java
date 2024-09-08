@@ -22,7 +22,7 @@ public class HttpServerManager {
   private final TemplatePaperPlugin plugin;
 
   private final String hostName;
-  private final int port = 8000;
+  private final int port;
 
   private final int successResponseCode = 200;
   private final int notFoundResponseCode = 404;
@@ -45,6 +45,7 @@ public class HttpServerManager {
     this.plugin = plugin;
 
     hostName = Bukkit.getServer().getIp();
+    port = plugin.getConfig().getInt("http-server.port");
 
     try {
       server = HttpServer.create(new InetSocketAddress(hostName, port), 0);
