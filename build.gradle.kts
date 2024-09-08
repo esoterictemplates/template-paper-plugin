@@ -11,7 +11,7 @@ plugins {
 
 description = "Test plugin for paperweight-userdev"
 
-val mainProjectAuthor = "Slqmy"
+val mainProjectAuthor = "Esoteric Slime"
 val projectAuthors = listOfNotNull(mainProjectAuthor)
 
 val topLevelDomain = "net"
