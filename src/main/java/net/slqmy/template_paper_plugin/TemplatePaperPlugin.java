@@ -126,5 +126,8 @@ public final class TemplatePaperPlugin extends JavaPlugin {
     if (playerDataManager != null) {
       playerDataManager.save();
     }
+    if (customMultiblockManager != null) {
+      customMultiblockManager.save();
+    }
   }
 }
