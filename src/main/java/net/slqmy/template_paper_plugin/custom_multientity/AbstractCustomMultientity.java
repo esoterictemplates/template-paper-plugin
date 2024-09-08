@@ -1,4 +1,4 @@
-package net.slqmy.template_paper_plugin.custom_entity;
+package net.slqmy.template_paper_plugin.custom_multientity;
 
 import java.util.List;
 
@@ -10,13 +10,13 @@ import org.bukkit.persistence.PersistentDataType;
 
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 
-public abstract class AbstractCustomEntity<E extends Entity> implements Listener {
+public abstract class AbstractCustomMultientity<E extends Entity> implements Listener {
 
   protected final TemplatePaperPlugin plugin;
 
-  private final CustomEntity entityId;
+  private final CustomMultientity entityId;
 
-  protected AbstractCustomEntity(TemplatePaperPlugin plugin, CustomEntityManager customEntityManager, CustomEntity entityId) {
+  protected AbstractCustomMultientity(TemplatePaperPlugin plugin, CustomMultientityManager customEntityManager, CustomMultientity entityId) {
     this.plugin = plugin;
 
     this.entityId = entityId;
@@ -43,7 +43,7 @@ public abstract class AbstractCustomEntity<E extends Entity> implements Listener
     }
 
     try {
-      return entityId == CustomEntity.valueOf(entity.getPersistentDataContainer().get(plugin.getCustomEntityIdKey(), PersistentDataType.STRING));
+      return entityId == CustomMultientity.valueOf(entity.getPersistentDataContainer().get(plugin.getCustomEntityIdKey(), PersistentDataType.STRING));
     } catch (IllegalArgumentException | NullPointerException exception) {
       return false;
     }

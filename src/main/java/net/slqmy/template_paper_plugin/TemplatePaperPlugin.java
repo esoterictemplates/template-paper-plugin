@@ -10,13 +10,13 @@ import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import net.slqmy.template_paper_plugin.commands.GiveCustomItemCommand;
 import net.slqmy.template_paper_plugin.commands.PlaceCustomMultiblockCommand;
 import net.slqmy.template_paper_plugin.commands.SetLanguageCommand;
-import net.slqmy.template_paper_plugin.commands.SpawnCustomEntityCommand;
-import net.slqmy.template_paper_plugin.custom_entity.CustomEntity;
-import net.slqmy.template_paper_plugin.custom_entity.CustomEntityManager;
+import net.slqmy.template_paper_plugin.commands.SpawnCustomMultientityCommand;
 import net.slqmy.template_paper_plugin.custom_item.CustomItem;
 import net.slqmy.template_paper_plugin.custom_item.CustomItemManager;
 import net.slqmy.template_paper_plugin.custom_multiblock.CustomMultiblock;
 import net.slqmy.template_paper_plugin.custom_multiblock.CustomMultiblockManager;
+import net.slqmy.template_paper_plugin.custom_multientity.CustomMultientity;
+import net.slqmy.template_paper_plugin.custom_multientity.CustomMultientityManager;
 import net.slqmy.template_paper_plugin.data.player.PlayerDataManager;
 import net.slqmy.template_paper_plugin.file.FileManager;
 import net.slqmy.template_paper_plugin.http_server.HttpServerManager;
@@ -32,7 +32,7 @@ public final class TemplatePaperPlugin extends JavaPlugin {
   private ResourcePackManager resourcePackManager;
   private HttpServerManager httpServerManager;
   private CustomItemManager customItemManager;
-  private CustomEntityManager customEntityManager;
+  private CustomMultientityManager customMultientityManager;
   private CustomMultiblockManager customMultiblockManager;
 
   private final NamespacedKey customItemIdKey = new NamespacedKey(this, "custom_item_id");
@@ -62,8 +62,8 @@ public final class TemplatePaperPlugin extends JavaPlugin {
     return customItemManager;
   }
 
-  public CustomEntityManager getCustomEntityManager() {
-    return customEntityManager;
+  public CustomMultientityManager getCustomMultientityManager() {
+    return customMultientityManager;
   }
 
   public CustomMultiblockManager getCustomMultiblockManager() {
@@ -96,8 +96,8 @@ public final class TemplatePaperPlugin extends JavaPlugin {
     if (CustomItem.values().length != 0) {
       customItemManager = new CustomItemManager(this);
     }
-    if (CustomEntity.values().length != 0) {
-      customEntityManager = new CustomEntityManager(this);
+    if (CustomMultientity.values().length != 0) {
+      customMultientityManager = new CustomMultientityManager(this);
     }
     if (CustomMultiblock.values().length != 0) {
       customMultiblockManager = new CustomMultiblockManager(this);
@@ -108,8 +108,8 @@ public final class TemplatePaperPlugin extends JavaPlugin {
     if (CustomItem.values().length != 0) {
       new GiveCustomItemCommand(this);
     }
-    if (CustomEntity.values().length != 0) {
-      new SpawnCustomEntityCommand(this);
+    if (CustomMultientity.values().length != 0) {
+      new SpawnCustomMultientityCommand(this);
     }
     if (CustomMultiblock.values().length != 0) {
       new PlaceCustomMultiblockCommand(this);

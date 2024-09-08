@@ -10,32 +10,32 @@ import dev.jorel.commandapi.arguments.CustomArgument;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentException;
 import dev.jorel.commandapi.arguments.StringArgument;
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
-import net.slqmy.template_paper_plugin.custom_entity.CustomEntity;
+import net.slqmy.template_paper_plugin.custom_multientity.CustomMultientity;
 import net.slqmy.template_paper_plugin.language.Message;
 
-public class SpawnCustomEntityCommand extends CommandAPICommand {
+public class SpawnCustomMultientityCommand extends CommandAPICommand {
 
-  public SpawnCustomEntityCommand(TemplatePaperPlugin plugin) {
+  public SpawnCustomMultientityCommand(TemplatePaperPlugin plugin) {
     super("spawn");
 
     String customEntityArgumentNodeName = "custom-entity-id";
 
-    String[] customEntityIds = Stream.of(CustomEntity.values()).map((customEntity) -> customEntity.name()).toArray(String[]::new);
+    String[] customEntityIds = Stream.of(CustomMultientity.values()).map((customEntity) -> customEntity.name()).toArray(String[]::new);
 
-    Argument<CustomEntity> customEntityArgument = new CustomArgument<>(new StringArgument(customEntityArgumentNodeName), (info) -> {
+    Argument<CustomMultientity> customEntityArgument = new CustomArgument<>(new StringArgument(customEntityArgumentNodeName), (info) -> {
       String input = info.currentInput();
 
       try {
-        return CustomEntity.valueOf(input);
+        return CustomMultientity.valueOf(input);
       } catch (IllegalArgumentException exception) {
         throw CustomArgumentException.fromAdventureComponent(plugin.getLanguageManager().getMessage(Message.UNKNOWN_CUSTOM_ENTITY, info.sender(), input));
       }
     }).includeSuggestions(ArgumentSuggestions.strings(customEntityIds));
 
     executesPlayer((info) -> {
-      CustomEntity entity = (CustomEntity) info.args().get(customEntityArgumentNodeName);
+      CustomMultientity entity = (CustomMultientity) info.args().get(customEntityArgumentNodeName);
 
-      plugin.getCustomEntityManager().spawnEntity(entity, info.sender().getLocation());
+      plugin.getCustomMultientityManager().spawnEntity(entity, info.sender().getLocation());
     });
 
     withPermission(CommandPermission.OP);
