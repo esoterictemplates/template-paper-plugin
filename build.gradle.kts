@@ -11,9 +11,11 @@ group = "net.slqmy.template_paper_plugin"
 version = "1.0.0-SNAPSHOT"
 description = "Test plugin for paperweight-userdev"
 
+val javaVersion = 21
+
 java {
   // Configure the java toolchain. This allows gradle to auto-provision JDK 21 on systems that only have JDK 11 installed for example.
-  toolchain.languageVersion = JavaLanguageVersion.of(21)
+  toolchain.languageVersion = JavaLanguageVersion.of(javaVersion)
 }
 
 // 1)
@@ -39,7 +41,7 @@ tasks {
   compileJava {
     // Set the release flag. This configures what version bytecode the compiler will emit, as well as what JDK APIs are usable.
     // See https://openjdk.java.net/jeps/247 for more information.
-    options.release = 21
+    options.release = javaVersion
   }
   javadoc {
     options.encoding = Charsets.UTF_8.name() // We want UTF-8 for everything
