@@ -83,7 +83,7 @@ public class LanguageManager {
     }
   }
 
-  private String getLanguage(CommandSender commandSender) {
+  public String getLanguage(CommandSender commandSender) {
     String language = getProfileLanguage(commandSender);
 
     if (language == null) {
@@ -93,7 +93,7 @@ public class LanguageManager {
     return language;
   }
 
-  private String getLanguage(UUID uuid) {
+  public String getLanguage(UUID uuid) {
     String language = getProfileLanguage(uuid);
 
     if (language == null) {
@@ -103,7 +103,7 @@ public class LanguageManager {
     return language;
   }
 
-  private String getLanguage(PlayerProfile profile) {
+  public String getLanguage(PlayerProfile profile) {
     return getLanguage(profile.getUuid());
   }
 
