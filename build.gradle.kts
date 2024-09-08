@@ -27,9 +27,9 @@ fun pascalcase(kebabCaseString: String): String {
   return pascalCaseString
 }
 
-val author = "Slqmy"
+val projectAuthor = "Slqmy"
 
-group = "net." + author.lowercase() + "." + snakecase(rootProject.name)
+group = "net." + projectAuthor + "." + snakecase(rootProject.name)
 version = "1.0.0-SNAPSHOT"
 description = "Test plugin for paperweight-userdev"
 
@@ -85,6 +85,6 @@ tasks {
 bukkitPluginYaml {
   main = project.group.toString() + "." + pascalcase(rootProject.name)
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
-  authors.add(author)
+  authors.add(projectAuthor)
   apiVersion = paperApiVersion
 }
