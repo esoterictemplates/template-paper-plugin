@@ -58,7 +58,9 @@ public class LanguageManager {
   }
 
   public Component getMessage(Message message, PlayerProfile playerProfile, Object... arguments) {
-    return getMessage(message, playerProfile.getLanguage(), arguments);
+    Language selectedLanguage = playerProfile.getLanguage();
+
+    return getMessage(message, selectedLanguage != null ? selectedLanguage : Language.valueOf(plugin.getConfig().getString("default-language")), arguments);
   }
 
   public Component getMessage(Message message, UUID playerUuid, Object... arguments) {
