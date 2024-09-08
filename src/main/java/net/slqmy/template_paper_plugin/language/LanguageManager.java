@@ -4,20 +4,14 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 import net.slqmy.template_paper_plugin.data.player.PlayerProfile;
+import net.slqmy.template_paper_plugin.util.FileUtil;
 
 import java.util.UUID;
-import java.util.stream.Collectors;
 import java.util.Map;
 import java.util.Set;
-import java.util.Collections;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
-import java.util.jar.JarFile;
-import java.util.jar.JarEntry;
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -28,6 +22,10 @@ public class LanguageManager {
   private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
   private final TemplatePaperPlugin plugin;
+
+  private final String languagesFolderName = "languages";
+  private final String languagesFolderPath;
+  private final File languagesFolder;
 
   private final String defaultLanguage;
 
@@ -45,15 +43,22 @@ public class LanguageManager {
     this.plugin = plugin;
 
     File dataFolder = plugin.getDataFolder();
-    String languagesFolderName = "languages";
-    String languagesFolderPath = dataFolder.getPath() + File.separator + languagesFolderName;
-    File languagesFolder = new File(languagesFolderPath);
+    languagesFolderPath = dataFolder.getPath() + File.separator + languagesFolderName;
+    languagesFolder = new File(languagesFolderPath);
 
-    String languageResourcesPath = languagesFolderName + "/";
-    List<String> fileNames = listResourcesInFolder(languageResourcesPath);
+    saveLanguageFiles();
+    loadLanguageMessages();
 
-    fileNames.forEach((fileName) -> plugin.saveResource(languageResourcesPath + fileName, false));
+    defaultLanguage = plugin.getConfig().getString("default-language");
+  }
 
+  private void saveLanguageFiles() {
+    List<String> fileNames = FileUtil.getResourceFolderResourceFileNames(languagesFolderName + "/");
+
+    fileNames.forEach((fileName) -> plugin.saveResource(languagesFolderName + File.separator + fileName, false));
+  }
+
+  private void loadLanguageMessages() {
     for (File languageMessagesFile : languagesFolder.listFiles()) {
       String languageName = languageMessagesFile.getName().split("\\.", 2)[0];
 
@@ -70,32 +75,6 @@ public class LanguageManager {
       }
 
       languages.put(languageName, messages);
-    }
-
-    defaultLanguage = plugin.getConfig().getString("default-language");
-  }
-
-  private List<String> listResourcesInFolder(String resourcePath) {
-    ClassLoader classLoader = getClass().getClassLoader();
-
-    try {
-      URL jarURL = classLoader.getResource(resourcePath);
-      if (jarURL == null) {
-        return Collections.emptyList();
-      }
-
-      // Obtain the JAR file URL
-      String jarPath = jarURL.getPath();
-      int bangIndex = jarPath.indexOf("!");
-      String jarFilePath = jarPath.substring(5, bangIndex);
-
-      try (JarFile jarFile = new JarFile(jarFilePath)) {
-        return jarFile.stream().map(JarEntry::getName).filter(name -> name.startsWith(resourcePath) && !name.equals(resourcePath)).map(name -> name.substring(resourcePath.length()))
-            .collect(Collectors.toList());
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-      return Collections.emptyList();
     }
   }
 
