@@ -119,7 +119,7 @@ public class LanguageManager {
     setLanguage(player.getUniqueId(), language);
   }
 
-  private Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Object... arguments) {
+  public Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Object... arguments) {
     Map<Message, String> languageMessageMap = languages.get(language);
     String miniMessageString = languageMessageMap.get(message);
 
@@ -130,7 +130,7 @@ public class LanguageManager {
     return miniMessage.deserialize(String.format(miniMessageString, arguments));
   }
 
-  private Component getMessage(Message message, String language, Object... arguments) {
+  public Component getMessage(Message message, String language, Object... arguments) {
     return getMessage(message, language, true, arguments);
   }
 
