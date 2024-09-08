@@ -127,6 +127,52 @@ public class LanguageManager {
     setLanguage(player.getUniqueId(), language);
   }
 
+  private String getLocale(CommandSender commandSender) {
+    if (!(commandSender instanceof Player player)) {
+      return defaultLanguage;
+    }
+
+    Locale playerLocale = player.locale();
+    String localeDisplayName = playerLocale.getDisplayName();
+
+    if (!getLanguages().contains(localeDisplayName)) {
+      return defaultLanguage;
+    }
+
+    return localeDisplayName;
+  }
+
+  private String getLocale(UUID uuid) {
+    Player player = Bukkit.getPlayer(uuid);
+    return getLocale(player);
+  }
+
+  private String getLocale(PlayerProfile profile) {
+    return getLocale(profile.getUuid());
+  }
+
+  private String getProfileLanguage(PlayerProfile profile) {
+    if (profile == null) {
+      return null;
+    }
+
+    return profile.getLanguage();
+  }
+
+  private String getProfileLanguage(UUID uuid) {
+    return getProfileLanguage(plugin.getPlayerDataManager().getPlayerProfile(uuid));
+  }
+
+  private String getProfileLanguage(CommandSender commandSender) {
+    if (commandSender == null) {
+      return null;
+    } else if (commandSender instanceof Player player) {
+      return getProfileLanguage(player.getUniqueId());
+    } else {
+      return defaultLanguage;
+    }
+  }
+
   public String getRawMessageString(Message message, String language, boolean fallbackOnDefaultLanguage) {
     Map<Message, String> languageMessageMap = languages.get(language);
     String miniMessageString = languageMessageMap.get(message);
@@ -227,52 +273,6 @@ public class LanguageManager {
 
   public Component getMessage(Message message, PlayerProfile playerProfile, Object... arguments) {
     return getMessage(message, playerProfile, true, arguments);
-  }
-
-  private String getLocale(CommandSender commandSender) {
-    if (!(commandSender instanceof Player player)) {
-      return defaultLanguage;
-    }
-
-    Locale playerLocale = player.locale();
-    String localeDisplayName = playerLocale.getDisplayName();
-
-    if (!getLanguages().contains(localeDisplayName)) {
-      return defaultLanguage;
-    }
-
-    return localeDisplayName;
-  }
-
-  private String getLocale(UUID uuid) {
-    Player player = Bukkit.getPlayer(uuid);
-    return getLocale(player);
-  }
-
-  private String getLocale(PlayerProfile profile) {
-    return getLocale(profile.getUuid());
-  }
-
-  private String getProfileLanguage(PlayerProfile profile) {
-    if (profile == null) {
-      return null;
-    }
-
-    return profile.getLanguage();
-  }
-
-  private String getProfileLanguage(UUID uuid) {
-    return getProfileLanguage(plugin.getPlayerDataManager().getPlayerProfile(uuid));
-  }
-
-  private String getProfileLanguage(CommandSender commandSender) {
-    if (commandSender == null) {
-      return null;
-    } else if (commandSender instanceof Player player) {
-      return getProfileLanguage(player.getUniqueId());
-    } else {
-      return defaultLanguage;
-    }
   }
 
   public Component[] toComponents(Object[] ...objects) {
