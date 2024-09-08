@@ -29,7 +29,7 @@ public abstract class AbstractCustomEntity<E extends Entity> implements Listener
 
   protected abstract E generateCustomEntity(E baseEntity);
 
-  public Entity getCustomEntity(Location spawnLocation) {
+  public E getCustomEntity(Location spawnLocation) {
     E entity = (E) spawnLocation.getWorld().spawnEntity(spawnLocation, entityType);
     entity.getPersistentDataContainer().set(plugin.getCustomEntityIdKey(), PersistentDataType.STRING, entityId.name());
     return generateCustomEntity(entity);
