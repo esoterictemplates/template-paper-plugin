@@ -64,7 +64,15 @@ const oldProjectName = "template-paper-plugin";
 
 // File paths
 const gradleSettingsFilePath = "settings.gradle.kts";
+const gradleBuildFilePath = "build.gradle.kts";
 
 // Replace project name in the gradle settings
 const gradleSettingsFileContent = readFileSync(gradleSettingsFilePath).toString();
 writeFileSync(gradleSettingsFilePath, gradleSettingsFileContent.replace(`rootProject.name = "${oldProjectName}"`, `rootProject.name = "${newProjectName}"`));
+
+// Replace project info in the gradle build script
+const gradleBuildFileContent = readFileSync(gradleBuildFilePath).toString();
+writeFileSync(gradleBuildFilePath, gradleBuildFileContent
+    .replace(`val mainProjectAuthor = "${oldProjectAuthorName}"`, `val mainProjectAuthor = "${newProjectAuthorName}"`)
+    .replace(`val topLevelDomain = "${oldProjectTopLevelDomain}"`, `val topLevelDomain = "${newProjectTopLevelDomain}"`)
+);
