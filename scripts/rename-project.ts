@@ -48,8 +48,11 @@ const newProjectName = commandLineArguments[2];
 if (!newProjectName) {
     console.error("A project name must be specified");
     console.error("Please use the following command:");
-    console.error("npm run rename-project -- new-project-name");
-    console.error("Where 'new-project-name' is replaced with your desired plugin name, in kebab-case format.");
+    console.error("npm run rename-project -- new-project-top-level-domain new-project-author-name new-project-name");
+    console.error("Where:");
+    console.error("'new-project-top-level-domain' is replaced with the desired plugin top level domain, such as `net`, `dev`, `org`, `com`, etc.");
+    console.error("'new-project-author-name' is replaced with the desired plugin author name.");
+    console.error("'new-project-name' is replaced with your desired plugin name, in kebab-case format.");
     console.error("Learn about kebab-case: https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case");
     process.exit(1);
 }
