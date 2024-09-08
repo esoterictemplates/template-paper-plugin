@@ -9,7 +9,7 @@ const commandLineArguments = process.argv.slice(2);
  * The name is provided by running this command:
  * `npm run rename-project -- new-project-name`
  * 
- * Where `new-project-name` is replaced with the desired plugin name, in [kebab-case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case) format. 
+ * Where `new-project-name` is replaced with the desired plugin name, in [kebab-case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case) format.
 **/
 const newProjectName = commandLineArguments[0]; // npm run rename-project -- new-project-name
 
