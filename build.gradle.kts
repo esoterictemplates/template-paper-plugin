@@ -55,8 +55,7 @@ repositories {
 dependencies {
   paperweight.paperDevBundle(paperApiVersion + "-R0.1-SNAPSHOT")
 
-  compileOnly("dev.jorel", "commandapi-bukkit-core", "9.5.0")
-  implementation("dev.jorel" , "commandapi-bukkit-shade-mojang-mapped" , "9.5.0")
+  implementation("dev.jorel" , "commandapi-bukkit-shade-mojang-mapped" , "9.5.1")
 }
 
 tasks {
