@@ -166,6 +166,14 @@ public class LanguageManager {
     return getMessage(message, uuid, true, arguments);
   }
 
+  public Component getMessage(Message message, PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Object... arguments) {
+    return getMessage(message, getLanguage(playerProfile), fallbackOnDefaultLanguage, arguments);
+  }
+
+  public Component getMessage(Message message, PlayerProfile playerProfile, Object... arguments) {
+    return getMessage(message, playerProfile, true, arguments);
+  }
+
   private String getLocale(CommandSender commandSender) {
     if (!(commandSender instanceof Player player)) {
       return defaultLanguage;
