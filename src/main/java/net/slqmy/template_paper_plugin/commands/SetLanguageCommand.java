@@ -1,11 +1,19 @@
 package net.slqmy.template_paper_plugin.commands;
 
 import dev.jorel.commandapi.CommandAPICommand;
+import dev.jorel.commandapi.arguments.Argument;
 import dev.jorel.commandapi.arguments.ArgumentSuggestions;
+import dev.jorel.commandapi.arguments.CustomArgument;
+import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentException;
+import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentInfo;
+import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentInfoParser;
 import dev.jorel.commandapi.arguments.GreedyStringArgument;
 
-import java.util.stream.Stream;
+import java.util.Set;
 
+import org.bukkit.Bukkit;
+
+import net.kyori.adventure.text.Component;
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 import net.slqmy.template_paper_plugin.data.player.PlayerDataManager;
 import net.slqmy.template_paper_plugin.data.player.PlayerProfile;
@@ -20,9 +28,30 @@ public class SetLanguageCommand extends CommandAPICommand {
     LanguageManager languageManager = plugin.getLanguageManager();
     PlayerDataManager playerDataManager = plugin.getPlayerDataManager();
 
+    Set<String> languages = languageManager.getLanguages();
+
     String languageArgumentNodeName = "language";
 
-    withArguments(new GreedyStringArgument(languageArgumentNodeName).includeSuggestions(ArgumentSuggestions.strings(Stream.of(languageManager.getLanguages().toArray(String[]::new)).toArray(String[]::new))));
+    Argument<String> languageArgument = new CustomArgument<String, String>(
+        new GreedyStringArgument(languageArgumentNodeName),
+        new CustomArgumentInfoParser<String, String>() {
+          @Override
+          public String apply(CustomArgumentInfo<String> info) throws CustomArgumentException {
+            String selectedLanguage = info.currentInput();
+
+            Bukkit.getLogger().info(selectedLanguage);
+
+            if (!languages.contains(selectedLanguage)) {
+              Component errorMessage = languageManager.getMessage(Message.UNKNOWN_LANGUAGE, info.sender(), selectedLanguage);
+
+              throw CustomArgumentException.fromAdventureComponent(errorMessage);
+            }
+
+            return selectedLanguage;
+          }
+        }).includeSuggestions(ArgumentSuggestions.strings(languageManager.getLanguages().toArray(String[]::new)));
+
+    withArguments(languageArgument);
 
     executesPlayer((player, arguments) -> {
       String selectedLanguage = (String) arguments.get(languageArgumentNodeName);
