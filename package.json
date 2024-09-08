@@ -21,5 +21,8 @@
     "url": "https://github.com/EsotericDevelopment/template-paper-plugin/issues"
   },
   "license": "ISC",
-  "homepage": "https://github.com/EsotericDevelopment/template-paper-plugin#readme"
+  "homepage": "https://github.com/EsotericDevelopment/template-paper-plugin#readme",
+  "devDependencies": {
+    "@types/node": "^22.5.4"
+  }
 }
