@@ -28,7 +28,7 @@ public class PlayerDataManager {
   public PlayerDataManager(TemplatePaperPlugin plugin) {
     this.plugin = plugin;
 
-    playerDataFolderPath = plugin.getDataFolder().getPath() + File.separator + playerDataFolderName;
+    playerDataFolderPath = plugin.getDataPath() + File.separator + playerDataFolderName;
     playerDataFolder = new File(playerDataFolderPath);
 
     load();

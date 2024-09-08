@@ -44,8 +44,7 @@ public class LanguageManager {
   public LanguageManager(TemplatePaperPlugin plugin) {
     this.plugin = plugin;
 
-    File dataFolder = plugin.getDataFolder();
-    languagesFolderPath = dataFolder.getPath() + File.separator + languagesFolderName;
+    languagesFolderPath = plugin.getDataPath() + File.separator + languagesFolderName;
     languagesFolder = new File(languagesFolderPath);
 
     saveLanguageFiles();
