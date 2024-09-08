@@ -14,6 +14,7 @@ import net.slqmy.template_paper_plugin.custom_entity.CustomEntity;
 import net.slqmy.template_paper_plugin.custom_entity.CustomEntityManager;
 import net.slqmy.template_paper_plugin.custom_item.CustomItem;
 import net.slqmy.template_paper_plugin.custom_item.CustomItemManager;
+import net.slqmy.template_paper_plugin.custom_multiblock.CustomMultiblock;
 import net.slqmy.template_paper_plugin.custom_multiblock.CustomMultiblockManager;
 import net.slqmy.template_paper_plugin.data.player.PlayerDataManager;
 import net.slqmy.template_paper_plugin.file.FileManager;
@@ -96,9 +97,15 @@ public final class TemplatePaperPlugin extends JavaPlugin {
     languageManager = new LanguageManager(this);
     resourcePackManager = new ResourcePackManager(this);
     httpServerManager = new HttpServerManager(this);
-    customItemManager = new CustomItemManager(this);
-    customEntityManager = new CustomEntityManager(this);
-    customMultiblockManager = new CustomMultiblockManager(this);
+    if (CustomItem.values().length != 0) {
+      customItemManager = new CustomItemManager(this);
+    }
+    if (CustomEntity.values().length != 0) {
+      customEntityManager = new CustomEntityManager(this);
+    }
+    if (CustomMultiblock.values().length != 0) {
+      customMultiblockManager = new CustomMultiblockManager(this);
+    }
 
     new SetLanguageCommand(this);
 
