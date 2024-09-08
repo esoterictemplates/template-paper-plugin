@@ -170,6 +170,10 @@ public class LanguageManager {
     return getLocale(player);
   }
 
+  private String getLocale(PlayerProfile profile) {
+    return getLocale(profile.getUuid());
+  }
+
   private String getProfileLanguage(PlayerProfile profile) {
     if (profile == null) {
       return null;
