@@ -91,7 +91,7 @@ public class CustomMultiblockManager {
       return;
     }
 
-    if (multiblocksFile.exists()) {
+    if (!multiblocksFile.exists()) {
       plugin.saveResource(multiblocksResourceFilePath, false);
     }
 
