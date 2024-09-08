@@ -60,4 +60,8 @@ public abstract class AbstractCustomItem implements Listener {
       return false;
     }
   }
+
+  public void give(Player player) {
+    player.getInventory().addItem(getCustomItem(player));
+  }
 }
