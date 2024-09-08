@@ -1,6 +1,5 @@
 package net.slqmy.template_paper_plugin.file;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
