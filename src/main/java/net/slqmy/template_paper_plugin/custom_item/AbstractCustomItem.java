@@ -14,18 +14,18 @@ public abstract class AbstractCustomItem implements Listener {
 
   protected final TemplatePaperPlugin plugin;
 
-  protected final String itemId;
+  protected final CustomItem itemId;
   protected final Material material;
 
   private final NamespacedKey itemIdKey;
 
-  public AbstractCustomItem(TemplatePaperPlugin plugin, String itemId, Material material) {
+  public AbstractCustomItem(TemplatePaperPlugin plugin, CustomItem itemId, Material material) {
     this.plugin = plugin;
 
     this.itemId = itemId;
     this.material = material;
 
-    itemIdKey = new NamespacedKey(plugin, itemId);
+    itemIdKey = new NamespacedKey(plugin, itemId.name());
 
     Bukkit.getPluginManager().registerEvents(this, plugin);
   }
@@ -34,7 +34,7 @@ public abstract class AbstractCustomItem implements Listener {
 
   public ItemStack getCustomItem(Player player) {
     ItemStack item = new ItemStack(material);
-    item.editMeta((meta) -> meta.getPersistentDataContainer().set(itemIdKey, PersistentDataType.STRING, itemId));
+    item.editMeta((meta) -> meta.getPersistentDataContainer().set(itemIdKey, PersistentDataType.STRING, itemId.name()));
     return generateCustomItem(item, player);
   }
 
@@ -47,6 +47,15 @@ public abstract class AbstractCustomItem implements Listener {
       return false;
     }
 
-    return itemId.equals(itemStack.getItemMeta().getPersistentDataContainer().get(itemIdKey, PersistentDataType.STRING));
+    String dataContainerItemIdValue = itemStack.getItemMeta().getPersistentDataContainer().get(itemIdKey, PersistentDataType.STRING);
+    if (dataContainerItemIdValue == null) {
+      return false;
+    }
+
+    try {
+      return itemId == CustomItem.valueOf(dataContainerItemIdValue);
+    } catch (IllegalArgumentException exception) {
+      return false;
+    }
   }
 }
