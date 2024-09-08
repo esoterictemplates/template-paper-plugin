@@ -47,4 +47,8 @@ public class LanguageManager {
             languages.put(language, languageData);
         }
     }
+
+    public String getMessage(Message message, Language language) {
+        return languages.get(language).getMessages().get(message);
+    }
 }
