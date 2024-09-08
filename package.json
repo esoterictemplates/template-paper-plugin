@@ -24,7 +24,7 @@
   "homepage": "https://github.com/EsotericDevelopment/template-paper-plugin#readme",
   "scripts": {
     "build": "npx tsc",
-    "rename-project": "node ./script-dist/rename-project.js"
+    "rename-project": "npm run build && node ./script-dist/rename-project.js"
   },
   "devDependencies": {
     "typescript": "^5.5.4",
