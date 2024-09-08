@@ -57,7 +57,7 @@ public class ResourcePackManager {
 
     try {
       resourcePackZipFile = new File(resourcePackZipFilePath);
-      FileUtil.zipFolder(resourcePackFolder.toPath(), resourcePackZipFile.toPath());
+      FileUtil.zipFolder(resourcePackFolder, resourcePackZipFile);
 
       FileUtils.deleteDirectory(resourcePackFolder);
     } catch (Exception exception) {

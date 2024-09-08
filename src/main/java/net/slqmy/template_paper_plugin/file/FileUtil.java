@@ -4,22 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.jar.JarFile;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 import java.util.jar.JarEntry;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import net.lingala.zip4j.ZipFile;
 
 public class FileUtil {
 
@@ -66,18 +60,16 @@ public class FileUtil {
     return paths;
   }
 
-  public static void zipFolder(Path sourceFolderPath, Path zipPath) throws Exception {
-    ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(zipPath.toFile()));
-    Files.walkFileTree(sourceFolderPath, new SimpleFileVisitor<Path>() {
-      @Override
-      public FileVisitResult visitFile(Path file, BasicFileAttributes attributes) throws IOException {
-        zipOutputStream.putNextEntry(new ZipEntry(sourceFolderPath.relativize(file).toString()));
-        Files.copy(file, zipOutputStream);
-        zipOutputStream.closeEntry();
-        return FileVisitResult.CONTINUE;
+  public static void zipFolder(File sourceFolder, File zipFile) throws IOException {
+    try (ZipFile zipFileInstance = new ZipFile(zipFile)) {
+      for (File file : sourceFolder.listFiles()) {
+        if (file.isDirectory()) {
+          zipFileInstance.addFolder(file);
+        } else {
+          zipFileInstance.addFile(file);
+        }
       }
-    });
-    zipOutputStream.close();
+    }
   }
 
   public static String getSha1HexString(File file) {
