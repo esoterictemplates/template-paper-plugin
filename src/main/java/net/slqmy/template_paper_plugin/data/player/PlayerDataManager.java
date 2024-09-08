@@ -24,7 +24,7 @@ public class PlayerDataManager {
   private Map<UUID, PlayerProfile> playerData;
 
   public PlayerDataManager(TemplatePaperPlugin plugin) {
-    playerDataFolderPath = plugin.getDataFolder().getPath() + File.pathSeparator + playerDataFolderName;
+    playerDataFolderPath = plugin.getDataFolder().getPath() + File.separator + playerDataFolderName;
     playerDataFolder = new File(playerDataFolderPath);
 
     load();
@@ -63,7 +63,7 @@ public class PlayerDataManager {
       UUID uuid = entry.getKey();
       PlayerProfile profile = entry.getValue();
 
-      File file = new File(playerDataFolderPath + File.pathSeparator + uuid.toString());
+      File file = new File(playerDataFolderPath + File.separator + uuid.toString());
 
       FileWriter writer;
 
