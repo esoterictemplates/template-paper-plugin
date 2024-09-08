@@ -1,5 +1,9 @@
 package net.slqmy.template_paper_plugin;
 
+import java.io.File;
+import java.nio.file.Path;
+
+import org.apache.commons.io.FileUtils;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -14,10 +18,13 @@ import net.slqmy.template_paper_plugin.custom_entity.CustomEntityManager;
 import net.slqmy.template_paper_plugin.custom_item.CustomItemManager;
 import net.slqmy.template_paper_plugin.data.player.PlayerDataManager;
 import net.slqmy.template_paper_plugin.file.FileManager;
+import net.slqmy.template_paper_plugin.file.FileUtil;
 import net.slqmy.template_paper_plugin.language.LanguageManager;
 
 @DefaultQualifier(NonNull.class)
 public final class TemplatePaperPlugin extends JavaPlugin {
+
+  private final String resourcePackResourceFolderName = String.join(" ", getClass().getSimpleName().split("(?=[A-Z])")) + " Resource Pack";
 
   private FileManager fileManager;
   private PlayerDataManager playerDataManager;
@@ -76,6 +83,16 @@ public final class TemplatePaperPlugin extends JavaPlugin {
 
     new GiveCustomItemCommand(this);
     new SpawnCustomEntityCommand(this);
+
+    fileManager.saveResourceFileFolder(resourcePackResourceFolderName);
+
+    try {
+      FileUtil.zipFolder(Path.of(getDataPath() + File.separator + resourcePackResourceFolderName), Path.of(getDataPath() + File.separator + resourcePackResourceFolderName + ".zip"));
+      File resourcePackFolder = new File(getDataPath() + File.separator + resourcePackResourceFolderName);
+      FileUtils.deleteDirectory(resourcePackFolder);
+    } catch (Exception exception) {
+      exception.printStackTrace();
+    }
   }
 
   @Override
