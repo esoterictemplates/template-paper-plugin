@@ -44,10 +44,12 @@ public class PlayerDataManager {
     File[] playerDataFiles = playerDataFolder.listFiles();
     for (File playerDataFile : playerDataFiles) {
       String fileName = playerDataFile.getName();
-      UUID playerUuid = UUID.fromString(fileName);
+      String playerUuidString = fileName.split("\\.", 2)[0];
+
+      UUID playerUuid = UUID.fromString(playerUuidString);
+      PlayerProfile profile;
 
       FileReader reader;
-      PlayerProfile profile;
 
       try {
         reader = new FileReader(playerDataFile);
