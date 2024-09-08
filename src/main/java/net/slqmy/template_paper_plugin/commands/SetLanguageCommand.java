@@ -47,7 +47,7 @@ public class SetLanguageCommand extends CommandAPICommand {
       String selectedLanguage = (String) arguments.get(languageArgumentNodeName);
       languageManager.setLanguage(player, selectedLanguage);
 
-      player.sendMessage(languageManager.getMessage(Message.SET_LANGUAGE_SUCCESSFULLY, player, selectedLanguage));
+      languageManager.sendMessage(Message.SET_LANGUAGE_SUCCESSFULLY, player, selectedLanguage);
     });
 
     register(plugin);
