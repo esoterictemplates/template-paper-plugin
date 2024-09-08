@@ -13,7 +13,7 @@ public class FileUtil {
     ClassLoader classLoader = FileUtil.class.getClassLoader();
 
     try {
-      URL jarURL = classLoader.getResource(resourcePath); 
+      URL jarURL = classLoader.getResource(resourcePath);
       if (jarURL == null) {
         return Collections.emptyList();
       }
