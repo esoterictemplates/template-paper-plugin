@@ -8,6 +8,7 @@ import org.checkerframework.framework.qual.DefaultQualifier;
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import net.slqmy.template_paper_plugin.commands.GiveCustomItemCommand;
+import net.slqmy.template_paper_plugin.commands.PlaceCustomMultiblockCommand;
 import net.slqmy.template_paper_plugin.commands.SetLanguageCommand;
 import net.slqmy.template_paper_plugin.commands.SpawnCustomEntityCommand;
 import net.slqmy.template_paper_plugin.custom_entity.CustomEntity;
@@ -114,6 +115,9 @@ public final class TemplatePaperPlugin extends JavaPlugin {
     }
     if (CustomEntity.values().length != 0) {
       new SpawnCustomEntityCommand(this);
+    }
+    if (CustomMultiblock.values().length != 0) {
+      new PlaceCustomMultiblockCommand(this);
     }
   }
 

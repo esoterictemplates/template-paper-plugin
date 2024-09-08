@@ -3,3 +3,4 @@ UNKNOWN_LANGUAGE: "Unsupported or unknown language: '{0}'."
 
 UNKNOWN_CUSTOM_ITEM: "Unknown custom item: '{0}'."
 UNKNOWN_CUSTOM_ENTITY: "Unknown custom entity: '{0}'."
+UNKNOWN_CUSTOM_MULTIBLOCK: "Unknown custom multiblock: '{0}'."
