@@ -69,6 +69,10 @@ public class LanguageManager {
     }
   }
 
+  public LanguageData getLanguageData(Language language) {
+    return languages.get(language);
+  }
+
   public Component getMessage(Message message, Language language, Object... arguments) {
     return miniMessage.deserialize(String.format(languages.get(language).getMessages().get(message), arguments));
   }
