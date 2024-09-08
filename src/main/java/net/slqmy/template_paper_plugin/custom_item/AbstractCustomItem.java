@@ -2,7 +2,6 @@ package net.slqmy.template_paper_plugin.custom_item;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
@@ -17,15 +16,11 @@ public abstract class AbstractCustomItem implements Listener {
   private final CustomItem itemId;
   private final Material material;
 
-  private final NamespacedKey itemIdKey;
-
   public AbstractCustomItem(TemplatePaperPlugin plugin, CustomItemManager customItemManager, CustomItem itemId, Material material) {
     this.plugin = plugin;
 
     this.itemId = itemId;
     this.material = material;
-
-    itemIdKey = new NamespacedKey(plugin, itemId.name());
 
     Bukkit.getPluginManager().registerEvents(this, plugin);
 
@@ -36,7 +31,7 @@ public abstract class AbstractCustomItem implements Listener {
 
   public ItemStack getCustomItem(Player player) {
     ItemStack item = new ItemStack(material);
-    item.editMeta((meta) -> meta.getPersistentDataContainer().set(itemIdKey, PersistentDataType.STRING, itemId.name()));
+    item.editMeta((meta) -> meta.getPersistentDataContainer().set(plugin.getCustomItemIdKey(), PersistentDataType.STRING, itemId.name()));
     return generateCustomItem(item, player);
   }
 
@@ -49,7 +44,7 @@ public abstract class AbstractCustomItem implements Listener {
       return false;
     }
 
-    String dataContainerItemIdValue = itemStack.getItemMeta().getPersistentDataContainer().get(itemIdKey, PersistentDataType.STRING);
+    String dataContainerItemIdValue = itemStack.getItemMeta().getPersistentDataContainer().get(plugin.getCustomItemIdKey(), PersistentDataType.STRING);
     if (dataContainerItemIdValue == null) {
       return false;
     }

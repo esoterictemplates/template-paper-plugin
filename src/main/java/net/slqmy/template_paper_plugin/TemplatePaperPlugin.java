@@ -1,5 +1,6 @@
 package net.slqmy.template_paper_plugin;
 
+import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.framework.qual.DefaultQualifier;
@@ -21,6 +22,9 @@ public final class TemplatePaperPlugin extends JavaPlugin {
   private CustomItemManager customItemManager;
   private CustomEntityManager customEntityManager;
 
+  private final NamespacedKey customItemIdKey = new NamespacedKey(this, "custom_item_id");
+  private final NamespacedKey customEntityIdKey = new NamespacedKey(this, "custom_entity_id");
+
   public PlayerDataManager getPlayerDataManager() {
     return playerDataManager;
   }
@@ -35,6 +39,14 @@ public final class TemplatePaperPlugin extends JavaPlugin {
 
   public CustomEntityManager getCustomEntityManager() {
     return customEntityManager;
+  }
+
+  public NamespacedKey getCustomItemIdKey() {
+    return customItemIdKey;
+  }
+
+  public NamespacedKey getCustomEntityIdKey() {
+    return customEntityIdKey;
   }
 
   @Override
