@@ -1,5 +1,7 @@
 package net.slqmy.template_paper_plugin;
 
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.framework.qual.DefaultQualifier;
@@ -8,6 +10,7 @@ import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import net.slqmy.template_paper_plugin.commands.SetLanguageCommand;
 import net.slqmy.template_paper_plugin.data.player.PlayerDataManager;
+import net.slqmy.template_paper_plugin.events.PlayerJoinListener;
 import net.slqmy.template_paper_plugin.language.LanguageManager;
 
 @DefaultQualifier(NonNull.class)
@@ -36,6 +39,10 @@ public final class TemplatePaperPlugin extends JavaPlugin {
 
     playerDataManager = new PlayerDataManager(this);
     languageManager = new LanguageManager(this);
+
+    PluginManager pluginManager = Bukkit.getPluginManager();
+
+    pluginManager.registerEvents(new PlayerJoinListener(this), this);
 
     new SetLanguageCommand(this);
   }
