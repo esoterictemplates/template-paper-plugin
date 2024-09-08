@@ -96,8 +96,6 @@ bukkitPluginYaml {
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
-            from(components["java"])
-
             groupId = projectGroupString
             artifactId = projectNameString
             version = projectVersionString
