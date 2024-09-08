@@ -19,7 +19,7 @@ public abstract class AbstractCustomItem implements Listener {
 
   private final NamespacedKey itemIdKey;
 
-  public AbstractCustomItem(TemplatePaperPlugin plugin, CustomItem itemId, Material material) {
+  public AbstractCustomItem(TemplatePaperPlugin plugin, CustomItemManager customItemManager, CustomItem itemId, Material material) {
     this.plugin = plugin;
 
     this.itemId = itemId;
@@ -29,7 +29,7 @@ public abstract class AbstractCustomItem implements Listener {
 
     Bukkit.getPluginManager().registerEvents(this, plugin);
 
-    plugin.getCustomItemManager().addCustomItem(itemId, this);
+    customItemManager.addCustomItem(itemId, this);
   }
 
   protected abstract ItemStack generateCustomItem(ItemStack baseCustomItem, Player player);
