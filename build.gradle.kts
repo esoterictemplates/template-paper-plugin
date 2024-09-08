@@ -7,7 +7,17 @@ plugins {
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1" // Generates plugin.yml based on the Gradle config
 }
 
-group = "net.slqmy.template_paper_plugin"
+fun underscoreCase(string: String): String {
+  return string.lowercase().replace(' ', '_')
+}
+
+fun pascalCase(string: String): String {
+  return string.replace(" ", "")
+}
+
+val author = "Slqmy"
+
+group = "net." + author.lowercase() + "." + underscoreCase(rootProject.name)
 version = "1.0.0-SNAPSHOT"
 description = "Test plugin for paperweight-userdev"
 
@@ -61,8 +71,8 @@ tasks {
 // Configure plugin.yml generation
 // - name, version, and description are inherited from the Gradle project.
 bukkitPluginYaml {
-  main = "net.slqmy.template_paper_plugin.TemplatePaperPlugin"
+  main = project.group.toString() + "." + pascalCase(rootProject.name)
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
-  authors.add("Slqmy")
+  authors.add(author)
   apiVersion = paperApiVersion
 }
