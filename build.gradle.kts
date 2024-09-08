@@ -70,6 +70,7 @@ dependencies {
   paperweight.paperDevBundle(paperApiVersion + "-R0.1-SNAPSHOT")
 
   compileOnly("dev.jorel", "commandapi-bukkit-core", "9.5.0")
+  implementation("dev.jorel" , "commandapi-bukkit-shade-mojang-mapped" , "9.5.0")
   // paperweight.foliaDevBundle("1.21-R0.1-SNAPSHOT")
   // paperweight.devBundle("com.example.paperfork", "1.21-R0.1-SNAPSHOT")
 }
