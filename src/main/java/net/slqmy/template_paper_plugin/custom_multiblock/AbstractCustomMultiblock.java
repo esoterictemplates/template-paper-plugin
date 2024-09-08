@@ -1,26 +1,24 @@
 package net.slqmy.template_paper_plugin.custom_multiblock;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.event.Listener;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.metadata.MetadataValue;
 
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
+import net.slqmy.template_paper_plugin.util.types.BlockLocation;
 
 public abstract class AbstractCustomMultiblock implements Listener {
 
-  private final TemplatePaperPlugin plugin;
+  protected final TemplatePaperPlugin plugin;
 
-  private final CustomMultiblock multiblockId;
+  private final List<List<BlockLocation>> multiblocks = new ArrayList<>();
 
   public AbstractCustomMultiblock(TemplatePaperPlugin plugin, CustomMultiblockManager customMultiblockManager, CustomMultiblock multiblockId) {
     this.plugin = plugin;
-
-    this.multiblockId = multiblockId;
 
     Bukkit.getPluginManager().registerEvents(this, plugin);
 
@@ -32,20 +30,18 @@ public abstract class AbstractCustomMultiblock implements Listener {
   public List<Block> getCustomMultiblock(Location placeLocation) {
     List<Block> multiblock = generateCustomMultiblock(placeLocation);
 
-    for (Block block : multiblock) {
-      block.setMetadata(plugin.getCustomMultiblockIdKey(), new FixedMetadataValue(plugin, multiblockId.name()));
-    }
+    multiblocks.add(multiblock.stream().map((block) -> new BlockLocation(block)).toList());
 
     return multiblock;
   }
 
   public boolean isBlock(Block block) {
-    List<MetadataValue> values = block.getMetadata(plugin.getCustomMultiblockIdKey());
-
-    if (values.size() == 0) {
-      return false;
+    for (List<BlockLocation> multiblock : multiblocks) {
+      if (multiblock.contains(new BlockLocation(block))) {
+        return true;
+      }
     }
 
-    return multiblockId.name().equals(values.get(0).asString());
+    return false;
   }
 }
