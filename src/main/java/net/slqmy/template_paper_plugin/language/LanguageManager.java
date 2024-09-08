@@ -176,11 +176,6 @@ public class LanguageManager {
     }
 
     Locale playerLocale = player.locale();
-
-    if (playerLocale == null) {
-      return null;
-    }
-
     String localeDisplayName = playerLocale.getDisplayName();
 
     if (!getLanguages().contains(localeDisplayName)) {
