@@ -78,6 +78,30 @@ public class FileUtil {
     }
   }
 
+  public static boolean isDirectoryRecursivelyEmpty(File directory) {
+    if (!directory.isDirectory()) {
+      throw new IllegalArgumentException("The specified path is not a directory");
+    }
+
+    File[] files = directory.listFiles();
+
+    if (files == null || files.length == 0) {
+      return true;
+    }
+
+    for (File file : files) {
+      if (file.isFile()) {
+        return false;
+      } else if (file.isDirectory()) {
+        if (!isDirectoryRecursivelyEmpty(file)) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
   public static String getSha1HexString(File file) {
     String algorithm = "SHA-1";
 
