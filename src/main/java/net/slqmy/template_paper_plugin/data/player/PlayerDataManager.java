@@ -32,6 +32,10 @@ public class PlayerDataManager {
   }
 
   private void load() {
+    if (!playerDataFolder.exists()) {
+      return;
+    }
+
     Gson gson = new Gson();
 
     File[] playerDataFiles = playerDataFolder.listFiles();
@@ -58,6 +62,8 @@ public class PlayerDataManager {
   }
 
   public void save() {
+    playerDataFolder.mkdir();
+
     Gson gson = new Gson();
 
     for (Entry<UUID, PlayerProfile> entry : playerData.entrySet()) {
