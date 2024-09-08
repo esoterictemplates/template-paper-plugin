@@ -51,7 +51,7 @@ public class LanguageManager {
         }
     }
 
-    public Component getMessage(Message message, Language language) {
-        return miniMessage.deserialize(languages.get(language).getMessages().get(message));
+    public Component getMessage(Message message, Language language, Object... arguments) {        
+        return miniMessage.deserialize(String.format(languages.get(language).getMessages().get(message), arguments));
     }
 }
