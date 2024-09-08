@@ -23,10 +23,10 @@ import java.security.NoSuchAlgorithmException;
 
 public class FileUtil {
 
-  private static final String fileExtensionSeparator = ".";
+  private static final String FILE_EXTENSION_SEPARATOR = ".";
 
   public static String getFileExtensionSeparator() {
-    return fileExtensionSeparator;
+    return FILE_EXTENSION_SEPARATOR;
   }
 
   public static List<String> getResourceFileFolderResourceFilePaths(String resourceFileFolderPath) throws IOException {
