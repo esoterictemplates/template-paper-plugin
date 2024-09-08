@@ -57,7 +57,9 @@ val projectVersionString = version.toString()
 
 val javaVersion = 21
 val javaVersionEnumMember = JavaVersion.valueOf("VERSION_" + javaVersion)
-val paperApiVersion = "1.21"
+
+val paperApiMinecraftVersion = "1.21"
+val paperApiVersion = paperApiMinecraftVersion + "-" + "R0.1-SNAPSHOT"
 
 java {
   sourceCompatibility = javaVersionEnumMember
@@ -71,7 +73,7 @@ repositories {
 }
 
 dependencies {
-  paperweight.paperDevBundle(paperApiVersion + "-R0.1-SNAPSHOT")
+  paperweight.paperDevBundle(paperApiVersion)
 
   implementation("dev.jorel" , "commandapi-bukkit-shade-mojang-mapped" , "9.5.1")
   
