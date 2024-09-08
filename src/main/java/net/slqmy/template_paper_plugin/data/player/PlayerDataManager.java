@@ -97,18 +97,18 @@ public class PlayerDataManager {
   }
 
   public PlayerProfile getPlayerProfile(UUID uuid) {
-    return playerData.get(uuid);
-  }
-
-  public PlayerProfile getPlayerProfile(Player player) {
-    PlayerProfile profile = playerData.get(player.getUniqueId());
+    PlayerProfile profile = playerData.get(uuid);
 
     if (profile == null) {
       profile = new PlayerProfile(plugin.getLanguageManager().getDefaultLanguage());
 
-      playerData.put(player.getUniqueId(), profile);
+      playerData.put(uuid, profile);
     }
 
-    return profile;
+    return playerData.get(uuid);
+  }
+
+  public PlayerProfile getPlayerProfile(Player player) {
+    return playerData.get(player.getUniqueId());
   }
 }
