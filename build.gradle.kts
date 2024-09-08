@@ -50,6 +50,8 @@ val projectNameString = rootProject.name
 group = topLevelDomain + groupStringSeparator + mainProjectAuthor.lowercase() + groupStringSeparator + snakecase(projectNameString)
 version = "1.0.0-SNAPSHOT"
 
+val buildDirectoryString = buildDir.toString()
+
 val projectGroupString = group.toString()
 val projectVersionString = version.toString()
 
@@ -101,7 +103,7 @@ publishing {
             version = projectVersionString
 
             fun artifactPath(classifier: String): String {
-              return "$buildDir/libs/" + projectNameString + "-" + projectVersionString + "-" + classifier + ".jar"
+              return buildDirectoryString + "/libs/" + projectNameString + "-" + projectVersionString + "-" + classifier + ".jar"
             }
 
             val devAllClassifier = "dev-all"
