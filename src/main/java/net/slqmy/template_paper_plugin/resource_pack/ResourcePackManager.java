@@ -1,7 +1,6 @@
 package net.slqmy.template_paper_plugin.resource_pack;
 
 import java.io.File;
-import java.nio.file.Path;
 
 import org.apache.commons.io.FileUtils;
 
