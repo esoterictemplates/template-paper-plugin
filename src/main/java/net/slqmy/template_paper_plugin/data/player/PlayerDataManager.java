@@ -56,7 +56,7 @@ public class PlayerDataManager {
     }
   }
 
-  private void save() {
+  public void save() {
     Gson gson = new Gson();
 
     for (Entry<UUID, PlayerProfile> entry : playerData.entrySet()) {

@@ -27,4 +27,9 @@ public final class TemplatePaperPlugin extends JavaPlugin implements Listener {
     playerDataManager = new PlayerDataManager(this);
     languageManager = new LanguageManager(this);
   }
+
+  @Override
+  public void onDisable() {
+    playerDataManager.save();
+  }
 }
