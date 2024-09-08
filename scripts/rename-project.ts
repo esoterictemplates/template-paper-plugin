@@ -1,3 +1,5 @@
+import { readFileSync, writeFileSync } from "fs";
+
 const commandLineArguments = process.argv.slice(2);
 
 /**
@@ -19,3 +21,13 @@ if (!newProjectName) {
     console.error("Learn about kebab-case: https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case");
     process.exit(1);
 }
+
+// Constants
+const oldProjectName = "template-paper-plugin";
+
+// File paths
+const gradleSettingsFilePath = "settings.gradle.kts"
+
+// Replace project name in the gradle settings
+const gradleSettingsFileContent = readFileSync(gradleSettingsFilePath).toString();
+writeFileSync(gradleSettingsFilePath, gradleSettingsFileContent.replace(oldProjectName, newProjectName));
