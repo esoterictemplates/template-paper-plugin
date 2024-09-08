@@ -51,10 +51,8 @@ public class PlayerDataManager {
       UUID playerUuid = UUID.fromString(playerUuidString);
       PlayerProfile profile;
 
-      FileReader reader;
-
       try {
-        reader = new FileReader(playerDataFile);
+        FileReader reader = new FileReader(playerDataFile);
 
         profile = gson.fromJson(reader, PlayerProfile.class);
 
@@ -83,12 +81,10 @@ public class PlayerDataManager {
 
       File file = new File(playerDataFolderPath + File.separator + uuid.toString() + playerDataFilesExtension);
 
-      FileWriter writer;
-
       try {
         file.createNewFile();
 
-        writer = new FileWriter(file);
+        FileWriter writer = new FileWriter(file);
 
         String json = gson.toJson(profile);
 
