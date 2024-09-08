@@ -93,25 +93,25 @@ public final class TemplatePaperPlugin extends JavaPlugin {
     languageManager = new LanguageManager(this);
     resourcePackManager = new ResourcePackManager(this);
     httpServerManager = new HttpServerManager(this);
-    if (CustomItem.values().length != 0) {
+    if (CustomItem.isEnabled()) {
       customItemManager = new CustomItemManager(this);
     }
-    if (CustomMultientity.values().length != 0) {
+    if (CustomMultientity.isEnabled()) {
       customMultientityManager = new CustomMultientityManager(this);
     }
-    if (CustomMultiblock.values().length != 0) {
+    if (CustomMultiblock.isEnabled()) {
       customMultiblockManager = new CustomMultiblockManager(this);
     }
 
     new SetLanguageCommand(this);
 
-    if (CustomItem.values().length != 0) {
+    if (CustomItem.isEnabled()) {
       new GiveCustomItemCommand(this);
     }
-    if (CustomMultientity.values().length != 0) {
+    if (CustomMultientity.isEnabled()) {
       new SpawnCustomMultientityCommand(this);
     }
-    if (CustomMultiblock.values().length != 0) {
+    if (CustomMultiblock.isEnabled()) {
       new PlaceCustomMultiblockCommand(this);
     }
   }
