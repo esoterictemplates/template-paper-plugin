@@ -83,38 +83,27 @@ public class LanguageManager {
     }
   }
 
-  public String getLanguage(CommandSender commandSender) {
-    if (!(commandSender instanceof Player player)) {
-      return defaultLanguage;
-    }
-
+  private String getLanguage(CommandSender commandSender) {
     String language = getProfileLanguage(commandSender);
 
     if (language == null) {
-      language = getPlayerLocale(player);
-      if (language == null) {
-        language = defaultLanguage;
-      }
+      language = getLocale(commandSender);
     }
 
     return language;
   }
 
-  public String getLanguage(UUID uuid) {
+  private String getLanguage(UUID uuid) {
     String language = getProfileLanguage(uuid);
 
     if (language == null) {
-      Player player = Bukkit.getPlayer(uuid);
-      language = getPlayerLocale(player);
-      if (language == null) {
-        language = defaultLanguage;
-      }
+      language = getLocale(uuid);
     }
 
     return language;
   }
 
-  public String getLanguage(PlayerProfile profile) {
+  private String getLanguage(PlayerProfile profile) {
     return getLanguage(profile.getUuid());
   }
 
@@ -149,19 +138,24 @@ public class LanguageManager {
     return getMessage(message, uuid, true, arguments);
   }
 
-  private String getPlayerLocale(Player player) {
-    if (player == null) {
-      return null;
+  private String getLocale(CommandSender commandSender) {
+    if (!(commandSender instanceof Player player)) {
+      return defaultLanguage;
     }
 
     Locale playerLocale = player.locale();
     String localeDisplayName = playerLocale.getDisplayName();
 
     if (!getLanguages().contains(localeDisplayName)) {
-      return null;
+      return defaultLanguage;
     }
 
     return localeDisplayName;
+  }
+
+  private String getLocale(UUID uuid) {
+    Player player = Bukkit.getPlayer(uuid);
+    return getLocale(player);
   }
 
   private String getProfileLanguage(PlayerProfile profile) {
@@ -177,7 +171,9 @@ public class LanguageManager {
   }
 
   private String getProfileLanguage(CommandSender commandSender) {
-    if (commandSender instanceof Player player) {
+    if (commandSender == null) {
+      return null;
+    } else if (commandSender instanceof Player player) {
       return getProfileLanguage(player.getUniqueId());
     } else {
       return defaultLanguage;
