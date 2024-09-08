@@ -13,14 +13,14 @@ fun capitaliseFirstLetter(string: String): String {
   return string.first().uppercase() + string.slice(IntRange(1, string.length - 1))
 }
 
-fun snakecase(kebabCaseString: String): String {
-  return kebabCaseString.lowercase().replace('-', '_')
+fun snakecase(kebabcaseString: String): String {
+  return kebabcaseString.lowercase().replace('-', '_')
 }
 
-fun pascalcase(kebabCaseString: String): String {
+fun pascalcase(kebabcaseString: String): String {
   var pascalCaseString = ""
 
-  val splitString = kebabCaseString.split("-")
+  val splitString = kebabcaseString.split("-")
 
   for (part in splitString) {
     pascalCaseString += capitaliseFirstLetter(part)
