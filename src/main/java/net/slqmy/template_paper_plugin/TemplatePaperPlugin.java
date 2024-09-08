@@ -6,6 +6,7 @@ import org.checkerframework.framework.qual.DefaultQualifier;
 
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
+import net.slqmy.template_paper_plugin.commands.GiveCustomItemCommand;
 import net.slqmy.template_paper_plugin.commands.SetLanguageCommand;
 import net.slqmy.template_paper_plugin.custom_item.CustomItemManager;
 import net.slqmy.template_paper_plugin.data.player.PlayerDataManager;
@@ -45,6 +46,7 @@ public final class TemplatePaperPlugin extends JavaPlugin {
     customItemManager = new CustomItemManager(this);
 
     new SetLanguageCommand(this);
+    new GiveCustomItemCommand(this);
   }
 
   @Override
