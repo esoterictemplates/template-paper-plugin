@@ -16,8 +16,6 @@ import org.bukkit.Bukkit;
 
 import net.kyori.adventure.text.Component;
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
-import net.slqmy.template_paper_plugin.data.player.PlayerDataManager;
-import net.slqmy.template_paper_plugin.data.player.PlayerProfile;
 import net.slqmy.template_paper_plugin.language.LanguageManager;
 import net.slqmy.template_paper_plugin.language.Message;
 
@@ -27,8 +25,6 @@ public class SetLanguageCommand extends CommandAPICommand {
     super("set-language");
 
     LanguageManager languageManager = plugin.getLanguageManager();
-    PlayerDataManager playerDataManager = plugin.getPlayerDataManager();
-
     Set<String> languages = languageManager.getLanguages();
 
     String languageArgumentNodeName = "language";
@@ -60,9 +56,7 @@ public class SetLanguageCommand extends CommandAPICommand {
 
     executesPlayer((player, arguments) -> {
       String selectedLanguage = (String) arguments.get(languageArgumentNodeName);
-
-      PlayerProfile profile = playerDataManager.getPlayerProfile(player);
-      profile.setLanguage(selectedLanguage);
+      languageManager.setLanguage(player, selectedLanguage);
 
       player.sendMessage(languageManager.getMessage(Message.SET_LANGUAGE_SUCCESSFULLY, player, selectedLanguage));
     });
