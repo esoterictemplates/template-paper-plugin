@@ -12,42 +12,42 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class LanguageManager {
 
-    private final MiniMessage miniMessage = MiniMessage.miniMessage();
+  private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
-    private final Map<Language, LanguageData> languages = new HashMap<>();
+  private final Map<Language, LanguageData> languages = new HashMap<>();
 
-    public LanguageManager(TemplatePaperPlugin plugin) {
-        File dataFolder = plugin.getDataFolder();
-        String languagesFolderPath = dataFolder.getPath() + File.separator + "languages";
+  public LanguageManager(TemplatePaperPlugin plugin) {
+    File dataFolder = plugin.getDataFolder();
+    String languagesFolderPath = dataFolder.getPath() + File.separator + "languages";
 
-        for (Language language : Language.values()) {
-            String languageFolderPath = languagesFolderPath + File.separator + language.getKebabCaseName() + File.separator;
+    for (Language language : Language.values()) {
+      String languageFolderPath = languagesFolderPath + File.separator + language.getKebabCaseName() + File.separator;
 
-            String manifestFilePath = languageFolderPath + "manifest.yaml";
-            String messagesFilePath = languageFolderPath + "messages.yaml";
+      String manifestFilePath = languageFolderPath + "manifest.yaml";
+      String messagesFilePath = languageFolderPath + "messages.yaml";
 
-            File manifestFile = new File(manifestFilePath);
-            File messagesFile = new File(messagesFilePath);
+      File manifestFile = new File(manifestFilePath);
+      File messagesFile = new File(messagesFilePath);
 
-            YamlConfiguration manifestConfiguration = YamlConfiguration.loadConfiguration(manifestFile);
-            YamlConfiguration messagesConfiguration = YamlConfiguration.loadConfiguration(messagesFile);
+      YamlConfiguration manifestConfiguration = YamlConfiguration.loadConfiguration(manifestFile);
+      YamlConfiguration messagesConfiguration = YamlConfiguration.loadConfiguration(messagesFile);
 
-            String languageName = manifestConfiguration.getString("name");
+      String languageName = manifestConfiguration.getString("name");
 
-            Map<Message, String> messages = new HashMap<>();
+      Map<Message, String> messages = new HashMap<>();
 
-            for (Message message : Message.values()) {
-                String mappedResult = messagesConfiguration.getString(message.getKebabCaseName());
+      for (Message message : Message.values()) {
+        String mappedResult = messagesConfiguration.getString(message.getKebabCaseName());
 
-                messages.put(message, mappedResult);
-            }
+        messages.put(message, mappedResult);
+      }
 
-            LanguageData languageData = new LanguageData(languageName, messages);
-            languages.put(language, languageData);
-        }
+      LanguageData languageData = new LanguageData(languageName, messages);
+      languages.put(language, languageData);
     }
+  }
 
-    public Component getMessage(Message message, Language language, Object... arguments) {        
-        return miniMessage.deserialize(String.format(languages.get(language).getMessages().get(message), arguments));
-    }
+  public Component getMessage(Message message, Language language, Object... arguments) {
+    return miniMessage.deserialize(String.format(languages.get(language).getMessages().get(message), arguments));
+  }
 }
