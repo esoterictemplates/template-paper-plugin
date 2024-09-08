@@ -104,7 +104,7 @@ public class PlayerDataManager {
         return null;
       }
 
-      profile = new PlayerProfile(plugin.getLanguageManager().getDefaultLanguage());
+      profile = new PlayerProfile(uuid, plugin.getLanguageManager().getDefaultLanguage());
 
       playerData.put(uuid, profile);
     }
