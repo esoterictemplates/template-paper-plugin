@@ -82,7 +82,14 @@ public class LanguageManager {
   }
 
   public Component getMessage(Message message, String language, Object... arguments) {
-    return miniMessage.deserialize(String.format(languages.get(language).get(message), arguments));
+    Map<Message, String> languageMessageMap = languages.get(language);
+    String miniMessageString = languageMessageMap.get(message);
+
+    if (miniMessageString == null) {
+      return getMessage(message, defaultLanguage, arguments);
+    }
+
+    return miniMessage.deserialize(String.format(miniMessageString, arguments));
   }
 
   public Component getMessage(Message message, PlayerProfile playerProfile, Object... arguments) {
