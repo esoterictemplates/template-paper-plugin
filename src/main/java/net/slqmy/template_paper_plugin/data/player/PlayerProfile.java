@@ -1,20 +1,18 @@
 package net.slqmy.template_paper_plugin.data.player;
 
-import net.slqmy.template_paper_plugin.language.Language;
-
 public class PlayerProfile {
 
-  private Language language;
+  private String language;
 
-  public PlayerProfile(Language language) {
+  public PlayerProfile(String language) {
     this.language = language;
   }
 
-  public Language getLanguage() {
+  public String getLanguage() {
     return language;
   }
 
-  public void setLanguage(Language language) {
+  public void setLanguage(String language) {
     this.language = language;
   }
 }

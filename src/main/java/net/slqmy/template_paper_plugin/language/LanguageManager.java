@@ -7,6 +7,7 @@ import net.slqmy.template_paper_plugin.data.player.PlayerProfile;
 
 import java.util.UUID;
 import java.util.Map;
+import java.util.Set;
 import java.util.HashMap;
 import java.io.File;
 
@@ -19,12 +20,16 @@ public class LanguageManager {
 
   private final TemplatePaperPlugin plugin;
 
-  private final Language defaultLanguage;
+  private final String defaultLanguage;
 
-  private final Map<Language, LanguageData> languages = new HashMap<>();
+  private final Map<String, LanguageData> languages = new HashMap<>();
 
-  public Language getDefaultLanguage() {
+  public String getDefaultLanguage() {
     return defaultLanguage;
+  }
+
+  public Set<String> getLanguages() {
+    return languages.keySet();
   }
 
   public LanguageManager(TemplatePaperPlugin plugin) {
@@ -33,14 +38,15 @@ public class LanguageManager {
     File dataFolder = plugin.getDataFolder();
     String languagesFolderName = "languages";
     String languagesFolderPath = dataFolder.getPath() + File.separator + languagesFolderName;
+    File languagesFolder = new File(languagesFolderPath);
 
     plugin.saveResource(languagesFolderName, false);
 
-    for (Language language : Language.values()) {
-      String languageEnumName = language.name();
+    for (File languageFolder : languagesFolder.listFiles()) {
+      String languageId = languageFolder.getName();
 
-      String languageFolderPath = languagesFolderPath + File.separator + languageEnumName + File.separator;
-      String languageFolderResourcePath = languagesFolderName + File.separator + languageEnumName + File.separator;
+      String languageFolderPath = languagesFolderPath + File.separator + languageId + File.separator;
+      String languageFolderResourcePath = languagesFolderName + File.separator + languageId + File.separator;
 
       String manifestFileName = "manifest.yaml";
       String messagesFileName = "messages.yaml";
@@ -71,14 +77,14 @@ public class LanguageManager {
       }
 
       LanguageData languageData = new LanguageData(languageName, messages);
-      languages.put(language, languageData);
+      languages.put(languageId, languageData);
     }
 
-    defaultLanguage = Language.valueOf(plugin.getConfig().getString("default-language"));
+    defaultLanguage = plugin.getConfig().getString("default-language");
   }
 
-  public Language getLanguageByName(String name) {
-    for (Language language : Language.values()) {
+  public String getLanguageByName(String name) {
+    for (String language : languages.keySet()) {
       if (getLanguageData(language).getName().equals(name)) {
         return language;
       }
@@ -87,16 +93,16 @@ public class LanguageManager {
     return null;
   }
 
-  public LanguageData getLanguageData(Language language) {
+  public LanguageData getLanguageData(String language) {
     return languages.get(language);
   }
 
-  public Component getMessage(Message message, Language language, Object... arguments) {
+  public Component getMessage(Message message, String language, Object... arguments) {
     return miniMessage.deserialize(String.format(languages.get(language).getMessages().get(message), arguments));
   }
 
   public Component getMessage(Message message, PlayerProfile playerProfile, Object... arguments) {
-    Language selectedLanguage = playerProfile.getLanguage();
+    String selectedLanguage = playerProfile.getLanguage();
 
     return getMessage(message, selectedLanguage != null ? selectedLanguage : defaultLanguage, arguments);
   }
