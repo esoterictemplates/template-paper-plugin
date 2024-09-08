@@ -24,7 +24,10 @@ public class LanguageManager {
     this.plugin = plugin;
 
     File dataFolder = plugin.getDataFolder();
-    String languagesFolderPath = dataFolder.getPath() + File.separator + "languages";
+    String languagesFolderName = "languages";
+    String languagesFolderPath = dataFolder.getPath() + File.separator + languagesFolderName;
+
+    plugin.saveResource(languagesFolderName, false);
 
     for (Language language : Language.values()) {
       String languageFolderPath = languagesFolderPath + File.separator + language.name() + File.separator;
