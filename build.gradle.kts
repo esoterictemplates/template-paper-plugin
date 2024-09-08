@@ -7,12 +7,24 @@ plugins {
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1" // Generates plugin.yml based on the Gradle config
 }
 
-fun underscoreCase(string: String): String {
-  return string.lowercase().replace(' ', '_')
+fun capitaliseFirstLetter(string: String): String {
+  return string.first().uppercase() + string.slice(IntRange(1, string.length - 1))
 }
 
-fun pascalCase(string: String): String {
-  return string.replace(" ", "")
+fun underscoreCase(kebabCaseString: String): String {
+  return kebabCaseString.lowercase().replace('-', '_')
+}
+
+fun pascalCase(kebabCaseString: String): String {
+  var pascalCaseString = ""
+
+  val splitString = kebabCaseString.split("-")
+
+  for (part in splitString) {
+    pascalCaseString += capitaliseFirstLetter(part)
+  }
+
+  return pascalCaseString
 }
 
 val author = "Slqmy"
