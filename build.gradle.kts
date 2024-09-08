@@ -6,7 +6,7 @@ plugins {
   id("io.papermc.paperweight.userdev") version "1.7.1"
   id("xyz.jpenilla.run-paper") version "2.3.0"
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1"
-  id("com.github.johnrengelman.shadow") version "7.1.2"
+  id("io.github.goooler.shadow") version "8.1.7"
 }
 
 val groupStringSeparator = "."
@@ -64,10 +64,6 @@ tasks {
   }
   javadoc {
     options.encoding = Charsets.UTF_8.name()
-  }
-
-  shadowJar {
-    fun relocatePackage(packageName: String) = relocate(packageName, project.group.toString() + groupStringSeparator + "$packageName")
   }
 }
 
