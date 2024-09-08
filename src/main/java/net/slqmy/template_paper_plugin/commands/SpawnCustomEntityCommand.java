@@ -8,7 +8,6 @@ import dev.jorel.commandapi.arguments.Argument;
 import dev.jorel.commandapi.arguments.ArgumentSuggestions;
 import dev.jorel.commandapi.arguments.CustomArgument;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentException;
-import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentInfo;
 import dev.jorel.commandapi.arguments.StringArgument;
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 import net.slqmy.template_paper_plugin.custom_entity.CustomEntity;
@@ -23,7 +22,7 @@ public class SpawnCustomEntityCommand extends CommandAPICommand {
 
     String[] customEntityIds = Stream.of(CustomEntity.values()).map((customEntity) -> customEntity.name()).toArray(String[]::new);
 
-    Argument<CustomEntity> customEntityArgument = new CustomArgument<CustomEntity, String>(new StringArgument(customEntityArgumentNodeName), (CustomArgumentInfo<String> info) -> {
+    Argument<CustomEntity> customEntityArgument = new CustomArgument<>(new StringArgument(customEntityArgumentNodeName), (info) -> {
       String input = info.currentInput();
 
       try {

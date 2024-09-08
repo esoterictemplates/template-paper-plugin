@@ -8,7 +8,6 @@ import dev.jorel.commandapi.arguments.Argument;
 import dev.jorel.commandapi.arguments.ArgumentSuggestions;
 import dev.jorel.commandapi.arguments.CustomArgument;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentException;
-import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentInfo;
 import dev.jorel.commandapi.arguments.StringArgument;
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 import net.slqmy.template_paper_plugin.custom_item.CustomItem;
@@ -23,7 +22,7 @@ public class GiveCustomItemCommand extends CommandAPICommand {
 
     String[] customItemIds = Stream.of(CustomItem.values()).map((customItem) -> customItem.name()).toArray(String[]::new);
 
-    Argument<CustomItem> customItemArgument = new CustomArgument<CustomItem, String>(new StringArgument(customItemArgumentNodeName), (CustomArgumentInfo<String> info) -> {
+    Argument<CustomItem> customItemArgument = new CustomArgument<>(new StringArgument(customItemArgumentNodeName), (info) -> {
       String input = info.currentInput();
 
       try {

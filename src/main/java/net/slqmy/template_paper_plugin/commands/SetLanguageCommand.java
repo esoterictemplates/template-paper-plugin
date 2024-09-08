@@ -5,7 +5,6 @@ import dev.jorel.commandapi.arguments.Argument;
 import dev.jorel.commandapi.arguments.ArgumentSuggestions;
 import dev.jorel.commandapi.arguments.CustomArgument;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentException;
-import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentInfo;
 import dev.jorel.commandapi.arguments.GreedyStringArgument;
 
 import java.util.Set;
@@ -25,7 +24,7 @@ public class SetLanguageCommand extends CommandAPICommand {
 
     String languageArgumentNodeName = "language";
 
-    Argument<String> languageArgument = new CustomArgument<String, String>(new GreedyStringArgument(languageArgumentNodeName), (CustomArgumentInfo<String> info) -> {
+    Argument<String> languageArgument = new CustomArgument<>(new GreedyStringArgument(languageArgumentNodeName), (info) -> {
       String selectedLanguage = info.currentInput();
       if (!languages.contains(selectedLanguage)) {
         Component errorMessage = languageManager.getMessage(Message.UNKNOWN_LANGUAGE, info.sender(), selectedLanguage);
