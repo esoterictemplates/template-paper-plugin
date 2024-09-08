@@ -1,3 +1,4 @@
+import org.gradle.api.JavaVersion
 import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
 
 plugins {
@@ -46,9 +47,13 @@ group = topLevelDomain + groupStringSeparator + mainProjectAuthor.lowercase() + 
 version = "1.0.0-SNAPSHOT"
 
 val javaVersion = 21
+val javaVersionEnumMember = JavaVersion.valueOf("VERSION_" + javaVersion);
 val paperApiVersion = "1.21"
 
 java {
+  sourceCompatibility = javaVersionEnumMember
+  targetCompatibility = javaVersionEnumMember
+
   toolchain.languageVersion = JavaLanguageVersion.of(javaVersion)
 }
 
