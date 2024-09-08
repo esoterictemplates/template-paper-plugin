@@ -12,15 +12,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class LanguageManager {
 
-    private final TemplatePaperPlugin plugin;
-
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     private final Map<Language, LanguageData> languages = new HashMap<>();
 
     public LanguageManager(TemplatePaperPlugin plugin) {
-        this.plugin = plugin;
-
         File dataFolder = plugin.getDataFolder();
         String languagesFolderPath = dataFolder.getPath() + File.separator + "languages";
 
