@@ -58,7 +58,7 @@ tasks {
 // Configure plugin.yml generation
 // - name, version, and description are inherited from the Gradle project.
 bukkitPluginYaml {
-  main = "io.papermc.paperweight.testplugin.TemplatePaperPlugin"
+  main = "net.slqmy.template_paper_plugin.TemplatePaperPlugin"
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
   authors.add("Slqmy")
   apiVersion = "1.21"

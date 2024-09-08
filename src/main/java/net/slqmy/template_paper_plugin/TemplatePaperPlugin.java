@@ -1,4 +1,4 @@
-package net.slqmy.template_paper_plugin.testplugin;
+package net.slqmy.template_paper_plugin;
 
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
