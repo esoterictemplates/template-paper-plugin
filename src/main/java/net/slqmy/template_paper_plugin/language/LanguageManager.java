@@ -119,15 +119,23 @@ public class LanguageManager {
     setLanguage(player.getUniqueId(), language);
   }
 
-  public Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Object... arguments) {
+  public String getMessageString(Message message, String language, boolean fallbackOnDefaultLanguage, Object... arguments) {
     Map<Message, String> languageMessageMap = languages.get(language);
     String miniMessageString = languageMessageMap.get(message);
 
     if (miniMessageString == null) {
-      return fallbackOnDefaultLanguage ? getMessage(message, defaultLanguage, false, arguments) : null;
+      return fallbackOnDefaultLanguage ? getMessageString(message, defaultLanguage, false, arguments) : null;
     }
 
-    return miniMessage.deserialize(String.format(miniMessageString, arguments));
+    return String.format(miniMessageString, arguments);
+  }
+
+  public String getMessageString(Message message, String language, Object... arguments) {
+    return getMessageString(message, language, true, arguments);
+  }
+
+  public Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Object... arguments) {
+    return miniMessage.deserialize(getMessageString(message, language, fallbackOnDefaultLanguage, arguments));
   }
 
   public Component getMessage(Message message, String language, Object... arguments) {
