@@ -81,7 +81,7 @@ public class LanguageManager {
     }
   }
 
-  public Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Object... arguments) {
+  private Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Object... arguments) {
     Map<Message, String> languageMessageMap = languages.get(language);
     String miniMessageString = languageMessageMap.get(message);
 
@@ -92,7 +92,7 @@ public class LanguageManager {
     return miniMessage.deserialize(String.format(miniMessageString, arguments));
   }
 
-  public Component getMessage(Message message, String language, Object... arguments) {
+  private Component getMessage(Message message, String language, Object... arguments) {
     return getMessage(message, language, true, arguments);
   }
 
