@@ -57,14 +57,14 @@ public class LanguageManager {
     saveLanguageFiles();
     loadLanguageMessages();
 
-    defaultLanguage = plugin.getConfig().getString("default-language");
+    defaultLanguage = plugin.getConfig().getString("language.default-language");
   }
 
   private void saveLanguageFiles() {
     String languagesResourceFolderName = languagesFolderName + "/";
     List<String> languageResourceFileNames = FileUtil.getResourceFolderResourceFileNames(languagesResourceFolderName);
 
-    languageResourceFileNames.forEach((fileName) -> plugin.saveResource(languagesFolderName + File.separator + fileName, true));
+    languageResourceFileNames.forEach((fileName) -> plugin.saveResource(languagesFolderName + File.separator + fileName, !plugin.getConfig().getBoolean("language.use-custom-messages")));
   }
 
   private void loadLanguageMessages() {
