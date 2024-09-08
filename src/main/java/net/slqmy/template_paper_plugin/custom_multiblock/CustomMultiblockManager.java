@@ -18,7 +18,6 @@ import com.google.gson.Gson;
 
 import net.slqmy.template_paper_plugin.custom_multiblock.AbstractCustomMultiblock;
 import net.slqmy.template_paper_plugin.custom_multiblock.CustomMultiblock;
-import net.slqmy.template_paper_plugin.custom_multiblock.blocks.MultiFurnace;
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 
 public class CustomMultiblockManager {
@@ -34,8 +33,6 @@ public class CustomMultiblockManager {
 
   public CustomMultiblockManager(TemplatePaperPlugin plugin) {
     this.plugin = plugin;
-
-    new MultiFurnace(plugin, this);
 
     multiblocksFilePath = plugin.getDataFolder() + File.separator + multiblocksResourceFilePath;
     multiblocksFile = new File(multiblocksFilePath);
