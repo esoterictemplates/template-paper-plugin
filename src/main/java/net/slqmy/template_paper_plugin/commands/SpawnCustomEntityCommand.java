@@ -19,10 +19,6 @@ public class SpawnCustomEntityCommand extends CommandAPICommand {
   public SpawnCustomEntityCommand(TemplatePaperPlugin plugin) {
     super("spawn");
 
-    if (CustomEntity.values().length == 0) {
-      return;
-    }
-
     String customEntityArgumentNodeName = "custom-entity-id";
 
     String[] customEntityIds = Stream.of(CustomEntity.values()).map((customEntity) -> customEntity.name()).toArray(String[]::new);

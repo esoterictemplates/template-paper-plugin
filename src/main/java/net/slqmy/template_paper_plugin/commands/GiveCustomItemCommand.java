@@ -19,10 +19,6 @@ public class GiveCustomItemCommand extends CommandAPICommand {
   public GiveCustomItemCommand(TemplatePaperPlugin plugin) {
     super("give-custom-item");
 
-    if (CustomItem.values().length == 0) {
-      return;
-    }
-
     String customItemArgumentNodeName = "custom-item-id";
 
     String[] customItemIds = Stream.of(CustomItem.values()).map((customItem) -> customItem.name()).toArray(String[]::new);

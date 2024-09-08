@@ -10,7 +10,9 @@ import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import net.slqmy.template_paper_plugin.commands.GiveCustomItemCommand;
 import net.slqmy.template_paper_plugin.commands.SetLanguageCommand;
 import net.slqmy.template_paper_plugin.commands.SpawnCustomEntityCommand;
+import net.slqmy.template_paper_plugin.custom_entity.CustomEntity;
 import net.slqmy.template_paper_plugin.custom_entity.CustomEntityManager;
+import net.slqmy.template_paper_plugin.custom_item.CustomItem;
 import net.slqmy.template_paper_plugin.custom_item.CustomItemManager;
 import net.slqmy.template_paper_plugin.data.player.PlayerDataManager;
 import net.slqmy.template_paper_plugin.file.FileManager;
@@ -88,8 +90,12 @@ public final class TemplatePaperPlugin extends JavaPlugin {
 
     new SetLanguageCommand(this);
 
-    new GiveCustomItemCommand(this);
-    new SpawnCustomEntityCommand(this);
+    if (CustomItem.values().length != 0) {
+      new GiveCustomItemCommand(this);
+    }
+    if (CustomEntity.values().length != 0) {
+      new SpawnCustomEntityCommand(this);
+    }
   }
 
   @Override
