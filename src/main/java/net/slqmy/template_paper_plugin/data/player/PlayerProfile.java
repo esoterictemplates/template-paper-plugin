@@ -6,6 +6,10 @@ public class PlayerProfile {
 
   private Language language;
 
+  public PlayerProfile(Language language) {
+    this.language = language;
+  }
+
   public Language getLanguage() {
     return language;
   }
