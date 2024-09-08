@@ -9,9 +9,9 @@ const commandLineArguments = process.argv.slice(2);
  * 
  * Where `new-project-name` is replaced with the desired plugin name, in [kebab-case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case) format. 
 **/
-const projectName = commandLineArguments[0]; // npm run rename-project -- new-project-name
+const newProjectName = commandLineArguments[0]; // npm run rename-project -- new-project-name
 
-if (!projectName) {
+if (!newProjectName) {
     console.error("A project name must be specified");
     console.error("Please use the following command:");
     console.error("npm run rename-project -- new-project-name");
