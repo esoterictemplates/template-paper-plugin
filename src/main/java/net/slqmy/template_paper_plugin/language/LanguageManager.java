@@ -10,15 +10,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.HashMap;
 import java.io.File;
-import java.io.InputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.jline.utils.InputStreamReader;
 
 public class LanguageManager {
 
@@ -46,28 +41,14 @@ public class LanguageManager {
     String languagesFolderPath = dataFolder.getPath() + File.separator + languagesFolderName;
     File languagesFolder = new File(languagesFolderPath);
 
-    String[] languageFileNames = {};
-
-    ClassLoader loader = Thread.currentThread().getContextClassLoader();
-    try (InputStream inputStream = loader.getResourceAsStream(languagesFolderName);
-        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
-
-      languageFileNames = bufferedReader.lines().toArray(String[]::new);
-
-      bufferedReader.lines().forEach(System.out::println);
-    } catch (IOException exception) {
-      throw new RuntimeException(exception);
-    }
-
-    for (String languageFileName : languageFileNames) {
-      plugin.saveResource(languagesFolderName + File.separator + languageFileName, false);
+    for (String languageFileName : new String[] { "English (UK)" }) {
+      plugin.saveResource(languagesFolderName + File.separator + languageFileName + ".yaml", false);
     }
 
     for (File languageMessagesFile : languagesFolder.listFiles()) {
-      String languageName = languageMessagesFile.getName();
+      String languageName = languageMessagesFile.getName().split("\\.", 2)[0];
 
-      String languageMessagesResourcePath = languagesFolderName + File.separator + languageName;
+      String languageMessagesResourcePath = languagesFolderName + File.separator + languageName + ".yaml";
       plugin.saveResource(languageMessagesResourcePath, false);
 
       YamlConfiguration messagesConfiguration = YamlConfiguration.loadConfiguration(languageMessagesFile);
