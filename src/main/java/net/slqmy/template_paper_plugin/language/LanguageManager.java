@@ -1,18 +1,16 @@
 package net.slqmy.template_paper_plugin.language;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 import net.slqmy.template_paper_plugin.data.player.PlayerProfile;
 import net.slqmy.template_paper_plugin.util.FileUtil;
 
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import java.util.Map;
 import java.util.Set;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -28,8 +26,6 @@ public class LanguageManager {
   private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
   private final TemplatePaperPlugin plugin;
-
-  private final Pattern placeholderPattern = Pattern.compile("\\{(\\d+)}");
 
   private final String languagesFolderName = "languages";
   private final String languagesFolderPath;
@@ -189,27 +185,17 @@ public class LanguageManager {
   public Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Component... arguments) {
     String miniMessageString = getRawMessageString(message, language, fallbackOnDefaultLanguage);    
 
-    Matcher matcher = placeholderPattern.matcher(miniMessageString);
+    Component result = miniMessage.deserialize(miniMessageString);
 
-    String[] parts = placeholderPattern.split(miniMessageString);
-    List<Integer> argumentIndexes = new ArrayList<>();
+    for (int i = 0; i < arguments.length; i++) {
+      final int argumentIndex = i;
 
-    while (matcher.find()) {
-      argumentIndexes.add(Integer.parseUnsignedInt(matcher.group(1)));
+      result = result.replaceText(TextReplacementConfig.builder().matchLiteral("{" + i + "}").replacement((matchResult, builder) -> {
+        return arguments[argumentIndex];
+      }).build());
     }
 
-    Component output = miniMessage.deserialize(parts[0]);
-
-    for (int i = 1; i < parts.length; i++) {
-      int argumentIndex = argumentIndexes.get(i - 1);
-      output = output.append(arguments[argumentIndex]);
-
-      String part = parts[i];
-      Component component = miniMessage.deserialize(part);
-      output = output.append(component);
-    }
-
-    return output;
+    return result;
   }
 
   public Component getMessage(Message message, String language, Component... arguments) {
