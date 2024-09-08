@@ -1,8 +1,8 @@
 package net.slqmy.template_paper_plugin.data.player;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
 
@@ -29,15 +29,19 @@ public class PlayerDataManager {
       UUID playerUuid = UUID.fromString(fileName);
 
       FileReader reader;
+      PlayerProfile profile;
 
       try {
         reader =  new FileReader(playerDataFile);
-      } catch (FileNotFoundException exception) {
+
+        profile = gson.fromJson(reader, PlayerProfile.class);
+
+        reader.close();  
+      } catch (IOException exception) {
         exception.printStackTrace();
         continue;
       }
 
-      PlayerProfile profile = gson.fromJson(reader, PlayerProfile.class);
       playerData.put(playerUuid, profile);
     }
   }
