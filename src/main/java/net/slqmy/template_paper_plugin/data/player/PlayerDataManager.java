@@ -42,11 +42,11 @@ public class PlayerDataManager {
       PlayerProfile profile;
 
       try {
-        reader =  new FileReader(playerDataFile);
+        reader = new FileReader(playerDataFile);
 
         profile = gson.fromJson(reader, PlayerProfile.class);
 
-        reader.close();  
+        reader.close();
       } catch (IOException exception) {
         exception.printStackTrace();
         continue;
