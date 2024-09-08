@@ -7,6 +7,8 @@ plugins {
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1" // Generates plugin.yml based on the Gradle config
 }
 
+val groupStringSeparator = "."
+
 fun capitaliseFirstLetter(string: String): String {
   return string.first().uppercase() + string.slice(IntRange(1, string.length - 1))
 }
@@ -31,7 +33,7 @@ val mainProjectAuthor = "Slqmy"
 val topLevelDomain = "net"
 val projectAuthors = listOfNotNull(mainProjectAuthor)
 
-group = topLevelDomain + "." + mainProjectAuthor.lowercase() + "." + snakecase(rootProject.name)
+group = topLevelDomain + groupStringSeparator + mainProjectAuthor.lowercase() + groupStringSeparator + snakecase(rootProject.name)
 version = "1.0.0-SNAPSHOT"
 description = "Test plugin for paperweight-userdev"
 
@@ -85,7 +87,7 @@ tasks {
 // Configure plugin.yml generation
 // - name, version, and description are inherited from the Gradle project.
 bukkitPluginYaml {
-  main = project.group.toString() + "." + pascalcase(rootProject.name)
+  main = project.group.toString() + groupStringSeparator + pascalcase(rootProject.name)
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
   authors = projectAuthors
   apiVersion = paperApiVersion
