@@ -23,7 +23,7 @@ public class PlayerDataManager {
   private final String playerDataFolderPath;
   private final File playerDataFolder;
 
-  private Map<UUID, PlayerProfile> playerData = new HashMap<>();
+  private final Map<UUID, PlayerProfile> playerData = new HashMap<>();
 
   public PlayerDataManager(TemplatePaperPlugin plugin) {
     this.plugin = plugin;
@@ -73,7 +73,7 @@ public class PlayerDataManager {
       UUID uuid = entry.getKey();
       PlayerProfile profile = entry.getValue();
 
-      File file = new File(playerDataFolderPath + File.separator + uuid.toString());
+      File file = new File(playerDataFolderPath + File.separator + uuid.toString() + ".json");
 
       FileWriter writer;
 
