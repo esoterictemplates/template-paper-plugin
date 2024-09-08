@@ -120,3 +120,6 @@ run/
 build
 .gradle
 /*.jar
+
+# .class files
+bin
