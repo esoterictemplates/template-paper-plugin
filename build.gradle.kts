@@ -96,7 +96,7 @@ tasks {
 
   shadowJar {
     // helper function to relocate a package into our package
-    fun relocatePackage(packageName: String) = relocate(packageName, group + groupStringSeparator + "$packageName")
+    fun relocatePackage(packageName: String) = relocate(packageName, project.group.toString() + groupStringSeparator + "$packageName")
   }
 }
 
