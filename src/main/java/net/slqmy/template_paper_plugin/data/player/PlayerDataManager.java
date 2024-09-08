@@ -109,6 +109,6 @@ public class PlayerDataManager {
   }
 
   public PlayerProfile getPlayerProfile(Player player) {
-    return playerData.get(player.getUniqueId());
+    return getPlayerProfile(player.getUniqueId());
   }
 }
