@@ -11,6 +11,22 @@ public class BlockLocation {
   private int y;
   private int z;
 
+  public String getWorldName() {
+    return worldName;
+  }
+
+  public int getX() {
+    return x;
+  }
+
+  public int getY() {
+    return y;
+  }
+
+  public int getZ() {
+    return z;
+  }
+
   public BlockLocation(String worldName, int x, int y, int z) {
     this.worldName = worldName;
     this.x = x;
