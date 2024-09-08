@@ -72,7 +72,9 @@ public class LanguageManager {
       for (Message message : Message.values()) {
         String mappedResult = messagesConfiguration.getString(message.name());
 
-        messages.put(message, mappedResult);
+        if (mappedResult != null) {
+          messages.put(message, mappedResult);
+        }
       }
 
       languages.put(languageName, messages);
