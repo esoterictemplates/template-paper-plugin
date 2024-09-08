@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -21,7 +22,7 @@ public class PlayerDataManager {
 
   private final File playerDataFolder;
 
-  private Map<UUID, PlayerProfile> playerData;
+  private Map<UUID, PlayerProfile> playerData = new HashMap<>();
 
   public PlayerDataManager(TemplatePaperPlugin plugin) {
     playerDataFolderPath = plugin.getDataFolder().getPath() + File.separator + playerDataFolderName;
