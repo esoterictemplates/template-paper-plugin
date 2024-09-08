@@ -16,7 +16,7 @@ import net.slqmy.template_paper_plugin.language.Message;
 public class PlaceCustomMultiblockCommand extends CommandAPICommand {
 
   public PlaceCustomMultiblockCommand(TemplatePaperPlugin plugin) {
-    super("place");
+    super("place-custom-multiblock");
 
     String customMultiblockArgumentNodeName = "custom-multiblock-id";
 

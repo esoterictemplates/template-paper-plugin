@@ -11,7 +11,7 @@ public enum Message {
   UNKNOWN_LANGUAGE(() -> false),
 
   UNKNOWN_CUSTOM_ITEM(() -> CustomItem.isEnabled()),
-  UNKNOWN_CUSTOM_ENTITY(() -> CustomMultientity.isEnabled()),
+  UNKNOWN_CUSTOM_MULTIENTITY(() -> CustomMultientity.isEnabled()),
   UNKNOWN_CUSTOM_MULTIBLOCK(() -> CustomMultiblock.isEnabled());
 
   private final BooleanSupplier isMessageInUseSupplier;

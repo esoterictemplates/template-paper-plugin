@@ -13,18 +13,18 @@ import net.slqmy.template_paper_plugin.custom_multientity.CustomMultientity;
 
 public class CustomMultientityManager {
 
-  private final Map<CustomMultientity, AbstractCustomMultientity<?>> customEntityMap = new HashMap<>();
+  private final Map<CustomMultientity, AbstractCustomMultientity<?>> customMultientityMap = new HashMap<>();
 
   public CustomMultientityManager(TemplatePaperPlugin plugin) {
 
   }
 
-  public void addCustomEntity(CustomMultientity itemId, AbstractCustomMultientity<?> customItem) {
-    customEntityMap.put(itemId, customItem);
+  public void addCustomEntity(CustomMultientity itemId, AbstractCustomMultientity<?> customMultientity) {
+    customMultientityMap.put(itemId, customMultientity);
   }
 
-  public AbstractCustomMultientity<?> getAbstractCustomEntity(CustomMultientity itemId) {
-    return customEntityMap.get(itemId);
+  public AbstractCustomMultientity<?> getAbstractCustomEntity(CustomMultientity entityId) {
+    return customMultientityMap.get(entityId);
   }
 
   public <E extends Entity> List<E> spawnEntity(CustomMultientity entityId, Location location) {

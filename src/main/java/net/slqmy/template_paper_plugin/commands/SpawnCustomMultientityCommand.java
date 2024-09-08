@@ -16,30 +16,30 @@ import net.slqmy.template_paper_plugin.language.Message;
 public class SpawnCustomMultientityCommand extends CommandAPICommand {
 
   public SpawnCustomMultientityCommand(TemplatePaperPlugin plugin) {
-    super("spawn");
+    super("spawn-custom-multientity");
 
-    String customEntityArgumentNodeName = "custom-entity-id";
+    String customMultientityArgumentNodeName = "custom-multientity-id";
 
-    String[] customEntityIds = Stream.of(CustomMultientity.values()).map((customEntity) -> customEntity.name()).toArray(String[]::new);
+    String[] customMultientityIds = Stream.of(CustomMultientity.values()).map((customMultientity) -> customMultientity.name()).toArray(String[]::new);
 
-    Argument<CustomMultientity> customEntityArgument = new CustomArgument<>(new StringArgument(customEntityArgumentNodeName), (info) -> {
+    Argument<CustomMultientity> customMultientityArgument = new CustomArgument<>(new StringArgument(customMultientityArgumentNodeName), (info) -> {
       String input = info.currentInput();
 
       try {
         return CustomMultientity.valueOf(input);
       } catch (IllegalArgumentException exception) {
-        throw CustomArgumentException.fromAdventureComponent(plugin.getLanguageManager().getMessage(Message.UNKNOWN_CUSTOM_ENTITY, info.sender(), input));
+        throw CustomArgumentException.fromAdventureComponent(plugin.getLanguageManager().getMessage(Message.UNKNOWN_CUSTOM_MULTIENTITY, info.sender(), input));
       }
-    }).includeSuggestions(ArgumentSuggestions.strings(customEntityIds));
+    }).includeSuggestions(ArgumentSuggestions.strings(customMultientityIds));
 
     executesPlayer((info) -> {
-      CustomMultientity entity = (CustomMultientity) info.args().get(customEntityArgumentNodeName);
+      CustomMultientity multientity = (CustomMultientity) info.args().get(customMultientityArgumentNodeName);
 
-      plugin.getCustomMultientityManager().spawnEntity(entity, info.sender().getLocation());
+      plugin.getCustomMultientityManager().spawnEntity(multientity, info.sender().getLocation());
     });
 
     withPermission(CommandPermission.OP);
-    withArguments(customEntityArgument);
+    withArguments(customMultientityArgument);
 
     register(plugin);
   }

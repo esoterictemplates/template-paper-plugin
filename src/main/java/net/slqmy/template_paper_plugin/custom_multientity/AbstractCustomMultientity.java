@@ -16,14 +16,14 @@ public abstract class AbstractCustomMultientity<E extends Entity> implements Lis
 
   private final CustomMultientity entityId;
 
-  protected AbstractCustomMultientity(TemplatePaperPlugin plugin, CustomMultientityManager customEntityManager, CustomMultientity entityId) {
+  protected AbstractCustomMultientity(TemplatePaperPlugin plugin, CustomMultientityManager customMultientityManager, CustomMultientity entityId) {
     this.plugin = plugin;
 
     this.entityId = entityId;
 
     Bukkit.getPluginManager().registerEvents(this, plugin);
 
-    customEntityManager.addCustomEntity(entityId, this);
+    customMultientityManager.addCustomEntity(entityId, this);
   }
 
   protected abstract List<E> generateCustomEntity(Location spawnLocation);
