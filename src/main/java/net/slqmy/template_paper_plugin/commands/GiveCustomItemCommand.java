@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.CommandPermission;
 import dev.jorel.commandapi.arguments.Argument;
+import dev.jorel.commandapi.arguments.ArgumentSuggestions;
 import dev.jorel.commandapi.arguments.CustomArgument;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentException;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentInfo;
@@ -12,6 +13,7 @@ import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentInfoParser;
 import dev.jorel.commandapi.arguments.StringArgument;
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 import net.slqmy.template_paper_plugin.custom_item.CustomItem;
+import net.slqmy.template_paper_plugin.language.Message;
 
 public class GiveCustomItemCommand extends CommandAPICommand {
 
@@ -27,7 +29,13 @@ public class GiveCustomItemCommand extends CommandAPICommand {
         new CustomArgumentInfoParser<>() {
           @Override
           public CustomItem apply(CustomArgumentInfo<String> info) throws CustomArgumentException {
-            return CustomItem.valueOf(info.currentInput());
+            String input = info.currentInput();            
+
+            try {
+              return CustomItem.valueOf(input);
+            } catch (IllegalArgumentException exception) {
+              throw CustomArgumentException.fromAdventureComponent(plugin.getLanguageManager().getMessage(Message.UNKNOWN_CUSTOM_ITEM, info.sender(), input));
+            }
           }
         }).includeSuggestions(ArgumentSuggestions.strings(customItemNames));
 
