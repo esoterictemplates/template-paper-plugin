@@ -17,6 +17,8 @@ import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 
 public class PlayerDataManager {
 
+  private final TemplatePaperPlugin plugin;
+
   private final String playerDataFolderName = "player-data";
   private final String playerDataFolderPath;
   private final File playerDataFolder;
@@ -24,6 +26,8 @@ public class PlayerDataManager {
   private Map<UUID, PlayerProfile> playerData = new HashMap<>();
 
   public PlayerDataManager(TemplatePaperPlugin plugin) {
+    this.plugin = plugin;
+
     playerDataFolderPath = plugin.getDataFolder().getPath() + File.separator + playerDataFolderName;
     playerDataFolder = new File(playerDataFolderPath);
 
@@ -95,6 +99,14 @@ public class PlayerDataManager {
   }
 
   public PlayerProfile getPlayerProfile(Player player) {
-    return playerData.get(player.getUniqueId());
+    PlayerProfile profile = playerData.get(player.getUniqueId());
+
+    if (profile == null) {
+      profile = new PlayerProfile(plugin.getLanguageManager().getDefaultLanguage());
+
+      playerData.put(player.getUniqueId(), profile);
+    }
+
+    return profile;
   }
 }
