@@ -48,7 +48,7 @@ public class LanguageManager {
         messages.put(message, mappedResult);
       }
 
-      LanguageData languageData = new LanguageData(languageName, messages);
+      LanguageData languageData = new LanguageData(Language.valueOf(languageName), messages);
       languages.put(language, languageData);
     }
   }

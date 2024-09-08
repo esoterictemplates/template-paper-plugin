@@ -4,10 +4,10 @@ import java.util.Map;
 
 public class LanguageData {
 
-  private final String name;
+  private final Language name;
   private final Map<Message, String> messages;
 
-  public String getName() {
+  public Language getName() {
     return name;
   }
 
@@ -15,7 +15,7 @@ public class LanguageData {
     return messages;
   }
 
-  public LanguageData(String name, Map<Message, String> messages) {
+  public LanguageData(Language name, Map<Message, String> messages) {
     this.name = name;
     this.messages = messages;
   }
