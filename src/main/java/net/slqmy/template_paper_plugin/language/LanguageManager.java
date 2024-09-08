@@ -169,4 +169,20 @@ public class LanguageManager {
   public Component getMessage(Message message, CommandSender commandSender, Object... arguments) {
     return getMessage(message, commandSender, true, arguments);
   }
+
+  private String getPlayerLocale(Player player) {
+    Locale playerLocale = player.locale();
+
+    if (playerLocale == null) {
+      return null;
+    }
+
+    String localeDisplayName = playerLocale.getDisplayName();
+
+    if (!getLanguages().contains(localeDisplayName)) {
+      return null;
+    }
+
+    return localeDisplayName;
+  }
 }
