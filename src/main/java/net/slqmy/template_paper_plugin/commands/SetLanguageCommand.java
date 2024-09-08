@@ -7,7 +7,6 @@ import dev.jorel.commandapi.arguments.CustomArgument;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentException;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentInfo;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentInfoParser;
-import dev.jorel.commandapi.arguments.CustomArgument.MessageBuilder;
 import dev.jorel.commandapi.arguments.GreedyStringArgument;
 
 import java.util.Set;
@@ -39,12 +38,7 @@ public class SetLanguageCommand extends CommandAPICommand {
             Bukkit.getLogger().info(selectedLanguage);
 
             if (!languages.contains(selectedLanguage)) {
-              Component errorMessage = languageManager.getMessage(Message.UNKNOWN_LANGUAGE, info.sender(), false, new Object[] {selectedLanguage});
-
-              if (errorMessage == null) {
-                throw CustomArgumentException.fromMessageBuilder(new MessageBuilder(null));
-              }
-
+              Component errorMessage = languageManager.getMessage(Message.UNKNOWN_LANGUAGE, info.sender(), true, new Object[] {selectedLanguage});
               throw CustomArgumentException.fromAdventureComponent(errorMessage);
             }
 
