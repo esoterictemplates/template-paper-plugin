@@ -6,10 +6,18 @@ import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 import net.slqmy.template_paper_plugin.data.player.PlayerProfile;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 import java.util.Map;
 import java.util.Set;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
+import java.util.jar.JarFile;
+import java.util.jar.JarEntry;
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -41,9 +49,10 @@ public class LanguageManager {
     String languagesFolderPath = dataFolder.getPath() + File.separator + languagesFolderName;
     File languagesFolder = new File(languagesFolderPath);
 
-    for (String languageFileName : new String[] { "English (UK)" }) {
-      plugin.saveResource(languagesFolderName + File.separator + languageFileName + ".yaml", false);
-    }
+    String languageResourcesPath = languagesFolderName + "/";
+    List<String> fileNames = listResourcesInFolder(languageResourcesPath);
+
+    fileNames.forEach((fileName) -> plugin.saveResource(languageResourcesPath + fileName, false));
 
     for (File languageMessagesFile : languagesFolder.listFiles()) {
       String languageName = languageMessagesFile.getName().split("\\.", 2)[0];
@@ -64,6 +73,30 @@ public class LanguageManager {
     }
 
     defaultLanguage = plugin.getConfig().getString("default-language");
+  }
+
+  private List<String> listResourcesInFolder(String resourcePath) {
+    ClassLoader classLoader = getClass().getClassLoader();
+
+    try {
+      URL jarURL = classLoader.getResource(resourcePath);
+      if (jarURL == null) {
+        return Collections.emptyList();
+      }
+
+      // Obtain the JAR file URL
+      String jarPath = jarURL.getPath();
+      int bangIndex = jarPath.indexOf("!");
+      String jarFilePath = jarPath.substring(5, bangIndex);
+
+      try (JarFile jarFile = new JarFile(jarFilePath)) {
+        return jarFile.stream().map(JarEntry::getName).filter(name -> name.startsWith(resourcePath) && !name.equals(resourcePath)).map(name -> name.substring(resourcePath.length()))
+            .collect(Collectors.toList());
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+      return Collections.emptyList();
+    }
   }
 
   public Component getMessage(Message message, String language, Object... arguments) {
