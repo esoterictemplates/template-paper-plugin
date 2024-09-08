@@ -123,3 +123,6 @@ build
 
 # .class files
 bin
+
+# Node modules
+node_modules
