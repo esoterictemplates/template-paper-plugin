@@ -5,6 +5,8 @@ plugins {
   java
   `java-library`
 
+  `maven-publish`
+
   id("io.papermc.paperweight.userdev") version "1.7.1"
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1"
   id("xyz.jpenilla.run-paper") version "2.3.0"
@@ -43,12 +45,17 @@ val projectAuthors = listOfNotNull(mainProjectAuthor)
 
 val topLevelDomain = "net"
 
-group = topLevelDomain + groupStringSeparator + mainProjectAuthor.lowercase() + groupStringSeparator + snakecase(rootProject.name)
+val projectNameString = rootProject.name
+
+group = topLevelDomain + groupStringSeparator + mainProjectAuthor.lowercase() + groupStringSeparator + snakecase(projectNameString)
 version = "1.0.0-SNAPSHOT"
 
 val javaVersion = 21
 val javaVersionEnumMember = JavaVersion.valueOf("VERSION_" + javaVersion);
 val paperApiVersion = "1.21"
+
+val projectGroupString = group.toString()
+val projectVersionString = version.toString()
 
 java {
   sourceCompatibility = javaVersionEnumMember
@@ -80,8 +87,35 @@ tasks {
 bukkitPluginYaml {
   authors = projectAuthors
 
-  main = project.group.toString() + groupStringSeparator + pascalcase(rootProject.name)
+  main = projectGroupString + groupStringSeparator + pascalcase(projectNameString)
   apiVersion = paperApiVersion
 
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+
+            groupId = projectGroupString
+            artifactId = projectNameString
+            version = projectVersionString
+
+            fun artifactPath(classifier: String): String {
+              return "$buildDir/libs/" + projectNameString + "-" + projectVersionString + "-" + classifier + ".jar"
+            }
+
+            val devAllClassifier = "dev-all"
+            val devClassifier = "dev"
+
+            artifact(artifactPath(devAllClassifier)) {
+                classifier = devAllClassifier
+            }
+
+            artifact(artifactPath(devClassifier)) {
+                classifier = devClassifier
+            }
+        }
+    }
 }
