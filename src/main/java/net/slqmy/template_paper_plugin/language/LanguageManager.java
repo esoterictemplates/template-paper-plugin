@@ -69,6 +69,16 @@ public class LanguageManager {
     }
   }
 
+  public Language getLanguageByName(String name) {
+    for (Language language : Language.values()) {
+      if (getLanguageData(language).getName().equals(name)) {
+        return language;
+      }
+    }
+
+    return null;
+  }
+
   public LanguageData getLanguageData(Language language) {
     return languages.get(language);
   }
