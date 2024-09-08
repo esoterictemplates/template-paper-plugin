@@ -26,7 +26,7 @@ public class PlayerDataManager {
     File[] playerDataFiles = playerDataFolder.listFiles();
     for (File playerDataFile : playerDataFiles) {
       String fileName = playerDataFile.getName();
-      UUID playerUUID = UUID.fromString(fileName);
+      UUID playerUuid = UUID.fromString(fileName);
 
       FileReader reader;
 
@@ -38,7 +38,7 @@ public class PlayerDataManager {
       }
 
       PlayerProfile profile = gson.fromJson(reader, PlayerProfile.class);
-      playerData.put(playerUUID, profile);
+      playerData.put(playerUuid, profile);
     }
   }
 
