@@ -27,7 +27,7 @@ public abstract class AbstractCustomEntity<E extends Entity> implements Listener
     customEntityManager.addCustomEntity(entityId, this);
   }
 
-  protected abstract Entity generateCustomEntity(E baseEntity);
+  protected abstract E generateCustomEntity(E baseEntity);
 
   public Entity getCustomEntity(Location spawnLocation) {
     E entity = (E) spawnLocation.getWorld().spawnEntity(spawnLocation, entityType);
