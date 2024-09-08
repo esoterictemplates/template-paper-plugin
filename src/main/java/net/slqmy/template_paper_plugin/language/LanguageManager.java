@@ -5,14 +5,12 @@ import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 import net.slqmy.template_paper_plugin.data.player.PlayerProfile;
-import net.slqmy.template_paper_plugin.util.FileUtil;
 
 import java.util.UUID;
 import java.util.stream.Stream;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.io.File;
 
@@ -57,10 +55,8 @@ public class LanguageManager {
   }
 
   private void saveLanguageFiles() {
-    String languagesResourceFolderName = languagesFolderName + "/";
-    List<String> languageResourceFileNames = FileUtil.getResourceFolderResourceFileNames(languagesResourceFolderName);
-
-    languageResourceFileNames.forEach((fileName) -> plugin.saveResource(languagesFolderName + File.separator + fileName, !plugin.getConfig().getBoolean("language.use-custom-messages")));
+    String languagesResourceFolderName = languagesFolderName;
+    plugin.getFileManager().saveResourceFileFolder(languagesResourceFolderName, !plugin.getConfig().getBoolean("language.use-custom-messages"));
   }
 
   private void loadLanguageMessages() {
