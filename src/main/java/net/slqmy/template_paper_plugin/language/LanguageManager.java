@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Locale;
 import java.io.File;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -129,39 +130,25 @@ public class LanguageManager {
     return getMessage(message, language, true, arguments);
   }
 
-  public Component getMessage(Message message, PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Object... arguments) {
-    String selectedLanguage = playerProfile.getLanguage();
-
-    return getMessage(message, selectedLanguage != null ? selectedLanguage : defaultLanguage, fallbackOnDefaultLanguage, arguments);
-  }
-
-  public Component getMessage(Message message, PlayerProfile playerProfile, Object... arguments) {
-    return getMessage(message, playerProfile, true, arguments);
-  }
-
-  public Component getMessage(Message message, UUID playerUuid, boolean fallbackOnDefaultLanguage, Object... arguments) {
-    return getMessage(message, plugin.getPlayerDataManager().getPlayerProfile(playerUuid), fallbackOnDefaultLanguage, arguments);
-  }
-
-  public Component getMessage(Message message, UUID playerUuid, Object... arguments) {
-    return getMessage(message, playerUuid, true, arguments);
-  }
-
-  public Component getMessage(Message message, Player player, boolean fallbackOnDefaultLanguage, Object... arguments) {
-    return getMessage(message, player.getUniqueId(), fallbackOnDefaultLanguage, arguments);
-  }
-
-  public Component getMessage(Message message, Player player, Object... arguments) {
-    return getMessage(message, player, true, arguments);
-  }
-
   public Component getMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Object... arguments) {
-    String language;
+    String language = defaultLanguage;
 
     if (commandSender instanceof Player player) {
-      language = plugin.getPlayerDataManager().getPlayerProfile(player.getUniqueId()).getLanguage();
-    } else {
-      language = defaultLanguage;
+      PlayerProfile profile = plugin.getPlayerDataManager().getPlayerProfile(player, false);
+
+      if (profile == null) {
+        language = getPlayerLocale(player);
+      } else {
+        language = profile.getLanguage();
+
+        if (language == null) {
+          language = getPlayerLocale(player);
+        }
+      }
+
+      if (language == null) {
+        language = defaultLanguage;
+      }
     }
 
     return getMessage(message, language, fallbackOnDefaultLanguage, arguments);
@@ -169,6 +156,31 @@ public class LanguageManager {
 
   public Component getMessage(Message message, CommandSender commandSender, Object... arguments) {
     return getMessage(message, commandSender, true, arguments);
+  }
+
+  public Component getMessage(Message message, UUID uuid, boolean fallbackOnDefaultLanguage, Object... arguments) {
+    String language = null;
+
+    Player player = Bukkit.getPlayer(uuid);
+    PlayerProfile profile = plugin.getPlayerDataManager().getPlayerProfile(uuid, false);
+
+    if (profile != null) {
+      language = profile.getLanguage();
+    }
+
+    if (language == null) {
+      language = getPlayerLocale(player);
+    }
+
+    if (language == null) {
+      language = defaultLanguage;
+    }
+
+    return getMessage(message, language, fallbackOnDefaultLanguage, arguments);
+  }
+
+  public Component getMessage(Message message, UUID uuid, Object... arguments) {
+    return getMessage(message, uuid, true, arguments);
   }
 
   private String getPlayerLocale(Player player) {
