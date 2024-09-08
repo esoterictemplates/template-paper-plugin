@@ -12,6 +12,7 @@ version = "1.0.0-SNAPSHOT"
 description = "Test plugin for paperweight-userdev"
 
 val javaVersion = 21
+val paperApiVersion = "1.21"
 
 java {
   // Configure the java toolchain. This allows gradle to auto-provision JDK 21 on systems that only have JDK 11 installed for example.
@@ -32,7 +33,7 @@ tasks.assemble {
  */
 
 dependencies {
-  paperweight.paperDevBundle("1.21-R0.1-SNAPSHOT")
+  paperweight.paperDevBundle(paperApiVersion + "-R0.1-SNAPSHOT")
   // paperweight.foliaDevBundle("1.21-R0.1-SNAPSHOT")
   // paperweight.devBundle("com.example.paperfork", "1.21-R0.1-SNAPSHOT")
 }
@@ -63,5 +64,5 @@ bukkitPluginYaml {
   main = "net.slqmy.template_paper_plugin.TemplatePaperPlugin"
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
   authors.add("Slqmy")
-  apiVersion = "1.21"
+  apiVersion = paperApiVersion
 }
