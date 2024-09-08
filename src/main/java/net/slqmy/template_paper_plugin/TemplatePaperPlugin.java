@@ -4,6 +4,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.framework.qual.DefaultQualifier;
 
+import dev.jorel.commandapi.CommandAPI;
+import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import net.slqmy.template_paper_plugin.data.player.PlayerDataManager;
 import net.slqmy.template_paper_plugin.language.LanguageManager;
 
@@ -23,6 +25,11 @@ public final class TemplatePaperPlugin extends JavaPlugin {
 
   @Override
   public void onEnable() {
+    CommandAPIBukkitConfig commandAPIConfig = new CommandAPIBukkitConfig(this);
+
+    CommandAPI.onLoad(commandAPIConfig);
+    CommandAPI.onEnable();
+
     playerDataManager = new PlayerDataManager(this);
     languageManager = new LanguageManager(this);
   }

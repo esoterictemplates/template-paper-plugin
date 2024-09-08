@@ -62,8 +62,15 @@ tasks.assemble {
 }
  */
 
+repositories {
+    mavenCentral()
+    maven("https://repo.codemc.org/repository/maven-public/")
+}
+
 dependencies {
   paperweight.paperDevBundle(paperApiVersion + "-R0.1-SNAPSHOT")
+
+  compileOnly("dev.jorel", "commandapi-bukkit-core", "9.5.0")
   // paperweight.foliaDevBundle("1.21-R0.1-SNAPSHOT")
   // paperweight.devBundle("com.example.paperfork", "1.21-R0.1-SNAPSHOT")
 }
