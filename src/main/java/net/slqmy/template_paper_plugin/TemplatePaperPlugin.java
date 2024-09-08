@@ -36,6 +36,8 @@ public final class TemplatePaperPlugin extends JavaPlugin {
 
   @Override
   public void onDisable() {
-    playerDataManager.save();
+    if (playerDataManager != null) {
+      playerDataManager.save();
+    }
   }
 }
