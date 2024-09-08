@@ -50,12 +50,12 @@ val projectNameString = rootProject.name
 group = topLevelDomain + groupStringSeparator + mainProjectAuthor.lowercase() + groupStringSeparator + snakecase(projectNameString)
 version = "1.0.0-SNAPSHOT"
 
+val projectGroupString = group.toString()
+val projectVersionString = version.toString()
+
 val javaVersion = 21
 val javaVersionEnumMember = JavaVersion.valueOf("VERSION_" + javaVersion)
 val paperApiVersion = "1.21"
-
-val projectGroupString = group.toString()
-val projectVersionString = version.toString()
 
 java {
   sourceCompatibility = javaVersionEnumMember
