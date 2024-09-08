@@ -48,7 +48,7 @@ val topLevelDomain = "net"
 val projectNameString = rootProject.name
 
 group = topLevelDomain + groupStringSeparator + mainProjectAuthor.lowercase() + groupStringSeparator + snakecase(projectNameString)
-version = "0.0.1"
+version = "0.0.2"
 
 val buildDirectoryString = buildDir.toString()
 
@@ -102,24 +102,11 @@ bukkitPluginYaml {
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
+            from(components["java"])
+
             groupId = projectGroupString
             artifactId = projectNameString
             version = projectVersionString
-
-            fun artifactPath(classifier: String): String {
-              return buildDirectoryString + "/libs/" + projectNameString + "-" + projectVersionString + "-" + classifier + ".jar"
-            }
-
-            val devAllClassifier = "dev-all"
-            val devClassifier = "dev"
-
-            artifact(artifactPath(devAllClassifier)) {
-                classifier = devAllClassifier
-            }
-
-            artifact(artifactPath(devClassifier)) {
-                classifier = devClassifier
-            }
         }
     }
 }
