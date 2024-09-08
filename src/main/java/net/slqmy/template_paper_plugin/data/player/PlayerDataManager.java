@@ -67,6 +67,10 @@ public class PlayerDataManager {
   }
 
   public void save() {
+    if (playerData.size() == 0) {
+      return;
+    }
+
     playerDataFolder.mkdir();
 
     Gson gson = new Gson();
