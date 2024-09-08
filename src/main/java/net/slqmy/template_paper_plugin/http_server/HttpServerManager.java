@@ -10,63 +10,81 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 
+import org.bukkit.Bukkit;
+
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
+import net.slqmy.template_paper_plugin.file.FileUtil;
+import net.slqmy.template_paper_plugin.http_server.event.listeners.PlayerJoinListener;
+import net.slqmy.template_paper_plugin.resource_pack.ResourcePackManager;
 
 public class HttpServerManager {
 
   private final TemplatePaperPlugin plugin;
 
+  private final String hostName = "localhost";
+  private final int port = 8000;
+
+  private final int successResponseCode = 200;
+  private final int notFoundResponseCode = 404;
+
+  private HttpServer server;
+
+  public int getPort() {
+    return server.getAddress().getPort();
+  }
+
+  public String getHostName() {
+    return server.getAddress().getHostName();
+  }
+
+  public String getSocketAddress() {
+    return getHostName() + ":" + getPort();
+  }
+
   public HttpServerManager(TemplatePaperPlugin plugin) {
     this.plugin = plugin;
 
-    HttpServer server;
     try {
-      server = HttpServer.create(new InetSocketAddress(8000), 0);
+      server = HttpServer.create(new InetSocketAddress(hostName, port), 0);
     } catch (IOException exception) {
       exception.printStackTrace();
       return;
     }
 
-    // Create a context for a specific path and set the handler
-    server.createContext("/", new MyHandler());
+    server.createContext("/", new ResourcePackDownloadHandler());
 
-    // Start the server
-    server.setExecutor(null); // Use the default executor
+    server.setExecutor(null);
     server.start();
 
-    plugin.getLogger().info("Server is running on port 8000");
+    Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(plugin, this), plugin);
   }
 
-  class MyHandler implements HttpHandler {
+  class ResourcePackDownloadHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-      // Set the path to the zip file
-      String filePath = "plugins/template-paper-plugin/Template Paper Plugin Resource Pack.zip";
-      File file = new File(filePath);
+      ResourcePackManager resourcePackManager = plugin.getResourcePackManager();      
+
+      File file = new File(resourcePackManager.getResourceZipFilePath());
 
       if (file.exists()) {
-        // Set the response headers
-        exchange.getResponseHeaders().set("Content-Type", "application/zip");
-        exchange.getResponseHeaders().set("Content-Disposition", "attachment; filename=\"Template Paper Plugin Resource Pack.zip\"");
+        exchange.getResponseHeaders().set("Content-Type", resourcePackManager.getResourcePackFileMimeType());
+        exchange.getResponseHeaders().set("Content-Disposition", "attachment; filename=\"" + resourcePackManager.getResourcePackResourceFolderName() + FileUtil.getFileExtensionSeparator() + resourcePackManager.getResourcePackFileExtension() + "\"");
 
-        // Send the response headers with the file length
-        exchange.sendResponseHeaders(200, file.length());
+        exchange.sendResponseHeaders(successResponseCode, file.length());
 
-        // Write the file to the response body
-        try (FileInputStream fis = new FileInputStream(file); OutputStream os = exchange.getResponseBody()) {
+        try (FileInputStream fileInputStream = new FileInputStream(file); OutputStream outputStream = exchange.getResponseBody()) {
           byte[] buffer = new byte[1024];
           int count;
-          while ((count = fis.read(buffer)) != -1) {
-            os.write(buffer, 0, count);
+          while ((count = fileInputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, count);
           }
         }
       } else {
-        // If the file does not exist, return a 404 error
         String response = "404 (Not Found)\n";
-        exchange.sendResponseHeaders(404, response.length());
-        OutputStream os = exchange.getResponseBody();
-        os.write(response.getBytes());
-        os.close();
+        exchange.sendResponseHeaders(notFoundResponseCode, response.length());
+        OutputStream outputStream = exchange.getResponseBody();
+        outputStream.write(response.getBytes());
+        outputStream.close();
       }
     }
   }

@@ -22,6 +22,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class FileUtil {
+
+  private static final String fileExtensionSeparator = ".";
+
+  public static String getFileExtensionSeparator() {
+    return fileExtensionSeparator;
+  }
+
   public static List<String> getResourceFileFolderResourceFilePaths(String resourceFileFolderPath) throws IOException {
     ClassLoader classLoader = FileUtil.class.getClassLoader();
 
@@ -73,13 +80,16 @@ public class FileUtil {
     zipOutputStream.close();
   }
 
-  public static String createSha1Hex(File file) {
+  public static String getSha1HexString(File file) {
+    String algorithm = "SHA-1";
+
     MessageDigest digest;
     try (InputStream fileInputStream = new FileInputStream(file)) {
-      digest = MessageDigest.getInstance("SHA-1");
+      digest = MessageDigest.getInstance(algorithm);
 
       int n = 0;
       byte[] buffer = new byte[8192];
+
       while (n != -1) {
         n = fileInputStream.read(buffer);
         if (n > 0) {
@@ -93,13 +103,16 @@ public class FileUtil {
 
     byte[] hashBytes = digest.digest();
     StringBuilder hexString = new StringBuilder(2 * hashBytes.length);
-    for (byte b : hashBytes) {
-      String hex = Integer.toHexString(0xff & b);
+    for (byte hashByte : hashBytes) {
+      String hex = Integer.toHexString(0xff & hashByte);
+
       if (hex.length() == 1) {
         hexString.append('0');
       }
+
       hexString.append(hex);
     }
+
     return hexString.toString();
   }
 }

@@ -24,8 +24,8 @@ public final class TemplatePaperPlugin extends JavaPlugin {
   private FileManager fileManager;
   private PlayerDataManager playerDataManager;
   private LanguageManager languageManager;
-  private HttpServerManager httpServerManager;
   private ResourcePackManager resourcePackManager;
+  private HttpServerManager httpServerManager;
   private CustomItemManager customItemManager;
   private CustomEntityManager customEntityManager;
 
@@ -44,12 +44,12 @@ public final class TemplatePaperPlugin extends JavaPlugin {
     return languageManager;
   }
 
-  public HttpServerManager getHttpServerManager() {
-    return httpServerManager;
-  }
-
   public ResourcePackManager getResourcePackManager() {
     return resourcePackManager;
+  }
+
+  public HttpServerManager getHttpServerManager() {
+    return httpServerManager;
   }
 
   public CustomItemManager getCustomItemManager() {
@@ -81,8 +81,8 @@ public final class TemplatePaperPlugin extends JavaPlugin {
     fileManager = new FileManager(this);
     playerDataManager = new PlayerDataManager(this);
     languageManager = new LanguageManager(this);
-    httpServerManager = new HttpServerManager(this);
     resourcePackManager = new ResourcePackManager(this);
+    httpServerManager = new HttpServerManager(this);
     customItemManager = new CustomItemManager(this);
     customEntityManager = new CustomEntityManager(this);
 
