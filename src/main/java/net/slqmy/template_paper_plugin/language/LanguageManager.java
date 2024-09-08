@@ -195,9 +195,6 @@ public class LanguageManager {
     String[] parts = placeholderPattern.split(miniMessageString);
     List<Integer> argumentIndexes = new ArrayList<>();
 
-    plugin.getLogger().info(Arrays.toString(parts));
-    plugin.getLogger().info(String.valueOf(parts.length));
-
     while (matcher.find()) {
       argumentIndexes.add(Integer.parseUnsignedInt(matcher.group(1)));
     }
@@ -205,20 +202,11 @@ public class LanguageManager {
     Component output = miniMessage.deserialize(parts[0]);
 
     for (int i = 1; i < parts.length; i++) {
-      plugin.getLogger().info(String.valueOf(i));
-
       int argumentIndex = argumentIndexes.get(i - 1);
-
-      plugin.getLogger().info(String.valueOf(argumentIndex));
-
       output = output.append(arguments[argumentIndex]);
 
       String part = parts[i];
-
-      plugin.getLogger().info(part);
-
       Component component = miniMessage.deserialize(part);
-
       output = output.append(component);
     }
 
