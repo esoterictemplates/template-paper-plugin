@@ -7,14 +7,19 @@ import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import java.util.jar.JarEntry;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class FileUtil {
   public static List<String> getResourceFileFolderResourceFilePaths(String resourceFileFolderPath) throws IOException {
@@ -66,5 +71,35 @@ public class FileUtil {
       }
     });
     zipOutputStream.close();
+  }
+
+  public static String createSha1Hex(File file) {
+    MessageDigest digest;
+    try (InputStream fileInputStream = new FileInputStream(file)) {
+      digest = MessageDigest.getInstance("SHA-1");
+
+      int n = 0;
+      byte[] buffer = new byte[8192];
+      while (n != -1) {
+        n = fileInputStream.read(buffer);
+        if (n > 0) {
+          digest.update(buffer, 0, n);
+        }
+      }
+    } catch (IOException | NoSuchAlgorithmException exception) {
+      exception.printStackTrace();
+      return null;
+    }
+
+    byte[] hashBytes = digest.digest();
+    StringBuilder hexString = new StringBuilder(2 * hashBytes.length);
+    for (byte b : hashBytes) {
+      String hex = Integer.toHexString(0xff & b);
+      if (hex.length() == 1) {
+        hexString.append('0');
+      }
+      hexString.append(hex);
+    }
+    return hexString.toString();
   }
 }

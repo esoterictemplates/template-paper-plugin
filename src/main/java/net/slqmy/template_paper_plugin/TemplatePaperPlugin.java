@@ -14,6 +14,7 @@ import net.slqmy.template_paper_plugin.custom_entity.CustomEntityManager;
 import net.slqmy.template_paper_plugin.custom_item.CustomItemManager;
 import net.slqmy.template_paper_plugin.data.player.PlayerDataManager;
 import net.slqmy.template_paper_plugin.file.FileManager;
+import net.slqmy.template_paper_plugin.http_server.HttpServerManager;
 import net.slqmy.template_paper_plugin.language.LanguageManager;
 import net.slqmy.template_paper_plugin.resource_pack.ResourcePackManager;
 
@@ -23,6 +24,7 @@ public final class TemplatePaperPlugin extends JavaPlugin {
   private FileManager fileManager;
   private PlayerDataManager playerDataManager;
   private LanguageManager languageManager;
+  private HttpServerManager httpServerManager;
   private ResourcePackManager resourcePackManager;
   private CustomItemManager customItemManager;
   private CustomEntityManager customEntityManager;
@@ -40,6 +42,10 @@ public final class TemplatePaperPlugin extends JavaPlugin {
 
   public LanguageManager getLanguageManager() {
     return languageManager;
+  }
+
+  public HttpServerManager getHttpServerManager() {
+    return httpServerManager;
   }
 
   public ResourcePackManager getResourcePackManager() {
@@ -75,6 +81,7 @@ public final class TemplatePaperPlugin extends JavaPlugin {
     fileManager = new FileManager(this);
     playerDataManager = new PlayerDataManager(this);
     languageManager = new LanguageManager(this);
+    httpServerManager = new HttpServerManager(this);
     resourcePackManager = new ResourcePackManager(this);
     customItemManager = new CustomItemManager(this);
     customEntityManager = new CustomEntityManager(this);
