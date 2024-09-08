@@ -1,6 +1,7 @@
 package net.slqmy.template_paper_plugin.custom_entity;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.bukkit.Location;
@@ -25,7 +26,7 @@ public class CustomEntityManager {
     return customEntityMap.get(itemId);
   }
 
-  public <E extends Entity> E spawnEntity(CustomEntity entityId, Location location) {
-    return (E) getAbstractCustomEntity(entityId).getCustomEntity(location);
+  public <E extends Entity> List<E> spawnEntity(CustomEntity entityId, Location location) {
+    return (List<E>) getAbstractCustomEntity(entityId).getCustomEntity(location);
   }
 }
