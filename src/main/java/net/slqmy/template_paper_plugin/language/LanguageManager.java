@@ -83,36 +83,39 @@ public class LanguageManager {
     }
   }
 
-  public String getPlayerLanguage(PlayerProfile playerProfile) {
-    return playerProfile.getLanguage();
-  }
-
-  public String getPlayerLanguage(UUID uuid) {
-    return plugin.getPlayerDataManager().getPlayerProfile(uuid).getLanguage();
-  }
-
-  public String getPlayerLanguage(Player player) {
-    return getPlayerLanguage(player.getUniqueId());
-  }
-
   public String getLanguage(CommandSender commandSender) {
-    if (commandSender instanceof Player player) {
-      return getPlayerLanguage(player);
-    } else {
+    if (!(commandSender instanceof Player player)) {
       return defaultLanguage;
     }
+
+    String language = getProfileLanguage(commandSender);
+
+    if (language == null) {
+      language = getPlayerLocale(player);
+      if (language == null) {
+        language = defaultLanguage;
+      }
+    }
+
+    return language;
   }
 
-  public void setPlayerLanguage(PlayerProfile playerProfile, String language) {
-    playerProfile.setLanguage(language);
+  public String getLanguage(UUID uuid) {
+    String language = getProfileLanguage(uuid);
+
+    if (language == null) {
+      Player player = Bukkit.getPlayer(uuid);
+      language = getPlayerLocale(player);
+      if (language == null) {
+        language = defaultLanguage;
+      }
+    }
+
+    return language;
   }
 
-  public void setPlayerLanguage(UUID uuid, String language) {
-    setPlayerLanguage(plugin.getPlayerDataManager().getPlayerProfile(uuid), language);
-  }
-
-  public void setPlayerLanguage(Player player, String language) {
-    setPlayerLanguage(player.getUniqueId(), language);
+  public String getLanguage(PlayerProfile profile) {
+    return getLanguage(profile.getUuid());
   }
 
   private Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Object... arguments) {
@@ -131,27 +134,7 @@ public class LanguageManager {
   }
 
   public Component getMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Object... arguments) {
-    String language = defaultLanguage;
-
-    if (commandSender instanceof Player player) {
-      PlayerProfile profile = plugin.getPlayerDataManager().getPlayerProfile(player, false);
-
-      if (profile == null) {
-        language = getPlayerLocale(player);
-      } else {
-        language = profile.getLanguage();
-
-        if (language == null) {
-          language = getPlayerLocale(player);
-        }
-      }
-
-      if (language == null) {
-        language = defaultLanguage;
-      }
-    }
-
-    return getMessage(message, language, fallbackOnDefaultLanguage, arguments);
+    return getMessage(message, getLanguage(commandSender), fallbackOnDefaultLanguage, arguments);
   }
 
   public Component getMessage(Message message, CommandSender commandSender, Object... arguments) {
@@ -159,24 +142,7 @@ public class LanguageManager {
   }
 
   public Component getMessage(Message message, UUID uuid, boolean fallbackOnDefaultLanguage, Object... arguments) {
-    String language = null;
-
-    Player player = Bukkit.getPlayer(uuid);
-    PlayerProfile profile = plugin.getPlayerDataManager().getPlayerProfile(uuid, false);
-
-    if (profile != null) {
-      language = profile.getLanguage();
-    }
-
-    if (language == null) {
-      language = getPlayerLocale(player);
-    }
-
-    if (language == null) {
-      language = defaultLanguage;
-    }
-
-    return getMessage(message, language, fallbackOnDefaultLanguage, arguments);
+    return getMessage(message, getLanguage(uuid), fallbackOnDefaultLanguage, arguments);
   }
 
   public Component getMessage(Message message, UUID uuid, Object... arguments) {
@@ -196,5 +162,25 @@ public class LanguageManager {
     }
 
     return localeDisplayName;
+  }
+
+  private String getProfileLanguage(PlayerProfile profile) {
+    if (profile == null) {
+      return null;
+    }
+
+    return profile.getLanguage();
+  }
+
+  private String getProfileLanguage(UUID uuid) {
+    return getProfileLanguage(plugin.getPlayerDataManager().getPlayerProfile(uuid));
+  }
+
+  private String getProfileLanguage(CommandSender commandSender) {
+    if (commandSender instanceof Player player) {
+      return getProfileLanguage(player.getUniqueId());
+    } else {
+      return defaultLanguage;
+    }
   }
 }
