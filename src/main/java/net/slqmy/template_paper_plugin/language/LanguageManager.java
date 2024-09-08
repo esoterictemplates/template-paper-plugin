@@ -285,7 +285,7 @@ public class LanguageManager {
     return getMessage(message, playerProfile, true, arguments);
   }
 
-  public Component[] toComponents(Object[] ...objects) {
+  public Component[] toComponents(Object ...objects) {
     return Stream.of(objects).map((object) -> toComponent(object)).toArray(Component[]::new);
   }
 
