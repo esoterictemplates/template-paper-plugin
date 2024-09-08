@@ -45,7 +45,7 @@ public class FileUtil {
 
     try (JarFile jarFile = new JarFile(jarFilePath)) {
       List<String> paths = jarFile.stream().map(JarEntry::getName).filter(name -> name.startsWith(resourceFileFolderPath) && !name.equals(resourceFileFolderPath))
-          .map(name -> resourceFileFolderPath + name.substring(resourceFileFolderPath.length())).toList();
+          .map(name -> name.substring(resourceFileFolderPath.length())).filter(name -> !"/".equals(name)).map(name -> resourceFileFolderPath + name).toList();
 
       return paths;
     }
