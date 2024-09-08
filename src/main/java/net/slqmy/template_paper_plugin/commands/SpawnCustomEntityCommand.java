@@ -28,16 +28,13 @@ public class SpawnCustomEntityCommand extends CommandAPICommand {
 
     String[] customEntityIds = Stream.of(CustomEntity.values()).map((customEntity) -> customEntity.name()).toArray(String[]::new);
 
-    Argument<CustomEntity> customEntityArgument = new CustomArgument<CustomEntity, String>(new StringArgument(customEntityArgumentNodeName), new CustomArgumentInfoParser<>() {
-      @Override
-      public CustomEntity apply(CustomArgumentInfo<String> info) throws CustomArgumentException {
-        String input = info.currentInput();
+    Argument<CustomEntity> customEntityArgument = new CustomArgument<CustomEntity, String>(new StringArgument(customEntityArgumentNodeName), (CustomArgumentInfo<String> info) -> {
+      String input = info.currentInput();
 
-        try {
-          return CustomEntity.valueOf(input);
-        } catch (IllegalArgumentException exception) {
-          throw CustomArgumentException.fromAdventureComponent(plugin.getLanguageManager().getMessage(Message.UNKNOWN_CUSTOM_ENTITY, info.sender(), input));
-        }
+      try {
+        return CustomEntity.valueOf(input);
+      } catch (IllegalArgumentException exception) {
+        throw CustomArgumentException.fromAdventureComponent(plugin.getLanguageManager().getMessage(Message.UNKNOWN_CUSTOM_ENTITY, info.sender(), input));
       }
     }).includeSuggestions(ArgumentSuggestions.strings(customEntityIds));
 
