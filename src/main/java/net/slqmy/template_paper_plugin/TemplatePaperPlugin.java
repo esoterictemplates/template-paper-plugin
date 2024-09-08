@@ -53,6 +53,7 @@ public final class TemplatePaperPlugin extends JavaPlugin {
     customEntityManager = new CustomEntityManager(this);
 
     new SetLanguageCommand(this);
+
     new GiveCustomItemCommand(this);
   }
 

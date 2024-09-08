@@ -8,11 +8,6 @@ public class PlayerProfile {
 
   private String language;
 
-  public PlayerProfile(UUID uuid, String language) {
-    this.uuid = uuid;
-    this.language = language;
-  }
-
   public UUID getUuid() {
     return uuid;
   }
@@ -22,6 +17,11 @@ public class PlayerProfile {
   }
 
   public void setLanguage(String language) {
+    this.language = language;
+  }
+
+  public PlayerProfile(UUID uuid, String language) {
+    this.uuid = uuid;
     this.language = language;
   }
 }

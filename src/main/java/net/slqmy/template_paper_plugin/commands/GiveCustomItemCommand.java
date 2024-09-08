@@ -24,20 +24,18 @@ public class GiveCustomItemCommand extends CommandAPICommand {
 
     String[] customItemNames = Stream.of(CustomItem.values()).map((customItem) -> customItem.name()).toArray(String[]::new);
 
-    Argument<CustomItem> customItemArgument = new CustomArgument<CustomItem, String>(
-        new StringArgument(customItemArgumentNodeName),
-        new CustomArgumentInfoParser<>() {
-          @Override
-          public CustomItem apply(CustomArgumentInfo<String> info) throws CustomArgumentException {
-            String input = info.currentInput();            
+    Argument<CustomItem> customItemArgument = new CustomArgument<CustomItem, String>(new StringArgument(customItemArgumentNodeName), new CustomArgumentInfoParser<>() {
+      @Override
+      public CustomItem apply(CustomArgumentInfo<String> info) throws CustomArgumentException {
+        String input = info.currentInput();
 
-            try {
-              return CustomItem.valueOf(input);
-            } catch (IllegalArgumentException exception) {
-              throw CustomArgumentException.fromAdventureComponent(plugin.getLanguageManager().getMessage(Message.UNKNOWN_CUSTOM_ITEM, info.sender(), input));
-            }
-          }
-        }).includeSuggestions(ArgumentSuggestions.strings(customItemNames));
+        try {
+          return CustomItem.valueOf(input);
+        } catch (IllegalArgumentException exception) {
+          throw CustomArgumentException.fromAdventureComponent(plugin.getLanguageManager().getMessage(Message.UNKNOWN_CUSTOM_ITEM, info.sender(), input));
+        }
+      }
+    }).includeSuggestions(ArgumentSuggestions.strings(customItemNames));
 
     executesPlayer((info) -> {
       CustomItem item = (CustomItem) info.args().get(customItemArgumentNodeName);

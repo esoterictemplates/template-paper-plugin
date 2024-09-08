@@ -14,8 +14,8 @@ public abstract class AbstractCustomItem implements Listener {
 
   protected final TemplatePaperPlugin plugin;
 
-  protected final CustomItem itemId;
-  protected final Material material;
+  private final CustomItem itemId;
+  private final Material material;
 
   private final NamespacedKey itemIdKey;
 

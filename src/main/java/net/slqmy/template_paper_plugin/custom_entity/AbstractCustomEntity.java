@@ -14,8 +14,8 @@ public abstract class AbstractCustomEntity<E extends Entity> implements Listener
 
   protected final TemplatePaperPlugin plugin;
 
-  protected final CustomEntity entityId;
-  protected final EntityType entityType;
+  private final CustomEntity entityId;
+  private final EntityType entityType;
 
   private final NamespacedKey entityIdKey;
 

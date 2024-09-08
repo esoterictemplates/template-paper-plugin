@@ -11,7 +11,7 @@ import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 
 public class CustomItemManager {
 
-  private Map<CustomItem, AbstractCustomItem> customItemMap = new HashMap<>();
+  private final Map<CustomItem, AbstractCustomItem> customItemMap = new HashMap<>();
 
   public CustomItemManager(TemplatePaperPlugin plugin) {
   }

@@ -121,7 +121,7 @@ public class LanguageManager {
     setLanguage(player.getUniqueId(), language);
   }
 
-  public String getLocale(CommandSender commandSender) {
+  private String getLocale(CommandSender commandSender) {
     if (!(commandSender instanceof Player player)) {
       return defaultLanguage;
     }
@@ -136,16 +136,16 @@ public class LanguageManager {
     return localeDisplayName;
   }
 
-  public String getLocale(UUID uuid) {
+  private String getLocale(UUID uuid) {
     Player player = Bukkit.getPlayer(uuid);
     return getLocale(player);
   }
 
-  public String getLocale(PlayerProfile profile) {
+  private String getLocale(PlayerProfile profile) {
     return getLocale(profile.getUuid());
   }
 
-  public String getProfileLanguage(PlayerProfile profile) {
+  private String getProfileLanguage(PlayerProfile profile) {
     if (profile == null) {
       return null;
     }
@@ -153,11 +153,11 @@ public class LanguageManager {
     return profile.getLanguage();
   }
 
-  public String getProfileLanguage(UUID uuid) {
+  private String getProfileLanguage(UUID uuid) {
     return getProfileLanguage(plugin.getPlayerDataManager().getPlayerProfile(uuid));
   }
 
-  public String getProfileLanguage(CommandSender commandSender) {
+  private String getProfileLanguage(CommandSender commandSender) {
     if (commandSender == null) {
       return null;
     } else if (commandSender instanceof Player player) {
@@ -167,7 +167,7 @@ public class LanguageManager {
     }
   }
 
-  public String getRawMessageString(Message message, String language, boolean fallbackOnDefaultLanguage) {
+  private String getRawMessageString(Message message, String language, boolean fallbackOnDefaultLanguage) {
     Map<Message, String> languageMessageMap = languages.get(language);
     String miniMessageString = languageMessageMap.get(message);
 
@@ -178,12 +178,12 @@ public class LanguageManager {
     return miniMessageString;
   }
 
-  public String getRawMessageString(Message message, String language) {
+  private String getRawMessageString(Message message, String language) {
     return getRawMessageString(message, language, true);
   }
 
-  public Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Component... arguments) {
-    String miniMessageString = getRawMessageString(message, language, fallbackOnDefaultLanguage);    
+  private Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Component... arguments) {
+    String miniMessageString = getRawMessageString(message, language, fallbackOnDefaultLanguage);
 
     Component result = miniMessage.deserialize(miniMessageString);
 
@@ -198,15 +198,15 @@ public class LanguageManager {
     return result;
   }
 
-  public Component getMessage(Message message, String language, Component... arguments) {
+  private Component getMessage(Message message, String language, Component... arguments) {
     return getMessage(message, language, true, arguments);
   }
 
-  public Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Object... arguments) {
+  private Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Object... arguments) {
     return getMessage(message, language, fallbackOnDefaultLanguage, toComponents(arguments));
   }
 
-  public Component getMessage(Message message, String language, Object... arguments) {
+  private Component getMessage(Message message, String language, Object... arguments) {
     return getMessage(message, language, true, arguments);
   }
 
@@ -306,11 +306,11 @@ public class LanguageManager {
     Bukkit.getPlayer(playerProfile.getUuid()).sendMessage(getMessage(message, playerProfile, true, arguments));
   }
 
-  public Component[] toComponents(Object ...objects) {
+  private Component[] toComponents(Object... objects) {
     return Stream.of(objects).map((object) -> toComponent(object)).toArray(Component[]::new);
   }
 
-  public Component toComponent(Object object) {
+  private Component toComponent(Object object) {
     if (object instanceof Component component) {
       return component;
     }

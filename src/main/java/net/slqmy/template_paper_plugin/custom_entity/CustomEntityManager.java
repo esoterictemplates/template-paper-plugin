@@ -11,8 +11,8 @@ import net.slqmy.template_paper_plugin.custom_entity.CustomEntity;
 import net.slqmy.template_paper_plugin.custom_entity.AbstractCustomEntity;
 
 public class CustomEntityManager {
-  
-  private Map<CustomEntity, AbstractCustomEntity<?>> customEntityMap = new HashMap<>();
+
+  private final Map<CustomEntity, AbstractCustomEntity<?>> customEntityMap = new HashMap<>();
 
   public CustomEntityManager(TemplatePaperPlugin plugin) {
   }
