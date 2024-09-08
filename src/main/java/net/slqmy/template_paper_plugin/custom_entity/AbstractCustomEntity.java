@@ -40,6 +40,10 @@ public abstract class AbstractCustomEntity<E extends Entity> implements Listener
       return false;
     }
 
-    return entityId == CustomEntity.valueOf(entity.getPersistentDataContainer().get(plugin.getCustomEntityIdKey(), PersistentDataType.STRING));
+    try {
+      return entityId == CustomEntity.valueOf(entity.getPersistentDataContainer().get(plugin.getCustomEntityIdKey(), PersistentDataType.STRING));
+    } catch (IllegalArgumentException | NullPointerException exception) {
+      return false;
+    }
   }
 }
