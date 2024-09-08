@@ -19,7 +19,6 @@ public class PlayerDataManager {
 
   private final String playerDataFolderName = "player-data";
   private final String playerDataFolderPath;
-
   private final File playerDataFolder;
 
   private Map<UUID, PlayerProfile> playerData = new HashMap<>();

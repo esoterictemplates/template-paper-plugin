@@ -15,8 +15,9 @@ import org.bukkit.entity.Player;
 
 public class LanguageManager {
 
-  private final TemplatePaperPlugin plugin;
   private final MiniMessage miniMessage = MiniMessage.miniMessage();
+
+  private final TemplatePaperPlugin plugin;
 
   private final Map<Language, LanguageData> languages = new HashMap<>();
 
