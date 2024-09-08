@@ -23,7 +23,7 @@ public class LanguageManager {
 
   private final String defaultLanguage;
 
-  private final Map<String, LanguageData> languages = new HashMap<>();
+  private final Map<String, Map<Message, String>> languages = new HashMap<>();
 
   public String getDefaultLanguage() {
     return defaultLanguage;
@@ -43,32 +43,13 @@ public class LanguageManager {
 
     plugin.saveResource(languagesFolderName, false);
 
-    for (File languageFolder : languagesFolder.listFiles()) {
-      String languageId = languageFolder.getName();
+    for (File languageMessagesFile : languagesFolder.listFiles()) {
+      String languageName = languageMessagesFile.getName();
 
-      String languageFolderPath = languagesFolderPath + File.separator + languageId + File.separator;
-      String languageFolderResourcePath = languagesFolderName + File.separator + languageId + File.separator;
+      String languageMessagesResourcePath = languagesFolderName + File.separator + languageName;
+      plugin.saveResource(languageMessagesResourcePath, false);
 
-      String manifestFileName = "manifest.yaml";
-      String messagesFileName = "messages.yaml";
-
-      String manifestFilePath = languageFolderPath + manifestFileName;
-      String messagesFilePath = languageFolderPath + messagesFileName;
-
-      String manifestResourceFilePath = languageFolderResourcePath + manifestFileName;
-      String messagesResourceFilePath = languageFolderResourcePath + messagesFileName;
-
-      plugin.saveResource(manifestResourceFilePath, false);
-      plugin.saveResource(messagesResourceFilePath, false);
-
-      File manifestFile = new File(manifestFilePath);
-      File messagesFile = new File(messagesFilePath);
-
-      YamlConfiguration manifestConfiguration = YamlConfiguration.loadConfiguration(manifestFile);
-      YamlConfiguration messagesConfiguration = YamlConfiguration.loadConfiguration(messagesFile);
-
-      String languageName = manifestConfiguration.getString("name");
-
+      YamlConfiguration messagesConfiguration = YamlConfiguration.loadConfiguration(languageMessagesFile);
       Map<Message, String> messages = new HashMap<>();
 
       for (Message message : Message.values()) {
@@ -77,29 +58,14 @@ public class LanguageManager {
         messages.put(message, mappedResult);
       }
 
-      LanguageData languageData = new LanguageData(languageName, messages);
-      languages.put(languageId, languageData);
+      languages.put(languageName, messages);
     }
 
     defaultLanguage = plugin.getConfig().getString("default-language");
   }
 
-  public String getLanguageByName(String name) {
-    for (String language : languages.keySet()) {
-      if (getLanguageData(language).getName().equals(name)) {
-        return language;
-      }
-    }
-
-    return null;
-  }
-
-  public LanguageData getLanguageData(String language) {
-    return languages.get(language);
-  }
-
   public Component getMessage(Message message, String language, Object... arguments) {
-    return miniMessage.deserialize(String.format(languages.get(language).getMessages().get(message), arguments));
+    return miniMessage.deserialize(String.format(languages.get(language).get(message), arguments));
   }
 
   public Component getMessage(Message message, PlayerProfile playerProfile, Object... arguments) {
