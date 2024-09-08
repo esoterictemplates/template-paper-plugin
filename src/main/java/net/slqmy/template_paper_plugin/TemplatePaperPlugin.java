@@ -8,6 +8,7 @@ import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import net.slqmy.template_paper_plugin.commands.GiveCustomItemCommand;
 import net.slqmy.template_paper_plugin.commands.SetLanguageCommand;
+import net.slqmy.template_paper_plugin.custom_entity.CustomEntityManager;
 import net.slqmy.template_paper_plugin.custom_item.CustomItemManager;
 import net.slqmy.template_paper_plugin.data.player.PlayerDataManager;
 import net.slqmy.template_paper_plugin.language.LanguageManager;
@@ -18,6 +19,7 @@ public final class TemplatePaperPlugin extends JavaPlugin {
   private PlayerDataManager playerDataManager;
   private LanguageManager languageManager;
   private CustomItemManager customItemManager;
+  private CustomEntityManager customEntityManager;
 
   public PlayerDataManager getPlayerDataManager() {
     return playerDataManager;
@@ -29,6 +31,10 @@ public final class TemplatePaperPlugin extends JavaPlugin {
 
   public CustomItemManager getCustomItemManager() {
     return customItemManager;
+  }
+
+  public CustomEntityManager getCustomEntityManager() {
+    return customEntityManager;
   }
 
   @Override
@@ -44,6 +50,7 @@ public final class TemplatePaperPlugin extends JavaPlugin {
     playerDataManager = new PlayerDataManager(this);
     languageManager = new LanguageManager(this);
     customItemManager = new CustomItemManager(this);
+    customEntityManager = new CustomEntityManager(this);
 
     new SetLanguageCommand(this);
     new GiveCustomItemCommand(this);
