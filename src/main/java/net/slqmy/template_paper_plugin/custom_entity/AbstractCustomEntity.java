@@ -40,6 +40,6 @@ public abstract class AbstractCustomEntity<E extends Entity> implements Listener
       return false;
     }
 
-    return entityType == EntityType.valueOf(entity.getPersistentDataContainer().get(plugin.getCustomEntityIdKey(), PersistentDataType.STRING));
+    return entityId == CustomEntity.valueOf(entity.getPersistentDataContainer().get(plugin.getCustomEntityIdKey(), PersistentDataType.STRING));
   }
 }
