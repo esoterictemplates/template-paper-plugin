@@ -19,6 +19,8 @@ public class PlayerDataManager {
 
   private final TemplatePaperPlugin plugin;
 
+  private final String playerDataFilesExtension = ".json";
+
   private final String playerDataFolderName = "player-data";
   private final String playerDataFolderPath;
   private final File playerDataFolder;
@@ -79,7 +81,7 @@ public class PlayerDataManager {
       UUID uuid = entry.getKey();
       PlayerProfile profile = entry.getValue();
 
-      File file = new File(playerDataFolderPath + File.separator + uuid.toString() + ".json");
+      File file = new File(playerDataFolderPath + File.separator + uuid.toString() + playerDataFilesExtension);
 
       FileWriter writer;
 

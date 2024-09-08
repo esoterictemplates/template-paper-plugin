@@ -15,7 +15,7 @@ public class ResourcePackManager {
 
   private final String resourcePackFileType = "application";
   private final String resourcePackFileExtension = "zip";
-  private final String resourcePackFileMimeType = resourcePackFileType + "/" + resourcePackFileExtension;
+  private final String resourcePackFileMimeType = resourcePackFileType + FileUtil.getFileMimeTypeTypeSubtypeSeparator() + resourcePackFileExtension;
 
   private String resourcePackZipFilePath;
   private File resourcePackZipFile;

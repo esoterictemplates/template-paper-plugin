@@ -25,6 +25,8 @@ public class LanguageManager {
 
   private final TemplatePaperPlugin plugin;
 
+  private final String languageMessageFilesExtension = ".yaml";
+
   private final String languagesFolderName = "languages";
   private final String languagesFolderPath;
   private final File languagesFolder;
@@ -62,7 +64,7 @@ public class LanguageManager {
     for (File languageMessagesFile : languagesFolder.listFiles()) {
       String languageName = languageMessagesFile.getName().split("\\.", 2)[0];
 
-      String languageMessagesResourcePath = languagesFolderName + File.separator + languageName + ".yaml";
+      String languageMessagesResourcePath = languagesFolderName + File.separator + languageName + languageMessageFilesExtension;
       plugin.saveResource(languageMessagesResourcePath, false);
 
       YamlConfiguration messagesConfiguration = YamlConfiguration.loadConfiguration(languageMessagesFile);

@@ -19,8 +19,14 @@ public class FileUtil {
 
   private static final String FILE_EXTENSION_SEPARATOR = ".";
 
+  private static final String FILE_MIME_TYPE_TYPE_SUBTYPE_SEPARATOR = "/";
+
   public static String getFileExtensionSeparator() {
     return FILE_EXTENSION_SEPARATOR;
+  }
+
+  public static String getFileMimeTypeTypeSubtypeSeparator() {
+    return FILE_MIME_TYPE_TYPE_SUBTYPE_SEPARATOR;
   }
 
   public static List<String> getResourceFileFolderResourceFilePaths(String resourceFileFolderPath) throws IOException {
