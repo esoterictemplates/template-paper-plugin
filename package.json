@@ -23,6 +23,7 @@
   "license": "ISC",
   "homepage": "https://github.com/EsotericDevelopment/template-paper-plugin#readme",
   "devDependencies": {
+    "typescript": "^5.5.4",
     "@types/node": "^22.5.4"
   }
 }

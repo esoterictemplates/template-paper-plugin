@@ -127,3 +127,6 @@ bin
 # Node files
 node_modules
 package-lock.json
+
+# JavaScript files
+script-dist
