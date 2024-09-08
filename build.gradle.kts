@@ -102,7 +102,7 @@ bukkitPluginYaml {
   authors = projectAuthors
 
   main = projectGroupString + groupStringSeparator + pascalcase(projectNameString)
-  apiVersion = paperApiVersion
+  apiVersion = paperApiMinecraftVersion
 
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
 }
