@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.HashMap;
 import java.io.File;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -113,5 +114,17 @@ public class LanguageManager {
 
   public Component getMessage(Message message, Player player, Object... arguments) {
     return getMessage(message, player.getUniqueId(), arguments);
+  }
+
+  public Component getMessage(Message message, CommandSender commandSender, Object... arguments) {
+    String language;
+
+    if (commandSender instanceof Player player) {
+      language = plugin.getPlayerDataManager().getPlayerProfile(player.getUniqueId()).getLanguage();
+    } else {
+      language = defaultLanguage;
+    }
+
+    return getMessage(message, language, arguments);
   }
 }
