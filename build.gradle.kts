@@ -81,6 +81,10 @@ tasks {
     dependsOn(shadowJar)
   }
 
+  shadowJar {
+    archiveFileName = projectNameString + "-" + projectVersionString + "." + "jar"
+  }
+
   compileJava {
     options.release = javaVersion
   }
