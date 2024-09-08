@@ -17,6 +17,14 @@ public abstract class AbstractCustomMultiblock implements Listener {
 
   private final List<List<BlockLocation>> multiblocks = new ArrayList<>();
 
+  public List<List<BlockLocation>> getMultiblocks() {
+    return multiblocks;
+  }
+
+  public void addMultiblocks(List<List<BlockLocation>> addedMultiblocks) {
+    multiblocks.addAll(addedMultiblocks);
+  }
+
   public AbstractCustomMultiblock(TemplatePaperPlugin plugin, CustomMultiblockManager customMultiblockManager, CustomMultiblock multiblockId) {
     this.plugin = plugin;
 
