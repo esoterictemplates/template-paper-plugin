@@ -19,10 +19,10 @@ import net.slqmy.template_paper_plugin.resource_pack.ResourcePackManager;
 
 public class HttpServerManager {
 
-  private final TemplatePaperPlugin plugin;
+  private TemplatePaperPlugin plugin;
 
-  private final String hostName;
-  private final int port;
+  private String hostName;
+  private int port;
 
   private final int successResponseCode = 200;
   private final int notFoundResponseCode = 404;
@@ -42,6 +42,10 @@ public class HttpServerManager {
   }
 
   public HttpServerManager(TemplatePaperPlugin plugin) {
+    if (plugin.getResourcePackManager().getResourcePackZipFile() == null) {
+      return;
+    }
+
     this.plugin = plugin;
 
     hostName = Bukkit.getServer().getIp();

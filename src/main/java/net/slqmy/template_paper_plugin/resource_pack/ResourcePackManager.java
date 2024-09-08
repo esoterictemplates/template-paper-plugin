@@ -1,6 +1,7 @@
 package net.slqmy.template_paper_plugin.resource_pack;
 
 import java.io.File;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
@@ -52,6 +53,21 @@ public class ResourcePackManager {
 
   private void saveResourcepackZipFile() {
     File resourcePackFolder = plugin.getFileManager().saveResourceFileFolder(resourcePackResourceFolderName);
+
+    String[] resourcePackFiles = resourcePackFolder.list();
+    if (resourcePackFiles == null || resourcePackFiles.length == 0) {
+      return;
+    }
+
+    if (!List.of(resourcePackFiles).contains("assets")) {
+      return;
+    }
+
+    File assetsFile = new File(plugin.getDataPath() + File.separator + resourcePackResourceFolderName + File.separator + "assets");
+    if (FileUtil.isDirectoryRecursivelyEmpty(assetsFile)) {
+      return;
+    }
+
     resourcePackZipFilePath = plugin.getDataPath() + File.separator + resourcePackResourceFolderName + FileUtil.getFileExtensionSeparator() + resourcePackFileExtension;
 
     try {
