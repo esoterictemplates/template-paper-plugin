@@ -21,7 +21,7 @@ public class HttpServerManager {
 
   private final TemplatePaperPlugin plugin;
 
-  private final String hostName = "localhost";
+  private final String hostName;
   private final int port = 8000;
 
   private final int successResponseCode = 200;
@@ -43,6 +43,8 @@ public class HttpServerManager {
 
   public HttpServerManager(TemplatePaperPlugin plugin) {
     this.plugin = plugin;
+
+    hostName = Bukkit.getServer().getIp();
 
     try {
       server = HttpServer.create(new InetSocketAddress(hostName, port), 0);
