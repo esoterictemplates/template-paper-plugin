@@ -1,4 +1,4 @@
-package io.papermc.paperweight.testplugin;
+package net.slqmy.template_paper_plugin.testplugin;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.ParseResults;

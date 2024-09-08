@@ -1,4 +1,4 @@
-package io.papermc.paperweight.testplugin;
+package net.slqmy.template_paper_plugin.testplugin;
 
 import com.destroystokyo.paper.brigadier.BukkitBrigadierCommandSource;
 import com.destroystokyo.paper.event.brigadier.CommandRegisteredEvent;
@@ -27,7 +27,7 @@ import static net.minecraft.commands.Commands.literal;
 import static net.minecraft.commands.arguments.EntityArgument.players;
 
 @DefaultQualifier(NonNull.class)
-public final class TestPlugin extends JavaPlugin implements Listener {
+public final class TemplatePaperPlugin extends JavaPlugin implements Listener {
   @Override
   public void onEnable() {
     this.getServer().getPluginManager().registerEvents(this, this);
