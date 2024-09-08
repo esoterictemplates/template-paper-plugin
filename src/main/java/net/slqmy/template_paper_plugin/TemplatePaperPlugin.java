@@ -37,7 +37,6 @@ public final class TemplatePaperPlugin extends JavaPlugin {
 
   private final NamespacedKey customItemIdKey = new NamespacedKey(this, "custom_item_id");
   private final NamespacedKey customEntityIdKey = new NamespacedKey(this, "custom_entity_id");
-  private final String customMultiblockIdKey = "custom_multiblock_id";
 
   public FileManager getFileManager() {
     return fileManager;
@@ -77,10 +76,6 @@ public final class TemplatePaperPlugin extends JavaPlugin {
 
   public NamespacedKey getCustomEntityIdKey() {
     return customEntityIdKey;
-  }
-
-  public String getCustomMultiblockIdKey() {
-    return customMultiblockIdKey;
   }
 
   @Override
