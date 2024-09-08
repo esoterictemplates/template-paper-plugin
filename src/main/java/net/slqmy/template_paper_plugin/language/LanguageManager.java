@@ -27,7 +27,7 @@ public class LanguageManager {
     String languagesFolderPath = dataFolder.getPath() + File.separator + "languages";
 
     for (Language language : Language.values()) {
-      String languageFolderPath = languagesFolderPath + File.separator + language.getKebabCaseName() + File.separator;
+      String languageFolderPath = languagesFolderPath + File.separator + language.name() + File.separator;
 
       String manifestFilePath = languageFolderPath + "manifest.yaml";
       String messagesFilePath = languageFolderPath + "messages.yaml";
@@ -43,7 +43,7 @@ public class LanguageManager {
       Map<Message, String> messages = new HashMap<>();
 
       for (Message message : Message.values()) {
-        String mappedResult = messagesConfiguration.getString(message.getKebabCaseName());
+        String mappedResult = messagesConfiguration.getString(message.name());
 
         messages.put(message, mappedResult);
       }
