@@ -25,6 +25,8 @@ public final class TemplatePaperPlugin extends JavaPlugin {
 
   @Override
   public void onEnable() {
+    getDataFolder().mkdir();
+
     CommandAPIBukkitConfig commandAPIConfig = new CommandAPIBukkitConfig(this);
 
     CommandAPI.onLoad(commandAPIConfig);
