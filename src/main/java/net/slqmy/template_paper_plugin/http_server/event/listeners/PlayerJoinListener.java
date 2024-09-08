@@ -18,8 +18,6 @@ public class PlayerJoinListener implements Listener {
   private ResourcePackInfo resourcePackInfo;
 
   public PlayerJoinListener(TemplatePaperPlugin plugin, HttpServerManager httpServerManager) {
-    plugin.getLogger().info(httpServerManager.getSocketAddress());
-
     resourcePackInfo = ResourcePackInfo.resourcePackInfo().hash(FileUtil.getSha1HexString(plugin.getResourcePackManager().getResourcePackZipFile()))
         .uri(URI.create("http://" + httpServerManager.getSocketAddress() + "/")).build();
   }
