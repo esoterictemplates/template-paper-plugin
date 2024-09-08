@@ -8,7 +8,7 @@ import dev.jorel.commandapi.arguments.CustomArgument;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentException;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentInfo;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentInfoParser;
-import dev.jorel.commandapi.arguments.MultiLiteralArgument;
+import dev.jorel.commandapi.arguments.StringArgument;
 import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
 import net.slqmy.template_paper_plugin.custom_item.CustomItem;
 
@@ -22,7 +22,7 @@ public class GiveCustomItemCommand extends CommandAPICommand {
     String[] customItemNames = Stream.of(CustomItem.values()).map((customItem) -> customItem.name()).toArray(String[]::new);
 
     Argument<CustomItem> customItemArgument = new CustomArgument<CustomItem, String>(
-        new MultiLiteralArgument(customItemArgumentNodeName, customItemNames),
+        new StringArgument(customItemArgumentNodeName),
         new CustomArgumentInfoParser<>() {
           @Override
           public CustomItem apply(CustomArgumentInfo<String> info) throws CustomArgumentException {
