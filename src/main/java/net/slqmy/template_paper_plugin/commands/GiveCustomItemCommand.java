@@ -3,6 +3,7 @@ package net.slqmy.template_paper_plugin.commands;
 import java.util.stream.Stream;
 
 import dev.jorel.commandapi.CommandAPICommand;
+import dev.jorel.commandapi.CommandPermission;
 import dev.jorel.commandapi.arguments.Argument;
 import dev.jorel.commandapi.arguments.CustomArgument;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentException;
@@ -36,6 +37,7 @@ public class GiveCustomItemCommand extends CommandAPICommand {
       plugin.getCustomItemManager().giveCustomItem(item, info.sender());
     });
 
+    withPermission(CommandPermission.OP);
     withArguments(customItemArgument);
 
     register(plugin);
