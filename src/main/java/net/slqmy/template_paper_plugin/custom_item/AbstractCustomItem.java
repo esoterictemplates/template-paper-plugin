@@ -28,6 +28,8 @@ public abstract class AbstractCustomItem implements Listener {
     itemIdKey = new NamespacedKey(plugin, itemId.name());
 
     Bukkit.getPluginManager().registerEvents(this, plugin);
+
+    plugin.getCustomItemManager().addCustomItem(itemId, this);
   }
 
   protected abstract ItemStack generateCustomItem(ItemStack baseCustomItem, Player player);
