@@ -81,32 +81,48 @@ public class LanguageManager {
     }
   }
 
-  public Component getMessage(Message message, String language, Object... arguments) {
+  public Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Object... arguments) {
     Map<Message, String> languageMessageMap = languages.get(language);
     String miniMessageString = languageMessageMap.get(message);
 
     if (miniMessageString == null) {
-      return getMessage(message, defaultLanguage, arguments);
+      return fallbackOnDefaultLanguage ? getMessage(message, defaultLanguage, false, arguments) : null;
     }
 
     return miniMessage.deserialize(String.format(miniMessageString, arguments));
   }
 
-  public Component getMessage(Message message, PlayerProfile playerProfile, Object... arguments) {
+  public Component getMessage(Message message, String language, Object... arguments) {
+    return getMessage(message, language, true, arguments);
+  }
+
+  public Component getMessage(Message message, PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Object... arguments) {
     String selectedLanguage = playerProfile.getLanguage();
 
-    return getMessage(message, selectedLanguage != null ? selectedLanguage : defaultLanguage, arguments);
+    return getMessage(message, selectedLanguage != null ? selectedLanguage : defaultLanguage, fallbackOnDefaultLanguage, arguments);
+  }
+
+  public Component getMessage(Message message, PlayerProfile playerProfile, Object... arguments) {
+    return getMessage(message, playerProfile, true, arguments);
+  }
+
+  public Component getMessage(Message message, UUID playerUuid, boolean fallbackOnDefaultLanguage, Object... arguments) {
+    return getMessage(message, plugin.getPlayerDataManager().getPlayerProfile(playerUuid), fallbackOnDefaultLanguage, arguments);
   }
 
   public Component getMessage(Message message, UUID playerUuid, Object... arguments) {
-    return getMessage(message, plugin.getPlayerDataManager().getPlayerProfile(playerUuid), arguments);
+    return getMessage(message, playerUuid, true, arguments);
+  }
+
+  public Component getMessage(Message message, Player player, boolean fallbackOnDefaultLanguage, Object... arguments) {
+    return getMessage(message, player.getUniqueId(), fallbackOnDefaultLanguage, arguments);
   }
 
   public Component getMessage(Message message, Player player, Object... arguments) {
-    return getMessage(message, player.getUniqueId(), arguments);
+    return getMessage(message, player, true, arguments);
   }
 
-  public Component getMessage(Message message, CommandSender commandSender, Object... arguments) {
+  public Component getMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Object... arguments) {
     String language;
 
     if (commandSender instanceof Player player) {
@@ -115,6 +131,10 @@ public class LanguageManager {
       language = defaultLanguage;
     }
 
-    return getMessage(message, language, arguments);
+    return getMessage(message, language, fallbackOnDefaultLanguage, arguments);
+  }
+
+  public Component getMessage(Message message, CommandSender commandSender, Object... arguments) {
+    return getMessage(message, commandSender, true, arguments);
   }
 }
