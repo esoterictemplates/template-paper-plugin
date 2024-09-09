@@ -1,5 +1,7 @@
 import sys
 
+from scripts.functions import to_kebab_case
+
 command_line_arguments = sys.argv[1::]
 """
 The command line arguments provided by the user.
@@ -46,3 +48,7 @@ The new project name.
 
 This may be `None` if none is provided by the user in `command_line_arguments`.
 """
+
+kebab_case_new_project_name = to_kebab_case(new_project_name)
+
+print(kebab_case_new_project_name)
