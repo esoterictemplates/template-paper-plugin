@@ -15,7 +15,7 @@ Where:
 """
 
 try:
-    newProjectTopLevelDomain = command_line_arguments[0]
+    new_project_top_level_domain = command_line_arguments[0]
     """
     The top level domain, such as net, com, dev, org, etc.
     """
@@ -33,14 +33,14 @@ except:
     print("Surround arguments with quotes if they contain spaces!")
     exit(1)
 
-newProjectAuthorName = command_line_arguments[1] if len(command_line_arguments) >= 2 else None
+new_project_author_name = command_line_arguments[1] if len(command_line_arguments) >= 2 else None
 """
 The new author name of the project.
 
 This may be `None` if none is provided by the user in `command_line_arguments`.
 """
 
-newProjectName = command_line_arguments[2] if len(command_line_arguments) == 3 else None
+new_project_name = command_line_arguments[2] if len(command_line_arguments) == 3 else None
 """
 The new project name.
 
