@@ -130,3 +130,7 @@ package-lock.json
 
 # JavaScript files
 script-dist
+
+# Pycache Files
+__pycache__
+*.pyc
