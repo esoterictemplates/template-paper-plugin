@@ -1,6 +1,6 @@
 import sys
 
-from scripts.functions import to_kebab_case
+from functions.to_kebab_case import to_kebab_case
 
 command_line_arguments = sys.argv[1::]
 """
