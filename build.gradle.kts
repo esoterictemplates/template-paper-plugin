@@ -147,6 +147,9 @@ tasks.register("renameProject") {
     val newMainFileName = "$newPascalcaseName.java"
     renameMainJavaFile(javaSrcPath, oldMainFileName, newMainFileName)
 
+    // Rename package directories
+    renamePackageDirectories(javaSrcPath, currentGroup, newGroup)
+
     println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
   }
 }
@@ -166,6 +169,25 @@ fun renameMainJavaFile(directory: File, oldFileName: String, newFileName: String
     } else {
       println("Failed to rename $oldFileName")
     }
+  }
+}
+
+// Helper function to rename package directories
+fun renamePackageDirectories(baseDir: File, oldGroup: String, newGroup: String) {
+  val oldPackagePath = oldGroup.replace(".", File.separator)
+  val newPackagePath = newGroup.replace(".", File.separator)
+
+  val oldPackageDir = File(baseDir, oldPackagePath)
+  val newPackageDir = File(baseDir, newPackagePath)
+
+  if (oldPackageDir.exists()) {
+    if (oldPackageDir.renameTo(newPackageDir)) {
+      println("Renamed package directory from $oldPackagePath to $newPackagePath")
+    } else {
+      println("Failed to rename package directory from $oldPackagePath to $newPackagePath")
+    }
+  } else {
+    println("Package directory $oldPackagePath does not exist")
   }
 }
 
