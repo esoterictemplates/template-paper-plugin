@@ -145,10 +145,10 @@ tasks.register("renameProject") {
     if (currentMainClassName == newMainClassName) {
       val currentMainClassFileName = "$currentMainClassName.java"
 
-      val oldMainClassFilePath = File(startPath, "$currentGroupPath${File.separator}$currentMainClassFileName")
+      val currentMainClassFilePath = File(startPath, "$currentGroupPath${File.separator}$currentMainClassFileName")
       val newMainClassFilePath = File(startPath, "$currentGroupPath${File.separator}$newMainClassFileName")
 
-      oldMainClassFilePath.renameTo(newMainClassFilePath)
+      currentMainClassFilePath.renameTo(newMainClassFilePath)
     }
 
     replaceStringInDirectoryFiles(javaSourcePath, projectGroupString, newGroupString)
