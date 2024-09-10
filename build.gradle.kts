@@ -160,9 +160,9 @@ tasks.register("renameProject") {
     replaceStringInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
     replaceStringInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
-    File("src/main/java/net").renameTo(File("src/main/java/dev"))
-    File("src/main/java/dev/esoteric_slime").renameTo(File("src/main/java/dev/esoteric_development"))
-    File("src/main/java/dev/esoteric_development/template_paper_plugin").renameTo(File("src/main/java/dev/esoteric_development/esoteric_plugin"))
+    File("$startPath/$topLevelDomain").renameTo(File("$startPath/$newTopLevelDomain"))
+    File("$startPath/$newTopLevelDomain/$snakecaseMainProjectAuthor").renameTo(File("$startPath/$newTopLevelDomain/$newSnakecaseAuthorName"))
+    File("$startPath/$newTopLevelDomain/$newSnakecaseAuthorName/$snakecaseProjectNameString").renameTo(File("$startPath/$newTopLevelDomain/$newSnakecaseAuthorName/$newSnakecaseName"))
 
     println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
   }
