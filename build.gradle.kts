@@ -59,13 +59,16 @@ fun replaceStringInDirectoryFiles(directory: File, stringToReplace: String, repl
 description = "Test plugin for paperweight-userdev"
 
 val mainProjectAuthor = "Esoteric Slime"
+val snakecaseMainProjectAuthor = snakecase(mainProjectAuthor)
+
 val projectAuthors = listOfNotNull(mainProjectAuthor)
 
 val topLevelDomain = "net"
 
 val projectNameString = rootProject.name
+val snakecaseProjectNameString = snakecase(projectNameString)
 
-group = "$topLevelDomain$groupStringSeparator${snakecase(mainProjectAuthor)}$groupStringSeparator${snakecase(projectNameString)}"
+group = "$topLevelDomain$groupStringSeparator${snakecaseMainProjectAuthor}$groupStringSeparator${snakecaseProjectNameString}"
 version = "0.0.4"
 
 val buildDirectoryString = layout.buildDirectory.toString()
