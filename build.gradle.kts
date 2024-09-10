@@ -5,6 +5,7 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardOpenOption
 import java.nio.file.NoSuchFileException
+import java.nio.file.StandardCopyOption
 
 plugins {
   java
@@ -180,7 +181,7 @@ tasks.register("renameProject") {
     println("${javaSourcePathString}\\${currentGroupPath}\\${currentMainFileNameWithExtension}")
     println("${javaSourcePathString}\\${newGroupPath}\\${newMainFileNameWithExtension}")
 
-    Paths.get("${javaSourcePathString}\\${currentGroupPath}\\${currentMainFileNameWithExtension}").toFile().renameTo(Paths.get("${javaSourcePathString}\\${newGroupPath}\\${newMainFileNameWithExtension}").toFile())
+    Files.move(Paths.get("${javaSourcePathString}\\${currentGroupPath}\\${currentMainFileNameWithExtension}"), Paths.get("${javaSourcePathString}\\${newGroupPath}\\${newMainFileNameWithExtension}"), StandardCopyOption.REPLACE_EXISTING)
 
     renamePackageDirectories("${javaSourcePathString}\\${currentGroupPath}", "${javaSourcePathString}\\${newGroupPath}")
 
