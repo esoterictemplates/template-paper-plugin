@@ -121,9 +121,9 @@ tasks {
 
 tasks.register("renameProject") {
   doLast {
-    val newName = project.findProperty("new-name")?.toString() ?: error("Please provide a new project name using -Pnew-name")
-    val newAuthorName = project.findProperty("new-author-name")?.toString() ?: error("Please provide a new author name using -Pnew-author-name")
-    val newTopLevelDomain = project.findProperty("new-top-level-domain")?.toString() ?: error("Please provide a new top level domain using -Pnew-top-level-domain")
+    val newName = project.findProperty("new-name")?.toString() ?: projectNameString
+    val newAuthorName = project.findProperty("new-author-name")?.toString() ?: mainProjectAuthorName
+    val newTopLevelDomain = project.findProperty("new-top-level-domain")?.toString() ?: topLevelDomain
 
     val newSnakecaseName = snakecase(newName)
     val newSnakecaseAuthorName = snakecase(newAuthorName)
