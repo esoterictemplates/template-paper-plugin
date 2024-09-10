@@ -5,51 +5,20 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardOpenOption
 
-// Function to replace text in a file
-fun replaceInFile(filePath: String, target: String, replacement: String) {
-  val file = Paths.get(filePath)
-  val content = String(Files.readAllBytes(file))
-  val updatedContent = content.replace(target, replacement)
-  Files.write(file, updatedContent.toByteArray(), StandardOpenOption.TRUNCATE_EXISTING)
-}
-
-// Custom task to rename project, author, and top-level domain
-tasks.register("renameProject") {
-  doLast {
-    // Get project properties passed via the command line
-    val newAuthor: String = project.findProperty("author")?.toString() ?: error("Please provide an author using -Pauthor")
-    val newName: String = project.findProperty("name")?.toString() ?: error("Please provide a name using -Pname")
-    val newTopLevelDomain: String = project.findProperty("topLevelDomain")?.toString() ?: error("Please provide a top level domain using -PtopLevelDomain")
-
-    // Replace project name in settings.gradle.kts
-    val settingsFile = "settings.gradle.kts"
-    val currentProjectName = rootProject.name
-    replaceInFile(settingsFile, currentProjectName, newName)
-
-    // Replace author and top-level domain in build.gradle.kts
-    val buildFile = "build.gradle.kts"
-
-    // Replace author
-    replaceInFile(buildFile, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthor\"")
-
-    // Replace top-level domain
-    replaceInFile(buildFile, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
-
-    // Optionally: Replace the project group (in case it includes top-level domain or author)
-    val currentGroup = "$topLevelDomain.$mainProjectAuthor.$projectNameString".replace(" ", snakecaseStringSeparator)
-    val newGroup = "$newTopLevelDomain.${newAuthor.lowercase().replace(" ", snakecaseStringSeparator)}.${snakecase(newName)}"
-    replaceInFile(buildFile, currentGroup, newGroup)
-
-    println("Renamed project to '$newName', author to '$newAuthor', and top-level domain to '$newTopLevelDomain'")
-  }
-}
-
 plugins {
   java
   `java-library`
   id("io.papermc.paperweight.userdev") version "1.7.2"
   id("xyz.jpenilla.run-paper") version "2.3.0" // Adds runServer and runMojangMappedServer tasks for testing
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1" // Generates plugin.yml based on the Gradle config
+}
+
+// Function to replace text in a file
+fun replaceInFile(filePath: String, target: String, replacement: String) {
+  val file = Paths.get(filePath)
+  val content = String(Files.readAllBytes(file))
+  val updatedContent = content.replace(target, replacement)
+  Files.write(file, updatedContent.toByteArray(), StandardOpenOption.TRUNCATE_EXISTING)
 }
 
 description = "Test plugin for paperweight-userdev"
@@ -109,6 +78,37 @@ tasks {
 
   javadoc {
     options.encoding = Charsets.UTF_8.name()
+  }
+}
+
+// Custom task to rename project, author, and top-level domain
+tasks.register("renameProject") {
+  doLast {
+    // Get project properties passed via the command line
+    val newAuthor: String = project.findProperty("author")?.toString() ?: error("Please provide an author using -Pauthor")
+    val newName: String = project.findProperty("name")?.toString() ?: error("Please provide a name using -Pname")
+    val newTopLevelDomain: String = project.findProperty("topLevelDomain")?.toString() ?: error("Please provide a top level domain using -PtopLevelDomain")
+
+    // Replace project name in settings.gradle.kts
+    val settingsFile = "settings.gradle.kts"
+    val currentProjectName = rootProject.name
+    replaceInFile(settingsFile, currentProjectName, newName)
+
+    // Replace author and top-level domain in build.gradle.kts
+    val buildFile = "build.gradle.kts"
+
+    // Replace author
+    replaceInFile(buildFile, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthor\"")
+
+    // Replace top-level domain
+    replaceInFile(buildFile, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
+
+    // Optionally: Replace the project group (in case it includes top-level domain or author)
+    val currentGroup = "$topLevelDomain.$mainProjectAuthor.$projectNameString".replace(" ", snakecaseStringSeparator)
+    val newGroup = "$newTopLevelDomain.${newAuthor.lowercase().replace(" ", snakecaseStringSeparator)}.${snakecase(newName)}"
+    replaceInFile(buildFile, currentGroup, newGroup)
+
+    println("Renamed project to '$newName', author to '$newAuthor', and top-level domain to '$newTopLevelDomain'")
   }
 }
 
