@@ -59,7 +59,7 @@ fun replaceStringInDirectoryFiles(directory: File, stringToReplace: String, repl
 
 description = "Test plugin for paperweight-userdev"
 
-val mainProjectAuthorName = "Esoteric Slime"
+val mainProjectAuthorName = "Esoteric Development"
 val snakecaseMainProjectAuthorName = snakecase(mainProjectAuthorName)
 
 val projectAuthors = listOfNotNull(mainProjectAuthorName)
