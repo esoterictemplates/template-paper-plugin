@@ -182,7 +182,7 @@ tasks.register("renameProject") {
 
     File("${javaSourcePathString}\\${currentGroupPath}\\${currentMainFileNameWithExtension}").renameTo(File("${javaSourcePathString}\\${newGroupPath}\\${newMainFileNameWithExtension}"))
 
-    renamePackageDirectories("${javaSourcePathString}\\${currentGroupPath}", "${javaSourcePathString}\\${currentGroupPath}")
+    renamePackageDirectories("${javaSourcePathString}\\${currentGroupPath}", "${javaSourcePathString}\\${newGroupPath}")
 
     println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
   }
