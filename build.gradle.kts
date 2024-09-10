@@ -142,7 +142,7 @@ tasks.register("renameProject") {
 
     val currentMainClassName = pascalcase(projectNameString)
 
-    if (currentMainClassName == newMainClassName) {
+    if (currentMainClassName != newMainClassName) {
       val currentMainClassFileName = "$currentMainClassName.java"
 
       val currentMainClassFilePath = File(startPath, "$currentGroupPath${File.separator}$currentMainClassFileName")
