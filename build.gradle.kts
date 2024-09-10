@@ -25,6 +25,10 @@ fun capitalizeFirstLetter(string: String): String {
   return string.first().uppercase() + string.drop(1)
 }
 
+fun titlecase(kebabcaseString: String): String {
+  return kebabcaseString.replace(kebabcaseStringSeparator, " ").split(" ").map { string -> capitalizeFirstLetter(string) }.joinToString(" ")
+}
+
 fun kebabcase(normalString: String): String {
   return normalString.lowercase().replace(" ", kebabcaseStringSeparator)
 }
@@ -151,6 +155,7 @@ tasks.register("renameProject") {
       currentMainClassFilePath.renameTo(newMainClassFilePath)
     }
 
+    replaceStringInDirectoryFiles(javaSourcePath.parentFile, newName, titlecase(projectNameString))
     replaceStringInDirectoryFiles(javaSourcePath.parentFile, projectGroupString, newGroupString)
     replaceStringInDirectoryFiles(javaSourcePath.parentFile, currentMainClassName, newMainClassName)
 
