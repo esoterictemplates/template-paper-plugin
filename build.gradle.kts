@@ -64,7 +64,7 @@ val snakecaseMainProjectAuthorName = snakecase(mainProjectAuthorName)
 
 val projectAuthors = listOfNotNull(mainProjectAuthorName)
 
-val topLevelDomain = "net"
+val topLevelDomain = "dev"
 
 val projectNameString = rootProject.name
 val snakecaseProjectNameString = snakecase(projectNameString)
