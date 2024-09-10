@@ -95,6 +95,11 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
         return
       }
 
+      if (!sourceFile.exists()) {
+        println("Source file ${sourceFile.path} does not exist!")
+        return
+      }
+
       Files.move(sourceFile.toPath(), destFile.toPath())
       println("Moved file ${sourceFile.path} to $destFile")
     } catch (e: Exception) {
