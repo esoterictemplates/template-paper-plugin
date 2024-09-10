@@ -133,11 +133,10 @@ tasks.register("renameProject") {
     val buildFilePath = projectDir.resolve("build.gradle.kts").toString()
     val javaSourcePath = projectDir.resolve(startPath)
 
-    val currentProjectName = rootProject.name
     val currentGroupString = project.group.toString()
     val currentGroupPath = currentGroupString.replace(groupStringSeparator, File.separator)
 
-    val currentMainClassName = pascalcase(currentProjectName)
+    val currentMainClassName = pascalcase(rootProject.name)
     val currentMainClassFileName = "$currentMainClassName.java"
 
     val oldMainClassFilePath = File(startPath, currentGroupPath + File.separator + currentMainClassFileName)
@@ -155,7 +154,7 @@ tasks.register("renameProject") {
     replaceStringInDirectoryFiles(javaSourcePath, currentGroupString, newGroupString)
     replaceStringInDirectoryFiles(javaSourcePath, currentMainClassName, newMainClassName)
 
-    replaceStringInFile(settingsFilePath, currentProjectName, kebabcase(newName))
+    replaceStringInFile(settingsFilePath, rootProject.name, kebabcase(newName))
     replaceStringInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
     replaceStringInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
