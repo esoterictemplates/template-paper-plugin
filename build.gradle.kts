@@ -146,7 +146,7 @@ tasks.register("renameProject") {
 
     // Rename the main Java class file
     val oldMainFileName = pascalcase(currentProjectName) + ".java"
-    val newMainFileName = newPascalcaseName + ".java"
+    val newMainFileName = "$newPascalcaseName.java"
     renameMainJavaFile(javaSrcPath, oldMainFileName, newMainFileName)
 
     println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
