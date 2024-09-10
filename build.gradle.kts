@@ -15,11 +15,12 @@ fun replaceInFile(filePath: String, target: String, replacement: String) {
 
 // Custom task to rename project, author, and top-level domain
 tasks.register("renameProject") {
-  val newAuthor: String by project
-  val newName: String by project
-  val newTopLevelDomain: String by project
-
   doLast {
+    // Get project properties passed via the command line
+    val newAuthor: String = project.findProperty("author")?.toString() ?: error("Please provide an author using -Pauthor")
+    val newName: String = project.findProperty("name")?.toString() ?: error("Please provide a name using -Pname")
+    val newTopLevelDomain: String = project.findProperty("topLevelDomain")?.toString() ?: error("Please provide a top level domain using -PtopLevelDomain")
+
     // Replace project name in settings.gradle.kts
     val settingsFile = "settings.gradle.kts"
     val currentProjectName = rootProject.name
