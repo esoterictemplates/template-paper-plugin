@@ -39,10 +39,10 @@ val projectGroupString = group.toString()
 val projectVersionString = version.toString()
 
 val javaVersion = 21
-val javaVersionEnumMember = JavaVersion.valueOf("VERSION_" + javaVersion)
+val javaVersionEnumMember = JavaVersion.valueOf("VERSION_$javaVersion")
 
 val paperApiMinecraftVersion = "1.21"
-val paperApiVersion = paperApiMinecraftVersion + "-" + "R0.1-SNAPSHOT"
+val paperApiVersion = "$paperApiMinecraftVersion-R0.1-SNAPSHOT"
 
 java {
   sourceCompatibility = javaVersionEnumMember
@@ -69,7 +69,7 @@ tasks {
   }
 
   shadowJar {
-    archiveFileName = projectNameString + "-" + projectVersionString + "." + "jar"
+    archiveFileName = "$projectNameString-$projectVersionString.jar"
   }
 
   compileJava {
