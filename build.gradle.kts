@@ -176,6 +176,8 @@ tasks.register("renameProject") {
       error("Failed to rename main file from ${oldMainClassFilePath.absolutePath} to ${newMainClassFilePath.absolutePath}")
     }
 
+    Files.move(Paths.get(startPath, currentGroupPath, "/."), Paths.get(startPath, newGroupPath, "/."))
+
     replaceStringInDirectoryFiles(javaSourcePath, currentGroupString, newGroupString)
     replaceStringInDirectoryFiles(javaSourcePath, currentMainClassName, newMainClassName)
 
