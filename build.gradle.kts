@@ -142,8 +142,7 @@ tasks.register("renameProject") {
     replaceInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
     // Replace all instances of the old group string with the new group string
-    val oldGroup = "$topLevelDomain.${mainProjectAuthor.lowercase().replace(" ", snakecaseStringSeparator)}.${snakecase(currentProjectName)}"
-    replaceGroupInJavaFiles(javaSrcPath, oldGroup, newGroup)
+    replaceGroupInJavaFiles(javaSrcPath, project.group.toString(), newGroup)
 
     // Rename the main Java class file
     val oldMainFileName = pascalcase(currentProjectName) + ".java"
