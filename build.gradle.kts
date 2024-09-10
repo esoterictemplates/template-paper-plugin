@@ -81,6 +81,7 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
         // Create directories in the destination if they don't exist
         if (!destFile.toFile().exists()) {
           Files.createDirectories(destFile)
+          destFile.toFile().mkdirs()
           println("Created directory ${destFile.toString()}")
         }
       } else {
