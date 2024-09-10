@@ -5,36 +5,41 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardOpenOption
 
+// Function to replace text in a file
+fun replaceInFile(filePath: String, target: String, replacement: String) {
+  val file = Paths.get(filePath)
+  val content = String(Files.readAllBytes(file))
+  val updatedContent = content.replace(target, replacement)
+  Files.write(file, updatedContent.toByteArray(), StandardOpenOption.TRUNCATE_EXISTING)
+}
+
+// Custom task to rename project, author, and top-level domain
 tasks.register("renameProject") {
-  val authorName: String? = project.findProperty("author") as String?
-  val projectName: String? = project.findProperty("name") as String?
-  val topLevelDomain: String? = project.findProperty("top-level-domain") as String?
+  val newAuthor: String by project
+  val newName: String by project
+  val newTopLevelDomain: String by project
 
   doLast {
-    if (authorName == null || projectName == null || topLevelDomain == null) {
-      throw IllegalArgumentException("Missing required parameters: --author, --name, --top-level-domain")
-    }
+    // Replace project name in settings.gradle.kts
+    val settingsFile = "settings.gradle.kts"
+    val currentProjectName = rootProject.name
+    replaceInFile(settingsFile, currentProjectName, newName)
 
-    // Update settings.gradle.kts
-    val settingsGradleFile = file("settings.gradle.kts")
-    val settingsContent = settingsGradleFile.readText()
-    val updatedSettingsContent = settingsContent.replace(
-      "rootProject.name = \"$rootProject.name\"",
-      "rootProject.name = \"$projectName\""
-    )
-    settingsGradleFile.writeText(updatedSettingsContent)
+    // Replace author and top-level domain in build.gradle.kts
+    val buildFile = "build.gradle.kts"
 
-    // Update build.gradle.kts
-    val buildGradleFile = file("build.gradle.kts")
-    val buildContent = buildGradleFile.readText()
+    // Replace author
+    replaceInFile(buildFile, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthor\"")
 
-    val updatedBuildContent = buildContent
-      .replace("val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$authorName\"")
-      .replace("val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$topLevelDomain\"")
+    // Replace top-level domain
+    replaceInFile(buildFile, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
-    buildGradleFile.writeText(updatedBuildContent)
+    // Optionally: Replace the project group (in case it includes top-level domain or author)
+    val currentGroup = "$topLevelDomain.$mainProjectAuthor.$projectNameString".replace(" ", snakecaseStringSeparator)
+    val newGroup = "$newTopLevelDomain.${newAuthor.lowercase().replace(" ", snakecaseStringSeparator)}.${snakecase(newName)}"
+    replaceInFile(buildFile, currentGroup, newGroup)
 
-    println("Project name, author, and top-level domain updated successfully.")
+    println("Renamed project to '$newName', author to '$newAuthor', and top-level domain to '$newTopLevelDomain'")
   }
 }
 
