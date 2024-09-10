@@ -119,7 +119,7 @@ tasks {
   }
 
   shadowJar {
-    archiveFileName.set("$projectNameString-$projectVersionString${File.separator}jar")
+    archiveFileName.set("$projectNameString-$projectVersionString.jar")
   }
 
   compileJava {
@@ -145,7 +145,7 @@ tasks.register("renameProject") {
     val newGroupPath = newGroupString.replace(groupStringSeparator, File.separator)
 
     val newMainClassName = newPascalcaseName
-    val newMainClassFileName = "$newPascalcaseName${File.separator}java"
+    val newMainClassFileName = "$newPascalcaseName.java"
 
     val settingsFilePath = projectDir.resolve("settings.gradle.kts").toString()
     val buildFilePath = projectDir.resolve("build.gradle.kts").toString()
@@ -157,7 +157,7 @@ tasks.register("renameProject") {
     val currentGroupPath = currentGroupString.replace(groupStringSeparator, File.separator)
 
     val currentMainClassName = pascalcase(currentProjectName)
-    val currentMainClassFileName = "$currentMainClassName${File.separator}java"
+    val currentMainClassFileName = "$currentMainClassName.java"
 
     val oldMainClassFilePath = projectDir.resolve(Paths.get(startPath, currentGroupPath, currentMainClassFileName).toFile())
     val newMainClassFilePath = projectDir.resolve(Paths.get(startPath, currentGroupPath, newMainClassFileName).toFile())
