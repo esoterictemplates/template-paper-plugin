@@ -1,6 +1,5 @@
 import org.gradle.api.JavaVersion
 import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
-import java.io.IOException
 
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -142,11 +141,11 @@ tasks.register("renameProject") {
     val newSnakecaseAuthorName = snakecase(newAuthorName)
     val newPascalcaseName = pascalcase(newName)
 
-    val newGroup = "$newTopLevelDomain$groupStringSeparator$newSnakecaseAuthorName$groupStringSeparator$newSnakecaseName"
-    val newGroupPath = newGroup.replace(groupStringSeparator, File.separator)
+    val newGroupString = "$newTopLevelDomain$groupStringSeparator$newSnakecaseAuthorName$groupStringSeparator$newSnakecaseName"
+    val newGroupPath = newGroupString.replace(groupStringSeparator, File.separator)
 
-    val newMainFileName = newPascalcaseName
-    val newMainFileNameWithExtension = "$newPascalcaseName${File.separator}java"
+    val newMainClassName = newPascalcaseName
+    val newMainClassFileName = "$newPascalcaseName${File.separator}java"
 
     val settingsFilePath = projectDir.resolve("settings.gradle.kts").toString()
     val buildFilePath = projectDir.resolve("build.gradle.kts").toString()
@@ -154,31 +153,31 @@ tasks.register("renameProject") {
     val javaSourcePathString = javaSourcePath.toString()
 
     val currentProjectName = rootProject.name
-    val currentGroup = project.group.toString()
-    val currentGroupPath = currentGroup.replace(groupStringSeparator, File.separator)
+    val currentGroupString = project.group.toString()
+    val currentGroupPath = currentGroupString.replace(groupStringSeparator, File.separator)
 
-    val currentMainFileName = pascalcase(currentProjectName)
-    val currentMainFileNameWithExtension = "$currentMainFileName.java"
+    val currentMainClassName = pascalcase(currentProjectName)
+    val currentMainClassFileName = "$currentMainClassName.java"
 
-    val oldMainFilePath = projectDir.resolve(Paths.get(startPath, "net${File.separator}esoteric_slime${File.separator}template_paper_plugin", currentMainFileNameWithExtension).toFile())
-    val newMainFilePath = projectDir.resolve(Paths.get(startPath, "net${File.separator}esoteric_slime${File.separator}template_paper_plugin", newMainFileNameWithExtension).toFile())
+    val oldMainClassFilePath = projectDir.resolve(Paths.get(startPath, "net${File.separator}esoteric_slime${File.separator}template_paper_plugin", currentMainClassFileName).toFile())
+    val newMainClassFilePath = projectDir.resolve(Paths.get(startPath, "net${File.separator}esoteric_slime${File.separator}template_paper_plugin", newMainClassFileName).toFile())
 
-    println("Current main file path: ${oldMainFilePath.absolutePath}")
-    println("New main file path: ${newMainFilePath.absolutePath}")
+    println("Current main file path: ${oldMainClassFilePath.absolutePath}")
+    println("New main file path: ${newMainClassFilePath.absolutePath}")
 
-    val destinationDir = newMainFilePath.parentFile
+    val destinationDir = newMainClassFilePath.parentFile
     if (!destinationDir.exists()) {
       destinationDir.mkdirs()
     }
 
-    if (oldMainFilePath.exists() && oldMainFilePath.renameTo(newMainFilePath)) {
-      println("Successfully renamed main file from ${oldMainFilePath.absolutePath} to ${newMainFilePath.absolutePath}")
+    if (oldMainClassFilePath.exists() && oldMainClassFilePath.renameTo(newMainClassFilePath)) {
+      println("Successfully renamed main file from ${oldMainClassFilePath.absolutePath} to ${newMainClassFilePath.absolutePath}")
     } else {
-      error("Failed to rename main file from ${oldMainFilePath.absolutePath} to ${newMainFilePath.absolutePath}")
+      error("Failed to rename main file from ${oldMainClassFilePath.absolutePath} to ${newMainClassFilePath.absolutePath}")
     }
 
-    replaceStringInDirectoryFiles(javaSourcePath, currentGroup, newGroup)
-    replaceStringInDirectoryFiles(javaSourcePath, currentMainFileName, newMainFileName)
+    replaceStringInDirectoryFiles(javaSourcePath, currentGroupString, newGroupString)
+    replaceStringInDirectoryFiles(javaSourcePath, currentMainClassName, newMainClassName)
 
     replaceStringInFile(settingsFilePath, currentProjectName, kebabcase(newName))
     replaceStringInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
