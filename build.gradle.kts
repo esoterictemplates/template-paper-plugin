@@ -21,6 +21,8 @@ val groupStringSeparator = "."
 val kebabcaseStringSeparator = "-"
 val snakecaseStringSeparator = "_"
 
+val startPath = "src${File.separator}main${File.separator}java"
+
 fun capitalizeFirstLetter(string: String): String {
   return string.first().uppercase() + string.drop(1)
 }
@@ -132,8 +134,6 @@ tasks {
 
 tasks.register("renameProject") {
   doLast {
-    val startPath = "src${File.separator}main${File.separator}java"
-
     val newName = project.findProperty("new-name")?.toString() ?: error("Please provide a new project name using -Pnew-name")
     val newAuthorName = project.findProperty("new-author-name")?.toString() ?: error("Please provide a new author name using -Pnew-author-name")
     val newTopLevelDomain = project.findProperty("new-top-level-domain")?.toString() ?: error("Please provide a new top level domain using -Pnew-top-level-domain")
