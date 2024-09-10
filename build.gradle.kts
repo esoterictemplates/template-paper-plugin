@@ -44,7 +44,7 @@ fun pascalcase(string: String): String {
   return pascalCaseString
 }
 
-fun replaceInFile(filePath: String, stringToReplace: String, replacementString: String) {
+fun replaceStringInFile(filePath: String, stringToReplace: String, replacementString: String) {
   val file = Paths.get(filePath)
 
   if (!Files.exists(file)) {
@@ -57,21 +57,10 @@ fun replaceInFile(filePath: String, stringToReplace: String, replacementString: 
   Files.write(file, updatedContent.toByteArray(), StandardOpenOption.TRUNCATE_EXISTING)
 }
 
-fun replaceGroupInJavaFiles(directory: File, oldGroup: String, newGroup: String) {
-  directory.walkTopDown().filter { it.isFile && it.extension == "java" }.forEach { file ->
-    replaceInFile(file.path, oldGroup, newGroup)
-    println("Replaced group $oldGroup with $newGroup in ${file.name}")
-  }
-}
-
-fun renameMainJavaFile(directory: File, oldFileName: String, newFileName: String) {
-  directory.walkTopDown().filter { it.isFile && it.name == oldFileName }.forEach { file ->
-    val newFile = File(file.parentFile, newFileName)
-    if (file.renameTo(newFile)) {
-      println("Renamed main Java file from $oldFileName to $newFileName")
-    } else {
-      println("Failed to rename $oldFileName")
-    }
+fun replaceStringInDirectoryFiles(directory: File, stringToReplace: String, replacementString: String) {
+  directory.walkTopDown().filter { it.isFile }.forEach { file ->
+    replaceStringInFile(file.path, stringToReplace, replacementString)
+    println("Replaced $stringToReplace with $replacementString in ${file.name}")
   }
 }
 
@@ -152,6 +141,8 @@ tasks {
 
 tasks.register("renameProject") {
   doLast {
+    val startPath = "src\\main\\java\\"
+
     val newName = project.findProperty("new-name")?.toString() ?: error("Please provide a new project name using -Pnew-name")
     val newAuthorName = project.findProperty("new-author-name")?.toString() ?: error("Please provide a new author name using -Pnew-author-name")
     val newTopLevelDomain = project.findProperty("new-top-level-domain")?.toString() ?: error("Please provide a new top level domain using -Pnew-top-level-domain")
@@ -161,6 +152,9 @@ tasks.register("renameProject") {
     val newPascalcaseName = pascalcase(newName)
 
     val newGroup = "$newTopLevelDomain.$newSnakecaseAuthorName.$newSnakecaseName"
+    val newGroupPath = newGroup.replace(groupStringSeparator, File.separator)
+
+    val newMainFileName = "$newPascalcaseName.java"
 
     val settingsFilePath = projectDir.resolve("settings.gradle.kts").toString()
     val buildFilePath = projectDir.resolve("build.gradle.kts").toString()
@@ -168,20 +162,20 @@ tasks.register("renameProject") {
 
     val currentProjectName = rootProject.name
 
-    val currentGroup = project.group.toString();
+    val currentGroup = project.group.toString()
+    val currentGroupPath = currentGroup.replace(groupStringSeparator, File.separator)
 
-    replaceGroupInJavaFiles(javaSrcPath, currentGroup, newGroup)
+    val currentMainFileName = pascalcase(currentProjectName) + ".java"
 
-    replaceInFile(settingsFilePath, currentProjectName, kebabcase(newName))
-    replaceInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
-    replaceInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
+    replaceStringInDirectoryFiles(javaSrcPath, currentGroup, newGroup)
 
-    val oldMainFileName = pascalcase(currentProjectName) + ".java"
-    val newMainFileName = "$newPascalcaseName.java"
-    renameMainJavaFile(javaSrcPath, oldMainFileName, newMainFileName)
+    replaceStringInFile(settingsFilePath, currentProjectName, kebabcase(newName))
+    replaceStringInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
+    replaceStringInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
-    // Rename package directories
-    renamePackageDirectories("src\\main\\java\\${currentGroup.replace('.', '\\')}", "src\\main\\java\\${newGroup.replace('.', '\\')}")
+    File("${startPath}${currentGroupPath}\\${currentMainFileName}").renameTo(File("${startPath}${newGroupPath}\\${newMainFileName}"))
+
+    renamePackageDirectories("${startPath}${currentGroupPath}", "${startPath}${currentGroupPath}")
 
     println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
   }
