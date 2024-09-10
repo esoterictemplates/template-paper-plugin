@@ -106,7 +106,7 @@ description = "Test plugin for paperweight-userdev"
 val mainProjectAuthor = "Esoteric Slime"
 val projectAuthors = listOfNotNull(mainProjectAuthor)
 
-val topLevelDomain = "net"
+val topLevelDomain = "dev"
 
 val projectNameString = rootProject.name
 
