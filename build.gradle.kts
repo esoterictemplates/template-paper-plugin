@@ -172,7 +172,6 @@ fun renameMainJavaFile(directory: File, oldFileName: String, newFileName: String
   }
 }
 
-// Helper function to rename package directories
 fun renamePackageDirectories(baseDir: File, oldGroup: String, newGroup: String) {
   val oldPackagePath = oldGroup.replace(".", File.separator)
   val newPackagePath = newGroup.replace(".", File.separator)
