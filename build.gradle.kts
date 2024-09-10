@@ -1,6 +1,43 @@
 import org.gradle.api.JavaVersion
 import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
 
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.file.StandardOpenOption
+
+tasks.register("renameProject") {
+  val authorName: String? = project.findProperty("author") as String?
+  val projectName: String? = project.findProperty("name") as String?
+  val topLevelDomain: String? = project.findProperty("top-level-domain") as String?
+
+  doLast {
+    if (authorName == null || projectName == null || topLevelDomain == null) {
+      throw IllegalArgumentException("Missing required parameters: --author, --name, --top-level-domain")
+    }
+
+    // Update settings.gradle.kts
+    val settingsGradleFile = file("settings.gradle.kts")
+    val settingsContent = settingsGradleFile.readText()
+    val updatedSettingsContent = settingsContent.replace(
+      "rootProject.name = \"$rootProject.name\"",
+      "rootProject.name = \"$projectName\""
+    )
+    settingsGradleFile.writeText(updatedSettingsContent)
+
+    // Update build.gradle.kts
+    val buildGradleFile = file("build.gradle.kts")
+    val buildContent = buildGradleFile.readText()
+
+    val updatedBuildContent = buildContent
+      .replace("val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$authorName\"")
+      .replace("val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$topLevelDomain\"")
+
+    buildGradleFile.writeText(updatedBuildContent)
+
+    println("Project name, author, and top-level domain updated successfully.")
+  }
+}
+
 plugins {
   java
   `java-library`
