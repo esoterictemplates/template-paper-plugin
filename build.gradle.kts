@@ -163,10 +163,10 @@ tasks.register("renameProject") {
 
     // Old and new directory paths
     val oldGroupPath = "net${File.separator}esoteric_slime${File.separator}template_paper_plugin"
-    val newGroupPath = "dev${File.separator}esoteric_development${File.separator}esoteric_plugin"
+    val newGroupPathToRenameTo = "dev${File.separator}esoteric_development${File.separator}esoteric_plugin"
 
-    val oldDirectory = projectDir.resolve(Paths.get(startPath, oldGroupPath))
-    val newDirectory = projectDir.resolve(Paths.get(startPath, newGroupPath))
+    val oldDirectory = projectDir.resolve(Paths.get(startPath, oldGroupPath).toFile())
+    val newDirectory = projectDir.resolve(Paths.get(startPath, newGroupPathToRenameTo).toFile())
 
     // Ensure the new directory exists
     if (!newDirectory.exists()) {
