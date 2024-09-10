@@ -161,9 +161,9 @@ tasks.register("renameProject") {
     val currentMainFileName = pascalcase(currentProjectName)
     val currentMainFileNameWithExtension = "$currentMainFileName.java"
 
-    // Define file paths
-    val oldMainFilePath = Paths.get(startPath, "net${File.separator}esoteric_slime${File.separator}template_paper_plugin", currentMainFileNameWithExtension).toFile()
-    val newMainFilePath = Paths.get(startPath, newGroupPath, newMainFileNameWithExtension).toFile()
+    // Correct file paths based on projectDir
+    val oldMainFilePath = projectDir.resolve(Paths.get(startPath, "net${File.separator}esoteric_slime${File.separator}template_paper_plugin", currentMainFileNameWithExtension)).toFile()
+    val newMainFilePath = projectDir.resolve(Paths.get(startPath, newGroupPath, newMainFileNameWithExtension)).toFile()
 
     // Debug output
     println("Current main file path: ${oldMainFilePath.absolutePath}")
