@@ -148,7 +148,7 @@ tasks.register("renameProject") {
     renameMainJavaFile(javaSrcPath, oldMainFileName, newMainFileName)
 
     // Rename package directories
-    renamePackageDirectories(javaSrcPath, currentGroup, newGroup)
+    renamePackageDirectories(javaSrcPath, "src\\main\\java\\$currentGroup", "src\\main\\java\\$newGroup")
 
     println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
   }
