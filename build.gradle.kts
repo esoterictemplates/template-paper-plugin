@@ -4,7 +4,7 @@ import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardOpenOption
-import java.nio.file.NoSuchFileException
+import java.nio.file.*
 
 plugins {
   java
@@ -74,7 +74,7 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
   // Walk the source directory and move each file to the destination
   sourceDir.walkTopDown().forEach { sourceFile ->
     val relativePath = sourceFile.toPath().relativize(sourceDir.toPath()).toString()
-    val destFile = destDir.toPath().resolve(sourceFile.toPath().name)
+    val destFile = destDir.toPath().resolve(sourceFile.toPath().fileName)
 
     try {
       if (sourceFile.isDirectory) {
@@ -85,7 +85,7 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
         }
       } else {
         // Move the files
-        Files.move(sourceFile.toPath(), destFile, REPLACE_EXISTING)
+        Files.move(sourceFile.toPath(), destFile)
         println("Moved file ${sourceFile.path} to ${destFile.toString()}")
       }
     } catch (e: Exception) {
