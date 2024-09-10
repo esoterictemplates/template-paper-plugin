@@ -87,7 +87,7 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
         println("Moved file ${sourceFile.path} to ${destFile}")
       }
     } catch (e: Exception) {
-      println("Error moving ${sourceFile.path}: ${e.message}")
+      throw RuntimeException(e)
     }
   }
 }
