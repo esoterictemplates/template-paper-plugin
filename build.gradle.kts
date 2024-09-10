@@ -5,6 +5,7 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardOpenOption
 import java.nio.file.*
+import kotlin.io.path.name
 
 plugins {
   java
@@ -72,7 +73,7 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
 
   sourceDir.walkTopDown().forEach { sourceFile ->
     val relativePath = sourceFile.toPath().relativize(sourceDir.toPath()).toString()
-    val destFile = destDir.toPath().resolve(sourceFile.toPath().fileName)
+    val destFile = destDir.toPath().resolve(sourceFile.toPath().name)
 
     try {
       if (sourceFile.isDirectory) {
