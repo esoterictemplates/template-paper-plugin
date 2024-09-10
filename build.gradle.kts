@@ -125,19 +125,52 @@ tasks.register("renameProject") {
 
     val newSnakecaseName = snakecase(newName)
     val newSnakecaseAuthorName = snakecase(newAuthorName)
+    val newPascalcaseName = pascalcase(newName)
 
-    val newGroup = newTopLevelDomain + groupStringSeparator + newSnakecaseAuthorName + groupStringSeparator + newSnakecaseName
+    val newGroup = "$newTopLevelDomain.$newSnakecaseAuthorName.$newSnakecaseName"
 
+    // File paths
     val settingsFilePath = projectDir.resolve("settings.gradle.kts").toString()
     val buildFilePath = projectDir.resolve("build.gradle.kts").toString()
+    val javaSrcPath = projectDir.resolve("src/main/java").toPath().toFile()
 
     val currentProjectName = rootProject.name
 
+    // Replace in settings.gradle.kts and build.gradle.kts
     replaceInFile(settingsFilePath, currentProjectName, kebabcase(newName))
     replaceInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
     replaceInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
+    // Replace all instances of the old group string with the new group string
+    val oldGroup = "$topLevelDomain.${mainProjectAuthor.lowercase().replace(" ", snakecaseStringSeparator)}.${snakecase(currentProjectName)}"
+    replaceGroupInJavaFiles(javaSrcPath, oldGroup, newGroup)
+
+    // Rename the main Java class file
+    val oldMainFileName = pascalcase(currentProjectName) + ".java"
+    val newMainFileName = newPascalcaseName + ".java"
+    renameMainJavaFile(javaSrcPath, oldMainFileName, newMainFileName)
+
     println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
+  }
+}
+
+// Helper function to replace group in all Java files
+fun replaceGroupInJavaFiles(directory: File, oldGroup: String, newGroup: String) {
+  directory.walkTopDown().filter { it.isFile && it.extension == "java" }.forEach { file ->
+    replaceInFile(file.path, oldGroup, newGroup)
+    println("Replaced group in ${file.name}")
+  }
+}
+
+// Helper function to rename the main Java class file
+fun renameMainJavaFile(directory: File, oldFileName: String, newFileName: String) {
+  directory.walkTopDown().filter { it.isFile && it.name == oldFileName }.forEach { file ->
+    val newFile = File(file.parentFile, newFileName)
+    if (file.renameTo(newFile)) {
+      println("Renamed main Java file from $oldFileName to $newFileName")
+    } else {
+      println("Failed to rename $oldFileName")
+    }
   }
 }
 
