@@ -57,6 +57,39 @@ fun replaceInFile(filePath: String, stringToReplace: String, replacementString: 
   Files.write(file, updatedContent.toByteArray(), StandardOpenOption.TRUNCATE_EXISTING)
 }
 
+fun replaceGroupInJavaFiles(directory: File, oldGroup: String, newGroup: String) {
+  directory.walkTopDown().filter { it.isFile && it.extension == "java" }.forEach { file ->
+    replaceInFile(file.path, oldGroup, newGroup)
+    println("Replaced group $oldGroup with $newGroup in ${file.name}")
+  }
+}
+
+fun renameMainJavaFile(directory: File, oldFileName: String, newFileName: String) {
+  directory.walkTopDown().filter { it.isFile && it.name == oldFileName }.forEach { file ->
+    val newFile = File(file.parentFile, newFileName)
+    if (file.renameTo(newFile)) {
+      println("Renamed main Java file from $oldFileName to $newFileName")
+    } else {
+      println("Failed to rename $oldFileName")
+    }
+  }
+}
+
+fun renamePackageDirectories(oldGroup: String, newGroup: String) {
+  val oldPackageDir = File(oldGroup)
+  val newPackageDir = File(newGroup)
+
+  if (oldPackageDir.exists()) {
+    if (oldPackageDir.renameTo(newPackageDir)) {
+      println("Renamed package directory from $oldGroup to $newGroup")
+    } else {
+      println("Failed to rename package directory from $oldGroup to $newGroup")
+    }
+  } else {
+    println("Package directory $oldGroup does not exist")
+  }
+}
+
 description = "Test plugin for paperweight-userdev"
 
 val mainProjectAuthor = "Esoteric Slime"
@@ -151,39 +184,6 @@ tasks.register("renameProject") {
     renamePackageDirectories("src\\main\\java\\${currentGroup.replace('.', '\\')}", "src\\main\\java\\${newGroup.replace('.', '\\')}")
 
     println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
-  }
-}
-
-fun replaceGroupInJavaFiles(directory: File, oldGroup: String, newGroup: String) {
-  directory.walkTopDown().filter { it.isFile && it.extension == "java" }.forEach { file ->
-    replaceInFile(file.path, oldGroup, newGroup)
-    println("Replaced group $oldGroup with $newGroup in ${file.name}")
-  }
-}
-
-fun renameMainJavaFile(directory: File, oldFileName: String, newFileName: String) {
-  directory.walkTopDown().filter { it.isFile && it.name == oldFileName }.forEach { file ->
-    val newFile = File(file.parentFile, newFileName)
-    if (file.renameTo(newFile)) {
-      println("Renamed main Java file from $oldFileName to $newFileName")
-    } else {
-      println("Failed to rename $oldFileName")
-    }
-  }
-}
-
-fun renamePackageDirectories(oldGroup: String, newGroup: String) {
-  val oldPackageDir = File(oldGroup)
-  val newPackageDir = File(newGroup)
-
-  if (oldPackageDir.exists()) {
-    if (oldPackageDir.renameTo(newPackageDir)) {
-      println("Renamed package directory from $oldGroup to $newGroup")
-    } else {
-      println("Failed to rename package directory from $oldGroup to $newGroup")
-    }
-  } else {
-    println("Package directory $oldGroup does not exist")
   }
 }
 
