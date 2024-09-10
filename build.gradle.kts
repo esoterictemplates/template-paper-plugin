@@ -1,12 +1,10 @@
 import org.gradle.api.JavaVersion
-import org.gradle.api.JavaVersion.VERSION_21
 import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
 
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardOpenOption
 import java.nio.file.NoSuchFileException
-import java.nio.file.StandardCopyOption
 
 plugins {
   java
