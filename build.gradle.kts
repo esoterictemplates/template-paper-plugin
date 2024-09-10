@@ -136,13 +136,13 @@ tasks.register("renameProject") {
 
     val currentProjectName = rootProject.name
 
+    // Replace all instances of the old group string with the new group string
+    replaceGroupInJavaFiles(javaSrcPath, project.group.toString(), newGroup)
+
     // Replace in settings.gradle.kts and build.gradle.kts
     replaceInFile(settingsFilePath, currentProjectName, kebabcase(newName))
     replaceInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
     replaceInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
-
-    // Replace all instances of the old group string with the new group string
-    replaceGroupInJavaFiles(javaSrcPath, project.group.toString(), newGroup)
 
     // Rename the main Java class file
     val oldMainFileName = pascalcase(currentProjectName) + ".java"
