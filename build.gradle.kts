@@ -44,13 +44,16 @@ fun pascalcase(kebabcaseString: String): String {
   return pascalCaseString
 }
 
-fun replaceInFile(filePath: String, target: String, replacement: String) {
+fun replaceInFile(filePath: String, stringToReplace: String, replacementString: String) {
   val file = Paths.get(filePath)
+
   if (!Files.exists(file)) {
     throw NoSuchFileException(filePath)
   }
+
   val content = String(Files.readAllBytes(file))
-  val updatedContent = content.replace(target, replacement)
+  val updatedContent = content.replace(stringToReplace, replacementString)
+
   Files.write(file, updatedContent.toByteArray(), StandardOpenOption.TRUNCATE_EXISTING)
 }
 
@@ -116,21 +119,20 @@ tasks {
 
 tasks.register("renameProject") {
   doLast {
-    val newAuthor: String = project.findProperty("new-author")?.toString() ?: error("Please provide an author using -Pnew-author")
-    val newName: String = project.findProperty("new-name")?.toString() ?: error("Please provide a name using -Pnew-name")
-    val newTopLevelDomain: String = project.findProperty("new-top-level-domain")?.toString() ?: error("Please provide a top level domain using -Pnew-top-level-domain")
+    val newName: String = project.findProperty("new-name")?.toString() ?: error("Please provide a new project name using -Pnew-name")
+    val newAuthorName: String = project.findProperty("new-author-name")?.toString() ?: error("Please provide a new author name using -Pnew-author-name")
+    val newTopLevelDomain: String = project.findProperty("new-top-level-domain")?.toString() ?: error("Please provide a new top level domain using -Pnew-top-level-domain")
 
     val settingsFilePath = projectDir.resolve("settings.gradle.kts").toString()
     val buildFilePath = projectDir.resolve("build.gradle.kts").toString()
 
     val currentProjectName = rootProject.name
+
     replaceInFile(settingsFilePath, currentProjectName, kebabcase(newName))
-
-    replaceInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthor\"")
-
+    replaceInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
     replaceInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
-    println("Renamed project to '$newName', author to '$newAuthor', and top-level domain to '$newTopLevelDomain'")
+    println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
   }
 }
 
