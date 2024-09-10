@@ -154,7 +154,8 @@ tasks.register("renameProject") {
     val newGroup = "$newTopLevelDomain.$newSnakecaseAuthorName.$newSnakecaseName"
     val newGroupPath = newGroup.replace(groupStringSeparator, File.separator)
 
-    val newMainFileName = "$newPascalcaseName.java"
+    val newMainFileName = newPascalcaseName
+    val newMainFileNameWithExtension = "$newPascalcaseName.java"
 
     val settingsFilePath = projectDir.resolve("settings.gradle.kts").toString()
     val buildFilePath = projectDir.resolve("build.gradle.kts").toString()
@@ -166,9 +167,11 @@ tasks.register("renameProject") {
     val currentGroup = project.group.toString()
     val currentGroupPath = currentGroup.replace(groupStringSeparator, File.separator)
 
-    val currentMainFileName = pascalcase(currentProjectName) + ".java"
+    val currentMainFileName = pascalcase(currentProjectName)
+    val currentMainFileNameWithExtension = "$currentMainFileName.java"
 
     replaceStringInDirectoryFiles(javaSourcePath, currentGroup, newGroup)
+    replaceStringInDirectoryFiles(javaSourcePath, currentMainFileNameWithExtension, newMainFileNameWithExtension)
 
     replaceStringInFile(settingsFilePath, currentProjectName, kebabcase(newName))
     replaceStringInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
