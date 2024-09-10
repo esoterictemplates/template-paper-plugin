@@ -67,7 +67,6 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
       println("Created destination directory ${destDir.path}")
     } else {
       println("FAILED to create destination directory ${destDir.path}")
-      return
     }
   }
 
