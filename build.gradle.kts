@@ -130,10 +130,6 @@ tasks.register("renameProject") {
 
     replaceInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
-    val currentGroup = "$topLevelDomain.$mainProjectAuthor.$projectNameString".replace(" ", snakecaseStringSeparator)
-    val newGroup = "$newTopLevelDomain.${newAuthor.lowercase().replace(" ", snakecaseStringSeparator)}.${snakecase(newName)}"
-    replaceInFile(buildFilePath, currentGroup, newGroup)
-
     println("Renamed project to '$newName', author to '$newAuthor', and top-level domain to '$newTopLevelDomain'")
   }
 }
