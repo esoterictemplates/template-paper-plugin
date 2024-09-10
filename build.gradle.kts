@@ -86,27 +86,20 @@ tasks {
 
 tasks.register("renameProject") {
   doLast {
-    // Get project properties passed via the command line
     val newAuthor: String = project.findProperty("author")?.toString() ?: error("Please provide an author using -Pauthor")
     val newName: String = project.findProperty("name")?.toString() ?: error("Please provide a name using -Pname")
     val newTopLevelDomain: String = project.findProperty("topLevelDomain")?.toString() ?: error("Please provide a top level domain using -PtopLevelDomain")
 
-    // Use absolute paths for the files
     val settingsFilePath = projectDir.resolve("settings.gradle.kts").toString()
     val buildFilePath = projectDir.resolve("build.gradle.kts").toString()
 
-    // Replace project name in settings.gradle.kts
     val currentProjectName = rootProject.name
     replaceInFile(settingsFilePath, currentProjectName, newName)
 
-    // Replace author and top-level domain in build.gradle.kts
-    // Replace author
     replaceInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthor\"")
 
-    // Replace top-level domain
     replaceInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
-    // Optionally: Replace the project group (in case it includes top-level domain or author)
     val currentGroup = "$topLevelDomain.$mainProjectAuthor.$projectNameString".replace(" ", snakecaseStringSeparator)
     val newGroup = "$newTopLevelDomain.${newAuthor.lowercase().replace(" ", snakecaseStringSeparator)}.${snakecase(newName)}"
     replaceInFile(buildFilePath, currentGroup, newGroup)
