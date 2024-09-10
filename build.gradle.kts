@@ -136,8 +136,7 @@ tasks.register("renameProject") {
     val buildFilePath = projectDir.resolve("build.gradle.kts").toString()
     val javaSourcePath = projectDir.resolve(startPath)
 
-    val currentGroupString = project.group.toString()
-    val currentGroupPath = currentGroupString.replace(groupStringSeparator, File.separator)
+    val currentGroupPath = projectGroupString.replace(groupStringSeparator, File.separator)
 
     val currentMainClassName = pascalcase(rootProject.name)
     val currentMainClassFileName = "$currentMainClassName.java"
@@ -154,7 +153,7 @@ tasks.register("renameProject") {
       error("Failed to rename main file from ${oldMainClassFilePath.absolutePath} to ${newMainClassFilePath.absolutePath}")
     }
 
-    replaceStringInDirectoryFiles(javaSourcePath, currentGroupString, newGroupString)
+    replaceStringInDirectoryFiles(javaSourcePath, projectGroupString, newGroupString)
     replaceStringInDirectoryFiles(javaSourcePath, currentMainClassName, newMainClassName)
 
     replaceStringInFile(settingsFilePath, rootProject.name, kebabcase(newName))
