@@ -141,7 +141,7 @@ tasks {
 
 tasks.register("renameProject") {
   doLast {
-    val startPath = "src\\main\\java\\"
+    val startPath = "src\\main\\java"
 
     val newName = project.findProperty("new-name")?.toString() ?: error("Please provide a new project name using -Pnew-name")
     val newAuthorName = project.findProperty("new-author-name")?.toString() ?: error("Please provide a new author name using -Pnew-author-name")
@@ -177,7 +177,7 @@ tasks.register("renameProject") {
     println("${javaSourcePathString}${currentGroupPath}\\${currentMainFileName}")
     println("${javaSourcePathString}${newGroupPath}\\${newMainFileName}")
 
-    File("${javaSourcePathString}${currentGroupPath}\\${currentMainFileName}").renameTo(File("${javaSourcePathString}${newGroupPath}\\${newMainFileName}"))
+    File("${javaSourcePathString}\\${currentGroupPath}\\${currentMainFileName}").renameTo(File("${javaSourcePathString}\\${newGroupPath}\\${newMainFileName}"))
 
     renamePackageDirectories("${javaSourcePathString}${currentGroupPath}", "${javaSourcePathString}${currentGroupPath}")
 
