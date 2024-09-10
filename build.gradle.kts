@@ -71,7 +71,6 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
   }
 
   sourceDir.walkTopDown().forEach { sourceFile ->
-    val relativePath = sourceFile.toPath().relativize(sourceDir.toPath()).toString()
     val destFile = destDir.toPath().resolve(sourceFile.toPath().toString()).toFile()
 
     println("Attempting to move $sourceFile to $destFile")
@@ -80,7 +79,7 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
       if (sourceFile.isDirectory) {
         if (!destFile.exists()) {
           destFile.mkdirs()
-          println("Created directory ${destFile}")
+          println("Created directory $destFile")
         }
       } else {
         Files.move(sourceFile.toPath(), destFile.toPath())
