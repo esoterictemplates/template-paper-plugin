@@ -62,8 +62,8 @@ description = "Test plugin for paperweight-userdev"
 val mainProjectAuthor = "Esoteric Development"
 val projectAuthors = listOfNotNull(mainProjectAuthor)
 
-val topLevelDomain = "dev"
-
+val topLevelDomain = "net"
+ 
 val projectNameString = rootProject.name
 
 group = topLevelDomain + groupStringSeparator + mainProjectAuthor.lowercase().replace(" ", snakecaseStringSeparator) + groupStringSeparator + snakecase(projectNameString)
