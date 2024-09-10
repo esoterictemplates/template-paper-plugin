@@ -171,7 +171,7 @@ tasks.register("renameProject") {
     val currentMainFileNameWithExtension = "$currentMainFileName.java"
 
     replaceStringInDirectoryFiles(javaSourcePath, currentGroup, newGroup)
-    replaceStringInDirectoryFiles(javaSourcePath, currentMainFileNameWithExtension, newMainFileNameWithExtension)
+    replaceStringInDirectoryFiles(javaSourcePath, currentMainFileName, newMainFileName)
 
     replaceStringInFile(settingsFilePath, currentProjectName, kebabcase(newName))
     replaceStringInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
