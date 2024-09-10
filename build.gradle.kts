@@ -86,9 +86,9 @@ tasks {
 
 tasks.register("renameProject") {
   doLast {
-    val newAuthor: String = project.findProperty("author")?.toString() ?: error("Please provide an author using -Pauthor")
-    val newName: String = project.findProperty("name")?.toString() ?: error("Please provide a name using -Pname")
-    val newTopLevelDomain: String = project.findProperty("topLevelDomain")?.toString() ?: error("Please provide a top level domain using -PtopLevelDomain")
+    val newAuthor: String = project.findProperty("new-author")?.toString() ?: error("Please provide an author using -Pnew-author")
+    val newName: String = project.findProperty("new-name")?.toString() ?: error("Please provide a name using -Pnew-name")
+    val newTopLevelDomain: String = project.findProperty("new-top-level-domain")?.toString() ?: error("Please provide a top level domain using -Pnew-top-level-domain")
 
     val settingsFilePath = projectDir.resolve("settings.gradle.kts").toString()
     val buildFilePath = projectDir.resolve("build.gradle.kts").toString()
