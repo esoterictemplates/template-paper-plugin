@@ -1,5 +1,6 @@
 import org.gradle.api.JavaVersion
 import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
+import java.io.IOException
 
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -187,7 +188,20 @@ tasks.register("renameProject") {
     replaceStringInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
     replaceStringInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
-    renamePackageDirectories("${javaSourcePathString}${File.separator}$currentGroupPath", "${javaSourcePathString}${File.separator}$newGroupPath")
+    val currentMainFilePath = javaSourcePath.resolve(currentGroupPath).resolve(currentMainFileNameWithExtension)
+    val newMainFilePath = javaSourcePath.resolve(newGroupPath).resolve(newMainFileNameWithExtension)
+
+    try {
+      Files.move(currentMainFilePath.toPath(), newMainFilePath.toPath())
+      println("Renamed file successfully")
+    } catch (exception: IOException) {
+      exception.printStackTrace()
+      error("Failed to rename file")
+    }
+
+    // Ensure directories are renamed and other replacements are done similarly
+
+    renamePackageDirectories("${javaSourcePathString}/${currentGroupPath}", "${javaSourcePathString}/${newGroupPath}")
 
     println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
   }
