@@ -65,13 +65,11 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
     return
   }
 
-  // Create destination directory if it doesn't exist
   if (!destDir.exists()) {
     destDir.mkdirs()
     println("Created destination directory ${destDir.path}")
   }
 
-  // Walk the source directory and move each file to the destination
   sourceDir.walkTopDown().forEach { sourceFile ->
     val relativePath = sourceFile.toPath().relativize(sourceDir.toPath()).toString()
     val destFile = destDir.toPath().resolve(sourceFile.toPath().fileName)
