@@ -70,7 +70,7 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
     println("Created destination directory ${destDir.path}")
   }
 
-  sourceDir.walkTopDown().forEach { sourceFile ->
+  sourceDir.walkTopDown().filter { it.isFile }.forEach { sourceFile ->
     val destFile = destDir.toPath().resolve(sourceFile.toPath().toString()).toFile()
 
     println("Attempting to move files")
