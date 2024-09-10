@@ -32,10 +32,10 @@ fun snakecase(kebabcaseString: String): String {
   return kebabcaseString.lowercase().replace(kebabcaseStringSeparator, snakecaseStringSeparator)
 }
 
-fun pascalcase(kebabcaseString: String): String {
+fun pascalcase(string: String): String {
   var pascalCaseString = ""
 
-  val splitString = kebabcaseString.split(kebabcaseStringSeparator)
+  val splitString = string.split(Regex("$kebabcaseStringSeparator| "))
 
   for (part in splitString) {
     pascalCaseString += capitalizeFirstLetter(part)
@@ -59,10 +59,10 @@ fun replaceInFile(filePath: String, stringToReplace: String, replacementString: 
 
 description = "Test plugin for paperweight-userdev"
 
-val mainProjectAuthor = "Esoteric Slime"
+val mainProjectAuthor = "Esoteric Development"
 val projectAuthors = listOfNotNull(mainProjectAuthor)
 
-val topLevelDomain = "net"
+val topLevelDomain = "dev"
 
 val projectNameString = rootProject.name
 
