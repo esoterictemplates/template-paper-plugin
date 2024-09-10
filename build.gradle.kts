@@ -1,4 +1,5 @@
 import org.gradle.api.JavaVersion
+import org.gradle.api.JavaVersion.VERSION_21
 import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
 
 import java.nio.file.Files
@@ -10,10 +11,10 @@ import java.nio.file.StandardCopyOption
 plugins {
   java
   `java-library`
+  `maven-publish`
   id("io.papermc.paperweight.userdev") version "1.7.2"
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1"
   id("xyz.jpenilla.run-paper") version "2.3.0"
-
   id("io.github.goooler.shadow") version "8.1.7"
 }
 
@@ -22,7 +23,7 @@ val kebabcaseStringSeparator = "-"
 val snakecaseStringSeparator = "_"
 
 fun capitalizeFirstLetter(string: String): String {
-  return string.first().uppercase() + string.slice(IntRange(1, string.length - 1))
+  return string.first().uppercase() + string.drop(1)
 }
 
 fun kebabcase(normalString: String): String {
@@ -34,15 +35,8 @@ fun snakecase(string: String): String {
 }
 
 fun pascalcase(string: String): String {
-  var pascalCaseString = ""
-
-  val splitString = string.split(Regex("$kebabcaseStringSeparator| "))
-
-  for (part in splitString) {
-    pascalCaseString += capitalizeFirstLetter(part)
-  }
-
-  return pascalCaseString
+  return string.split(Regex("$kebabcaseStringSeparator| "))
+    .joinToString("") { capitalizeFirstLetter(it) }
 }
 
 fun replaceStringInFile(filePath: String, stringToReplace: String, replacementString: String) {
@@ -86,10 +80,10 @@ val mainProjectAuthor = "Esoteric Slime"
 val projectAuthors = listOfNotNull(mainProjectAuthor)
 
 val topLevelDomain = "net"
- 
+
 val projectNameString = rootProject.name
 
-group = topLevelDomain + groupStringSeparator + mainProjectAuthor.lowercase().replace(" ", snakecaseStringSeparator) + groupStringSeparator + snakecase(projectNameString)
+group = "$topLevelDomain$groupStringSeparator${mainProjectAuthor.lowercase().replace(" ", snakecaseStringSeparator)}$groupStringSeparator${snakecase(projectNameString)}"
 version = "0.0.4"
 
 val buildDirectoryString = buildDir.toString()
@@ -106,8 +100,7 @@ val paperApiVersion = "$paperApiMinecraftVersion-R0.1-SNAPSHOT"
 java {
   sourceCompatibility = javaVersionEnumMember
   targetCompatibility = javaVersionEnumMember
-
-  toolchain.languageVersion = JavaLanguageVersion.of(javaVersion)
+  toolchain.languageVersion.set(JavaLanguageVersion.of(javaVersion))
 }
 
 repositories {
@@ -116,9 +109,7 @@ repositories {
 
 dependencies {
   paperweight.paperDevBundle(paperApiVersion)
-
-  implementation("dev.jorel" , "commandapi-bukkit-shade-mojang-mapped" , "9.5.1")
-  
+  implementation("dev.jorel", "commandapi-bukkit-shade-mojang-mapped", "9.5.1")
   implementation("net.lingala.zip4j", "zip4j", "2.11.5")
 }
 
@@ -128,11 +119,11 @@ tasks {
   }
 
   shadowJar {
-    archiveFileName = "$projectNameString-$projectVersionString.jar"
+    archiveFileName.set("$projectNameString-$projectVersionString.jar")
   }
 
   compileJava {
-    options.release = javaVersion
+    options.release.set(javaVersion)
   }
 
   javadoc {
@@ -142,7 +133,7 @@ tasks {
 
 tasks.register("renameProject") {
   doLast {
-    val startPath = "src/main/java"
+    val startPath = "src${File.separator}main${File.separator}java"
 
     val newName = project.findProperty("new-name")?.toString() ?: error("Please provide a new project name using -Pnew-name")
     val newAuthorName = project.findProperty("new-author-name")?.toString() ?: error("Please provide a new author name using -Pnew-author-name")
@@ -164,7 +155,6 @@ tasks.register("renameProject") {
     val javaSourcePathString = javaSourcePath.toString()
 
     val currentProjectName = rootProject.name
-
     val currentGroup = project.group.toString()
     val currentGroupPath = currentGroup.replace(groupStringSeparator, File.separator)
 
@@ -178,11 +168,13 @@ tasks.register("renameProject") {
     replaceStringInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
     replaceStringInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
-    Paths.get("$startPath/$currentGroupPath/$currentMainFileNameWithExtension").toFile().renameTo(
-      Paths.get("$startPath/$newGroupPath/$newMainFileNameWithExtension").toFile()
-    )
+    val oldMainFilePath = Paths.get(startPath, currentGroupPath, currentMainFileNameWithExtension).toFile()
+    val newMainFilePath = Paths.get(startPath, newGroupPath, newMainFileNameWithExtension).toFile()
+    if (!oldMainFilePath.renameTo(newMainFilePath)) {
+      error("Failed to rename main file from $oldMainFilePath to $newMainFilePath")
+    }
 
-    renamePackageDirectories("${javaSourcePathString}/${currentGroupPath}", "${javaSourcePathString}/${newGroupPath}")
+    renamePackageDirectories("${javaSourcePathString}${File.separator}$currentGroupPath", "${javaSourcePathString}${File.separator}$newGroupPath")
 
     println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
   }
@@ -190,10 +182,8 @@ tasks.register("renameProject") {
 
 bukkitPluginYaml {
   authors = projectAuthors
-
-  main = projectGroupString + groupStringSeparator + pascalcase(projectNameString)
+  main = "$projectGroupString$groupStringSeparator${pascalcase(projectNameString)}"
   apiVersion = paperApiMinecraftVersion
-
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
 }
 
@@ -201,7 +191,6 @@ publishing {
   publications {
     create<MavenPublication>("mavenJava") {
       from(components["java"])
-
       groupId = projectGroupString
       artifactId = projectNameString
       version = projectVersionString
