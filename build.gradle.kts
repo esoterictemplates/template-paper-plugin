@@ -160,21 +160,17 @@ tasks.register("renameProject") {
     val currentMainFileName = pascalcase(currentProjectName)
     val currentMainFileNameWithExtension = "$currentMainFileName.java"
 
-    // Correct file paths based on projectDir
     val oldMainFilePath = projectDir.resolve(Paths.get(startPath, "net${File.separator}esoteric_slime${File.separator}template_paper_plugin", currentMainFileNameWithExtension).toFile())
     val newMainFilePath = projectDir.resolve(Paths.get(startPath, "net${File.separator}esoteric_slime${File.separator}template_paper_plugin", newMainFileNameWithExtension).toFile())
 
-    // Debug output
     println("Current main file path: ${oldMainFilePath.absolutePath}")
     println("New main file path: ${newMainFilePath.absolutePath}")
 
-    // Ensure the destination directory exists
     val destinationDir = newMainFilePath.parentFile
     if (!destinationDir.exists()) {
       destinationDir.mkdirs()
     }
 
-    // Attempt the rename
     if (oldMainFilePath.exists() && oldMainFilePath.renameTo(newMainFilePath)) {
       println("Successfully renamed main file from ${oldMainFilePath.absolutePath} to ${newMainFilePath.absolutePath}")
     } else {
