@@ -148,7 +148,7 @@ tasks.register("renameProject") {
     renameMainJavaFile(javaSrcPath, oldMainFileName, newMainFileName)
 
     // Rename package directories
-    renamePackageDirectories(javaSrcPath, "src\\main\\java\\${currentGroup.replace('.', '\\')}", "src\\main\\java\\${newGroup.replace('.', '\\')}")
+    renamePackageDirectories("src\\main\\java\\${currentGroup.replace('.', '\\')}", "src\\main\\java\\${newGroup.replace('.', '\\')}")
 
     println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
   }
@@ -172,12 +172,9 @@ fun renameMainJavaFile(directory: File, oldFileName: String, newFileName: String
   }
 }
 
-fun renamePackageDirectories(baseDir: File, oldGroup: String, newGroup: String) {
-  val oldPackagePath = oldGroup.replace(".", File.separator)
-  val newPackagePath = newGroup.replace(".", File.separator)
-
-  val oldPackageDir = File(baseDir, oldGroup)
-  val newPackageDir = File(baseDir, newGroup)
+fun renamePackageDirectories(oldGroup: String, newGroup: String) {
+  val oldPackageDir = File(oldGroup)
+  val newPackageDir = File(newGroup)
 
   if (oldPackageDir.exists()) {
     if (oldPackageDir.renameTo(newPackageDir)) {
