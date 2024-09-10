@@ -84,6 +84,7 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
           destFile.toFile().mkdirs()
           println("Created directory ${destFile.toString()}")
         }
+        moveFilesRecursively(sourceFile, destFile.toFile())
       } else {
         // Move the files
         Files.move(sourceFile.toPath(), destFile)
