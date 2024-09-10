@@ -158,7 +158,7 @@ tasks.register("renameProject") {
 fun replaceGroupInJavaFiles(directory: File, oldGroup: String, newGroup: String) {
   directory.walkTopDown().filter { it.isFile && it.extension == "java" }.forEach { file ->
     replaceInFile(file.path, oldGroup, newGroup)
-    println("Replaced group in ${file.name}")
+    println("Replaced group $oldGroup with $newGroup in ${file.name}")
   }
 }
 
