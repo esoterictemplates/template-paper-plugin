@@ -79,15 +79,10 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
     println()
 
     try {
-      if (sourceFile.isDirectory) {
-        if (!destFile.exists()) {
-          destFile.mkdirs()
-          println("Created directory $destFile")
-        }
-      } else {
-        Files.move(sourceFile.toPath(), destFile.toPath())
-        println("Moved file ${sourceFile.path} to $destFile")
-      }
+      sourceFile.mkdirs()
+
+      Files.move(sourceFile.toPath(), destFile.toPath())
+      println("Moved file ${sourceFile.path} to $destFile")
     } catch (e: Exception) {
       throw RuntimeException(e)
     }
