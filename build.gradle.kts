@@ -56,62 +56,6 @@ fun replaceStringInDirectoryFiles(directory: File, stringToReplace: String, repl
   }
 }
 
-fun moveFilesRecursively(sourceDir: File, destDir: File) {
-  sourceDir.renameTo(destDir)
-
-//  if (!sourceDir.exists()) {
-//    println("Source directory ${sourceDir.path} does not exist")
-//    return
-//  }
-//
-//  if (!destDir.exists()) {
-//    if (destDir.mkdirs()) {
-//      println("Created destination directory ${destDir.path}")
-//    } else {
-//      println("FAILED to create destination directory ${destDir.path}")
-//    }
-//  }
-//
-//  sourceDir.walkTopDown().filter { it.isFile }.forEach { sourceFile ->
-//    val relativePath = sourceFile.relativeTo(sourceDir).path
-//    val destFile = File(destDir, relativePath)
-//
-//    println("Attempting to move file from ${sourceFile.path} to ${destFile.path}")
-//
-//    try {
-//      if (!destFile.parentFile.exists()) {
-//        if (!destFile.parentFile.mkdirs()) {
-//          println("FAILED to create directory ${destFile.parentFile.path}")
-//          return
-//        }
-//      }
-//
-//      destFile.mkdir()
-//      destFile.mkdirs()
-//
-//      if (!destFile.exists()) {
-//        if (!destFile.mkdir()) {
-//          println("FAILED to create directory ${destFile.parentFile.path}")
-//          return
-//        }
-//      }
-//
-//      if (!sourceFile.exists()) {
-//        println("Source file ${sourceFile.path} does not exist!")
-//        return
-//      }
-//
-//      if (!sourceFile.renameTo(destFile)) {
-//        throw IOException("Failed to move file from ${sourceFile.path} to ${destFile.path}")
-//      }
-//
-//      println("Moved file ${sourceFile.path} to ${destFile.path}")
-//    } catch (e: Exception) {
-//      throw RuntimeException(e)
-//    }
-//  }
-}
-
 description = "Test plugin for paperweight-userdev"
 
 val mainProjectAuthor = "Esoteric Slime"
@@ -214,8 +158,6 @@ tasks.register("renameProject") {
     replaceStringInFile(settingsFilePath, currentProjectName, kebabcase(newName))
     replaceStringInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
     replaceStringInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
-
-    moveFilesRecursively(File(startPath, currentGroupPath), File(startPath, newGroupPath))
 
     println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
   }
