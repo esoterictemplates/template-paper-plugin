@@ -83,7 +83,7 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
         }
       } else {
         Files.move(sourceFile.toPath(), destFile.toPath())
-        println("Moved file ${sourceFile.path} to ${destFile}")
+        println("Moved file ${sourceFile.path} to $destFile")
       }
     } catch (e: Exception) {
       throw RuntimeException(e)
