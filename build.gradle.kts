@@ -180,7 +180,7 @@ tasks.register("renameProject") {
     println("${javaSourcePathString}\\${currentGroupPath}\\${currentMainFileName}")
     println("${javaSourcePathString}\\${newGroupPath}\\${newMainFileName}")
 
-    File("${javaSourcePathString}\\${currentGroupPath}\\${currentMainFileName}").renameTo(File("${javaSourcePathString}\\${newGroupPath}\\${newMainFileName}"))
+    File("${javaSourcePathString}\\${currentGroupPath}\\${currentMainFileNameWithExtension}").renameTo(File("${javaSourcePathString}\\${newGroupPath}\\${newMainFileNameWithExtension}"))
 
     renamePackageDirectories("${javaSourcePathString}\\${currentGroupPath}", "${javaSourcePathString}\\${currentGroupPath}")
 
