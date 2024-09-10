@@ -59,18 +59,45 @@ fun replaceStringInDirectoryFiles(directory: File, stringToReplace: String, repl
   }
 }
 
-fun renamePackageDirectories(oldGroup: String, newGroup: String) {
-  val oldPackageDir = File(oldGroup)
-  val newPackageDir = File(newGroup)
+fun moveFilesRecursively(sourceDir: File, destDir: File) {
+  if (!sourceDir.exists()) {
+    println("Source directory ${sourceDir.path} does not exist")
+    return
+  }
 
-  if (oldPackageDir.exists()) {
-    if (oldPackageDir.renameTo(newPackageDir)) {
-      println("Renamed package directory from $oldGroup to $newGroup")
-    } else {
-      println("Failed to rename package directory from $oldGroup to $newGroup")
+  // Create destination directory if it doesn't exist
+  if (!destDir.exists()) {
+    destDir.mkdirs()
+    println("Created destination directory ${destDir.path}")
+  }
+
+  // Walk the source directory and move each file to the destination
+  sourceDir.walkTopDown().forEach { sourceFile ->
+    val relativePath = sourceFile.toPath().relativize(sourceDir.toPath()).toString()
+    val destFile = destDir.toPath().resolve(sourceFile.toPath().name)
+
+    try {
+      if (sourceFile.isDirectory) {
+        // Create directories in the destination if they don't exist
+        if (!destFile.toFile().exists()) {
+          Files.createDirectories(destFile)
+          println("Created directory ${destFile.toString()}")
+        }
+      } else {
+        // Move the files
+        Files.move(sourceFile.toPath(), destFile, REPLACE_EXISTING)
+        println("Moved file ${sourceFile.path} to ${destFile.toString()}")
+      }
+    } catch (e: Exception) {
+      println("Error moving ${sourceFile.path}: ${e.message}")
     }
+  }
+
+  // Optionally, delete the source directory if it is empty
+  if (sourceDir.deleteRecursively()) {
+    println("Deleted source directory ${sourceDir.path}")
   } else {
-    println("Package directory $oldGroup does not exist")
+    println("Failed to delete source directory ${sourceDir.path}")
   }
 }
 
