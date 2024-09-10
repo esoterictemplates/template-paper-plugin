@@ -136,8 +136,10 @@ tasks.register("renameProject") {
 
     val currentProjectName = rootProject.name
 
+    val currentGroup = project.group.toString();
+
     // Replace all instances of the old group string with the new group string
-    replaceGroupInJavaFiles(javaSrcPath, project.group.toString(), newGroup)
+    replaceGroupInJavaFiles(javaSrcPath, currentGroup, newGroup)
 
     // Replace in settings.gradle.kts and build.gradle.kts
     replaceInFile(settingsFilePath, currentProjectName, kebabcase(newName))
