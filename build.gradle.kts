@@ -142,7 +142,7 @@ tasks {
 
 tasks.register("renameProject") {
   doLast {
-    val startPath = "src\\main\\java"
+    val startPath = "src/main/java"
 
     val newName = project.findProperty("new-name")?.toString() ?: error("Please provide a new project name using -Pnew-name")
     val newAuthorName = project.findProperty("new-author-name")?.toString() ?: error("Please provide a new author name using -Pnew-author-name")
@@ -178,11 +178,11 @@ tasks.register("renameProject") {
     replaceStringInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
     replaceStringInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
-    Paths.get("$startPath\\$currentGroupPath\\$currentMainFileNameWithExtension").toFile().renameTo(
-      Paths.get("$startPath\\$newGroupPath\\$newMainFileNameWithExtension").toFile()
+    Paths.get("$startPath/$currentGroupPath/$currentMainFileNameWithExtension").toFile().renameTo(
+      Paths.get("$startPath/$newGroupPath/$newMainFileNameWithExtension").toFile()
     )
 
-    renamePackageDirectories("${javaSourcePathString}\\${currentGroupPath}", "${javaSourcePathString}\\${newGroupPath}")
+    renamePackageDirectories("${javaSourcePathString}/${currentGroupPath}", "${javaSourcePathString}/${newGroupPath}")
 
     println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
   }
