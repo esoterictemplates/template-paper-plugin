@@ -178,10 +178,9 @@ tasks.register("renameProject") {
     replaceStringInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
     replaceStringInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
-    println("${javaSourcePathString}\\${currentGroupPath}\\${currentMainFileNameWithExtension}")
-    println("${javaSourcePathString}\\${newGroupPath}\\${newMainFileNameWithExtension}")
-
-    Files.move(Paths.get("${javaSourcePathString}\\${currentGroupPath}\\${currentMainFileNameWithExtension}"), Paths.get("${javaSourcePathString}\\${newGroupPath}\\${newMainFileNameWithExtension}"), StandardCopyOption.REPLACE_EXISTING)
+    Paths.get("$startPath\\$currentGroupPath\\$currentMainFileNameWithExtension").toFile().renameTo(
+      Paths.get("$startPath\\$newGroupPath\\$newMainFileNameWithExtension").toFile()
+    )
 
     renamePackageDirectories("${javaSourcePathString}\\${currentGroupPath}", "${javaSourcePathString}\\${newGroupPath}")
 
