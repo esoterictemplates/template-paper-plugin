@@ -85,6 +85,11 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
     try {
       if (!sourceFile.mkdirs()) {
         println("FAILED to create ${sourceFile.path}")
+
+        if (!sourceFile.canWrite()) {
+          println("CANNOT WRITE TO SOURCE FILE")
+        }
+
         return
       }
 
