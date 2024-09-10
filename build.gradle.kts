@@ -158,9 +158,17 @@ tasks.register("renameProject") {
     replaceStringInFile(buildFilePath, "val mainProjectAuthorName = \"$mainProjectAuthorName\"", "val mainProjectAuthorName = \"$newAuthorName\"")
     replaceStringInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
-    File("$startPath${File.separator}$topLevelDomain").renameTo(File("$startPath${File.separator}$newTopLevelDomain"))
-    File("$startPath${File.separator}$newTopLevelDomain${File.separator}$snakecaseMainProjectAuthorName").renameTo(File("$startPath${File.separator}$newTopLevelDomain${File.separator}$newSnakecaseAuthorName"))
-    File("$startPath${File.separator}$newTopLevelDomain${File.separator}$newSnakecaseAuthorName${File.separator}$snakecaseProjectNameString").renameTo(File("$startPath${File.separator}$newGroupPath"))
+    if (topLevelDomain != newTopLevelDomain) {
+      File("$startPath${File.separator}$topLevelDomain").renameTo(File("$startPath${File.separator}$newTopLevelDomain"))
+    }
+
+    if (snakecaseMainProjectAuthorName != newSnakecaseAuthorName) {
+      File("$startPath${File.separator}$newTopLevelDomain${File.separator}$snakecaseMainProjectAuthorName").renameTo(File("$startPath${File.separator}$newTopLevelDomain${File.separator}$newSnakecaseAuthorName"))
+    }
+
+    if (snakecaseProjectNameString != newSnakecaseName) {
+      File("$startPath${File.separator}$newTopLevelDomain${File.separator}$newSnakecaseAuthorName${File.separator}$snakecaseProjectNameString").renameTo(File("$startPath${File.separator}$newGroupPath"))
+    }
   }
 }
 
