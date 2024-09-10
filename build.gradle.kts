@@ -161,19 +161,13 @@ tasks.register("renameProject") {
     val currentMainFileName = pascalcase(currentProjectName)
     val currentMainFileNameWithExtension = "$currentMainFileName.java"
 
-    // Debug output
-    println("Current main file path: ${Paths.get(startPath, currentGroupPath, currentMainFileNameWithExtension).toAbsolutePath()}")
-    println("New main file path: ${Paths.get(startPath, newGroupPath, newMainFileNameWithExtension).toAbsolutePath()}")
-
-    replaceStringInDirectoryFiles(javaSourcePath, currentGroup, newGroup)
-    replaceStringInDirectoryFiles(javaSourcePath, currentMainFileName, newMainFileName)
-
-    replaceStringInFile(settingsFilePath, currentProjectName, kebabcase(newName))
-    replaceStringInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
-    replaceStringInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
-
-    val oldMainFilePath = Paths.get(startPath, currentGroupPath, currentMainFileNameWithExtension).toFile()
+    // Define file paths
+    val oldMainFilePath = Paths.get(startPath, "net${File.separator}esoteric_slime${File.separator}template_paper_plugin", currentMainFileNameWithExtension).toFile()
     val newMainFilePath = Paths.get(startPath, newGroupPath, newMainFileNameWithExtension).toFile()
+
+    // Debug output
+    println("Current main file path: ${oldMainFilePath.absolutePath}")
+    println("New main file path: ${newMainFilePath.absolutePath}")
 
     // Ensure the destination directory exists
     val destinationDir = newMainFilePath.parentFile
@@ -182,11 +176,18 @@ tasks.register("renameProject") {
     }
 
     // Attempt the rename
-    if (oldMainFilePath.renameTo(newMainFilePath)) {
-      println("Successfully renamed main file from $oldMainFilePath to $newMainFilePath")
+    if (oldMainFilePath.exists() && oldMainFilePath.renameTo(newMainFilePath)) {
+      println("Successfully renamed main file from ${oldMainFilePath.absolutePath} to ${newMainFilePath.absolutePath}")
     } else {
-      error("Failed to rename main file from $oldMainFilePath to $newMainFilePath")
+      error("Failed to rename main file from ${oldMainFilePath.absolutePath} to ${newMainFilePath.absolutePath}")
     }
+
+    replaceStringInDirectoryFiles(javaSourcePath, currentGroup, newGroup)
+    replaceStringInDirectoryFiles(javaSourcePath, currentMainFileName, newMainFileName)
+
+    replaceStringInFile(settingsFilePath, currentProjectName, kebabcase(newName))
+    replaceStringInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
+    replaceStringInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
     renamePackageDirectories("${javaSourcePathString}${File.separator}$currentGroupPath", "${javaSourcePathString}${File.separator}$newGroupPath")
 
