@@ -155,7 +155,7 @@ tasks.register("renameProject") {
       currentMainClassFilePath.renameTo(newMainClassFilePath)
     }
 
-    replaceStringInDirectoryFiles(javaSourcePath.parentFile, newName, titlecase(projectNameString))
+    replaceStringInDirectoryFiles(javaSourcePath.parentFile, titlecase(projectNameString), newName)
     replaceStringInDirectoryFiles(javaSourcePath.parentFile, projectGroupString, newGroupString)
     replaceStringInDirectoryFiles(javaSourcePath.parentFile, currentMainClassName, newMainClassName)
 
