@@ -151,8 +151,8 @@ tasks.register("renameProject") {
       currentMainClassFilePath.renameTo(newMainClassFilePath)
     }
 
-    replaceStringInDirectoryFiles(javaSourcePath, projectGroupString, newGroupString)
-    replaceStringInDirectoryFiles(javaSourcePath, currentMainClassName, newMainClassName)
+    replaceStringInDirectoryFiles(javaSourcePath.parentFile, projectGroupString, newGroupString)
+    replaceStringInDirectoryFiles(javaSourcePath.parentFile, currentMainClassName, newMainClassName)
 
     replaceStringInFile(settingsFilePath, projectNameString, kebabcase(newName))
     replaceStringInFile(buildFilePath, "val mainProjectAuthorName = \"$mainProjectAuthorName\"", "val mainProjectAuthorName = \"$newAuthorName\"")
