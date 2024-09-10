@@ -57,57 +57,59 @@ fun replaceStringInDirectoryFiles(directory: File, stringToReplace: String, repl
 }
 
 fun moveFilesRecursively(sourceDir: File, destDir: File) {
-  if (!sourceDir.exists()) {
-    println("Source directory ${sourceDir.path} does not exist")
-    return
-  }
+  sourceDir.renameTo(destDir)
 
-  if (!destDir.exists()) {
-    if (destDir.mkdirs()) {
-      println("Created destination directory ${destDir.path}")
-    } else {
-      println("FAILED to create destination directory ${destDir.path}")
-    }
-  }
-
-  sourceDir.walkTopDown().filter { it.isFile }.forEach { sourceFile ->
-    val relativePath = sourceFile.relativeTo(sourceDir).path
-    val destFile = File(destDir, relativePath)
-
-    println("Attempting to move file from ${sourceFile.path} to ${destFile.path}")
-
-    try {
-      if (!destFile.parentFile.exists()) {
-        if (!destFile.parentFile.mkdirs()) {
-          println("FAILED to create directory ${destFile.parentFile.path}")
-          return
-        }
-      }
-
-      destFile.mkdir()
-      destFile.mkdirs()
-
-      if (!destFile.exists()) {
-        if (!destFile.mkdir()) {
-          println("FAILED to create directory ${destFile.parentFile.path}")
-          return
-        }
-      }
-
-      if (!sourceFile.exists()) {
-        println("Source file ${sourceFile.path} does not exist!")
-        return
-      }
-
-      if (!sourceFile.renameTo(destFile)) {
-        throw IOException("Failed to move file from ${sourceFile.path} to ${destFile.path}")
-      }
-
-      println("Moved file ${sourceFile.path} to ${destFile.path}")
-    } catch (e: Exception) {
-      throw RuntimeException(e)
-    }
-  }
+//  if (!sourceDir.exists()) {
+//    println("Source directory ${sourceDir.path} does not exist")
+//    return
+//  }
+//
+//  if (!destDir.exists()) {
+//    if (destDir.mkdirs()) {
+//      println("Created destination directory ${destDir.path}")
+//    } else {
+//      println("FAILED to create destination directory ${destDir.path}")
+//    }
+//  }
+//
+//  sourceDir.walkTopDown().filter { it.isFile }.forEach { sourceFile ->
+//    val relativePath = sourceFile.relativeTo(sourceDir).path
+//    val destFile = File(destDir, relativePath)
+//
+//    println("Attempting to move file from ${sourceFile.path} to ${destFile.path}")
+//
+//    try {
+//      if (!destFile.parentFile.exists()) {
+//        if (!destFile.parentFile.mkdirs()) {
+//          println("FAILED to create directory ${destFile.parentFile.path}")
+//          return
+//        }
+//      }
+//
+//      destFile.mkdir()
+//      destFile.mkdirs()
+//
+//      if (!destFile.exists()) {
+//        if (!destFile.mkdir()) {
+//          println("FAILED to create directory ${destFile.parentFile.path}")
+//          return
+//        }
+//      }
+//
+//      if (!sourceFile.exists()) {
+//        println("Source file ${sourceFile.path} does not exist!")
+//        return
+//      }
+//
+//      if (!sourceFile.renameTo(destFile)) {
+//        throw IOException("Failed to move file from ${sourceFile.path} to ${destFile.path}")
+//      }
+//
+//      println("Moved file ${sourceFile.path} to ${destFile.path}")
+//    } catch (e: Exception) {
+//      throw RuntimeException(e)
+//    }
+//  }
 }
 
 description = "Test plugin for paperweight-userdev"
