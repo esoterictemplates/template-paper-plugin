@@ -59,7 +59,7 @@ fun replaceInFile(filePath: String, stringToReplace: String, replacementString: 
 
 description = "Test plugin for paperweight-userdev"
 
-val mainProjectAuthor = "Esoteric Development"
+val mainProjectAuthor = "Esoteric Slime"
 val projectAuthors = listOfNotNull(mainProjectAuthor)
 
 val topLevelDomain = "net"
