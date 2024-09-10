@@ -28,8 +28,8 @@ fun kebabcase(normalString: String): String {
   return normalString.lowercase().replace(" ", kebabcaseStringSeparator)
 }
 
-fun snakecase(kebabcaseString: String): String {
-  return kebabcaseString.lowercase().replace(kebabcaseStringSeparator, snakecaseStringSeparator)
+fun snakecase(string: String): String {
+  return string.lowercase().replace(Regex("$kebabcaseStringSeparator| "), snakecaseStringSeparator)
 }
 
 fun pascalcase(string: String): String {
