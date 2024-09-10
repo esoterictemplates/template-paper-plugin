@@ -159,11 +159,11 @@ tasks.register("renameProject") {
     val currentMainClassName = pascalcase(currentProjectName)
     val currentMainClassFileName = "$currentMainClassName.java"
 
-    val oldMainClassFilePath = projectDir.resolve(Paths.get(startPath, "net${File.separator}esoteric_slime${File.separator}template_paper_plugin", currentMainClassFileName).toFile())
-    val newMainClassFilePath = projectDir.resolve(Paths.get(startPath, "net${File.separator}esoteric_slime${File.separator}template_paper_plugin", newMainClassFileName).toFile())
+    val oldMainClassFilePath = projectDir.resolve(Paths.get(startPath, currentGroupPath, currentMainClassFileName).toFile())
+    val newMainClassFilePath = projectDir.resolve(Paths.get(startPath, currentGroupPath, newMainClassFileName).toFile())
 
-    println("Current main file path: ${oldMainClassFilePath.absolutePath}")
-    println("New main file path: ${newMainClassFilePath.absolutePath}")
+    println("Current main class file path: ${oldMainClassFilePath.absolutePath}")
+    println("New main class file path: ${newMainClassFilePath.absolutePath}")
 
     val destinationDir = newMainClassFilePath.parentFile
     if (!destinationDir.exists()) {
