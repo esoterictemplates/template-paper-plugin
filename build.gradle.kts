@@ -148,7 +148,7 @@ tasks.register("renameProject") {
     renameMainJavaFile(javaSrcPath, oldMainFileName, newMainFileName)
 
     // Rename package directories
-    renamePackageDirectories(javaSrcPath, "src\\main\\java\\$currentGroup", "src\\main\\java\\$newGroup")
+    renamePackageDirectories(javaSrcPath, "src\\main\\java\\${currentGroup.replace('.', '\\')}", "src\\main\\java\\${newGroup.replace('.', '\\')}")
 
     println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
   }
@@ -176,17 +176,17 @@ fun renamePackageDirectories(baseDir: File, oldGroup: String, newGroup: String) 
   val oldPackagePath = oldGroup.replace(".", File.separator)
   val newPackagePath = newGroup.replace(".", File.separator)
 
-  val oldPackageDir = File(baseDir, oldPackagePath)
-  val newPackageDir = File(baseDir, newPackagePath)
+  val oldPackageDir = File(baseDir, oldGroup)
+  val newPackageDir = File(baseDir, newGroup)
 
   if (oldPackageDir.exists()) {
     if (oldPackageDir.renameTo(newPackageDir)) {
-      println("Renamed package directory from $oldPackagePath to $newPackagePath")
+      println("Renamed package directory from $oldGroup to $newGroup")
     } else {
-      println("Failed to rename package directory from $oldPackagePath to $newPackagePath")
+      println("Failed to rename package directory from $oldGroup to $newGroup")
     }
   } else {
-    println("Package directory $oldPackagePath does not exist")
+    println("Package directory $oldGroup does not exist")
   }
 }
 
