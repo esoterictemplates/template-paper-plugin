@@ -84,6 +84,13 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
         }
       }
 
+      if (!destFile.exists()) {
+        if (!destFile.mkdirs()) {
+          println("FAILED to create directory ${destFile.parentFile.path}")
+          return
+        }
+      }
+
       if (!sourceFile.exists()) {
         println("Source file ${sourceFile.path} does not exist!")
         return
