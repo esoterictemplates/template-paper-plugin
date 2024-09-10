@@ -74,6 +74,8 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
     val relativePath = sourceFile.toPath().relativize(sourceDir.toPath()).toString()
     val destFile = destDir.toPath().resolve(sourceFile.toPath().toString())
 
+    println("Attempting to move $sourceFile to $destFile")
+
     try {
       if (sourceFile.isDirectory) {
         if (!destFile.toFile().exists()) {
