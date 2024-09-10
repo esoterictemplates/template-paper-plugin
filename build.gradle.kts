@@ -92,13 +92,6 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
       println("Error moving ${sourceFile.path}: ${e.message}")
     }
   }
-
-  // Optionally, delete the source directory if it is empty
-  if (sourceDir.deleteRecursively()) {
-    println("Deleted source directory ${sourceDir.path}")
-  } else {
-    println("Failed to delete source directory ${sourceDir.path}")
-  }
 }
 
 description = "Test plugin for paperweight-userdev"
