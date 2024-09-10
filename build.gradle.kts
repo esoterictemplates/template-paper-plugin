@@ -66,8 +66,12 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
   }
 
   if (!destDir.exists()) {
-    destDir.mkdirs()
-    println("Created destination directory ${destDir.path}")
+    if (destDir.mkdirs()) {
+      println("Created destination directory ${destDir.path}")
+    } else {
+      println("FAILED to create destination directory ${destDir.path}")
+      return
+    }
   }
 
   sourceDir.walkTopDown().filter { it.isFile }.forEach { sourceFile ->
@@ -79,7 +83,10 @@ fun moveFilesRecursively(sourceDir: File, destDir: File) {
     println()
 
     try {
-      sourceFile.mkdirs()
+      if (sourceFile.mkdirs()) {
+        println("FAILED to create ${sourceFile.path}")
+        return
+      }
 
       Files.move(sourceFile.toPath(), destFile.toPath())
       println("Moved file ${sourceFile.path} to $destFile")
