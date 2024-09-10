@@ -158,7 +158,8 @@ tasks.register("renameProject") {
 
     val settingsFilePath = projectDir.resolve("settings.gradle.kts").toString()
     val buildFilePath = projectDir.resolve("build.gradle.kts").toString()
-    val javaSrcPath = projectDir.resolve("src/main/java").toPath().toFile()
+    val javaSourcePath = projectDir.resolve(startPath).toPath().toFile()
+    val javaSourcePathString = javaSourcePath.toString()
 
     val currentProjectName = rootProject.name
 
@@ -167,15 +168,15 @@ tasks.register("renameProject") {
 
     val currentMainFileName = pascalcase(currentProjectName) + ".java"
 
-    replaceStringInDirectoryFiles(javaSrcPath, currentGroup, newGroup)
+    replaceStringInDirectoryFiles(javaSourcePath, currentGroup, newGroup)
 
     replaceStringInFile(settingsFilePath, currentProjectName, kebabcase(newName))
     replaceStringInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
     replaceStringInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
-    File("${startPath}${currentGroupPath}\\${currentMainFileName}").renameTo(File("${startPath}${newGroupPath}\\${newMainFileName}"))
+    File("${javaSourcePathString}${currentGroupPath}\\${currentMainFileName}").renameTo(File("${javaSourcePathString}${newGroupPath}\\${newMainFileName}"))
 
-    renamePackageDirectories("${startPath}${currentGroupPath}", "${startPath}${currentGroupPath}")
+    renamePackageDirectories("${javaSourcePathString}${currentGroupPath}", "${javaSourcePathString}${currentGroupPath}")
 
     println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
   }
