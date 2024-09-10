@@ -84,7 +84,7 @@ val projectNameString = rootProject.name
 group = "$topLevelDomain$groupStringSeparator${mainProjectAuthor.lowercase().replace(" ", snakecaseStringSeparator)}$groupStringSeparator${snakecase(projectNameString)}"
 version = "0.0.4"
 
-val buildDirectoryString = buildDir.toString()
+val buildDirectoryString = layout.buildDirectory.toString()
 
 val projectGroupString = group.toString()
 val projectVersionString = version.toString()
