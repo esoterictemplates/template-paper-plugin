@@ -1,12 +1,14 @@
 import org.gradle.api.JavaVersion
 import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
+
 import java.io.File
-import java.io.IOException
 
 plugins {
   java
   `java-library`
+
   `maven-publish`
+
   id("io.papermc.paperweight.userdev") version "1.7.2"
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1"
   id("xyz.jpenilla.run-paper") version "2.3.0"
@@ -36,12 +38,12 @@ fun pascalcase(string: String): String {
     .joinToString("") { capitalizeFirstLetter(it) }
 }
 
+fun groupStringToPath(groupString: String): String {
+  return groupString.replace(groupStringSeparator, File.separator)
+}
+
 fun replaceStringInFile(filePath: String, stringToReplace: String, replacementString: String) {
   val file = File(filePath)
-
-  if (!file.exists()) {
-    throw IOException("File does not exist: $filePath")
-  }
 
   val content = file.readText()
   val updatedContent = content.replace(stringToReplace, replacementString)
@@ -52,23 +54,22 @@ fun replaceStringInFile(filePath: String, stringToReplace: String, replacementSt
 fun replaceStringInDirectoryFiles(directory: File, stringToReplace: String, replacementString: String) {
   directory.walkTopDown().filter { it.isFile }.forEach { file ->
     replaceStringInFile(file.path, stringToReplace, replacementString)
-    println("Replaced $stringToReplace with $replacementString in ${file.name}")
   }
 }
 
 description = "Test plugin for paperweight-userdev"
 
-val mainProjectAuthor = "Esoteric Slime"
-val snakecaseMainProjectAuthor = snakecase(mainProjectAuthor)
+val mainProjectAuthorName = "Esoteric Slime"
+val snakecaseMainProjectAuthorName = snakecase(mainProjectAuthorName)
 
-val projectAuthors = listOfNotNull(mainProjectAuthor)
+val projectAuthors = listOfNotNull(mainProjectAuthorName)
 
 val topLevelDomain = "net"
 
 val projectNameString = rootProject.name
 val snakecaseProjectNameString = snakecase(projectNameString)
 
-group = "$topLevelDomain$groupStringSeparator${snakecaseMainProjectAuthor}$groupStringSeparator${snakecaseProjectNameString}"
+group = "$topLevelDomain$groupStringSeparator${snakecaseMainProjectAuthorName}$groupStringSeparator${snakecaseProjectNameString}"
 version = "0.0.4"
 
 val buildDirectoryString = layout.buildDirectory.toString()
@@ -85,6 +86,7 @@ val paperApiVersion = "$paperApiMinecraftVersion-R0.1-SNAPSHOT"
 java {
   sourceCompatibility = javaVersionEnumMember
   targetCompatibility = javaVersionEnumMember
+
   toolchain.languageVersion.set(JavaLanguageVersion.of(javaVersion))
 }
 
@@ -94,6 +96,7 @@ repositories {
 
 dependencies {
   paperweight.paperDevBundle(paperApiVersion)
+
   implementation("dev.jorel", "commandapi-bukkit-shade-mojang-mapped", "9.5.1")
   implementation("net.lingala.zip4j", "zip4j", "2.11.5")
 }
@@ -124,52 +127,43 @@ tasks.register("renameProject") {
 
     val newSnakecaseName = snakecase(newName)
     val newSnakecaseAuthorName = snakecase(newAuthorName)
-    val newPascalcaseName = pascalcase(newName)
 
     val newGroupString = "$newTopLevelDomain$groupStringSeparator$newSnakecaseAuthorName$groupStringSeparator$newSnakecaseName"
-    val newGroupPath = newGroupString.replace(groupStringSeparator, File.separator)
+    val newGroupPath = groupStringToPath(newGroupString)
 
-    val newMainClassName = newPascalcaseName
-    val newMainClassFileName = "$newPascalcaseName.java"
+    val newMainClassName = pascalcase(newName)
+    val newMainClassFileName = "$newMainClassName.java"
 
     val settingsFilePath = projectDir.resolve("settings.gradle.kts").toString()
     val buildFilePath = projectDir.resolve("build.gradle.kts").toString()
     val javaSourcePath = projectDir.resolve(startPath)
 
-    val currentGroupPath = projectGroupString.replace(groupStringSeparator, File.separator)
+    val currentGroupPath = groupStringToPath(projectGroupString)
 
-    val currentMainClassName = pascalcase(rootProject.name)
+    val currentMainClassName = pascalcase(projectNameString)
     val currentMainClassFileName = "$currentMainClassName.java"
 
-    val oldMainClassFilePath = File(startPath, currentGroupPath + File.separator + currentMainClassFileName)
-    val newMainClassFilePath = File(startPath, currentGroupPath + File.separator + newMainClassFileName)
+    val oldMainClassFilePath = File(startPath, "$currentGroupPath${File.separator}$currentMainClassFileName")
+    val newMainClassFilePath = File(startPath, "$currentGroupPath${File.separator}$newMainClassFileName")
 
-    println("Current main class file path: ${oldMainClassFilePath.absolutePath}")
-    println("New main class file path: ${newMainClassFilePath.absolutePath}")
-
-    if (oldMainClassFilePath.exists() && oldMainClassFilePath.renameTo(newMainClassFilePath)) {
-      println("Successfully renamed main file from ${oldMainClassFilePath.absolutePath} to ${newMainClassFilePath.absolutePath}")
-    } else {
-      error("Failed to rename main file from ${oldMainClassFilePath.absolutePath} to ${newMainClassFilePath.absolutePath}")
-    }
+    oldMainClassFilePath.renameTo(newMainClassFilePath)
 
     replaceStringInDirectoryFiles(javaSourcePath, projectGroupString, newGroupString)
     replaceStringInDirectoryFiles(javaSourcePath, currentMainClassName, newMainClassName)
 
-    replaceStringInFile(settingsFilePath, rootProject.name, kebabcase(newName))
-    replaceStringInFile(buildFilePath, "val mainProjectAuthor = \"$mainProjectAuthor\"", "val mainProjectAuthor = \"$newAuthorName\"")
+    replaceStringInFile(settingsFilePath, projectNameString, kebabcase(newName))
+    replaceStringInFile(buildFilePath, "val mainProjectAuthorName = \"$mainProjectAuthorName\"", "val mainProjectAuthorName = \"$newAuthorName\"")
     replaceStringInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
 
-    File("$startPath/$topLevelDomain").renameTo(File("$startPath/$newTopLevelDomain"))
-    File("$startPath/$newTopLevelDomain/$snakecaseMainProjectAuthor").renameTo(File("$startPath/$newTopLevelDomain/$newSnakecaseAuthorName"))
-    File("$startPath/$newTopLevelDomain/$newSnakecaseAuthorName/$snakecaseProjectNameString").renameTo(File("$startPath/$newTopLevelDomain/$newSnakecaseAuthorName/$newSnakecaseName"))
-
-    println("Renamed project to '$newName', author to '$newAuthorName', and top-level domain to '$newTopLevelDomain'")
+    File("$startPath${File.separator}$topLevelDomain").renameTo(File("$startPath${File.separator}$newTopLevelDomain"))
+    File("$startPath${File.separator}$newTopLevelDomain${File.separator}$snakecaseMainProjectAuthorName").renameTo(File("$startPath${File.separator}$newTopLevelDomain${File.separator}$newSnakecaseAuthorName"))
+    File("$startPath${File.separator}$newTopLevelDomain${File.separator}$newSnakecaseAuthorName${File.separator}$snakecaseProjectNameString").renameTo(File("$startPath${File.separator}$newGroupPath"))
   }
 }
 
 bukkitPluginYaml {
   authors = projectAuthors
+
   main = "$projectGroupString$groupStringSeparator${pascalcase(projectNameString)}"
   apiVersion = paperApiMinecraftVersion
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
