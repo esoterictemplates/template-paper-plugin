@@ -125,7 +125,9 @@ tasks {
 
 tasks.register("renameProject") {
   doLast {
-    val newName = project.findProperty("new-name")?.toString() ?: projectNameString
+    val oldNameInput = titlecase(projectNameString)
+
+    val newName = project.findProperty("new-name")?.toString() ?: oldNameInput
     val newAuthorName = project.findProperty("new-author-name")?.toString() ?: mainProjectAuthorName
     val newTopLevelDomain = project.findProperty("new-top-level-domain")?.toString() ?: topLevelDomain
 
@@ -155,7 +157,7 @@ tasks.register("renameProject") {
       currentMainClassFilePath.renameTo(newMainClassFilePath)
     }
 
-    replaceStringInDirectoryFiles(javaSourcePath.parentFile, titlecase(projectNameString), newName)
+    replaceStringInDirectoryFiles(javaSourcePath.parentFile, oldNameInput, newName)
     replaceStringInDirectoryFiles(javaSourcePath.parentFile, projectGroupString, newGroupString)
     replaceStringInDirectoryFiles(javaSourcePath.parentFile, currentMainClassName, newMainClassName)
 
