@@ -18,6 +18,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 public class LanguageManager {
 
@@ -43,7 +45,7 @@ public class LanguageManager {
     return languages.keySet();
   }
 
-  public LanguageManager(TemplatePaperPlugin plugin) {
+  public LanguageManager(@NotNull TemplatePaperPlugin plugin) {
     this.plugin = plugin;
 
     languagesFolderPath = plugin.getDataPath() + File.separator + languagesFolderName;
@@ -102,11 +104,11 @@ public class LanguageManager {
     return language;
   }
 
-  public String getLanguage(PlayerProfile profile) {
+  public String getLanguage(@NonNull PlayerProfile profile) {
     return getLanguage(profile.getUuid());
   }
 
-  public void setLanguage(PlayerProfile profile, String language) {
+  public void setLanguage(@NonNull PlayerProfile profile, String language) {
     profile.setLanguage(language);
   }
 
@@ -114,7 +116,7 @@ public class LanguageManager {
     setLanguage(plugin.getPlayerDataManager().getPlayerProfile(uuid), language);
   }
 
-  public void setLanguage(Player player, String language) {
+  public void setLanguage(@NonNull Player player, String language) {
     setLanguage(player.getUniqueId(), language);
   }
 

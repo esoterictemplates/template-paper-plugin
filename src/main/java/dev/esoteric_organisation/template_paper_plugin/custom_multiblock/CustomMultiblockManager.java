@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import dev.esoteric_organisation.template_paper_plugin.TemplatePaperPlugin;
 import dev.esoteric_organisation.template_paper_plugin.custom_multiblock.AbstractCustomMultiblock;
 import dev.esoteric_organisation.template_paper_plugin.custom_multiblock.CustomMultiblock;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class CustomMultiblockManager {
 
@@ -31,7 +32,7 @@ public class CustomMultiblockManager {
 
   private final Map<CustomMultiblock, AbstractCustomMultiblock> customMultiblockMap = new HashMap<>();
 
-  public CustomMultiblockManager(TemplatePaperPlugin plugin) {
+  public CustomMultiblockManager(@NonNull TemplatePaperPlugin plugin) {
     this.plugin = plugin;
 
     multiblocksFilePath = plugin.getDataFolder() + File.separator + multiblocksResourceFilePath;
@@ -111,7 +112,7 @@ public class CustomMultiblockManager {
     }
   }
 
-  public void loadStoredCustomMultiblocks(StoredCustomMultiblocks multiblocks) {
+  public void loadStoredCustomMultiblocks(@NonNull StoredCustomMultiblocks multiblocks) {
     for (StoredCustomMultiblock multiblock : multiblocks.getStoredCustomMultiblocks()) {
       customMultiblockMap.get(multiblock.getMultiblockId()).addMultiblocks(multiblock.getBlockLocations());
     }

@@ -14,6 +14,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import net.lingala.zip4j.ZipFile;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 public class FileUtil {
 
@@ -51,7 +53,7 @@ public class FileUtil {
     }
   }
 
-  public static List<String> getResourceFileFolderResourceFilePathsRecursively(String resourceFileFolderPath) throws IOException {
+  public static @NonNull List<String> getResourceFileFolderResourceFilePathsRecursively(String resourceFileFolderPath) throws IOException {
     List<String> paths = new ArrayList<>();
 
     for (String resourceFilePath : getResourceFileFolderResourceFilePaths(resourceFileFolderPath)) {
@@ -66,7 +68,7 @@ public class FileUtil {
     return paths;
   }
 
-  public static void zipFolder(File sourceFolder, File zipFile) throws IOException {
+  public static void zipFolder(@NonNull File sourceFolder, File zipFile) throws IOException {
     try (ZipFile zipFileInstance = new ZipFile(zipFile)) {
       for (File file : sourceFolder.listFiles()) {
         if (file.isDirectory()) {
@@ -78,7 +80,7 @@ public class FileUtil {
     }
   }
 
-  public static boolean isDirectoryRecursivelyEmpty(File directory) {
+  public static boolean isDirectoryRecursivelyEmpty(@NonNull File directory) {
     if (!directory.isDirectory()) {
       throw new IllegalArgumentException("The specified path is not a directory");
     }
@@ -102,7 +104,7 @@ public class FileUtil {
     return true;
   }
 
-  public static String getSha1HexString(File file) {
+  public static @Nullable String getSha1HexString(File file) {
     String algorithm = "SHA-1";
 
     MessageDigest digest;

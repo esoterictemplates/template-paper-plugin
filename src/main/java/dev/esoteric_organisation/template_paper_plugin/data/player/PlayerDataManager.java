@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import com.google.gson.Gson;
 
 import dev.esoteric_organisation.template_paper_plugin.TemplatePaperPlugin;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class PlayerDataManager {
 
@@ -27,7 +28,7 @@ public class PlayerDataManager {
 
   private final Map<UUID, PlayerProfile> playerData = new HashMap<>();
 
-  public PlayerDataManager(TemplatePaperPlugin plugin) {
+  public PlayerDataManager(@NonNull TemplatePaperPlugin plugin) {
     this.plugin = plugin;
 
     playerDataFolderPath = plugin.getDataPath() + File.separator + playerDataFolderName;

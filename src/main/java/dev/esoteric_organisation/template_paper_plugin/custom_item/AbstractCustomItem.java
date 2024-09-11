@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
 import dev.esoteric_organisation.template_paper_plugin.TemplatePaperPlugin;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public abstract class AbstractCustomItem implements Listener {
 
@@ -16,7 +17,7 @@ public abstract class AbstractCustomItem implements Listener {
   private final CustomItem itemId;
   private final Material material;
 
-  public AbstractCustomItem(TemplatePaperPlugin plugin, CustomItemManager customItemManager, CustomItem itemId, Material material) {
+  public AbstractCustomItem(TemplatePaperPlugin plugin, @NonNull CustomItemManager customItemManager, CustomItem itemId, Material material) {
     this.plugin = plugin;
 
     this.itemId = itemId;

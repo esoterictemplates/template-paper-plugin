@@ -2,6 +2,7 @@ package dev.esoteric_organisation.template_paper_plugin.util.types;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class BlockLocation {
 
@@ -34,11 +35,11 @@ public class BlockLocation {
     this.z = z;
   }
 
-  public BlockLocation(Location location) {
+  public BlockLocation(@NonNull Location location) {
     this(location.getWorld().getName(), (int) location.getX(), (int) location.getY(), (int) location.getZ());
   }
 
-  public BlockLocation(Block block) {
+  public BlockLocation(@NonNull Block block) {
     this(block.getLocation());
   }
 }

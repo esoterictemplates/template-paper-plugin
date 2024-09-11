@@ -12,18 +12,19 @@ import dev.esoteric_organisation.template_paper_plugin.file.FileUtil;
 import dev.esoteric_organisation.template_paper_plugin.http_server.HttpServerManager;
 import net.kyori.adventure.resource.ResourcePackInfo;
 import net.kyori.adventure.resource.ResourcePackRequest;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class PlayerJoinListener implements Listener {
 
   private ResourcePackInfo resourcePackInfo;
 
-  public PlayerJoinListener(TemplatePaperPlugin plugin, HttpServerManager httpServerManager) {
+  public PlayerJoinListener(@NonNull TemplatePaperPlugin plugin, @NonNull HttpServerManager httpServerManager) {
     resourcePackInfo = ResourcePackInfo.resourcePackInfo().hash(FileUtil.getSha1HexString(plugin.getResourcePackManager().getResourcePackZipFile()))
         .uri(URI.create("http://" + httpServerManager.getSocketAddress() + "/")).build();
   }
 
   @EventHandler
-  public void onPlayerJoin(PlayerJoinEvent event) {
+  public void onPlayerJoin(@NonNull PlayerJoinEvent event) {
     Player player = event.getPlayer();
     player.sendResourcePacks(ResourcePackRequest.resourcePackRequest().packs(resourcePackInfo).required(true).build());
   }

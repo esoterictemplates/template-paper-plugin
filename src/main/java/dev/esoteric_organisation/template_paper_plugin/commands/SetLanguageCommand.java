@@ -13,10 +13,11 @@ import dev.esoteric_organisation.template_paper_plugin.TemplatePaperPlugin;
 import dev.esoteric_organisation.template_paper_plugin.language.LanguageManager;
 import dev.esoteric_organisation.template_paper_plugin.language.Message;
 import net.kyori.adventure.text.Component;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class SetLanguageCommand extends CommandAPICommand {
 
-  public SetLanguageCommand(TemplatePaperPlugin plugin) {
+  public SetLanguageCommand(@NonNull TemplatePaperPlugin plugin) {
     super("set-language");
 
     LanguageManager languageManager = plugin.getLanguageManager();

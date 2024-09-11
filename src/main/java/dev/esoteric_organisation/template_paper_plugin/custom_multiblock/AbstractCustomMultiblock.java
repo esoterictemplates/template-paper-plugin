@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 
 import dev.esoteric_organisation.template_paper_plugin.TemplatePaperPlugin;
 import dev.esoteric_organisation.template_paper_plugin.util.types.BlockLocation;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public abstract class AbstractCustomMultiblock implements Listener {
 
@@ -25,7 +26,7 @@ public abstract class AbstractCustomMultiblock implements Listener {
     multiblocks.addAll(addedMultiblocks);
   }
 
-  public AbstractCustomMultiblock(TemplatePaperPlugin plugin, CustomMultiblockManager customMultiblockManager, CustomMultiblock multiblockId) {
+  public AbstractCustomMultiblock(TemplatePaperPlugin plugin, @NonNull CustomMultiblockManager customMultiblockManager, CustomMultiblock multiblockId) {
     this.plugin = plugin;
 
     Bukkit.getPluginManager().registerEvents(this, plugin);

@@ -20,7 +20,7 @@ public class GiveCustomItemCommand extends CommandAPICommand {
 
     String customItemArgumentNodeName = "custom-item-id";
 
-    String[] customItemIds = Stream.of(CustomItem.values()).map((customItem) -> customItem.name()).toArray(String[]::new);
+    String[] customItemIds = Stream.of(CustomItem.values()).map(Enum::name).toArray(String[]::new);
 
     Argument<CustomItem> customItemArgument = new CustomArgument<>(new StringArgument(customItemArgumentNodeName), (info) -> {
       String input = info.currentInput();

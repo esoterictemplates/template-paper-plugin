@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.persistence.PersistentDataType;
 
 import dev.esoteric_organisation.template_paper_plugin.TemplatePaperPlugin;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public abstract class AbstractCustomMultientity<E extends Entity> implements Listener {
 
@@ -16,7 +17,7 @@ public abstract class AbstractCustomMultientity<E extends Entity> implements Lis
 
   private final CustomMultientity entityId;
 
-  protected AbstractCustomMultientity(TemplatePaperPlugin plugin, CustomMultientityManager customMultientityManager, CustomMultientity entityId) {
+  protected AbstractCustomMultientity(TemplatePaperPlugin plugin, @NonNull CustomMultientityManager customMultientityManager, CustomMultientity entityId) {
     this.plugin = plugin;
 
     this.entityId = entityId;
