@@ -26,7 +26,7 @@ fun capitalizeFirstLetter(string: String): String {
 }
 
 fun titlecase(kebabcaseString: String): String {
-  return kebabcaseString.replace(kebabcaseStringSeparator, " ").split(" ").map { string -> capitalizeFirstLetter(string) }.joinToString(" ")
+  return kebabcaseString.replace(kebabcaseStringSeparator, " ").split(" ").joinToString(" ") { string -> capitalizeFirstLetter(string) }
 }
 
 fun kebabcase(normalString: String): String {
