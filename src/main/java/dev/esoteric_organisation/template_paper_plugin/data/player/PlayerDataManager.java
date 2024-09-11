@@ -45,6 +45,7 @@ public class PlayerDataManager {
     Gson gson = new Gson();
 
     File[] playerDataFiles = playerDataFolder.listFiles();
+    assert playerDataFiles != null;
     for (File playerDataFile : playerDataFiles) {
       String fileName = playerDataFile.getName();
       String playerUuidString = fileName.split("\\.", 2)[0];
@@ -68,7 +69,7 @@ public class PlayerDataManager {
   }
 
   public void save() {
-    if (playerData.size() == 0) {
+    if (playerData.isEmpty()) {
       return;
     }
 
@@ -107,6 +108,7 @@ public class PlayerDataManager {
         return null;
       }
 
+      assert plugin.getLanguageManager() != null;
       profile = new PlayerProfile(uuid, plugin.getLanguageManager().getDefaultLanguage());
 
       playerData.put(uuid, profile);
@@ -119,7 +121,7 @@ public class PlayerDataManager {
     return getPlayerProfile(uuid, true);
   }
 
-  public PlayerProfile getPlayerProfile(Player player, boolean createNewProfile) {
+  public PlayerProfile getPlayerProfile(@NonNull Player player, boolean createNewProfile) {
     return getPlayerProfile(player.getUniqueId(), createNewProfile);
   }
 

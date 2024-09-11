@@ -88,7 +88,7 @@ public class CustomMultiblockManager {
   public void save() {
     StoredCustomMultiblocks dataToSave = getStoredCustomMultiblocks();
 
-    if (dataToSave.getStoredCustomMultiblocks().size() == 0) {
+    if (dataToSave.getStoredCustomMultiblocks().isEmpty()) {
       return;
     }
 

@@ -20,7 +20,7 @@ public class SpawnCustomMultientityCommand extends CommandAPICommand {
 
     String customMultientityArgumentNodeName = "custom-multientity-id";
 
-    String[] customMultientityIds = Stream.of(CustomMultientity.values()).map((customMultientity) -> customMultientity.name()).toArray(String[]::new);
+    String[] customMultientityIds = Stream.of(CustomMultientity.values()).map(Enum::name).toArray(String[]::new);
 
     Argument<CustomMultientity> customMultientityArgument = new CustomArgument<>(new StringArgument(customMultientityArgumentNodeName), (info) -> {
       String input = info.currentInput();
@@ -28,6 +28,7 @@ public class SpawnCustomMultientityCommand extends CommandAPICommand {
       try {
         return CustomMultientity.valueOf(input);
       } catch (IllegalArgumentException exception) {
+        assert plugin.getLanguageManager() != null;
         throw CustomArgumentException.fromAdventureComponent(plugin.getLanguageManager().getMessage(Message.UNKNOWN_CUSTOM_MULTIENTITY, info.sender(), input));
       }
     }).includeSuggestions(ArgumentSuggestions.strings(customMultientityIds));
@@ -35,6 +36,7 @@ public class SpawnCustomMultientityCommand extends CommandAPICommand {
     executesPlayer((info) -> {
       CustomMultientity multientity = (CustomMultientity) info.args().get(customMultientityArgumentNodeName);
 
+      assert plugin.getCustomMultientityManager() != null;
       plugin.getCustomMultientityManager().spawnEntity(multientity, info.sender().getLocation());
     });
 

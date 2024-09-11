@@ -21,6 +21,7 @@ public class SetLanguageCommand extends CommandAPICommand {
     super("set-language");
 
     LanguageManager languageManager = plugin.getLanguageManager();
+    assert languageManager != null;
     Set<String> languages = languageManager.getLanguages();
 
     String languageArgumentNodeName = "language";

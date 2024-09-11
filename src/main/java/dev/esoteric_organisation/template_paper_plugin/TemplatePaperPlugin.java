@@ -25,8 +25,6 @@ import dev.esoteric_organisation.template_paper_plugin.language.LanguageManager;
 import dev.esoteric_organisation.template_paper_plugin.language.Message;
 import dev.esoteric_organisation.template_paper_plugin.resource_pack.ResourcePackManager;
 
-import javax.inject.Qualifier;
-
 @DefaultQualifier(NonNull.class)
 public final class TemplatePaperPlugin extends JavaPlugin {
 

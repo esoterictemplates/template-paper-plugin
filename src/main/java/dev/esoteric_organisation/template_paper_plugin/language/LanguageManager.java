@@ -19,6 +19,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 public class LanguageManager {
@@ -113,6 +114,7 @@ public class LanguageManager {
   }
 
   public void setLanguage(UUID uuid, String language) {
+    assert plugin.getPlayerDataManager() != null;
     setLanguage(plugin.getPlayerDataManager().getPlayerProfile(uuid), language);
   }
 
@@ -140,7 +142,7 @@ public class LanguageManager {
     return getLocale(player);
   }
 
-  private String getLocale(PlayerProfile profile) {
+  private String getLocale(@NonNull PlayerProfile profile) {
     return getLocale(profile.getUuid());
   }
 
@@ -166,7 +168,7 @@ public class LanguageManager {
     }
   }
 
-  private String getRawMessageString(Message message, String language, boolean fallbackOnDefaultLanguage) {
+  private @Nullable String getRawMessageString(Message message, String language, boolean fallbackOnDefaultLanguage) {
     Map<Message, String> languageMessageMap = languages.get(language);
     String miniMessageString = languageMessageMap.get(message);
 
@@ -181,17 +183,16 @@ public class LanguageManager {
     return getRawMessageString(message, language, true);
   }
 
-  private Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Component... arguments) {
+  private Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Component @NonNull ... arguments) {
     String miniMessageString = getRawMessageString(message, language, fallbackOnDefaultLanguage);
 
+    assert miniMessageString != null;
     Component result = miniMessage.deserialize(miniMessageString);
 
     for (int i = 0; i < arguments.length; i++) {
       final int argumentIndex = i;
 
-      result = result.replaceText(TextReplacementConfig.builder().matchLiteral("{" + i + "}").replacement((matchResult, builder) -> {
-        return arguments[argumentIndex];
-      }).build());
+      result = result.replaceText(TextReplacementConfig.builder().matchLiteral("{" + i + "}").replacement((matchResult, builder) -> arguments[argumentIndex]).build());
     }
 
     return result;
@@ -257,19 +258,19 @@ public class LanguageManager {
     return getMessage(message, playerProfile, true, arguments);
   }
 
-  public void sendMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Component... arguments) {
+  public void sendMessage(Message message, @NonNull CommandSender commandSender, boolean fallbackOnDefaultLanguage, Component... arguments) {
     commandSender.sendMessage(getMessage(message, getLanguage(commandSender), fallbackOnDefaultLanguage, arguments));
   }
 
-  public void sendMessage(Message message, CommandSender commandSender, Component... arguments) {
+  public void sendMessage(Message message, @NonNull CommandSender commandSender, Component... arguments) {
     commandSender.sendMessage(getMessage(message, commandSender, true, arguments));
   }
 
-  public void sendMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Object... arguments) {
+  public void sendMessage(Message message, @NonNull CommandSender commandSender, boolean fallbackOnDefaultLanguage, Object... arguments) {
     commandSender.sendMessage(getMessage(message, commandSender, fallbackOnDefaultLanguage, toComponents(arguments)));
   }
 
-  public void sendMessage(Message message, CommandSender commandSender, Object... arguments) {
+  public void sendMessage(Message message, @NonNull CommandSender commandSender, Object... arguments) {
     commandSender.sendMessage(getMessage(message, commandSender, true, arguments));
   }
 
@@ -289,24 +290,24 @@ public class LanguageManager {
     Bukkit.getPlayer(uuid).sendMessage(getMessage(message, uuid, true, arguments));
   }
 
-  public void sendMessage(Message message, PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Component... arguments) {
+  public void sendMessage(Message message, @NonNull PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Component... arguments) {
     Bukkit.getPlayer(playerProfile.getUuid()).sendMessage(getMessage(message, getLanguage(playerProfile), fallbackOnDefaultLanguage, arguments));
   }
 
-  public void sendMessage(Message message, PlayerProfile playerProfile, Component... arguments) {
+  public void sendMessage(Message message, @NonNull PlayerProfile playerProfile, Component... arguments) {
     Bukkit.getPlayer(playerProfile.getUuid()).sendMessage(getMessage(message, playerProfile, true, arguments));
   }
 
-  public void sendMessage(Message message, PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Object... arguments) {
+  public void sendMessage(Message message, @NonNull PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Object... arguments) {
     Bukkit.getPlayer(playerProfile.getUuid()).sendMessage(getMessage(message, playerProfile, fallbackOnDefaultLanguage, toComponents(arguments)));
   }
 
-  public void sendMessage(Message message, PlayerProfile playerProfile, Object... arguments) {
+  public void sendMessage(Message message, @NonNull PlayerProfile playerProfile, Object... arguments) {
     Bukkit.getPlayer(playerProfile.getUuid()).sendMessage(getMessage(message, playerProfile, true, arguments));
   }
 
-  private Component[] toComponents(Object... objects) {
-    return Stream.of(objects).map((object) -> toComponent(object)).toArray(Component[]::new);
+  private Component @NonNull [] toComponents(Object... objects) {
+    return Stream.of(objects).map(this::toComponent).toArray(Component[]::new);
   }
 
   private Component toComponent(Object object) {

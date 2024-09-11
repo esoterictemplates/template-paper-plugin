@@ -17,6 +17,7 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 
 import org.bukkit.Bukkit;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class HttpServerManager {
 
@@ -42,7 +43,7 @@ public class HttpServerManager {
     return getHostName() + ":" + getPort();
   }
 
-  public HttpServerManager(TemplatePaperPlugin plugin) {
+  public HttpServerManager(@NonNull TemplatePaperPlugin plugin) {
     if (plugin.getResourcePackManager().getResourcePackZipFile() == null) {
       return;
     }

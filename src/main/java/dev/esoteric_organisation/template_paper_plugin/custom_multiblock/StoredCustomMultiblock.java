@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import dev.esoteric_organisation.template_paper_plugin.util.types.BlockLocation;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class StoredCustomMultiblock {
   private final List<List<BlockLocation>> blockLocations;
@@ -22,7 +23,7 @@ public class StoredCustomMultiblock {
     this.multiblockId = multiblockId;
   }
 
-  public StoredCustomMultiblock(Entry<CustomMultiblock, AbstractCustomMultiblock> multiblockInfo) {  
+  public StoredCustomMultiblock(@NonNull Entry<CustomMultiblock, AbstractCustomMultiblock> multiblockInfo) {
     this(multiblockInfo.getValue().getMultiblocks(), multiblockInfo.getKey());
   } 
 }

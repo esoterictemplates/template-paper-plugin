@@ -28,6 +28,7 @@ public class GiveCustomItemCommand extends CommandAPICommand {
       try {
         return CustomItem.valueOf(input);
       } catch (IllegalArgumentException exception) {
+        assert plugin.getLanguageManager() != null;
         throw CustomArgumentException.fromAdventureComponent(plugin.getLanguageManager().getMessage(Message.UNKNOWN_CUSTOM_ITEM, info.sender(), input));
       }
     }).includeSuggestions(ArgumentSuggestions.strings(customItemIds));
@@ -35,6 +36,7 @@ public class GiveCustomItemCommand extends CommandAPICommand {
     executesPlayer((info) -> {
       CustomItem item = (CustomItem) info.args().get(customItemArgumentNodeName);
 
+      assert plugin.getCustomItemManager() != null;
       plugin.getCustomItemManager().giveCustomItem(item, info.sender());
     });
 

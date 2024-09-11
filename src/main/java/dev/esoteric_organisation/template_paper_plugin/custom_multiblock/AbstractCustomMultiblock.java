@@ -39,7 +39,7 @@ public abstract class AbstractCustomMultiblock implements Listener {
   public List<Block> getCustomMultiblock(Location placeLocation) {
     List<Block> multiblock = generateCustomMultiblock(placeLocation);
 
-    multiblocks.add(multiblock.stream().map((block) -> new BlockLocation(block)).toList());
+    multiblocks.add(multiblock.stream().map(BlockLocation::new).toList());
 
     return multiblock;
   }

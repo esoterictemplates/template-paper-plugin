@@ -20,7 +20,7 @@ public class PlaceCustomMultiblockCommand extends CommandAPICommand {
 
     String customMultiblockArgumentNodeName = "custom-multiblock-id";
 
-    String[] customMultiblockIds = Stream.of(CustomMultiblock.values()).map((customMultiblock) -> customMultiblock.name()).toArray(String[]::new);
+    String[] customMultiblockIds = Stream.of(CustomMultiblock.values()).map(Enum::name).toArray(String[]::new);
 
     Argument<CustomMultiblock> customMultiblockArgument = new CustomArgument<>(new StringArgument(customMultiblockArgumentNodeName), (info) -> {
       String input = info.currentInput();
@@ -28,6 +28,7 @@ public class PlaceCustomMultiblockCommand extends CommandAPICommand {
       try {
         return CustomMultiblock.valueOf(input);
       } catch (IllegalArgumentException exception) {
+        assert plugin.getLanguageManager() != null;
         throw CustomArgumentException.fromAdventureComponent(plugin.getLanguageManager().getMessage(Message.UNKNOWN_CUSTOM_MULTIBLOCK, info.sender(), input));
       }
     }).includeSuggestions(ArgumentSuggestions.strings(customMultiblockIds));
@@ -35,6 +36,7 @@ public class PlaceCustomMultiblockCommand extends CommandAPICommand {
     executesPlayer((info) -> {
       CustomMultiblock multiblock = (CustomMultiblock) info.args().get(customMultiblockArgumentNodeName);
 
+      assert plugin.getCustomMultiblockManager() != null;
       plugin.getCustomMultiblockManager().placeCustomMultiblock(multiblock, info.sender().getLocation());
     });
 
