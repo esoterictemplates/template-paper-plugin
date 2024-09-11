@@ -3,6 +3,7 @@ package dev.esoteric_organisation.template_paper_plugin;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.framework.qual.DefaultQualifier;
 
 import dev.jorel.commandapi.CommandAPI;
@@ -24,49 +25,67 @@ import dev.esoteric_organisation.template_paper_plugin.language.LanguageManager;
 import dev.esoteric_organisation.template_paper_plugin.language.Message;
 import dev.esoteric_organisation.template_paper_plugin.resource_pack.ResourcePackManager;
 
+import javax.inject.Qualifier;
+
 @DefaultQualifier(NonNull.class)
 public final class TemplatePaperPlugin extends JavaPlugin {
 
+  @Nullable
   private FileManager fileManager;
+  @Nullable
   private PlayerDataManager playerDataManager;
+  @Nullable
   private LanguageManager languageManager;
+  @Nullable
   private ResourcePackManager resourcePackManager;
+  @Nullable
   private HttpServerManager httpServerManager;
+  @Nullable
   private CustomItemManager customItemManager;
+  @Nullable
   private CustomMultientityManager customMultientityManager;
+  @Nullable
   private CustomMultiblockManager customMultiblockManager;
 
   private final NamespacedKey customItemIdKey = new NamespacedKey(this, "custom_item_id");
   private final NamespacedKey customEntityIdKey = new NamespacedKey(this, "custom_entity_id");
 
+  @Nullable
   public FileManager getFileManager() {
     return fileManager;
   }
 
+  @Nullable
   public PlayerDataManager getPlayerDataManager() {
     return playerDataManager;
   }
 
+  @Nullable
   public LanguageManager getLanguageManager() {
     return languageManager;
   }
 
+  @Nullable
   public ResourcePackManager getResourcePackManager() {
     return resourcePackManager;
   }
 
+  @Nullable
   public HttpServerManager getHttpServerManager() {
     return httpServerManager;
   }
 
+  @Nullable
   public CustomItemManager getCustomItemManager() {
     return customItemManager;
   }
 
+  @Nullable
   public CustomMultientityManager getCustomMultientityManager() {
     return customMultientityManager;
   }
 
+  @Nullable
   public CustomMultiblockManager getCustomMultiblockManager() {
     return customMultiblockManager;
   }
