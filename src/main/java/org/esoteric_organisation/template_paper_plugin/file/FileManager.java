@@ -7,9 +7,9 @@ import org.esoteric_organisation.template_paper_plugin.TemplatePaperPlugin;
 
 public class FileManager {
 
-  private final ExamplePaperPlugin plugin;
+  private final TemplatePaperPlugin plugin;
 
-  public FileManager(ExamplePaperPlugin plugin) {
+  public FileManager(TemplatePaperPlugin plugin) {
     this.plugin = plugin;
   }
 

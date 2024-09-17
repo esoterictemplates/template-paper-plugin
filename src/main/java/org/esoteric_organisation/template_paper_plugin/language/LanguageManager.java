@@ -26,7 +26,7 @@ public class LanguageManager {
 
   private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
-  private final ExamplePaperPlugin plugin;
+  private final TemplatePaperPlugin plugin;
 
   private final String languageMessageFilesExtension = ".yaml";
 
@@ -46,7 +46,7 @@ public class LanguageManager {
     return languages.keySet();
   }
 
-  public LanguageManager(ExamplePaperPlugin plugin) {
+  public LanguageManager(TemplatePaperPlugin plugin) {
     this.plugin = plugin;
 
     languagesFolderPath = plugin.getDataPath() + File.separator + languagesFolderName;

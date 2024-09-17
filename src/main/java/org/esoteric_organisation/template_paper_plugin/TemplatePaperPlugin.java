@@ -26,7 +26,7 @@ import org.esoteric_organisation.template_paper_plugin.language.Message;
 import org.esoteric_organisation.template_paper_plugin.resource_pack.ResourcePackManager;
 
 @DefaultQualifier(NonNull.class)
-public final class ExamplePaperPlugin extends JavaPlugin {
+public final class TemplatePaperPlugin extends JavaPlugin {
 
   @Nullable
   private FileManager fileManager;

@@ -13,11 +13,11 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public abstract class AbstractCustomMultientity<E extends Entity> implements Listener {
 
-  protected final ExamplePaperPlugin plugin;
+  protected final TemplatePaperPlugin plugin;
 
   private final CustomMultientity entityId;
 
-  protected AbstractCustomMultientity(ExamplePaperPlugin plugin, CustomMultientityManager customMultientityManager, CustomMultientity entityId) {
+  protected AbstractCustomMultientity(TemplatePaperPlugin plugin, CustomMultientityManager customMultientityManager, CustomMultientity entityId) {
     this.plugin = plugin;
 
     this.entityId = entityId;

@@ -15,7 +15,7 @@ import dev.jorel.commandapi.arguments.StringArgument;
 
 public class PlaceCustomMultiblockCommand extends CommandAPICommand {
 
-  public PlaceCustomMultiblockCommand(ExamplePaperPlugin plugin) {
+  public PlaceCustomMultiblockCommand(TemplatePaperPlugin plugin) {
     super("place-custom-multiblock");
 
     String customMultiblockArgumentNodeName = "custom-multiblock-id";

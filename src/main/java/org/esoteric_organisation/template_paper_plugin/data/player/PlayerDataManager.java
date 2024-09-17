@@ -18,7 +18,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class PlayerDataManager {
 
-  private final ExamplePaperPlugin plugin;
+  private final TemplatePaperPlugin plugin;
 
   private final String playerDataFilesExtension = ".json";
 
@@ -28,7 +28,7 @@ public class PlayerDataManager {
 
   private final Map<UUID, PlayerProfile> playerData = new HashMap<>();
 
-  public PlayerDataManager(ExamplePaperPlugin plugin) {
+  public PlayerDataManager(TemplatePaperPlugin plugin) {
     this.plugin = plugin;
 
     playerDataFolderPath = plugin.getDataPath() + File.separator + playerDataFolderName;

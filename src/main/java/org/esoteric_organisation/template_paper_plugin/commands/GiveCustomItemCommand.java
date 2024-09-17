@@ -15,7 +15,7 @@ import dev.jorel.commandapi.arguments.StringArgument;
 
 public class GiveCustomItemCommand extends CommandAPICommand {
 
-  public GiveCustomItemCommand(ExamplePaperPlugin plugin) {
+  public GiveCustomItemCommand(TemplatePaperPlugin plugin) {
     super("give-custom-item");
 
     String customItemArgumentNodeName = "custom-item-id";

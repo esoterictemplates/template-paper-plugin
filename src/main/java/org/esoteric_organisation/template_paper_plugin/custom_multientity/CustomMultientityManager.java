@@ -15,7 +15,7 @@ public class CustomMultientityManager {
 
   private final Map<CustomMultientity, AbstractCustomMultientity<?>> customMultientityMap = new HashMap<>();
 
-  public CustomMultientityManager(ExamplePaperPlugin plugin) {
+  public CustomMultientityManager(TemplatePaperPlugin plugin) {
 
   }
 

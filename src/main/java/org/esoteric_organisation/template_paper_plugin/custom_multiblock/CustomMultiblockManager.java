@@ -23,7 +23,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class CustomMultiblockManager {
 
-  private final ExamplePaperPlugin plugin;
+  private final TemplatePaperPlugin plugin;
 
   private final String multiblocksFileExtension = ".json";
   private final String multiblocksResourceFilePath = "data" + File.separator + "multiblocks" + multiblocksFileExtension;
@@ -32,7 +32,7 @@ public class CustomMultiblockManager {
 
   private final Map<CustomMultiblock, AbstractCustomMultiblock> customMultiblockMap = new HashMap<>();
 
-  public CustomMultiblockManager(ExamplePaperPlugin plugin) {
+  public CustomMultiblockManager(TemplatePaperPlugin plugin) {
     this.plugin = plugin;
 
     multiblocksFilePath = plugin.getDataFolder() + File.separator + multiblocksResourceFilePath;

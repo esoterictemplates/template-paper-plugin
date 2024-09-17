@@ -17,7 +17,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class SetLanguageCommand extends CommandAPICommand {
 
-  public SetLanguageCommand(ExamplePaperPlugin plugin) {
+  public SetLanguageCommand(TemplatePaperPlugin plugin) {
     super("set-language");
 
     LanguageManager languageManager = plugin.getLanguageManager();

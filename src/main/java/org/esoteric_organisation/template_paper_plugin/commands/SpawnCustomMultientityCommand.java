@@ -15,7 +15,7 @@ import dev.jorel.commandapi.arguments.StringArgument;
 
 public class SpawnCustomMultientityCommand extends CommandAPICommand {
 
-  public SpawnCustomMultientityCommand(ExamplePaperPlugin plugin) {
+  public SpawnCustomMultientityCommand(TemplatePaperPlugin plugin) {
     super("spawn-custom-multientity");
 
     String customMultientityArgumentNodeName = "custom-multientity-id";

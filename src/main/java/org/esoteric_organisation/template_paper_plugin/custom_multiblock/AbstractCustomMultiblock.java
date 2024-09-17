@@ -14,7 +14,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public abstract class AbstractCustomMultiblock implements Listener {
 
-  protected final ExamplePaperPlugin plugin;
+  protected final TemplatePaperPlugin plugin;
 
   private final List<List<BlockLocation>> multiblocks = new ArrayList<>();
 
@@ -26,7 +26,7 @@ public abstract class AbstractCustomMultiblock implements Listener {
     multiblocks.addAll(addedMultiblocks);
   }
 
-  public AbstractCustomMultiblock(ExamplePaperPlugin plugin, CustomMultiblockManager customMultiblockManager, CustomMultiblock multiblockId) {
+  public AbstractCustomMultiblock(TemplatePaperPlugin plugin, CustomMultiblockManager customMultiblockManager, CustomMultiblock multiblockId) {
     this.plugin = plugin;
 
     Bukkit.getPluginManager().registerEvents(this, plugin);

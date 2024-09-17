@@ -13,7 +13,7 @@ public class CustomItemManager {
 
   private final Map<CustomItem, AbstractCustomItem> customItemMap = new HashMap<>();
 
-  public CustomItemManager(ExamplePaperPlugin plugin) {
+  public CustomItemManager(TemplatePaperPlugin plugin) {
   }
 
   public void addCustomItem(CustomItem itemId, AbstractCustomItem customItem) {

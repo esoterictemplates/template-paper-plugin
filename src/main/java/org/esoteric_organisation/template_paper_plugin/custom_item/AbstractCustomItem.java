@@ -12,12 +12,12 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public abstract class AbstractCustomItem implements Listener {
 
-  protected final ExamplePaperPlugin plugin;
+  protected final TemplatePaperPlugin plugin;
 
   private final CustomItem itemId;
   private final Material material;
 
-  public AbstractCustomItem(ExamplePaperPlugin plugin, CustomItemManager customItemManager, CustomItem itemId, Material material) {
+  public AbstractCustomItem(TemplatePaperPlugin plugin, CustomItemManager customItemManager, CustomItem itemId, Material material) {
     this.plugin = plugin;
 
     this.itemId = itemId;

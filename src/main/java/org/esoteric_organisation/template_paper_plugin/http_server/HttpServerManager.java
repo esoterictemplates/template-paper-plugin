@@ -21,7 +21,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class HttpServerManager {
 
-  private ExamplePaperPlugin plugin;
+  private TemplatePaperPlugin plugin;
 
   private String hostName;
   private int port;
@@ -43,7 +43,7 @@ public class HttpServerManager {
     return getHostName() + ":" + getPort();
   }
 
-  public HttpServerManager(ExamplePaperPlugin plugin) {
+  public HttpServerManager(TemplatePaperPlugin plugin) {
     if (plugin.getResourcePackManager().getResourcePackZipFile() == null) {
       return;
     }

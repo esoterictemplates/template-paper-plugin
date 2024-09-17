@@ -10,9 +10,9 @@ import org.esoteric_organisation.template_paper_plugin.file.FileUtil;
 
 public class ResourcePackManager {
 
-  private final ExamplePaperPlugin plugin;
+  private final TemplatePaperPlugin plugin;
 
-  private final String resourcePackResourceFolderName = String.join(" ", ExamplePaperPlugin.class.getSimpleName().split("(?=[A-Z])")) + " Resource Pack";
+  private final String resourcePackResourceFolderName = String.join(" ", TemplatePaperPlugin.class.getSimpleName().split("(?=[A-Z])")) + " Resource Pack";
 
   private final String resourcePackFileType = "application";
   private final String resourcePackFileExtension = "zip";
@@ -47,7 +47,7 @@ public class ResourcePackManager {
     return resourcePackZipFile;
   }
 
-  public ResourcePackManager(ExamplePaperPlugin plugin) {
+  public ResourcePackManager(TemplatePaperPlugin plugin) {
     this.plugin = plugin;
 
     saveResourcepackZipFile();
