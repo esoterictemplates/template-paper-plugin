@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.persistence.PersistentDataType;
 
 import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractCustomMultientity<E extends Entity> implements Listener {
 
@@ -16,7 +17,7 @@ public abstract class AbstractCustomMultientity<E extends Entity> implements Lis
 
   private final CustomMultientity entityId;
 
-  protected AbstractCustomMultientity(CustomMultientityManager customMultientityManager, CustomMultientity entityId) {
+  protected AbstractCustomMultientity(@NotNull CustomMultientityManager customMultientityManager, CustomMultientity entityId) {
     this.plugin = customMultientityManager.getPlugin();
 
     this.entityId = entityId;

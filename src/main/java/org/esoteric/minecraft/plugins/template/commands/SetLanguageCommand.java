@@ -13,10 +13,11 @@ import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 import org.esoteric.minecraft.plugins.template.language.LanguageManager;
 import org.esoteric.minecraft.plugins.template.language.Message;
 import net.kyori.adventure.text.Component;
+import org.jetbrains.annotations.NotNull;
 
 public class SetLanguageCommand extends CommandAPICommand {
 
-  public SetLanguageCommand(TemplatePaperPlugin plugin) {
+  public SetLanguageCommand(@NotNull TemplatePaperPlugin plugin) {
     super("set-language");
 
     LanguageManager languageManager = plugin.getLanguageManager();

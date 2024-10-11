@@ -17,7 +17,7 @@ import org.bukkit.Location;
 import com.google.gson.Gson;
 
 import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 public class CustomMultiblockManager {
 
@@ -34,7 +34,7 @@ public class CustomMultiblockManager {
     return plugin;
   }
 
-  public CustomMultiblockManager(TemplatePaperPlugin plugin) {
+  public CustomMultiblockManager(@NotNull TemplatePaperPlugin plugin) {
     this.plugin = plugin;
 
     multiblocksFilePath = plugin.getDataFolder() + File.separator + multiblocksResourceFilePath;
@@ -114,7 +114,7 @@ public class CustomMultiblockManager {
     }
   }
 
-  public void loadStoredCustomMultiblocks(@NonNull StoredCustomMultiblocks multiblocks) {
+  public void loadStoredCustomMultiblocks(@NotNull StoredCustomMultiblocks multiblocks) {
     for (StoredCustomMultiblock multiblock : multiblocks.getStoredCustomMultiblocks()) {
       customMultiblockMap.get(multiblock.getMultiblockId()).addMultiblocks(multiblock.getBlockLocations());
     }

@@ -2,7 +2,7 @@ package org.esoteric.minecraft.plugins.template.util.types;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 public class BlockLocation {
 
@@ -35,11 +35,11 @@ public class BlockLocation {
     this.z = z;
   }
 
-  public BlockLocation(@NonNull Location location) {
+  public BlockLocation(@NotNull Location location) {
     this(location.getWorld().getName(), (int) location.getX(), (int) location.getY(), (int) location.getZ());
   }
 
-  public BlockLocation(@NonNull Block block) {
+  public BlockLocation(@NotNull Block block) {
     this(block.getLocation());
   }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import org.esoteric.minecraft.plugins.template.util.types.BlockLocation;
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 public class StoredCustomMultiblock {
   private final List<List<BlockLocation>> blockLocations;
@@ -23,7 +23,7 @@ public class StoredCustomMultiblock {
     this.multiblockId = multiblockId;
   }
 
-  public StoredCustomMultiblock(@NonNull Entry<CustomMultiblock, AbstractCustomMultiblock> multiblockInfo) {
+  public StoredCustomMultiblock(@NotNull Entry<CustomMultiblock, AbstractCustomMultiblock> multiblockInfo) {
     this(multiblockInfo.getValue().getMultiblocks(), multiblockInfo.getKey());
   } 
 }

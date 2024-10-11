@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import com.google.gson.Gson;
 
 import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 public class PlayerDataManager {
 
@@ -28,7 +28,7 @@ public class PlayerDataManager {
 
   private final Map<UUID, PlayerProfile> playerData = new HashMap<>();
 
-  public PlayerDataManager(TemplatePaperPlugin plugin) {
+  public PlayerDataManager(@NotNull TemplatePaperPlugin plugin) {
     this.plugin = plugin;
 
     playerDataFolderPath = plugin.getDataPath() + File.separator + playerDataFolderName;
@@ -121,7 +121,7 @@ public class PlayerDataManager {
     return getPlayerProfile(uuid, true);
   }
 
-  public PlayerProfile getPlayerProfile(@NonNull Player player, boolean createNewProfile) {
+  public PlayerProfile getPlayerProfile(@NotNull Player player, boolean createNewProfile) {
     return getPlayerProfile(player.getUniqueId(), createNewProfile);
   }
 

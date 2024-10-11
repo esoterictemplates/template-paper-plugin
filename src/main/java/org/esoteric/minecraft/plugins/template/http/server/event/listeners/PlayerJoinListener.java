@@ -12,19 +12,19 @@ import org.esoteric.minecraft.plugins.template.file.FileUtil;
 import org.esoteric.minecraft.plugins.template.http.server.HttpServerManager;
 import net.kyori.adventure.resource.ResourcePackInfo;
 import net.kyori.adventure.resource.ResourcePackRequest;
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 public class PlayerJoinListener implements Listener {
 
   private ResourcePackInfo resourcePackInfo;
 
-  public PlayerJoinListener(TemplatePaperPlugin plugin, HttpServerManager httpServerManager) {
+  public PlayerJoinListener(@NotNull TemplatePaperPlugin plugin, @NotNull HttpServerManager httpServerManager) {
     resourcePackInfo = ResourcePackInfo.resourcePackInfo().hash(FileUtil.getSha1HexString(plugin.getResourcePackManager().getResourcePackZipFile()))
         .uri(URI.create("http://" + httpServerManager.getSocketAddress() + "/")).build();
   }
 
   @EventHandler
-  public void onPlayerJoin(@NonNull PlayerJoinEvent event) {
+  public void onPlayerJoin(@NotNull PlayerJoinEvent event) {
     Player player = event.getPlayer();
     player.sendResourcePacks(ResourcePackRequest.resourcePackRequest().packs(resourcePackInfo).required(true).build());
   }

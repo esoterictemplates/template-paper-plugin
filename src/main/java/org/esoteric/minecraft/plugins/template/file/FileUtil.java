@@ -14,8 +14,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import net.lingala.zip4j.ZipFile;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class FileUtil {
 
@@ -53,7 +53,7 @@ public class FileUtil {
     }
   }
 
-  public static @NonNull List<String> getResourceFileFolderResourceFilePathsRecursively(String resourceFileFolderPath) throws IOException {
+  public static @NotNull List<String> getResourceFileFolderResourceFilePathsRecursively(String resourceFileFolderPath) throws IOException {
     List<String> paths = new ArrayList<>();
 
     for (String resourceFilePath : getResourceFileFolderResourceFilePaths(resourceFileFolderPath)) {
@@ -68,7 +68,7 @@ public class FileUtil {
     return paths;
   }
 
-  public static void zipFolder(@NonNull File sourceFolder, File zipFile) throws IOException {
+  public static void zipFolder(@NotNull File sourceFolder, File zipFile) throws IOException {
     try (ZipFile zipFileInstance = new ZipFile(zipFile)) {
       for (File file : sourceFolder.listFiles()) {
         if (file.isDirectory()) {
@@ -80,7 +80,7 @@ public class FileUtil {
     }
   }
 
-  public static boolean isDirectoryRecursivelyEmpty(@NonNull File directory) {
+  public static boolean isDirectoryRecursivelyEmpty(@NotNull File directory) {
     if (!directory.isDirectory()) {
       throw new IllegalArgumentException("The specified path is not a directory");
     }

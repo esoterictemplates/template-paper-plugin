@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 
 import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 import org.esoteric.minecraft.plugins.template.util.types.BlockLocation;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractCustomMultiblock implements Listener {
 
@@ -25,7 +26,7 @@ public abstract class AbstractCustomMultiblock implements Listener {
     multiblocks.addAll(addedMultiblocks);
   }
 
-  public AbstractCustomMultiblock(CustomMultiblockManager customMultiblockManager, CustomMultiblock multiblockId) {
+  public AbstractCustomMultiblock(@NotNull CustomMultiblockManager customMultiblockManager, CustomMultiblock multiblockId) {
     this.plugin = customMultiblockManager.getPlugin();
 
     Bukkit.getPluginManager().registerEvents(this, plugin);

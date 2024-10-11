@@ -7,8 +7,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractCustomItem implements Listener {
 
@@ -17,7 +17,7 @@ public abstract class AbstractCustomItem implements Listener {
   private final CustomItem itemId;
   private final Material material;
 
-  public AbstractCustomItem(CustomItemManager customItemManager, CustomItem itemId, Material material) {
+  public AbstractCustomItem(@NotNull CustomItemManager customItemManager, CustomItem itemId, Material material) {
     this.plugin = customItemManager.getPlugin();
 
     this.itemId = itemId;
@@ -57,7 +57,7 @@ public abstract class AbstractCustomItem implements Listener {
     }
   }
 
-  public void give(@NonNull Player player) {
+  public void give(@NotNull Player player) {
     player.getInventory().addItem(getCustomItem(player));
   }
 }
