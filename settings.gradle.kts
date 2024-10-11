@@ -8,4 +8,6 @@ fun kebabcase(normalString: String): String {
   return normalString.lowercase().replace(" ", kebabcaseStringSeparator)
 }
 
-rootProject.name = kebabcase(providers.gradleProperty("projectName").get())
+val projectName = providers.gradleProperty("projectName").get()
+
+rootProject.name = kebabcase(projectName)
