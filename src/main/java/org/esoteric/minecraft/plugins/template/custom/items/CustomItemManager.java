@@ -9,9 +9,16 @@ import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 
 public class CustomItemManager {
 
+  private final TemplatePaperPlugin plugin;
+
   private final Map<CustomItem, AbstractCustomItem> customItemMap = new HashMap<>();
 
+  public TemplatePaperPlugin getPlugin() {
+    return plugin;
+  }
+
   public CustomItemManager(TemplatePaperPlugin plugin) {
+    this.plugin = plugin;
   }
 
   public void addCustomItem(CustomItem itemId, AbstractCustomItem customItem) {

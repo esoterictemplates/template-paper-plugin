@@ -16,8 +16,8 @@ public abstract class AbstractCustomMultientity<E extends Entity> implements Lis
 
   private final CustomMultientity entityId;
 
-  protected AbstractCustomMultientity(TemplatePaperPlugin plugin, CustomMultientityManager customMultientityManager, CustomMultientity entityId) {
-    this.plugin = plugin;
+  protected AbstractCustomMultientity(CustomMultientityManager customMultientityManager, CustomMultientity entityId) {
+    this.plugin = customMultientityManager.getPlugin();
 
     this.entityId = entityId;
 

@@ -30,6 +30,10 @@ public class CustomMultiblockManager {
 
   private final Map<CustomMultiblock, AbstractCustomMultiblock> customMultiblockMap = new HashMap<>();
 
+  public TemplatePaperPlugin getPlugin() {
+    return plugin;
+  }
+
   public CustomMultiblockManager(TemplatePaperPlugin plugin) {
     this.plugin = plugin;
 

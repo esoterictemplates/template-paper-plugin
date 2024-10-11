@@ -7,18 +7,18 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
-import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 
 public abstract class AbstractCustomItem implements Listener {
 
-  protected final TemplatePaperPlugin plugin;
+  private final TemplatePaperPlugin plugin;
 
   private final CustomItem itemId;
   private final Material material;
 
-  public AbstractCustomItem(TemplatePaperPlugin plugin, CustomItemManager customItemManager, CustomItem itemId, Material material) {
-    this.plugin = plugin;
+  public AbstractCustomItem(CustomItemManager customItemManager, CustomItem itemId, Material material) {
+    this.plugin = customItemManager.getPlugin();
 
     this.itemId = itemId;
     this.material = material;

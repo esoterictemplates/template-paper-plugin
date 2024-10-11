@@ -11,10 +11,16 @@ import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 
 public class CustomMultientityManager {
 
+  private final TemplatePaperPlugin plugin;
+
   private final Map<CustomMultientity, AbstractCustomMultientity<?>> customMultientityMap = new HashMap<>();
 
-  public CustomMultientityManager(TemplatePaperPlugin plugin) {
+  public TemplatePaperPlugin getPlugin() {
+    return plugin;
+  }
 
+  public CustomMultientityManager(TemplatePaperPlugin plugin) {
+    this.plugin = plugin;
   }
 
   public void addCustomEntity(CustomMultientity itemId, AbstractCustomMultientity<?> customMultientity) {

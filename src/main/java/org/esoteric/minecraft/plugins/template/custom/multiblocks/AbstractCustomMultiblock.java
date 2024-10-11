@@ -25,8 +25,8 @@ public abstract class AbstractCustomMultiblock implements Listener {
     multiblocks.addAll(addedMultiblocks);
   }
 
-  public AbstractCustomMultiblock(TemplatePaperPlugin plugin, CustomMultiblockManager customMultiblockManager, CustomMultiblock multiblockId) {
-    this.plugin = plugin;
+  public AbstractCustomMultiblock(CustomMultiblockManager customMultiblockManager, CustomMultiblock multiblockId) {
+    this.plugin = customMultiblockManager.getPlugin();
 
     Bukkit.getPluginManager().registerEvents(this, plugin);
 
