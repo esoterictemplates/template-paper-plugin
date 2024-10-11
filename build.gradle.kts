@@ -181,7 +181,7 @@ bukkitPluginYaml {
   setVersion(project.version)
 
   apiVersion = paperApiMinecraftVersion
-  main = "org.esoteric.minecraft.plugins.template.TemplatePaperPlugin"
+  main = "org.esoteric.minecraft.plugins.template.PaperTemplatePlugin"
 
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
 }
