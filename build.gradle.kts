@@ -173,7 +173,7 @@ tasks.register("renameProject") {
 }
 
 bukkitPluginYaml {
-  name = providers.gradleProperty("projectName").get()
+  name = pascalcase(providers.gradleProperty("projectName").get())
   description = project.description
   authors = projectAuthors
   setVersion(project.version)
