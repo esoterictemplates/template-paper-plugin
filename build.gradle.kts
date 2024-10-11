@@ -175,11 +175,14 @@ tasks.register("renameProject") {
 bukkitPluginYaml {
   name = pascalcase(providers.gradleProperty("projectName").get())
   description = project.description
+
   authors = projectAuthors
+
   setVersion(project.version)
 
-  main = "org.esoteric.minecraft.plugins.template.TemplatePaperPlugin"
   apiVersion = paperApiMinecraftVersion
+  main = "org.esoteric.minecraft.plugins.template.TemplatePaperPlugin"
+
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
 }
 
