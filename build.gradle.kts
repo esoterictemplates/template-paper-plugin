@@ -64,7 +64,7 @@ val mainProjectAuthorName = "Esoteric Organisation"
 val simplifiedMainProjectAuthorName = mainProjectAuthorName.split(" ").first()
 val snakecaseMainProjectAuthorName = snakecase(mainProjectAuthorName)
 
-val projectAuthors = listOfNotNull(mainProjectAuthorName)
+val projectAuthors = listOfNotNull(mainProjectAuthorName, "Esoteric Enderman")
 
 val topLevelDomain = "org"
 
