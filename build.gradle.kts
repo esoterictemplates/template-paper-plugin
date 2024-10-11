@@ -110,10 +110,6 @@ tasks {
     dependsOn(shadowJar)
   }
 
-  shadowJar {
-    archiveFileName.set("$projectNameString-$projectVersionString.jar")
-  }
-
   compileJava {
     options.release.set(javaVersion)
   }
