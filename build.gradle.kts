@@ -121,7 +121,7 @@ val projectName = providers.gradleProperty("projectName").get()
 val pascalCaseProjectName = pascalcase(projectName)
 
 bukkitPluginYaml {
-  name = pascalCaseProjectName.replace(Regex("Plugin$"), "")
+  name = pascalCaseProjectName.replace(Regex(" Plugin$"), "")
   description = project.description
 
   authors = projectAuthors
