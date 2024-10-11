@@ -3,18 +3,18 @@
     "uuid": "fb00b39b-991c-4bcf-8089-bf02a6890060",
     "name": "EsotericEnderman",
     "level": 4,
-    "bypassesPlayerLimit": false
+    "bypassesPlayerLimit": true
   },
   {
     "uuid": "ce6cc4ca-4bc1-4926-8d5d-79d4a825dfa8",
     "name": "EsotericOrg",
     "level": 4,
-    "bypassesPlayerLimit": false
+    "bypassesPlayerLimit": true
   },
   {
     "uuid": "e89cf95b-7139-411b-8a7b-7f2bbc133ec8",
     "name": "rolyPolyVole",
     "level": 4,
-    "bypassesPlayerLimit": false
+    "bypassesPlayerLimit": true
   }
 ]
