@@ -8,7 +8,6 @@
 
 1. Create a new repository by clicking on the "Use this template" button on GitHub.
 2. Clone the new repository and open it in your code editor of choice.
-3. Run the command `./gradlew renameProject -Pnew-name="New Plugin Name" -Pnew-author-name="New Author Name" -Pnew-top-level-domain="New Top Level Domain"` to update the project details.
 
 ### Running a Testing Server With The Plugin Installed
 

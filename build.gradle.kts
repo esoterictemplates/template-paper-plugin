@@ -117,62 +117,6 @@ tasks {
   }
 }
 
-tasks.register("renameProject") {
-  doLast {
-    val oldNameInput = titlecase(projectNameString)
-
-    val newName = project.findProperty("new-name")?.toString() ?: oldNameInput
-    val newAuthorName = project.findProperty("new-author-name")?.toString() ?: mainProjectAuthorName
-    val newTopLevelDomain = project.findProperty("new-top-level-domain")?.toString() ?: topLevelDomain
-
-    val newSnakecaseName = snakecase(newName)
-    val newSnakecaseAuthorName = snakecase(newAuthorName)
-
-    val newGroupString = "$newTopLevelDomain$groupStringSeparator$newSnakecaseAuthorName$groupStringSeparator$newSnakecaseName"
-    val newGroupPath = groupStringToPath(newGroupString)
-
-    val newMainClassName = pascalcase(newName)
-    val newMainClassFileName = "$newMainClassName.java"
-
-    val settingsFilePath = projectDir.resolve("settings.gradle.kts").toString()
-    val buildFilePath = projectDir.resolve("build.gradle.kts").toString()
-    val javaSourcePath = projectDir.resolve(startPath)
-
-    val currentGroupPath = groupStringToPath(projectGroupString)
-
-    val currentMainClassName = pascalcase(projectNameString)
-
-    if (currentMainClassName != newMainClassName) {
-      val currentMainClassFileName = "$currentMainClassName.java"
-
-      val currentMainClassFilePath = File(startPath, "$currentGroupPath${File.separator}$currentMainClassFileName")
-      val newMainClassFilePath = File(startPath, "$currentGroupPath${File.separator}$newMainClassFileName")
-
-      currentMainClassFilePath.renameTo(newMainClassFilePath)
-    }
-
-    replaceStringInDirectoryFiles(javaSourcePath.parentFile, oldNameInput, newName)
-    replaceStringInDirectoryFiles(javaSourcePath.parentFile, projectGroupString, newGroupString)
-    replaceStringInDirectoryFiles(javaSourcePath.parentFile, currentMainClassName, newMainClassName)
-
-    replaceStringInFile(settingsFilePath, projectNameString, kebabcase(newName))
-    replaceStringInFile(buildFilePath, "val mainProjectAuthorName = \"$mainProjectAuthorName\"", "val mainProjectAuthorName = \"$newAuthorName\"")
-    replaceStringInFile(buildFilePath, "val topLevelDomain = \"$topLevelDomain\"", "val topLevelDomain = \"$newTopLevelDomain\"")
-
-    if (topLevelDomain != newTopLevelDomain) {
-      File("$startPath${File.separator}$topLevelDomain").renameTo(File("$startPath${File.separator}$newTopLevelDomain"))
-    }
-
-    if (snakecaseMainProjectAuthorName != newSnakecaseAuthorName) {
-      File("$startPath${File.separator}$newTopLevelDomain${File.separator}$snakecaseMainProjectAuthorName").renameTo(File("$startPath${File.separator}$newTopLevelDomain${File.separator}$newSnakecaseAuthorName"))
-    }
-
-    if (snakecaseProjectNameString != newSnakecaseName) {
-      File("$startPath${File.separator}$newTopLevelDomain${File.separator}$newSnakecaseAuthorName${File.separator}$snakecaseProjectNameString").renameTo(File("$startPath${File.separator}$newGroupPath"))
-    }
-  }
-}
-
 val projectName = providers.gradleProperty("projectName").get()
 val pascalCaseProjectName = pascalcase(projectName)
 
