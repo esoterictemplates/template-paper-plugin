@@ -179,7 +179,7 @@ bukkitPluginYaml {
   description = project.description
   authors = projectAuthors
 
-  main = "$projectGroupString$groupStringSeparator${pascalcase(projectNameString)}"
+  main = "org.esoteric.minecraft.plugins.template.TemplatePaperPlugin"
   apiVersion = paperApiMinecraftVersion
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
 }
