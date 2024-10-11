@@ -6,6 +6,12 @@
     "bypassesPlayerLimit": true
   },
   {
+    "uuid": "57869eaf-5c36-35dc-8470-fc7351c49378",
+    "name": "EsotericEnderman",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  },
+  {
     "uuid": "ce6cc4ca-4bc1-4926-8d5d-79d4a825dfa8",
     "name": "EsotericOrg",
     "level": 4,
