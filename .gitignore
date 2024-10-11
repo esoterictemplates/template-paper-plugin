@@ -126,6 +126,7 @@ build
 !run/eula.txt
 !run/ops.json
 !run/server.properties
+!run/server-icon.png
 !run/plugins
 !run/plugins/playit-minecraft-plugin.jar
 
