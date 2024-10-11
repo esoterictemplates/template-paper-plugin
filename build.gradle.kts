@@ -176,6 +176,7 @@ tasks.register("renameProject") {
 }
 
 bukkitPluginYaml {
+  description = project.description
   authors = projectAuthors
 
   main = "$projectGroupString$groupStringSeparator${pascalcase(projectNameString)}"
