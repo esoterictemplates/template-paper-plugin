@@ -123,6 +123,7 @@ build
 
 # Server configuration files
 !run/eula.txt
+!run/ops.json
 
 # .class files
 bin
