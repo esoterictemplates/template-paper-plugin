@@ -9,9 +9,9 @@ plugins {
 
   `maven-publish`
 
-  id("io.papermc.paperweight.userdev") version "1.7.2"
-  id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1"
-  id("xyz.jpenilla.run-paper") version "2.3.0"
+  id("io.papermc.paperweight.userdev") version "1.7.3"
+  id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.2.0"
+  id("xyz.jpenilla.run-paper") version "2.3.1"
   id("io.github.goooler.shadow") version "8.1.7"
 }
 
@@ -84,7 +84,7 @@ val projectVersionString = version.toString()
 val javaVersion = 21
 val javaVersionEnumMember = JavaVersion.valueOf("VERSION_$javaVersion")
 
-val paperApiMinecraftVersion = "1.21"
+val paperApiMinecraftVersion = "1.21.1"
 val paperApiVersion = "$paperApiMinecraftVersion-R0.1-SNAPSHOT"
 
 java {
