@@ -117,6 +117,7 @@ buildNumber.properties
 
 # Common working directory
 run/*
+run/plugins/*
 build
 .gradle
 /*.jar
@@ -125,6 +126,8 @@ build
 !run/eula.txt
 !run/ops.json
 !run/server.properties
+!run/plugins
+!run/plugins/playit-minecraft-plugin.jar
 
 # .class files
 bin
