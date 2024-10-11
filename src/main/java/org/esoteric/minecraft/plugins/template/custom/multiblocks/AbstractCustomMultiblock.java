@@ -1,4 +1,4 @@
-package org.esoteric.minecraft.plugins.template.custom_multiblock;
+package org.esoteric.minecraft.plugins.template.custom.multiblocks;
 
 import java.util.ArrayList;
 import java.util.List;

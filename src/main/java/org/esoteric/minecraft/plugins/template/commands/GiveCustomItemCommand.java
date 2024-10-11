@@ -9,7 +9,7 @@ import dev.jorel.commandapi.arguments.ArgumentSuggestions;
 import dev.jorel.commandapi.arguments.CustomArgument;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentException;
 import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
-import org.esoteric.minecraft.plugins.template.custom_item.CustomItem;
+import org.esoteric.minecraft.plugins.template.custom.items.CustomItem;
 import org.esoteric.minecraft.plugins.template.language.Message;
 import dev.jorel.commandapi.arguments.StringArgument;
 

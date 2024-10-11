@@ -1,4 +1,4 @@
-package org.esoteric.minecraft.plugins.template.http_server.event.listeners;
+package org.esoteric.minecraft.plugins.template.http.server.event.listeners;
 
 import java.net.URI;
 
@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 import org.esoteric.minecraft.plugins.template.file.FileUtil;
-import org.esoteric.minecraft.plugins.template.http_server.HttpServerManager;
+import org.esoteric.minecraft.plugins.template.http.server.HttpServerManager;
 import net.kyori.adventure.resource.ResourcePackInfo;
 import net.kyori.adventure.resource.ResourcePackRequest;
 import org.checkerframework.checker.nullness.qual.NonNull;

@@ -1,4 +1,4 @@
-package org.esoteric.minecraft.plugins.template.custom_multiblock;
+package org.esoteric.minecraft.plugins.template.custom.multiblocks;
 
 import java.util.List;
 import java.util.Map.Entry;

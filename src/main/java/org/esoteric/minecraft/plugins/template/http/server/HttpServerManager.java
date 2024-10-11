@@ -1,11 +1,11 @@
-package org.esoteric.minecraft.plugins.template.http_server;
+package org.esoteric.minecraft.plugins.template.http.server;
 
 import com.sun.net.httpserver.HttpServer;
 
 import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 import org.esoteric.minecraft.plugins.template.file.FileUtil;
-import org.esoteric.minecraft.plugins.template.http_server.event.listeners.PlayerJoinListener;
-import org.esoteric.minecraft.plugins.template.resource_pack.ResourcePackManager;
+import org.esoteric.minecraft.plugins.template.http.server.event.listeners.PlayerJoinListener;
+import org.esoteric.minecraft.plugins.template.resourcepack.ResourcePackManager;
 
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;

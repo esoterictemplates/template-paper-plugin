@@ -1,4 +1,4 @@
-package org.esoteric.minecraft.plugins.template.custom_item;
+package org.esoteric.minecraft.plugins.template.custom.items;
 
 public enum CustomItem {
   ;

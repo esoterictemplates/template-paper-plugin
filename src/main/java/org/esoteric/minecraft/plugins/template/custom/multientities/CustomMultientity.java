@@ -1,4 +1,4 @@
-package org.esoteric.minecraft.plugins.template.custom_multientity;
+package org.esoteric.minecraft.plugins.template.custom.multientities;
 
 public enum CustomMultientity {
   ;

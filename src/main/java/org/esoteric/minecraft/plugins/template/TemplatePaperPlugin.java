@@ -12,18 +12,18 @@ import org.esoteric.minecraft.plugins.template.commands.GiveCustomItemCommand;
 import org.esoteric.minecraft.plugins.template.commands.PlaceCustomMultiblockCommand;
 import org.esoteric.minecraft.plugins.template.commands.SetLanguageCommand;
 import org.esoteric.minecraft.plugins.template.commands.SpawnCustomMultientityCommand;
-import org.esoteric.minecraft.plugins.template.custom_item.CustomItem;
-import org.esoteric.minecraft.plugins.template.custom_item.CustomItemManager;
-import org.esoteric.minecraft.plugins.template.custom_multiblock.CustomMultiblock;
-import org.esoteric.minecraft.plugins.template.custom_multiblock.CustomMultiblockManager;
-import org.esoteric.minecraft.plugins.template.custom_multientity.CustomMultientity;
-import org.esoteric.minecraft.plugins.template.custom_multientity.CustomMultientityManager;
+import org.esoteric.minecraft.plugins.template.custom.items.CustomItem;
+import org.esoteric.minecraft.plugins.template.custom.items.CustomItemManager;
+import org.esoteric.minecraft.plugins.template.custom.multiblocks.CustomMultiblock;
+import org.esoteric.minecraft.plugins.template.custom.multiblocks.CustomMultiblockManager;
+import org.esoteric.minecraft.plugins.template.custom.multientities.CustomMultientity;
+import org.esoteric.minecraft.plugins.template.custom.multientities.CustomMultientityManager;
 import org.esoteric.minecraft.plugins.template.data.player.PlayerDataManager;
 import org.esoteric.minecraft.plugins.template.file.FileManager;
-import org.esoteric.minecraft.plugins.template.http_server.HttpServerManager;
+import org.esoteric.minecraft.plugins.template.http.server.HttpServerManager;
 import org.esoteric.minecraft.plugins.template.language.LanguageManager;
 import org.esoteric.minecraft.plugins.template.language.Message;
-import org.esoteric.minecraft.plugins.template.resource_pack.ResourcePackManager;
+import org.esoteric.minecraft.plugins.template.resourcepack.ResourcePackManager;
 
 @DefaultQualifier(NonNull.class)
 public final class TemplatePaperPlugin extends JavaPlugin {

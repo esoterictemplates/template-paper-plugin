@@ -1,4 +1,4 @@
-package org.esoteric.minecraft.plugins.template.custom_item;
+package org.esoteric.minecraft.plugins.template.custom.items;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package org.esoteric.minecraft.plugins.template.resource_pack;
+package org.esoteric.minecraft.plugins.template.resourcepack;
 
 import java.io.File;
 import java.util.List;
