@@ -61,6 +61,7 @@ fun replaceStringInDirectoryFiles(directory: File, stringToReplace: String, repl
 description = "A template repository for easily developing Minecraft Paper plugins."
 
 val mainProjectAuthorName = "Esoteric Organisation"
+val simplifiedMainProjectAuthorName = mainProjectAuthorName.split(" ").first()
 val snakecaseMainProjectAuthorName = snakecase(mainProjectAuthorName)
 
 val projectAuthors = listOfNotNull(mainProjectAuthorName)
@@ -70,7 +71,7 @@ val topLevelDomain = "org"
 val projectNameString = rootProject.name
 val snakecaseProjectNameString = snakecase(projectNameString)
 
-group = "$topLevelDomain$groupStringSeparator$snakecaseMainProjectAuthorName"
+group = "$topLevelDomain$groupStringSeparator${simplifiedMainProjectAuthorName.lowercase()}"
 version = "0.0.4"
 
 val buildDirectoryString = layout.buildDirectory.toString()
@@ -172,10 +173,11 @@ tasks.register("renameProject") {
   }
 }
 
-val projectName = pascalcase(providers.gradleProperty("projectName").get())
+val projectName = providers.gradleProperty("projectName").get()
+val pascalCaseProjectName = pascalcase(projectName)
 
 bukkitPluginYaml {
-  name = projectName.replace(Regex("Plugin$"), "")
+  name = pascalCaseProjectName.replace(Regex("Plugin$"), "")
   description = project.description
 
   authors = projectAuthors
@@ -183,7 +185,7 @@ bukkitPluginYaml {
   setVersion(project.version)
 
   apiVersion = paperApiMinecraftVersion
-  main = "org.esoteric.minecraft.plugins.template.PaperTemplatePlugin"
+  main = "${project.group}.minecraft.plugins.template.${pascalCaseProjectName}"
 
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
 }
