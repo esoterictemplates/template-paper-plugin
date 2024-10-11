@@ -176,6 +176,7 @@ bukkitPluginYaml {
   name = providers.gradleProperty("projectName").get()
   description = project.description
   authors = projectAuthors
+  setVersion(project.version)
 
   main = "org.esoteric.minecraft.plugins.template.TemplatePaperPlugin"
   apiVersion = paperApiMinecraftVersion
