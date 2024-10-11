@@ -1,10 +1,10 @@
 package org.esoteric.minecraft.plugins.template.custom.multiblocks;
 
-import java.util.List;
-import java.util.Map.Entry;
-
 import org.esoteric.minecraft.plugins.template.util.types.BlockLocation;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.Map.Entry;
 
 public class StoredCustomMultiblock {
   private final List<List<BlockLocation>> blockLocations;
@@ -25,5 +25,5 @@ public class StoredCustomMultiblock {
 
   public StoredCustomMultiblock(@NotNull Entry<CustomMultiblock, AbstractCustomMultiblock> multiblockInfo) {
     this(multiblockInfo.getValue().getMultiblocks(), multiblockInfo.getKey());
-  } 
+  }
 }

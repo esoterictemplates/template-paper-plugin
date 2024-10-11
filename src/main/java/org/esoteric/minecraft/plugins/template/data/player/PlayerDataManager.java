@@ -1,5 +1,10 @@
 package org.esoteric.minecraft.plugins.template.data.player;
 
+import com.google.gson.Gson;
+import org.bukkit.entity.Player;
+import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -8,13 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
-
-import org.bukkit.entity.Player;
-
-import com.google.gson.Gson;
-
-import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
-import org.jetbrains.annotations.NotNull;
 
 public class PlayerDataManager {
 

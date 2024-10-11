@@ -1,23 +1,20 @@
 package org.esoteric.minecraft.plugins.template.http.server;
 
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
-
+import org.bukkit.Bukkit;
 import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 import org.esoteric.minecraft.plugins.template.file.FileUtil;
 import org.esoteric.minecraft.plugins.template.http.server.event.listeners.PlayerJoinListener;
 import org.esoteric.minecraft.plugins.template.resourcepack.ResourcePackManager;
-
-import com.sun.net.httpserver.HttpHandler;
-import com.sun.net.httpserver.HttpExchange;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
-
-import org.bukkit.Bukkit;
-import org.jetbrains.annotations.NotNull;
 
 public class HttpServerManager {
 
@@ -71,7 +68,7 @@ public class HttpServerManager {
   class ResourcePackDownloadHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-      ResourcePackManager resourcePackManager = plugin.getResourcePackManager();      
+      ResourcePackManager resourcePackManager = plugin.getResourcePackManager();
 
       File file = new File(resourcePackManager.getResourceZipFilePath());
 

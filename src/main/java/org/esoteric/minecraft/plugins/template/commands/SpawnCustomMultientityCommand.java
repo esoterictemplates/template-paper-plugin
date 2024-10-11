@@ -1,17 +1,17 @@
 package org.esoteric.minecraft.plugins.template.commands;
 
-import java.util.stream.Stream;
-
 import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.CommandPermission;
 import dev.jorel.commandapi.arguments.Argument;
 import dev.jorel.commandapi.arguments.ArgumentSuggestions;
 import dev.jorel.commandapi.arguments.CustomArgument;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentException;
+import dev.jorel.commandapi.arguments.StringArgument;
 import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 import org.esoteric.minecraft.plugins.template.custom.multientities.CustomMultientity;
 import org.esoteric.minecraft.plugins.template.language.Message;
-import dev.jorel.commandapi.arguments.StringArgument;
+
+import java.util.stream.Stream;
 
 public class SpawnCustomMultientityCommand extends CommandAPICommand {
 

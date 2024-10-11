@@ -1,10 +1,10 @@
 package org.esoteric.minecraft.plugins.template.language;
 
-import java.util.function.BooleanSupplier;
-
 import org.esoteric.minecraft.plugins.template.custom.items.CustomItem;
 import org.esoteric.minecraft.plugins.template.custom.multiblocks.CustomMultiblock;
 import org.esoteric.minecraft.plugins.template.custom.multientities.CustomMultientity;
+
+import java.util.function.BooleanSupplier;
 
 public enum Message {
   SET_LANGUAGE_SUCCESSFULLY(() -> false),

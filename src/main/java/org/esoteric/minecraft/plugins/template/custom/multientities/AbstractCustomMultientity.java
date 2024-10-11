@@ -1,15 +1,14 @@
 package org.esoteric.minecraft.plugins.template.custom.multientities;
 
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Listener;
 import org.bukkit.persistence.PersistentDataType;
-
 import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public abstract class AbstractCustomMultientity<E extends Entity> implements Listener {
 

@@ -1,12 +1,11 @@
 package org.esoteric.minecraft.plugins.template.resourcepack;
 
-import java.io.File;
-import java.util.List;
-
 import org.apache.commons.io.FileUtils;
-
 import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 import org.esoteric.minecraft.plugins.template.file.FileUtil;
+
+import java.io.File;
+import java.util.List;
 
 public class ResourcePackManager {
 

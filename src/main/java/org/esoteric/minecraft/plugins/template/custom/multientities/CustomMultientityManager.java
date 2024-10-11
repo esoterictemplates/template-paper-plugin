@@ -1,13 +1,12 @@
 package org.esoteric.minecraft.plugins.template.custom.multientities;
 
+import org.bukkit.Location;
+import org.bukkit.entity.Entity;
+import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.bukkit.Location;
-import org.bukkit.entity.Entity;
-
-import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 
 public class CustomMultientityManager {
 

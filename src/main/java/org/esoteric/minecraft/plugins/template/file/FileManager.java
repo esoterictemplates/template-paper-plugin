@@ -1,9 +1,9 @@
 package org.esoteric.minecraft.plugins.template.file;
 
+import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+
 import java.io.File;
 import java.io.IOException;
-
-import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 
 public class FileManager {
 

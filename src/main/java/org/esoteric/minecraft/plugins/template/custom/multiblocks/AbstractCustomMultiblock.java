@@ -1,16 +1,15 @@
 package org.esoteric.minecraft.plugins.template.custom.multiblocks;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.event.Listener;
-
 import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 import org.esoteric.minecraft.plugins.template.util.types.BlockLocation;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractCustomMultiblock implements Listener {
 

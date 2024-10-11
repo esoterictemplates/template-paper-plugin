@@ -1,25 +1,20 @@
 package org.esoteric.minecraft.plugins.template.language;
 
-import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
-import org.esoteric.minecraft.plugins.template.data.player.PlayerProfile;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-
-import java.util.UUID;
-import java.util.stream.Stream;
-import java.util.Map;
-import java.util.Set;
-import java.util.HashMap;
-import java.util.Locale;
-import java.io.File;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+import org.esoteric.minecraft.plugins.template.data.player.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.io.File;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class LanguageManager {
 

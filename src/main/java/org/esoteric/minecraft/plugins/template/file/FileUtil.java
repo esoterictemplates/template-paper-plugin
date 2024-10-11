@@ -1,10 +1,9 @@
 package org.esoteric.minecraft.plugins.template.file;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.jar.JarFile;
-import java.util.jar.JarEntry;
+import net.lingala.zip4j.ZipFile;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,10 +11,11 @@ import java.io.InputStream;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import net.lingala.zip4j.ZipFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class FileUtil {
 
@@ -47,7 +47,7 @@ public class FileUtil {
 
     try (JarFile jarFile = new JarFile(jarFilePath)) {
       List<String> paths = jarFile.stream().map(JarEntry::getName).filter(name -> name.startsWith(resourceFileFolderPath) && !name.equals(resourceFileFolderPath))
-          .map(name -> name.substring(resourceFileFolderPath.length())).filter(name -> !"/".equals(name)).map(name -> resourceFileFolderPath + name).toList();
+        .map(name -> name.substring(resourceFileFolderPath.length())).filter(name -> !"/".equals(name)).map(name -> resourceFileFolderPath + name).toList();
 
       return paths;
     }

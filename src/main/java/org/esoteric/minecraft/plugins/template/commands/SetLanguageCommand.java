@@ -6,14 +6,13 @@ import dev.jorel.commandapi.arguments.ArgumentSuggestions;
 import dev.jorel.commandapi.arguments.CustomArgument;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentException;
 import dev.jorel.commandapi.arguments.GreedyStringArgument;
-
-import java.util.Set;
-
+import net.kyori.adventure.text.Component;
 import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 import org.esoteric.minecraft.plugins.template.language.LanguageManager;
 import org.esoteric.minecraft.plugins.template.language.Message;
-import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Set;
 
 public class SetLanguageCommand extends CommandAPICommand {
 

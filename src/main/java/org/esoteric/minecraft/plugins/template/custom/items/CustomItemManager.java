@@ -1,11 +1,10 @@
 package org.esoteric.minecraft.plugins.template.custom.items;
 
+import org.bukkit.entity.Player;
+import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import org.bukkit.entity.Player;
-
-import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
 
 public class CustomItemManager {
 

@@ -1,7 +1,4 @@
-import org.gradle.api.JavaVersion
 import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
-
-import java.io.File
 
 plugins {
   java

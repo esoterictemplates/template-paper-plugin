@@ -1,10 +1,9 @@
 package org.esoteric.minecraft.plugins.template;
 
-import org.bukkit.NamespacedKey;
-import org.bukkit.plugin.java.JavaPlugin;
-
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
+import org.bukkit.NamespacedKey;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.esoteric.minecraft.plugins.template.commands.GiveCustomItemCommand;
 import org.esoteric.minecraft.plugins.template.commands.PlaceCustomMultiblockCommand;
 import org.esoteric.minecraft.plugins.template.commands.SetLanguageCommand;
