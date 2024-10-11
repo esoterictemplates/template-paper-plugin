@@ -101,7 +101,7 @@ repositories {
 dependencies {
   paperweight.paperDevBundle(paperApiVersion)
 
-  implementation("dev.jorel", "commandapi-bukkit-shade-mojang-mapped", "9.5.1")
+  implementation("dev.jorel", "commandapi-bukkit-shade-mojang-mapped", "9.5.3")
   implementation("net.lingala.zip4j", "zip4j", "2.11.5")
 }
 
