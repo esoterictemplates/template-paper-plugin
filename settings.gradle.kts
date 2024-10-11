@@ -2,6 +2,6 @@ plugins {
   id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 
-val projectName = "Template Paper Plugin"
+val projectName = "Paper Template Plugin"
 
-rootProject.name = "template-paper-plugin"
+rootProject.name = "paper-template-plugin"

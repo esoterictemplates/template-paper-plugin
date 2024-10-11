@@ -5,14 +5,14 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Listener;
 import org.bukkit.persistence.PersistentDataType;
-import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+import org.esoteric.minecraft.plugins.template.PaperTemplatePlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public abstract class AbstractCustomMultientity<E extends Entity> implements Listener {
 
-  protected final TemplatePaperPlugin plugin;
+  protected final PaperTemplatePlugin plugin;
 
   private final CustomMultientity entityId;
 

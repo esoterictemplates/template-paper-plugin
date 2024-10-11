@@ -1,7 +1,7 @@
 package org.esoteric.minecraft.plugins.template.resourcepack;
 
 import org.apache.commons.io.FileUtils;
-import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+import org.esoteric.minecraft.plugins.template.PaperTemplatePlugin;
 import org.esoteric.minecraft.plugins.template.file.FileUtil;
 
 import java.io.File;
@@ -9,9 +9,9 @@ import java.util.List;
 
 public class ResourcePackManager {
 
-  private final TemplatePaperPlugin plugin;
+  private final PaperTemplatePlugin plugin;
 
-  private final String resourcePackResourceFolderName = String.join(" ", TemplatePaperPlugin.class.getSimpleName().split("(?=[A-Z])")) + " Resource Pack";
+  private final String resourcePackResourceFolderName = String.join(" ", PaperTemplatePlugin.class.getSimpleName().split("(?=[A-Z])")) + " Resource Pack";
 
   private final String resourcePackFileType = "application";
   private final String resourcePackFileExtension = "zip";
@@ -46,7 +46,7 @@ public class ResourcePackManager {
     return resourcePackZipFile;
   }
 
-  public ResourcePackManager(TemplatePaperPlugin plugin) {
+  public ResourcePackManager(PaperTemplatePlugin plugin) {
     this.plugin = plugin;
 
     saveResourcepackZipFile();

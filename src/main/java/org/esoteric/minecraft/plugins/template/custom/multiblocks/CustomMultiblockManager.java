@@ -2,7 +2,7 @@ package org.esoteric.minecraft.plugins.template.custom.multiblocks;
 
 import com.google.gson.Gson;
 import org.bukkit.Location;
-import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+import org.esoteric.minecraft.plugins.template.PaperTemplatePlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -14,7 +14,7 @@ import java.util.Map.Entry;
 
 public class CustomMultiblockManager {
 
-  private final TemplatePaperPlugin plugin;
+  private final PaperTemplatePlugin plugin;
 
   private final String multiblocksFileExtension = ".json";
   private final String multiblocksResourceFilePath = "data" + File.separator + "multiblocks" + multiblocksFileExtension;
@@ -23,11 +23,11 @@ public class CustomMultiblockManager {
 
   private final Map<CustomMultiblock, AbstractCustomMultiblock> customMultiblockMap = new HashMap<>();
 
-  public TemplatePaperPlugin getPlugin() {
+  public PaperTemplatePlugin getPlugin() {
     return plugin;
   }
 
-  public CustomMultiblockManager(@NotNull TemplatePaperPlugin plugin) {
+  public CustomMultiblockManager(@NotNull PaperTemplatePlugin plugin) {
     this.plugin = plugin;
 
     multiblocksFilePath = plugin.getDataFolder() + File.separator + multiblocksResourceFilePath;

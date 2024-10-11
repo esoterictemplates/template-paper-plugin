@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+import org.esoteric.minecraft.plugins.template.PaperTemplatePlugin;
 import org.esoteric.minecraft.plugins.template.data.player.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,7 +20,7 @@ public class LanguageManager {
 
   private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
-  private final TemplatePaperPlugin plugin;
+  private final PaperTemplatePlugin plugin;
 
   private final String languageMessageFilesExtension = ".yaml";
 
@@ -40,7 +40,7 @@ public class LanguageManager {
     return languages.keySet();
   }
 
-  public LanguageManager(@NotNull TemplatePaperPlugin plugin) {
+  public LanguageManager(@NotNull PaperTemplatePlugin plugin) {
     this.plugin = plugin;
 
     languagesFolderPath = plugin.getDataPath() + File.separator + languagesFolderName;

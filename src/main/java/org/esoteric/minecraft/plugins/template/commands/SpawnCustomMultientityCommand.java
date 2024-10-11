@@ -7,7 +7,7 @@ import dev.jorel.commandapi.arguments.ArgumentSuggestions;
 import dev.jorel.commandapi.arguments.CustomArgument;
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentException;
 import dev.jorel.commandapi.arguments.StringArgument;
-import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+import org.esoteric.minecraft.plugins.template.PaperTemplatePlugin;
 import org.esoteric.minecraft.plugins.template.custom.multientities.CustomMultientity;
 import org.esoteric.minecraft.plugins.template.language.Message;
 
@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 public class SpawnCustomMultientityCommand extends CommandAPICommand {
 
-  public SpawnCustomMultientityCommand(TemplatePaperPlugin plugin) {
+  public SpawnCustomMultientityCommand(PaperTemplatePlugin plugin) {
     super("spawn-custom-multientity");
 
     String customMultientityArgumentNodeName = "custom-multientity-id";

@@ -1,15 +1,15 @@
 package org.esoteric.minecraft.plugins.template.file;
 
-import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+import org.esoteric.minecraft.plugins.template.PaperTemplatePlugin;
 
 import java.io.File;
 import java.io.IOException;
 
 public class FileManager {
 
-  private final TemplatePaperPlugin plugin;
+  private final PaperTemplatePlugin plugin;
 
-  public FileManager(TemplatePaperPlugin plugin) {
+  public FileManager(PaperTemplatePlugin plugin) {
     this.plugin = plugin;
   }
 

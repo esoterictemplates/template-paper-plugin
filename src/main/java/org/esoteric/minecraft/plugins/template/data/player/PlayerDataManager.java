@@ -2,7 +2,7 @@ package org.esoteric.minecraft.plugins.template.data.player;
 
 import com.google.gson.Gson;
 import org.bukkit.entity.Player;
-import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+import org.esoteric.minecraft.plugins.template.PaperTemplatePlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -16,7 +16,7 @@ import java.util.UUID;
 
 public class PlayerDataManager {
 
-  private final TemplatePaperPlugin plugin;
+  private final PaperTemplatePlugin plugin;
 
   private final String playerDataFilesExtension = ".json";
 
@@ -26,7 +26,7 @@ public class PlayerDataManager {
 
   private final Map<UUID, PlayerProfile> playerData = new HashMap<>();
 
-  public PlayerDataManager(@NotNull TemplatePaperPlugin plugin) {
+  public PlayerDataManager(@NotNull PaperTemplatePlugin plugin) {
     this.plugin = plugin;
 
     playerDataFolderPath = plugin.getDataPath() + File.separator + playerDataFolderName;

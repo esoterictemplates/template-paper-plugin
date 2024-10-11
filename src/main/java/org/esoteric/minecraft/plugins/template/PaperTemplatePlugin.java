@@ -21,7 +21,7 @@ import org.esoteric.minecraft.plugins.template.language.LanguageManager;
 import org.esoteric.minecraft.plugins.template.language.Message;
 import org.esoteric.minecraft.plugins.template.resourcepack.ResourcePackManager;
 
-public final class TemplatePaperPlugin extends JavaPlugin {
+public final class PaperTemplatePlugin extends JavaPlugin {
 
   private FileManager fileManager;
   private PlayerDataManager playerDataManager;

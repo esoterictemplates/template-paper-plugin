@@ -2,7 +2,7 @@ package org.esoteric.minecraft.plugins.template.custom.multientities;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
-import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+import org.esoteric.minecraft.plugins.template.PaperTemplatePlugin;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,15 +10,15 @@ import java.util.Map;
 
 public class CustomMultientityManager {
 
-  private final TemplatePaperPlugin plugin;
+  private final PaperTemplatePlugin plugin;
 
   private final Map<CustomMultientity, AbstractCustomMultientity<?>> customMultientityMap = new HashMap<>();
 
-  public TemplatePaperPlugin getPlugin() {
+  public PaperTemplatePlugin getPlugin() {
     return plugin;
   }
 
-  public CustomMultientityManager(TemplatePaperPlugin plugin) {
+  public CustomMultientityManager(PaperTemplatePlugin plugin) {
     this.plugin = plugin;
   }
 

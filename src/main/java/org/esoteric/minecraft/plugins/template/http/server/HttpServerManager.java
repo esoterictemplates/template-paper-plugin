@@ -4,7 +4,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import org.bukkit.Bukkit;
-import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+import org.esoteric.minecraft.plugins.template.PaperTemplatePlugin;
 import org.esoteric.minecraft.plugins.template.file.FileUtil;
 import org.esoteric.minecraft.plugins.template.http.server.event.listeners.PlayerJoinListener;
 import org.esoteric.minecraft.plugins.template.resourcepack.ResourcePackManager;
@@ -18,7 +18,7 @@ import java.net.InetSocketAddress;
 
 public class HttpServerManager {
 
-  private TemplatePaperPlugin plugin;
+  private PaperTemplatePlugin plugin;
 
   private String hostName;
   private int port;
@@ -40,7 +40,7 @@ public class HttpServerManager {
     return getHostName() + ":" + getPort();
   }
 
-  public HttpServerManager(@NotNull TemplatePaperPlugin plugin) {
+  public HttpServerManager(@NotNull PaperTemplatePlugin plugin) {
     if (plugin.getResourcePackManager().getResourcePackZipFile() == null) {
       return;
     }

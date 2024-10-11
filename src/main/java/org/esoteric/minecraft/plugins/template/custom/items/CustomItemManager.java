@@ -1,22 +1,22 @@
 package org.esoteric.minecraft.plugins.template.custom.items;
 
 import org.bukkit.entity.Player;
-import org.esoteric.minecraft.plugins.template.TemplatePaperPlugin;
+import org.esoteric.minecraft.plugins.template.PaperTemplatePlugin;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class CustomItemManager {
 
-  private final TemplatePaperPlugin plugin;
+  private final PaperTemplatePlugin plugin;
 
   private final Map<CustomItem, AbstractCustomItem> customItemMap = new HashMap<>();
 
-  public TemplatePaperPlugin getPlugin() {
+  public PaperTemplatePlugin getPlugin() {
     return plugin;
   }
 
-  public CustomItemManager(TemplatePaperPlugin plugin) {
+  public CustomItemManager(PaperTemplatePlugin plugin) {
     this.plugin = plugin;
   }
 
