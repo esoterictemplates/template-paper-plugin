@@ -117,10 +117,12 @@ buildNumber.properties
 
 # Common working directory
 run/*
-!run/eula.txt
 build
 .gradle
 /*.jar
+
+# Server configuration files
+!run/eula.txt
 
 # .class files
 bin
