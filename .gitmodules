@@ -1,4 +1,0 @@
-[submodule "example-paper-plugin"]
-	path = example-paper-plugin
-	url = https://github.com/EsotericDevelopment/example-paper-plugin
-	branch = master

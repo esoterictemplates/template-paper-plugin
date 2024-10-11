@@ -3,5 +3,3 @@ plugins {
 }
 
 rootProject.name = "template-paper-plugin"
-
-include("example-paper-plugin")
