@@ -172,8 +172,10 @@ tasks.register("renameProject") {
   }
 }
 
+val projectName = pascalcase(providers.gradleProperty("projectName").get())
+
 bukkitPluginYaml {
-  name = pascalcase(providers.gradleProperty("projectName").get())
+  name = projectName.replace(Regex("Plugin$"), "")
   description = project.description
 
   authors = projectAuthors
