@@ -73,7 +73,7 @@ val topLevelDomain = "org"
 val projectNameString = rootProject.name
 val snakecaseProjectNameString = snakecase(projectNameString)
 
-group = "$topLevelDomain$groupStringSeparator${snakecaseMainProjectAuthorName}$groupStringSeparator${snakecaseProjectNameString}"
+group = "$topLevelDomain$groupStringSeparator$snakecaseMainProjectAuthorName"
 version = "0.0.4"
 
 val buildDirectoryString = layout.buildDirectory.toString()
