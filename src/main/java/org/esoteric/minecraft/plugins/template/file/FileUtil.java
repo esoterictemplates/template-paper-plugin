@@ -8,14 +8,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 
 public class FileUtil {
 
@@ -29,43 +23,6 @@ public class FileUtil {
 
   public static String getFileMimeTypeTypeSubtypeSeparator() {
     return FILE_MIME_TYPE_TYPE_SUBTYPE_SEPARATOR;
-  }
-
-  public static List<String> getResourceFileFolderResourceFilePaths(String resourceFileFolderPath) throws IOException {
-    ClassLoader classLoader = FileUtil.class.getClassLoader();
-
-    URL jarURL = classLoader.getResource(resourceFileFolderPath);
-    if (jarURL == null) {
-      return Collections.emptyList();
-    }
-
-    String jarPath = jarURL.getPath();
-    int exclamationMarkIndex = jarPath.indexOf("!");
-
-    String jarPathPrefix = "file:";
-    String jarFilePath = jarPath.substring(jarPathPrefix.length(), exclamationMarkIndex);
-
-    try (JarFile jarFile = new JarFile(jarFilePath)) {
-      List<String> paths = jarFile.stream().map(JarEntry::getName).filter(name -> name.startsWith(resourceFileFolderPath) && !name.equals(resourceFileFolderPath))
-        .map(name -> name.substring(resourceFileFolderPath.length())).filter(name -> !"/".equals(name)).map(name -> resourceFileFolderPath + name).toList();
-
-      return paths;
-    }
-  }
-
-  public static @NotNull List<String> getResourceFileFolderResourceFilePathsRecursively(String resourceFileFolderPath) throws IOException {
-    List<String> paths = new ArrayList<>();
-
-    for (String resourceFilePath : getResourceFileFolderResourceFilePaths(resourceFileFolderPath)) {
-      List<String> subFiles = getResourceFileFolderResourceFilePathsRecursively(resourceFilePath);
-      if (subFiles.isEmpty()) {
-        paths.add(resourceFilePath);
-      } else {
-        paths.addAll(subFiles);
-      }
-    }
-
-    return paths;
   }
 
   public static void zipFolder(@NotNull File sourceFolder, File zipFile) throws IOException {
