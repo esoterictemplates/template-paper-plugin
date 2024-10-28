@@ -1,5 +1,6 @@
 package org.esoteric.minecraft.plugins.template.resourcepack;
 
+import foundation.esoteric.utility.file.FileUtility;
 import org.apache.commons.io.FileUtils;
 import org.esoteric.minecraft.plugins.template.PaperTemplatePlugin;
 import org.esoteric.minecraft.plugins.template.file.FileUtil;
@@ -66,7 +67,7 @@ public class ResourcePackManager {
     }
 
     File assetsFile = new File(plugin.getDataPath() + File.separator + resourcePackResourceFolderName + File.separator + resourcePackAssetsFolderName);
-    if (FileUtil.isDirectoryRecursivelyEmpty(assetsFile)) {
+    if (FileUtility.Companion.isRecursivelyEmpty(assetsFile)) {
       return;
     }
 
