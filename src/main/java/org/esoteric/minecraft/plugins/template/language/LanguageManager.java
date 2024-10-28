@@ -54,7 +54,7 @@ public class LanguageManager {
 
   private void saveLanguageFiles() {
     String languagesResourceFolderName = languagesFolderName;
-    plugin.getFileManager().saveResourceFileFolder(languagesResourceFolderName, !plugin.getConfig().getBoolean("language.use-custom-messages"));
+    plugin.getFileManager().saveResourceFolder(languagesResourceFolderName, !plugin.getConfig().getBoolean("language.use-custom-messages"));
   }
 
   private void loadLanguageMessages() {

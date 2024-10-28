@@ -54,8 +54,7 @@ public class ResourcePackManager {
   }
 
   private void saveResourcepackZipFile() {
-    assert plugin.getFileManager() != null;
-    File resourcePackFolder = plugin.getFileManager().saveResourceFileFolder(resourcePackResourceFolderName);
+    File resourcePackFolder = plugin.getFileManager().saveResourceFolder(resourcePackResourceFolderName, true);
 
     String[] resourcePackFiles = resourcePackFolder.list();
     if (resourcePackFiles == null || resourcePackFiles.length == 0) {

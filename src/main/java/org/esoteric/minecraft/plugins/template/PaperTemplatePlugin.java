@@ -2,6 +2,8 @@ package org.esoteric.minecraft.plugins.template;
 
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
+import foundation.esoteric.minecraft.plugins.library.file.FileManagedPlugin;
+import foundation.esoteric.minecraft.plugins.library.file.FileManager;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.esoteric.minecraft.plugins.template.commands.GiveCustomItemCommand;
@@ -15,13 +17,12 @@ import org.esoteric.minecraft.plugins.template.custom.multiblocks.CustomMultiblo
 import org.esoteric.minecraft.plugins.template.custom.multientities.CustomMultientity;
 import org.esoteric.minecraft.plugins.template.custom.multientities.CustomMultientityManager;
 import org.esoteric.minecraft.plugins.template.data.player.PlayerDataManager;
-import org.esoteric.minecraft.plugins.template.file.FileManager;
 import org.esoteric.minecraft.plugins.template.http.server.HttpServerManager;
 import org.esoteric.minecraft.plugins.template.language.LanguageManager;
 import org.esoteric.minecraft.plugins.template.language.Message;
 import org.esoteric.minecraft.plugins.template.resourcepack.ResourcePackManager;
 
-public final class PaperTemplatePlugin extends JavaPlugin {
+public final class PaperTemplatePlugin extends JavaPlugin implements FileManagedPlugin {
 
   private FileManager fileManager;
   private PlayerDataManager playerDataManager;
