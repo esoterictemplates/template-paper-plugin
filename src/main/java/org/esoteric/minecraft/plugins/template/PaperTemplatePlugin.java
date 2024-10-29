@@ -2,16 +2,16 @@ package org.esoteric.minecraft.plugins.template;
 
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
+import foundation.esoteric.minecraft.plugins.library.commands.GiveCustomItemCommand;
 import foundation.esoteric.minecraft.plugins.library.file.FileManagedPlugin;
 import foundation.esoteric.minecraft.plugins.library.file.FileManager;
+import foundation.esoteric.minecraft.plugins.library.item.CustomItemManager;
+import foundation.esoteric.minecraft.plugins.library.item.CustomItemPlugin;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.esoteric.minecraft.plugins.template.commands.GiveCustomItemCommand;
 import org.esoteric.minecraft.plugins.template.commands.PlaceCustomMultiblockCommand;
 import org.esoteric.minecraft.plugins.template.commands.SetLanguageCommand;
 import org.esoteric.minecraft.plugins.template.commands.SpawnCustomMultientityCommand;
-import org.esoteric.minecraft.plugins.template.custom.items.CustomItem;
-import org.esoteric.minecraft.plugins.template.custom.items.CustomItemManager;
 import org.esoteric.minecraft.plugins.template.custom.multiblocks.CustomMultiblock;
 import org.esoteric.minecraft.plugins.template.custom.multiblocks.CustomMultiblockManager;
 import org.esoteric.minecraft.plugins.template.custom.multientities.CustomMultientity;
@@ -22,7 +22,7 @@ import org.esoteric.minecraft.plugins.template.language.LanguageManager;
 import org.esoteric.minecraft.plugins.template.language.Message;
 import org.esoteric.minecraft.plugins.template.resourcepack.ResourcePackManager;
 
-public final class PaperTemplatePlugin extends JavaPlugin implements FileManagedPlugin {
+public final class PaperTemplatePlugin extends JavaPlugin implements FileManagedPlugin, CustomItemPlugin {
 
   private FileManager fileManager;
   private PlayerDataManager playerDataManager;
@@ -91,11 +91,10 @@ public final class PaperTemplatePlugin extends JavaPlugin implements FileManaged
     if (Message.isEnabled()) {
       languageManager = new LanguageManager(this);
     }
+
     resourcePackManager = new ResourcePackManager(this);
     httpServerManager = new HttpServerManager(this);
-    if (CustomItem.isEnabled()) {
-      customItemManager = new CustomItemManager(this);
-    }
+    customItemManager = new CustomItemManager(this);
     if (CustomMultientity.isEnabled()) {
       customMultientityManager = new CustomMultientityManager(this);
     }
@@ -106,9 +105,7 @@ public final class PaperTemplatePlugin extends JavaPlugin implements FileManaged
     if (Message.isEnabled()) {
       new SetLanguageCommand(this);
     }
-    if (CustomItem.isEnabled()) {
-      new GiveCustomItemCommand(this);
-    }
+    new GiveCustomItemCommand(this);
     if (CustomMultientity.isEnabled()) {
       new SpawnCustomMultientityCommand(this);
     }

@@ -1,6 +1,5 @@
 package org.esoteric.minecraft.plugins.template.language;
 
-import org.esoteric.minecraft.plugins.template.custom.items.CustomItem;
 import org.esoteric.minecraft.plugins.template.custom.multiblocks.CustomMultiblock;
 import org.esoteric.minecraft.plugins.template.custom.multientities.CustomMultientity;
 
@@ -10,7 +9,7 @@ public enum Message {
   SET_LANGUAGE_SUCCESSFULLY(() -> false),
   UNKNOWN_LANGUAGE(() -> false),
 
-  UNKNOWN_CUSTOM_ITEM(CustomItem::isEnabled),
+  UNKNOWN_CUSTOM_ITEM(),
   UNKNOWN_CUSTOM_MULTIENTITY(CustomMultientity::isEnabled),
   UNKNOWN_CUSTOM_MULTIBLOCK(CustomMultiblock::isEnabled);
 
