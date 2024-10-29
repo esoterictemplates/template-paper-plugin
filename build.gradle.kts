@@ -60,7 +60,7 @@ fun replaceStringInDirectoryFiles(directory: File, stringToReplace: String, repl
 
 description = "A template repository for easily developing Minecraft Paper plugins."
 
-val mainProjectAuthorName = "Esoteric Organisation"
+val mainProjectAuthorName = "Esoteric Foundation"
 val simplifiedMainProjectAuthorName = mainProjectAuthorName.split(" ").first()
 val snakecaseMainProjectAuthorName = snakecase(mainProjectAuthorName)
 
