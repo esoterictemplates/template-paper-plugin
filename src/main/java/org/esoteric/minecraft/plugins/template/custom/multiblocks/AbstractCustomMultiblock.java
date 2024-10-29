@@ -1,11 +1,11 @@
 package org.esoteric.minecraft.plugins.template.custom.multiblocks;
 
+import foundation.esoteric.minecraft.plugins.library.utility.types.BlockLocation;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.event.Listener;
 import org.esoteric.minecraft.plugins.template.PaperTemplatePlugin;
-import org.esoteric.minecraft.plugins.template.util.types.BlockLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

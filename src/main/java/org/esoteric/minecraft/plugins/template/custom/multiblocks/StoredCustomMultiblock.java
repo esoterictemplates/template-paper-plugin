@@ -1,6 +1,6 @@
 package org.esoteric.minecraft.plugins.template.custom.multiblocks;
 
-import org.esoteric.minecraft.plugins.template.util.types.BlockLocation;
+import foundation.esoteric.minecraft.plugins.library.utility.types.BlockLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
