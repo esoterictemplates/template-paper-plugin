@@ -6,8 +6,11 @@ import foundation.esoteric.minecraft.plugins.library.commands.GiveCustomItemComm
 import foundation.esoteric.minecraft.plugins.library.entity.CustomEntityManager;
 import foundation.esoteric.minecraft.plugins.library.file.FileManagedPlugin;
 import foundation.esoteric.minecraft.plugins.library.file.FileManager;
+import foundation.esoteric.minecraft.plugins.library.http.server.HttpServerManager;
 import foundation.esoteric.minecraft.plugins.library.item.CustomItemManager;
 import foundation.esoteric.minecraft.plugins.library.item.CustomItemPlugin;
+import foundation.esoteric.minecraft.plugins.library.resourcepack.ResourcePackManager;
+import foundation.esoteric.minecraft.plugins.library.resourcepack.ResourcePackPlugin;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 import foundation.esoteric.minecraft.plugins.template.commands.PlaceCustomMultiblockCommand;
@@ -15,12 +18,10 @@ import foundation.esoteric.minecraft.plugins.template.commands.SetLanguageComman
 import foundation.esoteric.minecraft.plugins.template.custom.multiblocks.CustomMultiblock;
 import foundation.esoteric.minecraft.plugins.template.custom.multiblocks.CustomMultiblockManager;
 import foundation.esoteric.minecraft.plugins.template.data.player.PlayerDataManager;
-import foundation.esoteric.minecraft.plugins.template.http.server.HttpServerManager;
 import foundation.esoteric.minecraft.plugins.template.language.LanguageManager;
 import foundation.esoteric.minecraft.plugins.template.language.Message;
-import foundation.esoteric.minecraft.plugins.template.resourcepack.ResourcePackManager;
 
-public final class PaperTemplatePlugin extends JavaPlugin implements FileManagedPlugin, CustomItemPlugin {
+public final class PaperTemplatePlugin extends JavaPlugin implements FileManagedPlugin, CustomItemPlugin, ResourcePackPlugin {
 
   private FileManager fileManager;
   private PlayerDataManager playerDataManager;
