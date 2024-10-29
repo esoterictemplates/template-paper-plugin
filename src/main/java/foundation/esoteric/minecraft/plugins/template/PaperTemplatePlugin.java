@@ -3,6 +3,7 @@ package foundation.esoteric.minecraft.plugins.template;
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import foundation.esoteric.minecraft.plugins.library.commands.GiveCustomItemCommand;
+import foundation.esoteric.minecraft.plugins.library.entity.CustomEntityManager;
 import foundation.esoteric.minecraft.plugins.library.file.FileManagedPlugin;
 import foundation.esoteric.minecraft.plugins.library.file.FileManager;
 import foundation.esoteric.minecraft.plugins.library.item.CustomItemManager;
@@ -11,11 +12,8 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 import foundation.esoteric.minecraft.plugins.template.commands.PlaceCustomMultiblockCommand;
 import foundation.esoteric.minecraft.plugins.template.commands.SetLanguageCommand;
-import foundation.esoteric.minecraft.plugins.template.commands.SpawnCustomMultientityCommand;
 import foundation.esoteric.minecraft.plugins.template.custom.multiblocks.CustomMultiblock;
 import foundation.esoteric.minecraft.plugins.template.custom.multiblocks.CustomMultiblockManager;
-import foundation.esoteric.minecraft.plugins.template.custom.multientities.CustomMultientity;
-import foundation.esoteric.minecraft.plugins.template.custom.multientities.CustomMultientityManager;
 import foundation.esoteric.minecraft.plugins.template.data.player.PlayerDataManager;
 import foundation.esoteric.minecraft.plugins.template.http.server.HttpServerManager;
 import foundation.esoteric.minecraft.plugins.template.language.LanguageManager;
@@ -30,7 +28,7 @@ public final class PaperTemplatePlugin extends JavaPlugin implements FileManaged
   private ResourcePackManager resourcePackManager;
   private HttpServerManager httpServerManager;
   private CustomItemManager customItemManager;
-  private CustomMultientityManager customMultientityManager;
+  private CustomEntityManager customMultientityManager;
   private CustomMultiblockManager customMultiblockManager;
 
   private final NamespacedKey customItemIdKey = new NamespacedKey(this, "custom_item_id");
@@ -60,7 +58,7 @@ public final class PaperTemplatePlugin extends JavaPlugin implements FileManaged
     return customItemManager;
   }
 
-  public CustomMultientityManager getCustomMultientityManager() {
+  public CustomEntityManager getCustomMultientityManager() {
     return customMultientityManager;
   }
 
@@ -95,9 +93,7 @@ public final class PaperTemplatePlugin extends JavaPlugin implements FileManaged
     resourcePackManager = new ResourcePackManager(this);
     httpServerManager = new HttpServerManager(this);
     customItemManager = new CustomItemManager(this);
-    if (CustomMultientity.isEnabled()) {
-      customMultientityManager = new CustomMultientityManager(this);
-    }
+    customMultientityManager = new CustomEntityManager(this);
     if (CustomMultiblock.isEnabled()) {
       customMultiblockManager = new CustomMultiblockManager(this);
     }
@@ -106,9 +102,6 @@ public final class PaperTemplatePlugin extends JavaPlugin implements FileManaged
       new SetLanguageCommand(this);
     }
     new GiveCustomItemCommand(this);
-    if (CustomMultientity.isEnabled()) {
-      new SpawnCustomMultientityCommand(this);
-    }
     if (CustomMultiblock.isEnabled()) {
       new PlaceCustomMultiblockCommand(this);
     }

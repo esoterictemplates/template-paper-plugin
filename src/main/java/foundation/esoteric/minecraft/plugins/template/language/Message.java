@@ -1,7 +1,6 @@
 package foundation.esoteric.minecraft.plugins.template.language;
 
 import foundation.esoteric.minecraft.plugins.template.custom.multiblocks.CustomMultiblock;
-import foundation.esoteric.minecraft.plugins.template.custom.multientities.CustomMultientity;
 
 import java.util.function.BooleanSupplier;
 
@@ -10,7 +9,7 @@ public enum Message {
   UNKNOWN_LANGUAGE(() -> false),
 
   UNKNOWN_CUSTOM_ITEM(),
-  UNKNOWN_CUSTOM_MULTIENTITY(CustomMultientity::isEnabled),
+  UNKNOWN_CUSTOM_MULTIENTITY(),
   UNKNOWN_CUSTOM_MULTIBLOCK(CustomMultiblock::isEnabled);
 
   private final BooleanSupplier isMessageInUseSupplier;
