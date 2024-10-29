@@ -3,7 +3,6 @@ package foundation.esoteric.minecraft.plugins.template.resourcepack;
 import foundation.esoteric.utility.file.FileUtility;
 import org.apache.commons.io.FileUtils;
 import foundation.esoteric.minecraft.plugins.template.PaperTemplatePlugin;
-import foundation.esoteric.minecraft.plugins.template.file.FileUtil;
 
 import java.io.File;
 import java.util.List;
@@ -16,7 +15,7 @@ public class ResourcePackManager {
 
   private final String resourcePackFileType = "application";
   private final String resourcePackFileExtension = "zip";
-  private final String resourcePackFileMimeType = resourcePackFileType + FileUtil.getFileMimeTypeTypeSubtypeSeparator() + resourcePackFileExtension;
+  private final String resourcePackFileMimeType = resourcePackFileType + "/" + resourcePackFileExtension;
 
   private final String resourcePackAssetsFolderName = "assets";
 
@@ -70,11 +69,11 @@ public class ResourcePackManager {
       return;
     }
 
-    resourcePackZipFilePath = plugin.getDataPath() + File.separator + resourcePackResourceFolderName + FileUtil.getFileExtensionSeparator() + resourcePackFileExtension;
+    resourcePackZipFilePath = plugin.getDataPath() + File.separator + resourcePackResourceFolderName + "." + resourcePackFileExtension;
 
     try {
       resourcePackZipFile = new File(resourcePackZipFilePath);
-      FileUtil.zipFolder(resourcePackFolder, resourcePackZipFile);
+      FileUtility.Companion.zipFolder(resourcePackFolder, resourcePackZipFile);
 
       FileUtils.deleteDirectory(resourcePackFolder);
     } catch (Exception exception) {

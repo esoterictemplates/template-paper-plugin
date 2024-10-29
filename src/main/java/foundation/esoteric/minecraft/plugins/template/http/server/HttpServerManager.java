@@ -5,7 +5,6 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import org.bukkit.Bukkit;
 import foundation.esoteric.minecraft.plugins.template.PaperTemplatePlugin;
-import foundation.esoteric.minecraft.plugins.template.file.FileUtil;
 import foundation.esoteric.minecraft.plugins.template.http.server.event.listeners.PlayerJoinListener;
 import foundation.esoteric.minecraft.plugins.template.resourcepack.ResourcePackManager;
 import org.jetbrains.annotations.NotNull;
@@ -74,7 +73,7 @@ public class HttpServerManager {
 
       if (file.exists()) {
         exchange.getResponseHeaders().set("Content-Type", resourcePackManager.getResourcePackFileMimeType());
-        exchange.getResponseHeaders().set("Content-Disposition", "attachment; filename=\"" + resourcePackManager.getResourcePackResourceFolderName() + FileUtil.getFileExtensionSeparator() + resourcePackManager.getResourcePackFileExtension() + "\"");
+        exchange.getResponseHeaders().set("Content-Disposition", "attachment; filename=\"" + resourcePackManager.getResourcePackResourceFolderName() + "." + resourcePackManager.getResourcePackFileExtension() + "\"");
 
         exchange.sendResponseHeaders(successResponseCode, file.length());
 
