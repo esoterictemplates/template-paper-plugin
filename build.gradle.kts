@@ -62,7 +62,7 @@ tasks {
 }
 
 bukkitPluginYaml {
-  name = "Paper Template"
+  name = "PaperTemplate"
   description = project.description
 
   authors = listOfNotNull("Esoteric Foundation", "Esoteric Enderman")
