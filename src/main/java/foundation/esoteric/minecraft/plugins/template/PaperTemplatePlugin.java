@@ -11,7 +11,6 @@ import foundation.esoteric.minecraft.plugins.library.item.CustomItemManager;
 import foundation.esoteric.minecraft.plugins.library.item.CustomItemPlugin;
 import foundation.esoteric.minecraft.plugins.library.resourcepack.ResourcePackManager;
 import foundation.esoteric.minecraft.plugins.library.resourcepack.ResourcePackPlugin;
-import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 import foundation.esoteric.minecraft.plugins.template.commands.PlaceCustomMultiblockCommand;
 import foundation.esoteric.minecraft.plugins.template.commands.SetLanguageCommand;
@@ -27,13 +26,8 @@ public final class PaperTemplatePlugin extends JavaPlugin implements FileManaged
   private PlayerDataManager playerDataManager;
   private LanguageManager languageManager;
   private ResourcePackManager resourcePackManager;
-  private HttpServerManager httpServerManager;
   private CustomItemManager customItemManager;
-  private CustomEntityManager customMultientityManager;
   private CustomMultiblockManager customMultiblockManager;
-
-  private final NamespacedKey customItemIdKey = new NamespacedKey(this, "custom_item_id");
-  private final NamespacedKey customEntityIdKey = new NamespacedKey(this, "custom_entity_id");
 
   public FileManager getFileManager() {
     return fileManager;
@@ -51,28 +45,12 @@ public final class PaperTemplatePlugin extends JavaPlugin implements FileManaged
     return resourcePackManager;
   }
 
-  public HttpServerManager getHttpServerManager() {
-    return httpServerManager;
-  }
-
   public CustomItemManager getCustomItemManager() {
     return customItemManager;
   }
 
-  public CustomEntityManager getCustomMultientityManager() {
-    return customMultientityManager;
-  }
-
   public CustomMultiblockManager getCustomMultiblockManager() {
     return customMultiblockManager;
-  }
-
-  public NamespacedKey getCustomItemIdKey() {
-    return customItemIdKey;
-  }
-
-  public NamespacedKey getCustomEntityIdKey() {
-    return customEntityIdKey;
   }
 
   @Override
@@ -92,9 +70,9 @@ public final class PaperTemplatePlugin extends JavaPlugin implements FileManaged
     }
 
     resourcePackManager = new ResourcePackManager(this);
-    httpServerManager = new HttpServerManager(this);
+    new HttpServerManager(this);
     customItemManager = new CustomItemManager(this);
-    customMultientityManager = new CustomEntityManager(this);
+    new CustomEntityManager(this);
     if (CustomMultiblock.isEnabled()) {
       customMultiblockManager = new CustomMultiblockManager(this);
     }
