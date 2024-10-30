@@ -12,69 +12,10 @@ plugins {
   id("io.github.goooler.shadow") version "8.1.8"
 }
 
-val groupStringSeparator = "."
-val kebabcaseStringSeparator = "-"
-val snakecaseStringSeparator = "_"
-
-val startPath = "src${File.separator}main${File.separator}java"
-
-fun capitalizeFirstLetter(string: String): String {
-  return string.first().uppercase() + string.drop(1)
-}
-
-fun titlecase(kebabcaseString: String): String {
-  return kebabcaseString.replace(kebabcaseStringSeparator, " ").split(" ").joinToString(" ") { string -> capitalizeFirstLetter(string) }
-}
-
-fun kebabcase(normalString: String): String {
-  return normalString.lowercase().replace(" ", kebabcaseStringSeparator)
-}
-
-fun snakecase(string: String): String {
-  return string.lowercase().replace(Regex("$kebabcaseStringSeparator| "), snakecaseStringSeparator)
-}
-
-fun pascalcase(string: String): String {
-  return string.split(Regex("$kebabcaseStringSeparator| "))
-    .joinToString("") { capitalizeFirstLetter(it) }
-}
-
-fun groupStringToPath(groupString: String): String {
-  return groupString.replace(groupStringSeparator, File.separator)
-}
-
-fun replaceStringInFile(filePath: String, stringToReplace: String, replacementString: String) {
-  val file = File(filePath)
-
-  val content = file.readText()
-  val updatedContent = content.replace(stringToReplace, replacementString)
-
-  file.writeText(updatedContent)
-}
-
-fun replaceStringInDirectoryFiles(directory: File, stringToReplace: String, replacementString: String) {
-  directory.walkTopDown().filter { it.isFile }.forEach { file ->
-    replaceStringInFile(file.path, stringToReplace, replacementString)
-  }
-}
-
 description = "A template repository for easily developing Minecraft Paper plugins."
 
-val mainProjectAuthorName = "Esoteric Foundation"
-val simplifiedMainProjectAuthorName = mainProjectAuthorName.split(" ").first()
-val snakecaseMainProjectAuthorName = snakecase(mainProjectAuthorName)
-
-val projectAuthors = listOfNotNull(mainProjectAuthorName, "Esoteric Enderman")
-
-val topLevelDomain = "foundation"
-
-val projectNameString = rootProject.name
-val snakecaseProjectNameString = snakecase(projectNameString)
-
-group = "$topLevelDomain$groupStringSeparator${simplifiedMainProjectAuthorName.lowercase()}"
+group = "foundation.esoteric"
 version = "0.0.1"
-
-val buildDirectoryString = layout.buildDirectory.toString()
 
 val projectGroupString = group.toString()
 val projectVersionString = version.toString()
@@ -120,19 +61,16 @@ tasks {
   }
 }
 
-val projectName = providers.gradleProperty("projectName").get()
-val pascalCaseProjectName = pascalcase(projectName)
-
 bukkitPluginYaml {
-  name = pascalCaseProjectName.replace(Regex(" Plugin$"), "")
+  name = "Paper Template"
   description = project.description
 
-  authors = projectAuthors
+  authors = listOfNotNull("Esoteric Foundation", "Esoteric Enderman")
 
   setVersion(project.version)
 
   apiVersion = paperApiMinecraftVersion
-  main = "${project.group}.minecraft.plugins.template.${pascalCaseProjectName}"
+  main = "${project.group}.minecraft.plugins.template.PaperTemplatePlugin"
 
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
 }
@@ -142,7 +80,7 @@ publishing {
     create<MavenPublication>("mavenJava") {
       from(components["java"])
       groupId = projectGroupString
-      artifactId = projectNameString
+      artifactId = rootProject.name
       version = projectVersionString
     }
   }
