@@ -1,19 +1,17 @@
-package foundation.esoteric.minecraft.plugins.template;
+package foundation.esoteric.minecraft.plugins.template
 
-import dev.jorel.commandapi.CommandAPI;
-import dev.jorel.commandapi.CommandAPIBukkitConfig;
-import org.bukkit.plugin.java.JavaPlugin;
+import dev.jorel.commandapi.CommandAPI
+import dev.jorel.commandapi.CommandAPIBukkitConfig
+import org.bukkit.plugin.java.JavaPlugin
 
-public final class PaperTemplatePlugin extends JavaPlugin {
+class PaperTemplatePlugin : JavaPlugin() {
+    override fun onEnable() {
+        dataFolder.mkdir()
+        saveDefaultConfig()
 
-  @Override
-  public void onEnable() {
-    getDataFolder().mkdir();
-    saveDefaultConfig();
+        val commandAPIConfig = CommandAPIBukkitConfig(this)
 
-    CommandAPIBukkitConfig commandAPIConfig = new CommandAPIBukkitConfig(this);
-
-    CommandAPI.onLoad(commandAPIConfig);
-    CommandAPI.onEnable();
-  }
+        CommandAPI.onLoad(commandAPIConfig)
+        CommandAPI.onEnable()
+    }
 }

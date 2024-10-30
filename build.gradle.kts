@@ -10,6 +10,7 @@ plugins {
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.2.0"
   id("xyz.jpenilla.run-paper") version "2.3.1"
   id("io.github.goooler.shadow") version "8.1.8"
+  kotlin("jvm")
 }
 
 description = "A template repository for easily developing Minecraft Paper plugins."
@@ -45,6 +46,7 @@ dependencies {
   implementation("net.lingala.zip4j", "zip4j", "2.11.5")
   implementation("com.github.EsotericFoundation:utility.kt:0.4.0")
   implementation("com.github.EsotericFoundation:plugin-library:0.4.0")
+  implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks {
