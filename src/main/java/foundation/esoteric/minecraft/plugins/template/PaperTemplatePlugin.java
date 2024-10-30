@@ -2,6 +2,7 @@ package foundation.esoteric.minecraft.plugins.template;
 
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
+import foundation.esoteric.minecraft.plugins.library.block.CustomBlockManager;
 import foundation.esoteric.minecraft.plugins.library.commands.GiveCustomItemCommand;
 import foundation.esoteric.minecraft.plugins.library.entity.CustomEntityManager;
 import foundation.esoteric.minecraft.plugins.library.file.FileManagedPlugin;
@@ -12,10 +13,7 @@ import foundation.esoteric.minecraft.plugins.library.item.CustomItemPlugin;
 import foundation.esoteric.minecraft.plugins.library.resourcepack.ResourcePackManager;
 import foundation.esoteric.minecraft.plugins.library.resourcepack.ResourcePackPlugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import foundation.esoteric.minecraft.plugins.template.commands.PlaceCustomMultiblockCommand;
 import foundation.esoteric.minecraft.plugins.template.commands.SetLanguageCommand;
-import foundation.esoteric.minecraft.plugins.template.custom.multiblocks.CustomMultiblock;
-import foundation.esoteric.minecraft.plugins.template.custom.multiblocks.CustomMultiblockManager;
 import foundation.esoteric.minecraft.plugins.template.data.player.PlayerDataManager;
 import foundation.esoteric.minecraft.plugins.template.language.LanguageManager;
 import foundation.esoteric.minecraft.plugins.template.language.Message;
@@ -27,7 +25,7 @@ public final class PaperTemplatePlugin extends JavaPlugin implements FileManaged
   private LanguageManager languageManager;
   private ResourcePackManager resourcePackManager;
   private CustomItemManager customItemManager;
-  private CustomMultiblockManager customMultiblockManager;
+  private CustomBlockManager customMultiblockManager;
 
   public FileManager getFileManager() {
     return fileManager;
@@ -49,7 +47,7 @@ public final class PaperTemplatePlugin extends JavaPlugin implements FileManaged
     return customItemManager;
   }
 
-  public CustomMultiblockManager getCustomMultiblockManager() {
+  public CustomBlockManager getCustomMultiblockManager() {
     return customMultiblockManager;
   }
 
@@ -73,17 +71,12 @@ public final class PaperTemplatePlugin extends JavaPlugin implements FileManaged
     new HttpServerManager(this);
     customItemManager = new CustomItemManager(this);
     new CustomEntityManager(this);
-    if (CustomMultiblock.isEnabled()) {
-      customMultiblockManager = new CustomMultiblockManager(this);
-    }
+    customMultiblockManager = new CustomBlockManager(this);
 
     if (Message.isEnabled()) {
       new SetLanguageCommand(this);
     }
     new GiveCustomItemCommand(this);
-    if (CustomMultiblock.isEnabled()) {
-      new PlaceCustomMultiblockCommand(this);
-    }
   }
 
   @Override

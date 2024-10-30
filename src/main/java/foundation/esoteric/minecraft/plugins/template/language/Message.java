@@ -1,7 +1,5 @@
 package foundation.esoteric.minecraft.plugins.template.language;
 
-import foundation.esoteric.minecraft.plugins.template.custom.multiblocks.CustomMultiblock;
-
 import java.util.function.BooleanSupplier;
 
 public enum Message {
@@ -10,7 +8,7 @@ public enum Message {
 
   UNKNOWN_CUSTOM_ITEM(),
   UNKNOWN_CUSTOM_MULTIENTITY(),
-  UNKNOWN_CUSTOM_MULTIBLOCK(CustomMultiblock::isEnabled);
+  UNKNOWN_CUSTOM_MULTIBLOCK();
 
   private final BooleanSupplier isMessageInUseSupplier;
 
