@@ -1,6 +1,6 @@
 # Old Paper Template Plugin
 
-Forked from [PaperMC/paperweight-test-plugin](https://github.com/PaperMC/paperweight-test-plugin)
+<sup>Forked from <a href="https://github.com/PaperMC/paperweight-test-plugin">PaperMC/paperweight-test-plugin</a></sup>
 
 > A template repository for easily developing Minecraft Paper plugins.
 
