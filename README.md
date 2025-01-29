@@ -1,4 +1,4 @@
-# Paper Template Plugin
+# Old Paper Template Plugin
 
 > A template repository for easily developing Minecraft Paper plugins.
 
