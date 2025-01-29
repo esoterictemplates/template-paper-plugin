@@ -2,6 +2,8 @@
 
 <sup>Forked from <a href="https://github.com/PaperMC/paperweight-test-plugin">PaperMC/paperweight-test-plugin</a></sup>
 
+[![Project Status: Abandoned](./assets/images/badges/status.svg)](./)
+
 > A template repository for easily developing Minecraft Paper plugins.
 
 > [!NOTE]
