@@ -2,6 +2,9 @@
 
 > A template repository for easily developing Minecraft Paper plugins.
 
+> [!NOTE]
+> This template is old and outdated, check out [this updated version](https://github.com/esotericenderman/template-minecraft-plugin) for a properly maintained version.
+
 ## Usage
 
 ### Using This Template
