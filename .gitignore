@@ -144,3 +144,7 @@ script-dist
 # Pycache Files
 __pycache__
 *.pyc
+
+# Gradle wrapper
+gradlew
+gradlew.bat
