@@ -141,7 +141,7 @@ package-lock.json
 dist
 script-dist
 
-# Pycache Files
+# Pycache files
 __pycache__
 *.pyc
 
