@@ -1,4 +1,4 @@
-# Old Paper Template Plugin
+# Template Paper Plugin
 
 <sup>Forked from <a href="https://github.com/PaperMC/paperweight-test-plugin">PaperMC/paperweight-test-plugin</a></sup>
 
